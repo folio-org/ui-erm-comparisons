@@ -1,0 +1,86 @@
+{
+  "name": "@folio/erm-comparison",
+  "version": "1.0.0",
+  "description": "ERM app for comparison of Agreement and Package objects",
+  "main": "src/index.js",
+  "repository": "folio-org/ui-erm-comparison",
+  "publishConfig": {
+    "registry": "https://repository.folio.org/repository/npm-folio/"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "start": "stripes serve",
+    "build": "stripes build --output ./output",
+    "lint": "eslint .",
+    "test": "stripes test karma"
+  },
+  "stripes": {
+    "actsAs": [
+      "app",
+      "settings"
+    ],
+    "displayName": "ui-erm-comparison.meta.title",
+    "route": "/erm-comparison",
+    "home": "/erm-comparison",
+    "hasSettings": true,
+    "queryResource": "query",
+    "okapiInterfaces": {
+      "erm": "1.0 2.0"
+    },
+    "stripesDeps": [
+      "@folio/stripes-erm-components"
+    ],
+    "icons": [
+      {
+        "name": "app",
+        "alt": "ERM: Comparison App for Stripes",
+        "title": "ERMComparison"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@bigtest/interactor": "^0.9.2",
+    "@bigtest/mirage": "^0.0.1",
+    "@bigtest/mocha": "^0.5.2",
+    "@bigtest/react": "^0.1.2",
+    "@folio/eslint-config-stripes": "^5.2.0",
+    "@folio/stripes": "^4.0.0",
+    "@folio/stripes-cli": "^1.8.0",
+    "babel-eslint": "^9.0.0",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.2.1",
+    "mocha": "^6.2.0",
+    "react": "^16.6.0",
+    "react-intl": "^4.5.1",
+    "react-dom": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.7.0",
+    "sinon": "^7.3.2"
+  },
+  "dependencies": {
+    "@folio/stripes-erm-components": "^3.0.0",
+    "@folio/react-intl-safe-html": "^2.0.0",
+    "compose-function": "^3.0.3",
+    "final-form": "^4.18.5",
+    "final-form-arrays": "^3.0.1",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.0",
+    "query-string": "^6.6.0",
+    "react-final-form": "^6.3.0",
+    "react-final-form-arrays": "^3.1.1"
+  },
+  "peerDependencies": {
+    "@folio/stripes": "^4.0.0",
+    "react": "*",
+    "react-dom": "*",
+    "react-intl": "^4.5.1",
+    "react-redux": "*",
+    "react-router-dom": "^4.1.1",
+    "redux": "*"
+  }
+}
