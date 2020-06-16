@@ -11,7 +11,6 @@ import {
   Pane,
   PaneFooter,
   PaneMenu,
-  Paneset,
 } from '@folio/stripes/components';
 
 class ComparisonForm extends React.Component {
@@ -66,12 +65,12 @@ class ComparisonForm extends React.Component {
   renderFirstMenu() {
     return (
       <PaneMenu>
-        <FormattedMessage id="ui-local-kb-admin.job.close">
+        <FormattedMessage id="ui-erm-comparison.comparison.close">
           {ariaLabel => (
             <IconButton
               aria-label={ariaLabel}
               icon="times"
-              id="close-job-form-button"
+              id="close-comparison-form-button"
               onClick={this.props.handlers.onClose}
             />
           )}
@@ -80,46 +79,43 @@ class ComparisonForm extends React.Component {
     );
   }
 
-  validateUploadFile(value) {
-    if (value === null) return <FormattedMessage id="ui-local-kb-admin.error.uploadFile" />;
-    return undefined;
-  }
-
   render() {
     return (
-      <Paneset>
-        <FormattedMessage id="ui-erm-comparison.create">
-          <Pane
-            appIcon={<AppIcon app="local-kb-admin" />}
-            defaultWidth="100%"
-            firstMenu={this.renderFirstMenu()}
-            footer={this.renderPaneFooter()}
-            id="pane-job-form"
-            paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
-          >
-            <Field
-              name="comparisonResource1"
-            >
+      <Pane
+        appIcon={<AppIcon app="local-kb-admin" />}
+        defaultWidth="100%"
+        firstMenu={this.renderFirstMenu()}
+        footer={this.renderPaneFooter()}
+        id="pane-comparison-form"
+        paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
+      >
+        <Field
+          name="comparisonResource1"
+          render={() => {
+            return (
               <Button
                 bottomMargin0
                 onClick={() => window.alert('Select a package/agreement')}
               >
                 <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
               </Button>
-            </Field>
-            <Field
-              name="comparisonResource2"
-            >
+            );
+          }}
+        />
+        <Field
+          name="comparisonResource2"
+          render={() => {
+            return (
               <Button
                 bottomMargin0
                 onClick={() => window.alert('Select a package/agreement')}
               >
                 <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
               </Button>
-            </Field>
-          </Pane>
-        </FormattedMessage>
-      </Paneset>
+            );
+          }}
+        />
+      </Pane>
     );
   }
 }
