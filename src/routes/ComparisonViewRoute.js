@@ -45,22 +45,21 @@ class ComparisonViewRoute extends React.Component {
     const { resources } = this.props;
     const comparison = resources?.comparison?.records?.[0] ?? {};
     const name = comparison?.name ?? '';
-    const comparisonClass = comparison?.class ?? '';
     this.props.mutator.comparison
       .DELETE(comparison)
       .then(() => {
         this.props.history.replace(
           {
-            pathname: '/local-kb-admin',
+            pathname: '/erm-comparison',
             search: this.props.location.search,
           }
         );
-        this.context.sendCallout({ message: <SafeHTMLMessage id={`ui-local-kb-admin.job.deleted.success.${comparisonClass}`} values={{ name }} /> });
+        this.context.sendCallout({ message: <SafeHTMLMessage id={`ui-erm-comparison.comparison.deleted.success`} values={{ name }} /> });
       });
   };
 
   handleClose = () => {
-    this.props.history.push(`/local-kb-admin${this.props.location.search}`);
+    this.props.history.push(`/erm-comparison${this.props.location.search}`);
   };
 
   showDeleteConfirmationModal = () => this.setState({ showConfirmDelete: true });
@@ -73,8 +72,8 @@ class ComparisonViewRoute extends React.Component {
     const name = comparison?.name ?? '';
     const comparisonClass = comparison?.class ?? '';
 
-    let deleteMessageId = 'ui-local-kb-admin.job.delete.message';
-    let deleteHeadingId = 'ui-local-kb-admin.job.delete.heading';
+    let deleteMessageId = 'ui-erm-comparison.comparison.delete.message';
+    let deleteHeadingId = 'ui-erm-comparison.comparison.delete.heading';
 
     if (comparisonClass !== '') {
       deleteMessageId = `${deleteMessageId}.${comparisonClass}`;
@@ -94,7 +93,7 @@ class ComparisonViewRoute extends React.Component {
         {this.state.showConfirmDelete && (
           <ConfirmationModal
             buttonStyle="danger"
-            confirmLabel={<FormattedMessage id="ui-local-kb-admin.job.delete.confirmLabel" />}
+            confirmLabel={<FormattedMessage id="ui-erm-comparison.comparison.delete.confirmLabel" />}
             heading={<FormattedMessage id={deleteHeadingId} />}
             id="delete-comparison-confirmation"
             message={<SafeHTMLMessage id={deleteMessageId} values={{ name }} />}

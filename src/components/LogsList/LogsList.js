@@ -19,13 +19,13 @@ export default class LogsList extends React.Component {
     const { comparison, logs, onNeedMoreLogs, type } = this.props;
 
     if (!logs) return <Spinner />;
-    if (!logs.length) return <FormattedMessage id={`ui-local-kb-admin.${type}LogNo`} />;
+    if (!logs.length) return <FormattedMessage id={`ui-erm-comparison.${type}LogNo`} />;
 
     return (
       <MultiColumnList
         columnMapping={{
-          recordNumber: <FormattedMessage id="ui-local-kb-admin.columns.recordNumber" />,
-          message: <FormattedMessage id={`ui-local-kb-admin.columns.${type}LogMessage`} />,
+          recordNumber: <FormattedMessage id="ui-erm-comparison.columns.recordNumber" />,
+          message: <FormattedMessage id={`ui-erm-comparison.columns.${type}LogMessage`} />,
         }}
         contentData={logs}
         formatter={{ recordNumber: ({ recordNumber }) => (recordNumber ?? <NoValue />) }}

@@ -22,7 +22,7 @@ export default class LogsList extends React.Component {
         displayWhenClosed={<Badge>{comparison[`${type}LogCount`]}</Badge>}
         displayWhenOpen={<Badge>{comparison[`${type}LogCount`]}</Badge>}
         id={id}
-        label={<FormattedMessage id={`ui-local-kb-admin.${type}Log`} />}
+        label={<FormattedMessage id={`ui-erm-comparison.${type}Log`} />}
         onToggle={onToggle}
         open={open}
       >

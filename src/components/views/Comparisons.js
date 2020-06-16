@@ -51,12 +51,12 @@ export default class Comparisons extends React.Component {
   }
 
   columnMapping = {
-    comparisonName: <FormattedMessage id="ui-local-kb-admin.prop.jobName" />,
-    runningStatus: <FormattedMessage id="ui-local-kb-admin.prop.runningStatus" />,
-    result: <FormattedMessage id="ui-local-kb-admin.prop.outcome" />,
-    errors: <FormattedMessage id="ui-local-kb-admin.prop.errors" />,
-    started: <FormattedMessage id="ui-local-kb-admin.prop.started" />,
-    ended: <FormattedMessage id="ui-local-kb-admin.prop.ended" />,
+    comparisonName: <FormattedMessage id="ui-erm-comparison.prop.comparisonName" />,
+    runningStatus: <FormattedMessage id="ui-erm-comparison.prop.runningStatus" />,
+    result: <FormattedMessage id="ui-erm-comparison.prop.outcome" />,
+    errors: <FormattedMessage id="ui-erm-comparison.prop.errors" />,
+    started: <FormattedMessage id="ui-erm-comparison.prop.started" />,
+    ended: <FormattedMessage id="ui-erm-comparison.prop.ended" />,
   }
 
   columnWidths = {
@@ -96,7 +96,7 @@ export default class Comparisons extends React.Component {
   }
 
   rowURL = (id) => {
-    return `/local-kb-admin/${id}${this.props.searchString}`;
+    return `/erm-comparison/${id}${this.props.searchString}`;
   }
 
   toggleFilterPane = () => {
@@ -148,44 +148,15 @@ export default class Comparisons extends React.Component {
     );
   }
 
-  renderNewComparisonMenu = ({ onToggle }) => (
-    <DropdownMenu
-      data-role="menu"
-      onToggle={onToggle}
-    >
-      <FormattedMessage id="ui-local-kb-admin.job.newJob">
-        {() => (
-          <>
-            <Button
-              buttonStyle="dropdownItem"
-              id="clickable-new-JSON-job"
-              marginBottom0
-              to={`/local-kb-admin/create/JSON${this.props.searchString}`}
-            >
-              <FormattedMessage id="ui-local-kb-admin.job.JSONImportJob" />
-            </Button>
-            <Button
-              buttonStyle="dropdownItem"
-              id="clickable-new-KBART-job"
-              marginBottom0
-              to={`/local-kb-admin/create/KBART${this.props.searchString}`}
-            >
-              <FormattedMessage id="ui-local-kb-admin.job.KBARTImportJob" />
-            </Button>
-          </>
-        )}
-      </FormattedMessage>
-    </DropdownMenu>
-  );
 
   renderResultsLastMenu() {
     return (
       <IfPermission perm="ui-local-kb-admin.jobs.edit">
-        <Dropdown
-          buttonProps={{ buttonStyle: 'primary' }}
-          label={<FormattedMessage id="ui-local-kb-admin.job.new" />}
-          renderMenu={this.renderNewComparisonMenu}
-        />
+        <Button
+          onClick={() => window.alert("this will open up the create page, not implemented yet")}
+        >
+          <FormattedMessage id="ui-erm-comparison.comparison.newComparison" />
+        </Button>
       </IfPermission>
     );
   }
@@ -240,7 +211,7 @@ export default class Comparisons extends React.Component {
               const disableReset = () => (!filterChanged && !searchChanged);
 
               return (
-                <Paneset id="local-kb-admin-paneset">
+                <Paneset id="erm-comparison-paneset">
                   {this.state.filterPaneIsVisible &&
                     <Pane
                       defaultWidth="20%"
@@ -250,14 +221,14 @@ export default class Comparisons extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {/* TODO: Use forthcoming <SearchGroup> or similar component */}
                         <div className={css.searchGroupWrap}>
-                          <FormattedMessage id="ui-local-kb-admin.searchInputLabel">
+                          <FormattedMessage id="ui-erm-comparison.searchInputLabel">
                             {ariaLabel => (
                               <SearchField
                                 aria-label={ariaLabel}
                                 autoFocus
                                 className={css.searchField}
-                                data-test-local-kb-admin-search-input
-                                id="input-local-kb-admin-search"
+                                data-test-erm-comparison-search-input
+                                id="input-erm-comparison-search"
                                 inputRef={this.searchField}
                                 marginBottom0
                                 name="query"

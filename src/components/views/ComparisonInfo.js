@@ -44,7 +44,7 @@ export default class ComparisonInfo extends React.Component {
         dismissible
         id="pane-view-comparison"
         onClose={this.props.onClose}
-        paneTitle={<FormattedMessage id="ui-local-kb-admin.loading" />}
+        paneTitle={<FormattedMessage id="ui-erm-comparison.loading" />}
       >
         <Layout className="marginTop1">
           <Spinner />
@@ -92,7 +92,7 @@ export default class ComparisonInfo extends React.Component {
           }}
         >
           <Icon icon="trash">
-            <FormattedMessage id="ui-local-kb-admin.job.delete" />
+            <FormattedMessage id="ui-erm-comparison.comparison.delete" />
           </Icon>
         </Button>
       </IfPermission>
@@ -123,7 +123,7 @@ export default class ComparisonInfo extends React.Component {
           <div>
             <Row>
               <Col xs={9}>
-                <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.jobName" />}>
+                <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.comparisonName" />}>
                   <div data-test-comparison-name>
                     <strong>{comparison.name}</strong>
                   </div>
@@ -132,7 +132,7 @@ export default class ComparisonInfo extends React.Component {
             </Row>
             <Row>
               <Col xs={4}>
-                <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.runningStatus" />}>
+                <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.runningStatus" />}>
                   <div data-test-comparison-status>
                     {comparison?.status?.label ?? <NoValue />}
                   </div>
@@ -141,7 +141,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.outcome" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.outcome" />}>
                       <div data-test-comparison-result>
                         {comparison?.result?.label ?? <NoValue />}
                       </div>
@@ -152,7 +152,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.errors" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.errors" />}>
                       <div data-test-comparison-errors>
                         {comparison.errorLog ? comparison.errorLog.length : '0'}
                       </div>
@@ -165,7 +165,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.started" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.started" />}>
                       <div data-test-comparison-started>
                         {comparison.started ? <FormattedDateTime date={comparison.started} /> : <NoValue />}
                       </div>
@@ -176,7 +176,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.ended" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.ended" />}>
                       <div data-test-comparison-ended>
                         {comparison.ended ? <FormattedDateTime date={comparison.ended} /> : <NoValue />}
                       </div>
@@ -187,14 +187,16 @@ export default class ComparisonInfo extends React.Component {
               <Col xs={4}>
                 {
                   comparison.fileName ? (
-                    <KeyValue label={<FormattedMessage id="ui-local-kb-admin.prop.filename" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.filename" />}>
                       <div data-test-comparison-filename>
                         {comparison.fileName}
                       </div>
                     </KeyValue>) : (
-                      <KeyValue label={<FormattedMessage id="ui-local-kb-admin.source" />}>
+                      <KeyValue label={<FormattedMessage id="ui-erm-comparison.source" />}>
                         <div data-test-comparison-type>
-                          <FormattedMessage id={`ui-local-kb-admin.${comparison.class}`} />
+                          {//TODO Is this even necessary anymore?
+                          }
+                          <FormattedMessage id={`ui-erm-comparison.${comparison.class}`} />
                         </div>
                       </KeyValue>)
                 }
