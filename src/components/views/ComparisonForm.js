@@ -2,16 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, TitleManager } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {
   Button,
   IconButton,
   Pane,
+  Paneset,
   PaneFooter,
   PaneMenu,
 } from '@folio/stripes/components';
+
+import css from './ComparisonForm.css';
 
 class ComparisonForm extends React.Component {
   static propTypes = {
@@ -81,41 +84,53 @@ class ComparisonForm extends React.Component {
 
   render() {
     return (
-      <Pane
-        appIcon={<AppIcon app="local-kb-admin" />}
-        defaultWidth="100%"
-        firstMenu={this.renderFirstMenu()}
-        footer={this.renderPaneFooter()}
-        id="pane-comparison-form"
-        paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
-      >
-        <Field
-          name="comparisonResource1"
-          render={() => {
-            return (
-              <Button
-                bottomMargin0
-                onClick={() => window.alert('Select a package/agreement')}
-              >
-                <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
-              </Button>
-            );
-          }}
-        />
-        <Field
-          name="comparisonResource2"
-          render={() => {
-            return (
-              <Button
-                bottomMargin0
-                onClick={() => window.alert('Select a package/agreement')}
-              >
-                <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
-              </Button>
-            );
-          }}
-        />
-      </Pane>
+      <Paneset>
+        <FormattedMessage id="ui-erm-comparison.create">
+          {create => (
+            <Pane
+              appIcon={<AppIcon app="local-kb-admin" />}
+              defaultWidth="100%"
+              firstMenu={this.renderFirstMenu()}
+              footer={this.renderPaneFooter()}
+              id="pane-comparison-form"
+              paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
+            >
+              <TitleManager record={create}>
+                <form>
+                  <div className={css.comparisonForm}>
+                    <Field
+                      name="comparisonResource1"
+                      render={() => {
+                        return (
+                          <Button
+                            bottomMargin0
+                            onClick={() => window.alert('Select a package/agreement')}
+                          >
+                            <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
+                          </Button>
+                        );
+                      }}
+                    />
+                    <Field
+                      name="comparisonResource2"
+                      render={() => {
+                        return (
+                          <Button
+                            bottomMargin0
+                            onClick={() => window.alert('Select a package/agreement')}
+                          >
+                            <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
+                          </Button>
+                        );
+                      }}
+                    />
+                  </div>
+                </form>
+              </TitleManager>
+            </Pane>
+          )}
+        </FormattedMessage>
+      </Paneset>
     );
   }
 }
