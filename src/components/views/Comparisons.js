@@ -7,8 +7,6 @@ import { AppIcon, IfPermission } from '@folio/stripes/core';
 
 import {
   Button,
-  Dropdown,
-  DropdownMenu,
   Icon,
   MultiColumnList,
   NoValue,
@@ -155,7 +153,7 @@ export default class Comparisons extends React.Component {
         <Button
           bottomMargin0
           buttonStyle="primary"
-          to={'/erm-comparison/create'}
+          to="/erm-comparison/create"
         >
           <FormattedMessage id="ui-erm-comparison.comparison.new" />
         </Button>

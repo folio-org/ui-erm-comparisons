@@ -54,7 +54,7 @@ class ComparisonViewRoute extends React.Component {
             search: this.props.location.search,
           }
         );
-        this.context.sendCallout({ message: <SafeHTMLMessage id={`ui-erm-comparison.comparison.deleted.success`} values={{ name }} /> });
+        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparison.comparison.deleted.success" values={{ name }} /> });
       });
   };
 

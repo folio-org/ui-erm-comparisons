@@ -16,7 +16,6 @@ import {
 
 class ComparisonForm extends React.Component {
   static propTypes = {
-    format: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handlers: PropTypes.shape({
       onClose: PropTypes.func.isRequired,
@@ -90,37 +89,35 @@ class ComparisonForm extends React.Component {
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparison.create">
-          {create => (
-            <Pane
-              appIcon={<AppIcon app="local-kb-admin" />}
-              defaultWidth="100%"
-              firstMenu={this.renderFirstMenu()}
-              footer={this.renderPaneFooter()}
-              id="pane-job-form"
-              paneTitle={<FormattedMessage id={`ui-erm-comparison.comparison.newComparison`} />}
+          <Pane
+            appIcon={<AppIcon app="local-kb-admin" />}
+            defaultWidth="100%"
+            firstMenu={this.renderFirstMenu()}
+            footer={this.renderPaneFooter()}
+            id="pane-job-form"
+            paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
+          >
+            <Field
+              name="comparisonResource1"
             >
-              <Field 
-                name="comparisonResource1"
+              <Button
+                bottomMargin0
+                onClick={() => window.alert('Select a package/agreement')}
               >
-                 <Button
-                    bottomMargin0
-                    onClick={() => window.alert("Select a package/agreement")}
-                  >
-                    <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
-                  </Button>
-              </Field>
-              <Field 
-                name="comparisonResource2"
+                <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
+              </Button>
+            </Field>
+            <Field
+              name="comparisonResource2"
+            >
+              <Button
+                bottomMargin0
+                onClick={() => window.alert('Select a package/agreement')}
               >
-                 <Button
-                    bottomMargin0
-                    onClick={() => window.alert("Select a package/agreement")}
-                  >
-                    <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
-                  </Button>
-              </Field>
-            </Pane>
-          )}
+                <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
+              </Button>
+            </Field>
+          </Pane>
         </FormattedMessage>
       </Paneset>
     );
