@@ -184,23 +184,6 @@ export default class ComparisonInfo extends React.Component {
                   </Col>
                 )
               }
-              <Col xs={4}>
-                {
-                  comparison.fileName ? (
-                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.filename" />}>
-                      <div data-test-comparison-filename>
-                        {comparison.fileName}
-                      </div>
-                    </KeyValue>) : (
-                      <KeyValue label={<FormattedMessage id="ui-erm-comparison.source" />}>
-                        <div data-test-comparison-type>
-                          {//TODO Is this even necessary anymore?
-                          }
-                          <FormattedMessage id={`ui-erm-comparison.${comparison.class}`} />
-                        </div>
-                      </KeyValue>)
-                }
-              </Col>
             </Row>
           </div>
           {

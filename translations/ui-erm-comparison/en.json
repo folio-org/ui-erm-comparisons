@@ -42,5 +42,7 @@
   "comparison.packageName": "Package name",
   "comparison.packageSource": "Package source",
   "comparison.packageReference": "Package reference",
-  "comparison.packageProvider": "Package provider"
+  "comparison.packageProvider": "Package provider",
+
+  "newComparison.selectPackageOrAgreement": "Select a Package/Agreement"
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Switch from 'react-router-dom/Switch';
 import { Route } from '@folio/stripes/core';
 
+const ComparisonCreateRoute = lazy(() => import('./routes/ComparisonCreateRoute'));
 const ComparisonsRoute = lazy(() => import('./routes/ComparisonsRoute'));
 const ComparisonViewRoute = lazy(() => import('./routes/ComparisonViewRoute'));
 
@@ -28,6 +29,7 @@ export default class App extends React.Component {
     return (
       <Suspense fallback={null}>
         <Switch>
+          <Route component={ComparisonCreateRoute} path={`${path}/create`} />
           <Route component={ComparisonsRoute} path={`${path}/:id?`}>
             <Suspense fallback={null}>
               <Route component={ComparisonViewRoute} path={`${path}/:id`} />

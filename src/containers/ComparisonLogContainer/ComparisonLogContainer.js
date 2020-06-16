@@ -8,7 +8,7 @@ export default class ComparisonLogContainer extends React.Component {
   static manifest = Object.freeze({
     logs: {
       type: 'okapi',
-      path: 'erm/jobs/!{job.id}/!{type}Log',
+      path: 'erm/jobs/!{comparison.id}/!{type}Log',
       records: 'results',
       perRequest: resultCount.RESULT_COUNT_INCREMENT,
       resultOffset: '%{resultOffset}',

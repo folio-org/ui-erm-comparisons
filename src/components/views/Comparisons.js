@@ -153,9 +153,11 @@ export default class Comparisons extends React.Component {
     return (
       <IfPermission perm="ui-local-kb-admin.jobs.edit">
         <Button
-          onClick={() => window.alert("this will open up the create page, not implemented yet")}
+          bottomMargin0
+          buttonStyle="primary"
+          to={'/erm-comparison/create'}
         >
-          <FormattedMessage id="ui-erm-comparison.comparison.newComparison" />
+          <FormattedMessage id="ui-erm-comparison.comparison.new" />
         </Button>
       </IfPermission>
     );
