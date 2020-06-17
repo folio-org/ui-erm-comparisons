@@ -39,8 +39,13 @@
   "comparison.new": "New",
   "comparison.newComparison": "New comparison",
   "comparison.close": "Close comparison",
-  "comparison.info": "Select two items for comparison",
 
+  "newComparison.info": "Select two items for comparison",
+  "newComparison.name": "Comparison job name",
   "newComparison.addPackage": "Add package",
-  "newComparison.addAgreement": "Add agreement"
+  "newComparison.removePackage": "Remove package {index} from comparison",
+  "newComparison.packageTitle": "Package {number}",
+  "newComparison.addAgreement": "Add agreement",
+  "newComparison.removeAgreement": "Remove agreement {index} from comparison",
+  "newComparison.agreementTitle": "Agreement {number}"
 }

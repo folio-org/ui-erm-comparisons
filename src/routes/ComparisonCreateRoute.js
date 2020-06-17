@@ -28,7 +28,8 @@ class ComparisonCreateRoute extends React.Component {
     this.props.history.push(`/erm-comparison${location.search}`);
   }
 
-  handleSubmit = () => {
+  handleSubmit = (comparison) => {
+    console.log("Submitted: %o", comparison);
     window.alert('This will eventually submit a new comparison');
   }
 

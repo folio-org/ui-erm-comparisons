@@ -1,32 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Field, Form } from 'react-final-form';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {
   Button,
+  Col,
   IconButton,
+  Layout,
+  MessageBanner,
   Pane,
   Paneset,
   PaneFooter,
   PaneMenu,
-  MessageBanner,
+  Row,
+  TextField,
 } from '@folio/stripes/components';
 
-import css from './ComparisonForm.css';
+import ComparisonPointFieldArray from '../ComparisonPointFieldArray';
 
 class ComparisonForm extends React.Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     handlers: PropTypes.shape({
       onClose: PropTypes.func.isRequired,
-      onDownloadFile: PropTypes.func.isRequired,
-      onUploadFile: PropTypes.func.isRequired,
-    }),
-    localKB: PropTypes.shape({
-      trustedSourceTI: PropTypes.bool,
     }),
     pristine: PropTypes.bool,
     submitting: PropTypes.bool
@@ -84,51 +84,61 @@ class ComparisonForm extends React.Component {
   }
 
   render() {
+    const { values } = this.props;
+    const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparison.create">
           {create => (
             <Pane
               appIcon={<AppIcon app="local-kb-admin" />}
+              centerContent
               defaultWidth="100%"
               firstMenu={this.renderFirstMenu()}
               footer={this.renderPaneFooter()}
               id="pane-comparison-form"
               paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
             >
+              <Layout className="padding-top-gutter padding-bottom-gutter">
+                <MessageBanner>
+                  <FormattedMessage id="ui-erm-comparison.newComparison.info" />
+                </MessageBanner>
+              </Layout>
               <TitleManager record={create}>
                 <form>
-                  <div className={css.comparisonForm}>
-                    <MessageBanner>
-                      <FormattedMessage id="ui-erm-comparison.comparison.info" />
-                    </MessageBanner>
+                  <Layout className="padding-top-gutter padding-bottom-gutter">
                     <Field
-                      name="comparisonResource1"
-                      render={() => {
-                        return (
-                          <Button
-                            bottomMargin0
-                            onClick={() => window.alert('Select a package/agreement')}
-                          >
-                            <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
-                          </Button>
-                        );
-                      }}
+                      component={TextField}
+                      label={<FormattedMessage id="ui-erm-comparison.newComparison.name" />}
+                      name="name"
                     />
-                    <Field
-                      name="comparisonResource2"
-                      render={() => {
-                        return (
-                          <Button
-                            bottomMargin0
-                            onClick={() => window.alert('Select a package/agreement')}
-                          >
-                            <FormattedMessage id="ui-erm-comparison.newComparison.selectPackageOrAgreement" />
-                          </Button>
-                        );
-                      }}
+                  </Layout>
+                  <Layout className="padding-top-gutter padding-bottom-gutter">
+                    <FieldArray
+                      addButtonId="add-package-to-comparison-button"
+                      addLabelId="ui-erm-comparison.newComparison.addPackage"
+                      comparisonPoint="packages"
+                      component={ComparisonPointFieldArray}
+                      deleteButtonTooltipId="ui-erm-comparison.newComparison.removePackage"
+                      disableAddNew={currentComparisons >= 2}
+                      headerId="ui-erm-comparison.newComparison.packageTitle"
+                      id="comparison-point-form-packages"
+                      name="packages"
                     />
-                  </div>
+                  </Layout>
+                  <Layout className="padding-top-gutter padding-bottom-gutter">
+                    <FieldArray
+                      addButtonId="add-agreement-to-comparison-button"
+                      addLabelId="ui-erm-comparison.newComparison.addAgreement"
+                      comparisonPoint="agreements"
+                      component={ComparisonPointFieldArray}
+                      deleteButtonTooltipId="ui-erm-comparison.newComparison.removeAgreement"
+                      disableAddNew={currentComparisons >= 2}
+                      headerId="ui-erm-comparison.newComparison.agreementTitle"
+                      id="comparison-point-form-agreements"
+                      name="agreements"
+                    />
+                  </Layout>
                 </form>
               </TitleManager>
             </Pane>
@@ -142,4 +152,7 @@ class ComparisonForm extends React.Component {
 export default stripesFinalForm({
   navigationCheck: true,
   keepDirtyOnReinitialize: true,
+  subscription: {
+    values: true,
+  },
 })(ComparisonForm);
