@@ -39,10 +39,8 @@
   "comparison.new": "New",
   "comparison.newComparison": "New comparison",
   "comparison.close": "Close comparison",
-  "comparison.packageName": "Package name",
-  "comparison.packageSource": "Package source",
-  "comparison.packageReference": "Package reference",
-  "comparison.packageProvider": "Package provider",
+  "comparison.info": "Select two items for comparison",
 
-  "newComparison.selectPackageOrAgreement": "Select a Package/Agreement"
+  "newComparison.addPackage": "Add package",
+  "newComparison.addAgreement": "Add agreement"
 }

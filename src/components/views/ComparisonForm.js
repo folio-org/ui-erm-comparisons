@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 
@@ -12,6 +12,7 @@ import {
   Paneset,
   PaneFooter,
   PaneMenu,
+  MessageBanner,
 } from '@folio/stripes/components';
 
 import css from './ComparisonForm.css';
@@ -98,6 +99,9 @@ class ComparisonForm extends React.Component {
               <TitleManager record={create}>
                 <form>
                   <div className={css.comparisonForm}>
+                    <MessageBanner>
+                      <FormattedMessage id="ui-erm-comparison.comparison.info" />
+                    </MessageBanner>
                     <Field
                       name="comparisonResource1"
                       render={() => {
