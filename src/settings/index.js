@@ -5,7 +5,7 @@ import { Settings } from '@folio/stripes/smart-components';
 export default class ERMComparisonSettings extends React.Component {
   sections = [
     {
-      label: <FormattedMessage id="ui-erm-comparison.settings.general" />,
+      label: <FormattedMessage id="ui-erm-comparisonss.settings.general" />,
       pages: [
       ]
     },
@@ -16,7 +16,7 @@ export default class ERMComparisonSettings extends React.Component {
       <Settings
         {...this.props}
         navPaneWidth="20%"
-        paneTitle={<FormattedMessage id="ui-erm-comparison.meta.title" />}
+        paneTitle={<FormattedMessage id="ui-erm-comparisonss.meta.title" />}
         sections={this.sections}
       />
     );

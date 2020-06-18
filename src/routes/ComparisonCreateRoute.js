@@ -25,7 +25,7 @@ class ComparisonCreateRoute extends React.Component {
 
   handleClose = () => {
     const { location } = this.props;
-    this.props.history.push(`/erm-comparison${location.search}`);
+    this.props.history.push(`/erm-comparisons${location.search}`);
   }
 
   handleSubmit = (comparison) => {

@@ -49,12 +49,12 @@ export default class Comparisons extends React.Component {
   }
 
   columnMapping = {
-    comparisonName: <FormattedMessage id="ui-erm-comparison.prop.comparisonName" />,
-    runningStatus: <FormattedMessage id="ui-erm-comparison.prop.runningStatus" />,
-    result: <FormattedMessage id="ui-erm-comparison.prop.outcome" />,
-    errors: <FormattedMessage id="ui-erm-comparison.prop.errors" />,
-    started: <FormattedMessage id="ui-erm-comparison.prop.started" />,
-    ended: <FormattedMessage id="ui-erm-comparison.prop.ended" />,
+    comparisonName: <FormattedMessage id="ui-erm-comparisonss.prop.comparisonName" />,
+    runningStatus: <FormattedMessage id="ui-erm-comparisonss.prop.runningStatus" />,
+    result: <FormattedMessage id="ui-erm-comparisonss.prop.outcome" />,
+    errors: <FormattedMessage id="ui-erm-comparisonss.prop.errors" />,
+    started: <FormattedMessage id="ui-erm-comparisonss.prop.started" />,
+    ended: <FormattedMessage id="ui-erm-comparisonss.prop.ended" />,
   }
 
   columnWidths = {
@@ -94,7 +94,7 @@ export default class Comparisons extends React.Component {
   }
 
   rowURL = (id) => {
-    return `/erm-comparison/${id}${this.props.searchString}`;
+    return `/erm-comparisons/${id}${this.props.searchString}`;
   }
 
   toggleFilterPane = () => {
@@ -153,9 +153,9 @@ export default class Comparisons extends React.Component {
         <Button
           bottomMargin0
           buttonStyle="primary"
-          to="/erm-comparison/create"
+          to="/erm-comparisons/create"
         >
-          <FormattedMessage id="ui-erm-comparison.comparison.new" />
+          <FormattedMessage id="ui-erm-comparisonss.comparison.new" />
         </Button>
       </IfPermission>
     );
@@ -211,7 +211,7 @@ export default class Comparisons extends React.Component {
               const disableReset = () => (!filterChanged && !searchChanged);
 
               return (
-                <Paneset id="erm-comparison-paneset">
+                <Paneset id="erm-comparisons-paneset">
                   {this.state.filterPaneIsVisible &&
                     <Pane
                       defaultWidth="20%"
@@ -221,14 +221,14 @@ export default class Comparisons extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {/* TODO: Use forthcoming <SearchGroup> or similar component */}
                         <div className={css.searchGroupWrap}>
-                          <FormattedMessage id="ui-erm-comparison.searchInputLabel">
+                          <FormattedMessage id="ui-erm-comparisonss.searchInputLabel">
                             {ariaLabel => (
                               <SearchField
                                 aria-label={ariaLabel}
                                 autoFocus
                                 className={css.searchField}
-                                data-test-erm-comparison-search-input
-                                id="input-erm-comparison-search"
+                                data-test-erm-comparisons-search-input
+                                id="input-erm-comparisons-search"
                                 inputRef={this.searchField}
                                 marginBottom0
                                 name="query"
@@ -280,7 +280,7 @@ export default class Comparisons extends React.Component {
                     noOverflow
                     padContent={false}
                     paneSub={this.renderResultsPaneSubtitle(source)}
-                    paneTitle={<FormattedMessage id="ui-erm-comparison.meta.title" />}
+                    paneTitle={<FormattedMessage id="ui-erm-comparisonss.meta.title" />}
                   >
                     <MultiColumnList
                       autosize

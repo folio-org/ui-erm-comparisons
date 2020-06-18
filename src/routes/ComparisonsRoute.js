@@ -91,7 +91,7 @@ class ComparisonsRoute extends React.Component {
 
       if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
         const record = newRecords[0];
-        history.push(`/erm-comparison/${record.id}${location.search}`);
+        history.push(`/erm-comparisons/${record.id}${location.search}`);
       }
     }
   }

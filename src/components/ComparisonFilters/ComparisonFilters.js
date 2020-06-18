@@ -53,7 +53,7 @@ export default class ComparisonFilters extends React.Component {
         displayClearButton={groupFilters.length > 0}
         header={FilterAccordionHeader}
         id={`filter-accordion-${name}`}
-        label={<FormattedMessage id={`ui-erm-comparison.prop.${name}`} />}
+        label={<FormattedMessage id={`ui-erm-comparisonss.prop.${name}`} />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(name); }}
         separator={false}
         {...props}

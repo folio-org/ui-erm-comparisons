@@ -44,7 +44,7 @@ export default class ComparisonInfo extends React.Component {
         dismissible
         id="pane-view-comparison"
         onClose={this.props.onClose}
-        paneTitle={<FormattedMessage id="ui-erm-comparison.loading" />}
+        paneTitle={<FormattedMessage id="ui-erm-comparisonss.loading" />}
       >
         <Layout className="marginTop1">
           <Spinner />
@@ -92,7 +92,7 @@ export default class ComparisonInfo extends React.Component {
           }}
         >
           <Icon icon="trash">
-            <FormattedMessage id="ui-erm-comparison.comparison.delete" />
+            <FormattedMessage id="ui-erm-comparisonss.comparison.delete" />
           </Icon>
         </Button>
       </IfPermission>
@@ -123,7 +123,7 @@ export default class ComparisonInfo extends React.Component {
           <div>
             <Row>
               <Col xs={9}>
-                <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.comparisonName" />}>
+                <KeyValue label={<FormattedMessage id="ui-erm-comparisonss.prop.comparisonName" />}>
                   <div data-test-comparison-name>
                     <strong>{comparison.name}</strong>
                   </div>
@@ -132,7 +132,7 @@ export default class ComparisonInfo extends React.Component {
             </Row>
             <Row>
               <Col xs={4}>
-                <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.runningStatus" />}>
+                <KeyValue label={<FormattedMessage id="ui-erm-comparisonss.prop.runningStatus" />}>
                   <div data-test-comparison-status>
                     {comparison?.status?.label ?? <NoValue />}
                   </div>
@@ -141,7 +141,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.outcome" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparisonss.prop.outcome" />}>
                       <div data-test-comparison-result>
                         {comparison?.result?.label ?? <NoValue />}
                       </div>
@@ -152,7 +152,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.errors" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparisonss.prop.errors" />}>
                       <div data-test-comparison-errors>
                         {comparison.errorLog ? comparison.errorLog.length : '0'}
                       </div>
@@ -165,7 +165,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.started" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparisonss.prop.started" />}>
                       <div data-test-comparison-started>
                         {comparison.started ? <FormattedDateTime date={comparison.started} /> : <NoValue />}
                       </div>
@@ -176,7 +176,7 @@ export default class ComparisonInfo extends React.Component {
               {
                 isComparisonNotQueued && (
                   <Col xs={4}>
-                    <KeyValue label={<FormattedMessage id="ui-erm-comparison.prop.ended" />}>
+                    <KeyValue label={<FormattedMessage id="ui-erm-comparisonss.prop.ended" />}>
                       <div data-test-comparison-ended>
                         {comparison.ended ? <FormattedDateTime date={comparison.ended} /> : <NoValue />}
                       </div>

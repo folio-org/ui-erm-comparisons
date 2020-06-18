@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { FormattedMessage } from 'react-intl';
-import { Field } from 'react-final-form';
-import { Button } from '@folio/stripes/components';
+
+import AgreementField from './AgreementField';
 
 class ComparisonPointField extends React.Component {
   render() {
+    console.log("CPF PROPS: %o", this.props)
+    const { onComparisonPointSelected, ...props } = this.props;
     return (
-      <p> Hi </p>
+      <AgreementField onAgreementSelected={onComparisonPointSelected} {...props} />
     );
   }
 }

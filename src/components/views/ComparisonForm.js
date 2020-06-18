@@ -69,7 +69,7 @@ class ComparisonForm extends React.Component {
   renderFirstMenu() {
     return (
       <PaneMenu>
-        <FormattedMessage id="ui-erm-comparison.comparison.close">
+        <FormattedMessage id="ui-erm-comparisonss.comparison.close">
           {ariaLabel => (
             <IconButton
               aria-label={ariaLabel}
@@ -88,7 +88,7 @@ class ComparisonForm extends React.Component {
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
-        <FormattedMessage id="ui-erm-comparison.create">
+        <FormattedMessage id="ui-erm-comparisonss.create">
           {create => (
             <Pane
               appIcon={<AppIcon app="local-kb-admin" />}
@@ -97,11 +97,11 @@ class ComparisonForm extends React.Component {
               firstMenu={this.renderFirstMenu()}
               footer={this.renderPaneFooter()}
               id="pane-comparison-form"
-              paneTitle={<FormattedMessage id="ui-erm-comparison.comparison.newComparison" />}
+              paneTitle={<FormattedMessage id="ui-erm-comparisonss.comparison.newComparison" />}
             >
               <Layout className="padding-top-gutter padding-bottom-gutter">
                 <MessageBanner>
-                  <FormattedMessage id="ui-erm-comparison.newComparison.info" />
+                  <FormattedMessage id="ui-erm-comparisonss.newComparison.info" />
                 </MessageBanner>
               </Layout>
               <TitleManager record={create}>
@@ -109,19 +109,19 @@ class ComparisonForm extends React.Component {
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <Field
                       component={TextField}
-                      label={<FormattedMessage id="ui-erm-comparison.newComparison.name" />}
+                      label={<FormattedMessage id="ui-erm-comparisonss.newComparison.name" />}
                       name="name"
                     />
                   </Layout>
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <FieldArray
                       addButtonId="add-package-to-comparison-button"
-                      addLabelId="ui-erm-comparison.newComparison.addPackage"
+                      addLabelId="ui-erm-comparisonss.newComparison.addPackage"
                       comparisonPoint="packages"
                       component={ComparisonPointFieldArray}
-                      deleteButtonTooltipId="ui-erm-comparison.newComparison.removePackage"
+                      deleteButtonTooltipId="ui-erm-comparisonss.newComparison.removePackage"
                       disableAddNew={currentComparisons >= 2}
-                      headerId="ui-erm-comparison.newComparison.packageTitle"
+                      headerId="ui-erm-comparisonss.newComparison.packageTitle"
                       id="comparison-point-form-packages"
                       name="packages"
                     />
@@ -129,12 +129,12 @@ class ComparisonForm extends React.Component {
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <FieldArray
                       addButtonId="add-agreement-to-comparison-button"
-                      addLabelId="ui-erm-comparison.newComparison.addAgreement"
+                      addLabelId="ui-erm-comparisonss.newComparison.addAgreement"
                       comparisonPoint="agreements"
                       component={ComparisonPointFieldArray}
-                      deleteButtonTooltipId="ui-erm-comparison.newComparison.removeAgreement"
+                      deleteButtonTooltipId="ui-erm-comparisonss.newComparison.removeAgreement"
                       disableAddNew={currentComparisons >= 2}
-                      headerId="ui-erm-comparison.newComparison.agreementTitle"
+                      headerId="ui-erm-comparisonss.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"
                     />
