@@ -43,7 +43,7 @@ class AgreementField extends React.Component {
           return (
             <Tooltip
               id={`${this.props.id}-agreement-button-tooltip`}
-              text={<FormattedMessage id="ui-erm-comparisonss.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.name }} />}
+              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.name }} />}
               triggerRef={this.triggerButton}
             >
               {({ ariaIds }) => (
@@ -52,7 +52,7 @@ class AgreementField extends React.Component {
                   data-test-ic-link-user
                   {...buttonProps}
                 >
-                  <FormattedMessage id="ui-erm-comparisonss.newComparison.contacts.replaceAgreement" />
+                  <FormattedMessage id="ui-erm-comparisons.newComparison.contacts.replaceAgreement" />
                 </Button>
               )}
             </Tooltip>
@@ -63,13 +63,13 @@ class AgreementField extends React.Component {
             data-test-ic-link-agreement
             {...buttonProps}
           >
-            <FormattedMessage id="ui-erm-comparisonss.newComparison.linkAgreement" />
+            <FormattedMessage id="ui-erm-comparisons.newComparison.linkAgreement" />
           </Button>
         );
       }}
       type="find-agreement"
     >
-      <FormattedMessage id="ui-erm-comparisonss.newComparison.noAgreementPlugin" />
+      <FormattedMessage id="ui-erm-comparisons.newComparison.noAgreementPlugin" />
     </Pluggable>
   )
 
@@ -96,7 +96,7 @@ class AgreementField extends React.Component {
         headerStart={(
           <AppIcon app="agreements" size="small">
             <strong>
-              <FormattedMessage id="ui-erm-comparisonss.newComparison.agreement" />
+              <FormattedMessage id="ui-erm-comparisons.newComparison.agreement" />
             </strong>
           </AppIcon>
         )}

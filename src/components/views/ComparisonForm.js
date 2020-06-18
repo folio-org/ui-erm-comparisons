@@ -69,7 +69,7 @@ class ComparisonForm extends React.Component {
   renderFirstMenu() {
     return (
       <PaneMenu>
-        <FormattedMessage id="ui-erm-comparisonss.comparison.close">
+        <FormattedMessage id="ui-erm-comparisons.comparison.close">
           {ariaLabel => (
             <IconButton
               aria-label={ariaLabel}
@@ -88,7 +88,7 @@ class ComparisonForm extends React.Component {
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
-        <FormattedMessage id="ui-erm-comparisonss.create">
+        <FormattedMessage id="ui-erm-comparisons.create">
           {create => (
             <Pane
               appIcon={<AppIcon app="local-kb-admin" />}
@@ -97,11 +97,11 @@ class ComparisonForm extends React.Component {
               firstMenu={this.renderFirstMenu()}
               footer={this.renderPaneFooter()}
               id="pane-comparison-form"
-              paneTitle={<FormattedMessage id="ui-erm-comparisonss.comparison.newComparison" />}
+              paneTitle={<FormattedMessage id="ui-erm-comparisons.comparison.newComparison" />}
             >
               <Layout className="padding-top-gutter padding-bottom-gutter">
                 <MessageBanner>
-                  <FormattedMessage id="ui-erm-comparisonss.newComparison.info" />
+                  <FormattedMessage id="ui-erm-comparisons.newComparison.info" />
                 </MessageBanner>
               </Layout>
               <TitleManager record={create}>
@@ -109,19 +109,19 @@ class ComparisonForm extends React.Component {
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <Field
                       component={TextField}
-                      label={<FormattedMessage id="ui-erm-comparisonss.newComparison.name" />}
+                      label={<FormattedMessage id="ui-erm-comparisons.newComparison.name" />}
                       name="name"
                     />
                   </Layout>
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <FieldArray
                       addButtonId="add-package-to-comparison-button"
-                      addLabelId="ui-erm-comparisonss.newComparison.addPackage"
+                      addLabelId="ui-erm-comparisons.newComparison.addPackage"
                       comparisonPoint="packages"
                       component={ComparisonPointFieldArray}
-                      deleteButtonTooltipId="ui-erm-comparisonss.newComparison.removePackage"
+                      deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                       disableAddNew={currentComparisons >= 2}
-                      headerId="ui-erm-comparisonss.newComparison.packageTitle"
+                      headerId="ui-erm-comparisons.newComparison.packageTitle"
                       id="comparison-point-form-packages"
                       name="packages"
                     />
@@ -129,12 +129,12 @@ class ComparisonForm extends React.Component {
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <FieldArray
                       addButtonId="add-agreement-to-comparison-button"
-                      addLabelId="ui-erm-comparisonss.newComparison.addAgreement"
+                      addLabelId="ui-erm-comparisons.newComparison.addAgreement"
                       comparisonPoint="agreements"
                       component={ComparisonPointFieldArray}
-                      deleteButtonTooltipId="ui-erm-comparisonss.newComparison.removeAgreement"
+                      deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
                       disableAddNew={currentComparisons >= 2}
-                      headerId="ui-erm-comparisonss.newComparison.agreementTitle"
+                      headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"
                     />

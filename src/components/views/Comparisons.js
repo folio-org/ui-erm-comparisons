@@ -49,12 +49,12 @@ export default class Comparisons extends React.Component {
   }
 
   columnMapping = {
-    comparisonName: <FormattedMessage id="ui-erm-comparisonss.prop.comparisonName" />,
-    runningStatus: <FormattedMessage id="ui-erm-comparisonss.prop.runningStatus" />,
-    result: <FormattedMessage id="ui-erm-comparisonss.prop.outcome" />,
-    errors: <FormattedMessage id="ui-erm-comparisonss.prop.errors" />,
-    started: <FormattedMessage id="ui-erm-comparisonss.prop.started" />,
-    ended: <FormattedMessage id="ui-erm-comparisonss.prop.ended" />,
+    comparisonName: <FormattedMessage id="ui-erm-comparisons.prop.comparisonName" />,
+    runningStatus: <FormattedMessage id="ui-erm-comparisons.prop.runningStatus" />,
+    result: <FormattedMessage id="ui-erm-comparisons.prop.outcome" />,
+    errors: <FormattedMessage id="ui-erm-comparisons.prop.errors" />,
+    started: <FormattedMessage id="ui-erm-comparisons.prop.started" />,
+    ended: <FormattedMessage id="ui-erm-comparisons.prop.ended" />,
   }
 
   columnWidths = {
@@ -155,7 +155,7 @@ export default class Comparisons extends React.Component {
           buttonStyle="primary"
           to="/erm-comparisons/create"
         >
-          <FormattedMessage id="ui-erm-comparisonss.comparison.new" />
+          <FormattedMessage id="ui-erm-comparisons.comparison.new" />
         </Button>
       </IfPermission>
     );
@@ -221,7 +221,7 @@ export default class Comparisons extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {/* TODO: Use forthcoming <SearchGroup> or similar component */}
                         <div className={css.searchGroupWrap}>
-                          <FormattedMessage id="ui-erm-comparisonss.searchInputLabel">
+                          <FormattedMessage id="ui-erm-comparisons.searchInputLabel">
                             {ariaLabel => (
                               <SearchField
                                 aria-label={ariaLabel}
@@ -280,7 +280,7 @@ export default class Comparisons extends React.Component {
                     noOverflow
                     padContent={false}
                     paneSub={this.renderResultsPaneSubtitle(source)}
-                    paneTitle={<FormattedMessage id="ui-erm-comparisonss.meta.title" />}
+                    paneTitle={<FormattedMessage id="ui-erm-comparisons.meta.title" />}
                   >
                     <MultiColumnList
                       autosize

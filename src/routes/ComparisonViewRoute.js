@@ -54,7 +54,7 @@ class ComparisonViewRoute extends React.Component {
             search: this.props.location.search,
           }
         );
-        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisonss.comparison.deleted.success" values={{ name }} /> });
+        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.deleted.success" values={{ name }} /> });
       });
   };
 
@@ -72,8 +72,8 @@ class ComparisonViewRoute extends React.Component {
     const name = comparison?.name ?? '';
     const comparisonClass = comparison?.class ?? '';
 
-    let deleteMessageId = 'ui-erm-comparisonss.comparison.delete.message';
-    let deleteHeadingId = 'ui-erm-comparisonss.comparison.delete.heading';
+    let deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
+    let deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
 
     if (comparisonClass !== '') {
       deleteMessageId = `${deleteMessageId}.${comparisonClass}`;
@@ -93,7 +93,7 @@ class ComparisonViewRoute extends React.Component {
         {this.state.showConfirmDelete && (
           <ConfirmationModal
             buttonStyle="danger"
-            confirmLabel={<FormattedMessage id="ui-erm-comparisonss.comparison.delete.confirmLabel" />}
+            confirmLabel={<FormattedMessage id="ui-erm-comparisons.comparison.delete.confirmLabel" />}
             heading={<FormattedMessage id={deleteHeadingId} />}
             id="delete-comparison-confirmation"
             message={<SafeHTMLMessage id={deleteMessageId} values={{ name }} />}

@@ -1,4 +1,4 @@
-# ui-erm-comparisonss
+# ui-erm-comparisons
 
 Copyright (C) 2018-2019 The Open Library Foundation
 
@@ -6,7 +6,7 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 
 ## Introduction
 
-The ERM comparison module, or `ui-erm-comparisonss`, is a Stripes UI module used for comparison of "Agreement" and/or "Package" objects defined by the `ui-agreements` (Agreements) module.
+The ERM comparisons module, or `ui-erm-comparisons`, is a Stripes UI module used for comparison of "Agreement" and/or "Package" objects defined by the `ui-agreements` (Agreements) module.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Additionally, until it is part of the Okapi backends, the [mod-agreements](https
 
 Note that the following commands require that [`stripes-cli`](https://github.com/folio-org/stripes-cli) is installed globally.
 
-Run the following from the ui-erm-comparisonss to serve `ui-erm-comparisonss` by itself using a development server:
+Run the following from the ui-erm-comparisons to serve `ui-erm-comparisons` by itself using a development server:
 ```
 stripes serve
 ```
@@ -33,9 +33,9 @@ To specify your own tenant ID or to use an Okapi instance other than http://loca
 stripes serve --okapi http://my-okapi.example.com:9130 --tenant my-tenant-id
 ```
 
-To run `ui-erm-comparisonss` within a Stripes platform:
+To run `ui-erm-comparisons` within a Stripes platform:
 
-1. Create a workspace with `stripes workspace` and select whatever modules you want (e.g., `ui-users` and `ui-erm-comparisonss`) and at least one platform such as `stripes-sample-platform`.
+1. Create a workspace with `stripes workspace` and select whatever modules you want (e.g., `ui-users` and `ui-erm-comparisons`) and at least one platform such as `stripes-sample-platform`.
 1. Navigate to the platform's directory and run `stripes serve stripes.config.js.local`.
 
 ## Additional information

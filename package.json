@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
-  "repository": "folio-org/ui-erm-comparisonss",
+  "repository": "folio-org/ui-erm-comparisons",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
@@ -22,7 +22,7 @@
       "app",
       "settings"
     ],
-    "displayName": "ui-erm-comparisonss.meta.title",
+    "displayName": "ui-erm-comparisons.meta.title",
     "route": "/erm-comparisons",
     "home": "/erm-comparisons",
     "hasSettings": true,
