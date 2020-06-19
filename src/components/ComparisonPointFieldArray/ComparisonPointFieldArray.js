@@ -14,7 +14,7 @@ class ComparisonPointFieldArray extends React.Component {
 
   // Execution of this block only occurs with the find-user plugin existing in UserPicker.
   handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint) => {
-    this.props.onUpdateField(index, { comparisonPoint: comparisonPoint.id });
+    this.props.onUpdateField(index, { id: comparisonPoint.id, name: comparisonPoint.name });
 
     this.setState(prevState => ({
       comparisonPoints: {
@@ -36,6 +36,7 @@ class ComparisonPointFieldArray extends React.Component {
         onDelete={() => this.props.onDeleteField(index, comparisonPoint)}
       >
         <Field
+          agreement={this.state.comparisonPoints[comparisonPoint.agreement] || comparisonPoint}
           component={ComparisonPointField}
           index={index}
           name={`${name}[${index}]`}
