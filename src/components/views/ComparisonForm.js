@@ -85,7 +85,6 @@ class ComparisonForm extends React.Component {
 
   render() {
     const { values } = this.props;
-    console.log("values: %o", values)
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
@@ -118,13 +117,13 @@ class ComparisonForm extends React.Component {
                     <FieldArray
                       addButtonId="add-package-to-comparison-button"
                       addLabelId="ui-erm-comparisons.newComparison.addPackage"
-                      comparisonPoint="packages"
+                      comparisonPoint="package"
                       component={ComparisonPointFieldArray}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                       disableAddNew={currentComparisons >= 2}
                       headerId="ui-erm-comparisons.newComparison.packageTitle"
                       id="comparison-point-form-packages"
-                      name="package"
+                      name="packages"
                     />
                   </Layout>
                   <Layout className="padding-top-gutter padding-bottom-gutter">

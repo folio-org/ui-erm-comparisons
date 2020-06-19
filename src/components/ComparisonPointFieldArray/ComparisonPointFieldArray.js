@@ -8,10 +8,6 @@ import { EditCard } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 class ComparisonPointFieldArray extends React.Component {
-  state = {
-    comparisonPoints: {}
-  }
-
   // Execution of this block only occurs with the find-user plugin existing in UserPicker.
   handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint, comparisonType) => {
     switch (comparisonType) {
@@ -33,21 +29,15 @@ class ComparisonPointFieldArray extends React.Component {
         });
         break;
       default:
-        return;
+        break;
     }
-
-    this.setState(prevState => ({
-      comparisonPoints: {
-        ...prevState.comparisonPoints,
-        [comparisonPoint.id]: comparisonPoint,
-      },
-    }));
   }
 
 
   // We don't need a full blown withKiwtFieldArray here since these will never be edited, just these small handlers will do
   handleAddField = () => {
-    this.props.fields.insert(this.props.fields.length, {});
+    const { fields } = this.props;
+    fields.insert(fields.length, {});
   }
 
   handleDeleteField = (index) => {
@@ -64,23 +54,26 @@ class ComparisonPointFieldArray extends React.Component {
 
   renderComparisonPoints = () => {
     const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId, name } = this.props;
-    return fields?.value?.map((comparisonPoint, index) => (
-      <EditCard
-        key={index}
-        data-test-comparison-point-number={`${comparisonType} ${index}`}
-        deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
-        header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
-        onDelete={() => this.handleDeleteField(index)}
-      >
-        <Field
-          comparisonPoint={this.state.comparisonPoints[comparisonPoint[comparisonType]] || comparisonPoint}
-          component={ComparisonPointField}
-          index={index}
-          name={`${name}[${index}]`}
-          onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
-        />
-      </EditCard>
-    ));
+    return fields?.value?.map((comparisonPoint, index) => {
+      console.log("Comparison Point: %o", comparisonPoint)
+      return (
+        <EditCard
+          key={index}
+          data-test-comparison-point-number={`${comparisonType} ${index}`}
+          deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
+          header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
+          onDelete={() => this.handleDeleteField(index)}
+        >
+          <Field
+            comparisonPoint={comparisonPoint}
+            component={ComparisonPointField}
+            index={index}
+            name={`${name}[${index}]`}
+            onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
+          />
+        </EditCard>
+      );
+    });
   }
 
   renderAddNewButton() {

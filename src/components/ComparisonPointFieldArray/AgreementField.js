@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
   Button,
   Card,
+  Col,
+  KeyValue,
   Layout,
+  NoValue,
+  Row,
   Tooltip
 } from '@folio/stripes/components';
 import { AppIcon, Pluggable } from '@folio/stripes/core';
@@ -76,6 +81,56 @@ class AgreementField extends React.Component {
     );
   }
 
+  renderAgreement = () => {
+    const {
+      endDate = <NoValue />,
+      startDate = <NoValue />,
+      status = <NoValue />
+    } = this.props.agreement;
+
+
+    return (
+      <div data-test-agreement-card>
+        <Row>
+          <Col md={5} xs={12}>
+            <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.startDate" />}>
+              <span data-test-agreement-startDate>
+                {startDate}
+              </span>
+            </KeyValue>
+          </Col>
+          <Col md={3} xs={6}>
+            <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.endDate" />}>
+              <span data-test-agreement-endDate>
+                {endDate}
+              </span>
+            </KeyValue>
+          </Col>
+          <Col md={4} xs={6}>
+            <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.status" />}>
+              <span data-test-agreement-status>
+                {status}
+              </span>
+            </KeyValue>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+
+  renderEmpty = () => (
+    <div data-test-user-empty>
+      <Layout className="textCentered">
+        <strong>
+          <FormattedMessage id="ui-erm-comparisons.newComparison.noAgreementLinked" />
+        </strong>
+      </Layout>
+      <Layout className="textCentered">
+        <FormattedMessage id="ui-erm-comparisons.newComparison.linkAgreementToStart" />
+      </Layout>
+    </div>
+  )
+
   renderError = () => (
     <Layout className={`textCentered ${css.error}`} data-test-agreement-error>
       <strong>
@@ -91,27 +146,36 @@ class AgreementField extends React.Component {
       meta: { error, touched }
     } = this.props;
 
+
+    // If no agreement has been selected, then the passed agreement will be {}. We want that to be null
     let agreement = null;
-    if (value.id) {
-      // Only show up if we've selected something.
-      agreement = value;
+    if (this.props.agreement?.id) {
+      agreement = this.props.agreement;
     }
 
     return (
       <Card
         cardStyle={agreement ? 'positive' : 'negative'}
         headerEnd={this.renderLinkAgreementButton(agreement)}
-        headerStart={(
+        headerStart={
           <AppIcon app="agreements" size="small">
             <strong>
-              <FormattedMessage id="ui-erm-comparisons.newComparison.agreement" />
+              {agreement ?
+                <Link
+                  data-test-agreement-name-link
+                  to={`/erm/agreements/${agreement.id}`}
+                >
+                  {agreement.name}
+                </Link> :
+                <FormattedMessage id="ui-erm-comparisons.newComparison.agreement" />
+              }
             </strong>
           </AppIcon>
-        )}
+        }
         id={id}
         roundedBorder
       >
-        {agreement ? "Agreement here" : "No agreement"}
+        {agreement ? this.renderAgreement() : this.renderEmpty()}
         {touched && error ? this.renderError() : null}
       </Card>
     );

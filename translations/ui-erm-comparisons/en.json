@@ -52,9 +52,16 @@
   "newComparison.agreementTitle": "Agreement {number}",
 
   "newComparison.linkAgreement": "Link agreement",
+  "newComparison.noAgreementLinked": "No agreement linked",
+  "newComparison.linkAgreementToStart": "Link an agreement to get started",
   "newComparison.noAgreementPlugin": "No \"find-agreement\" plugin is installed",
   "newComparison.replaceAgreement": "Replace agreement",
   "newComparison.replaceAgreementSpecific": "Replace agreement {agreement}",
+  "newComparison.startDate": "Start date",
+  "newComparison.endDate": "End date",
+  "newComparison.status": "Status",
   "newComparison.linkPackage": "Link package",
+  "newComparison.noPackageLinked": "No package linked",
+  "newComparison.linkPackageToStart": "Link a package to get started",
   "newComparison.noPackagePlugin": "No \"find-package\" plugin is installed"
 }
