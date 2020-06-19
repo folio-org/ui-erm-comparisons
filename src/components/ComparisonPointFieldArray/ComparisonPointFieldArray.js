@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Button, Tooltip } from '@folio/stripes/components';
 
-import { EditCard, withKiwtFieldArray } from '@folio/stripes-erm-components';
+import { EditCard } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 class ComparisonPointFieldArray extends React.Component {
@@ -13,8 +13,28 @@ class ComparisonPointFieldArray extends React.Component {
   }
 
   // Execution of this block only occurs with the find-user plugin existing in UserPicker.
-  handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint) => {
-    this.props.onUpdateField(index, { id: comparisonPoint.id, name: comparisonPoint.name });
+  handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint, comparisonType) => {
+    switch (comparisonType) {
+      case 'agreement':
+        this.handleUpdateField(index, {
+          id: comparisonPoint.id,
+          name: comparisonPoint.name,
+          startDate: comparisonPoint.startDate,
+          endDate: comparisonPoint.endDate
+        });
+        break;
+      case 'package':
+        this.handleUpdateField(index, {
+          id: comparisonPoint.id,
+          name: comparisonPoint.name,
+          type: comparisonPoint.type,
+          count: comparisonPoint.count,
+          provider: comparisonPoint.provider
+        });
+        break;
+      default:
+        return;
+    }
 
     this.setState(prevState => ({
       comparisonPoints: {
@@ -24,23 +44,40 @@ class ComparisonPointFieldArray extends React.Component {
     }));
   }
 
-  renderComparisonPoints = () => {
-    const { comparisonPoint: comparisonType, deleteButtonTooltipId, headerId, items, name } = this.props;
 
-    return items.map((comparisonPoint, index) => (
+  // We don't need a full blown withKiwtFieldArray here since these will never be edited, just these small handlers will do
+  handleAddField = () => {
+    this.props.fields.insert(this.props.fields.length, {});
+  }
+
+  handleDeleteField = (index) => {
+    this.props.fields.remove(index);
+  }
+
+  handleUpdateField = (index, field) => {
+    const { fields } = this.props;
+    fields.update(index, {
+      ...fields.value[index],
+      ...field,
+    });
+  }
+
+  renderComparisonPoints = () => {
+    const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId, name } = this.props;
+    return fields?.value?.map((comparisonPoint, index) => (
       <EditCard
         key={index}
         data-test-comparison-point-number={`${comparisonType} ${index}`}
         deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
         header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
-        onDelete={() => this.props.onDeleteField(index, comparisonPoint)}
+        onDelete={() => this.handleDeleteField(index)}
       >
         <Field
-          agreement={this.state.comparisonPoints[comparisonPoint.agreement] || comparisonPoint}
+          comparisonPoint={this.state.comparisonPoints[comparisonPoint[comparisonType]] || comparisonPoint}
           component={ComparisonPointField}
           index={index}
           name={`${name}[${index}]`}
-          onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint)}
+          onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
         />
       </EditCard>
     ));
@@ -49,7 +86,7 @@ class ComparisonPointFieldArray extends React.Component {
   renderAddNewButton() {
     const {addButtonId, addLabelId, disableAddNew } = this.props;
     return (
-      <Button disabled={disableAddNew} id={addButtonId} onClick={() => this.props.onAddField()}>
+      <Button disabled={disableAddNew} id={addButtonId} onClick={() => this.handleAddField()}>
         <FormattedMessage id={addLabelId} />
       </Button>
     );
@@ -57,7 +94,6 @@ class ComparisonPointFieldArray extends React.Component {
 
   render = () => {
     const { id } = this.props;
-    console.log("CPFA PROPS: %o", this.props)
     return (
       <div>
         <div id={id}>
@@ -69,4 +105,4 @@ class ComparisonPointFieldArray extends React.Component {
   }
 }
 
-export default withKiwtFieldArray(ComparisonPointFieldArray);
+export default ComparisonPointFieldArray;

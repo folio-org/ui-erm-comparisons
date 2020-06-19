@@ -87,16 +87,20 @@ class AgreementField extends React.Component {
   render() {
     const {
       id,
-      input: { value: { comparisonPoint } },
+      input: { value },
       meta: { error, touched }
     } = this.props;
 
+    let agreement = null;
+    if (value.id) {
+      // Only show up if we've selected something.
+      agreement = value;
+    }
 
-    console.log("AF PROPS: %o", this.props)
     return (
       <Card
-        cardStyle={comparisonPoint ? 'positive' : 'negative'}
-        headerEnd={this.renderLinkAgreementButton(comparisonPoint)}
+        cardStyle={agreement ? 'positive' : 'negative'}
+        headerEnd={this.renderLinkAgreementButton(agreement)}
         headerStart={(
           <AppIcon app="agreements" size="small">
             <strong>
@@ -107,7 +111,7 @@ class AgreementField extends React.Component {
         id={id}
         roundedBorder
       >
-        {comparisonPoint ? "Agreement here" : "No agreement"}
+        {agreement ? "Agreement here" : "No agreement"}
         {touched && error ? this.renderError() : null}
       </Card>
     );
