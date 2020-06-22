@@ -35,14 +35,9 @@ class ComparisonForm extends React.Component {
     submitting: PropTypes.bool
   }
 
-  state = { currentComparisons: 0 }
-
-  static getDerivedStateFromProps(props) {
-    return { currentComparisons: (props.values?.agreements?.length || 0) + (props.values?.packages?.length || 0) };
-  }
-
   renderPaneFooter() {
-    const { handlers, handleSubmit, invalid, pristine, submitting } = this.props;
+    const { handlers, handleSubmit, invalid, pristine, submitting, values } = this.props;
+    const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     const startButton = (
       <Button
         buttonStyle="default mega"
@@ -58,7 +53,7 @@ class ComparisonForm extends React.Component {
       <Button
         buttonStyle="primary mega"
         data-test-save-button
-        disabled={invalid || pristine || submitting || this.state.currentComparisons < 2}
+        disabled={invalid || pristine || submitting || currentComparisons < 2}
         marginBottom0
         onClick={handleSubmit}
         type="submit"
@@ -93,6 +88,8 @@ class ComparisonForm extends React.Component {
   }
 
   render() {
+    const { values } = this.props; 
+    const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparisons.create">
@@ -129,7 +126,7 @@ class ComparisonForm extends React.Component {
                       comparisonPoint="package"
                       component={ComparisonPointFieldArray}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
-                      disableAddNew={this.state.currentComparisons >= 2}
+                      disableAddNew={currentComparisons >= 2}
                       headerId="ui-erm-comparisons.newComparison.packageTitle"
                       id="comparison-point-form-packages"
                       name="packages"
@@ -142,7 +139,7 @@ class ComparisonForm extends React.Component {
                       comparisonPoint="agreement"
                       component={ComparisonPointFieldArray}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
-                      disableAddNew={this.state.currentComparisons >= 2}
+                      disableAddNew={currentComparisons >= 2}
                       headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"

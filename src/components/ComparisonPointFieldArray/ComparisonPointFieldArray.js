@@ -74,6 +74,7 @@ class ComparisonPointFieldArray extends React.Component {
           />
           <Field
             component={Datepicker}
+            defaultValue={new Date()}
             index={index}
             label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
             name={`${name}[${index}].onDate`}
