@@ -16,6 +16,7 @@ class ComparisonPointFieldArray extends React.Component {
           id: comparisonPoint.id,
           name: comparisonPoint.name,
           startDate: comparisonPoint.startDate,
+          status: comparisonPoint.agreementStatus?.label,
           endDate: comparisonPoint.endDate
         });
         break;
