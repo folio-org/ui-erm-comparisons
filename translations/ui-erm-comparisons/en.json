@@ -57,6 +57,7 @@
   "newComparison.noAgreementPlugin": "No \"find-agreement\" plugin is installed",
   "newComparison.replaceAgreement": "Replace agreement",
   "newComparison.replaceAgreementSpecific": "Replace agreement {agreement}",
+  "newComparison.onDate": "On date",
   "newComparison.startDate": "Start date",
   "newComparison.endDate": "End date",
   "newComparison.status": "Status",

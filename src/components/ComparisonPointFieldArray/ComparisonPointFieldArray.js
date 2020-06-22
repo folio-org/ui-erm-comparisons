@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Button, Tooltip } from '@folio/stripes/components';
+import { Button, Tooltip, Datepicker } from '@folio/stripes/components';
 
-import { EditCard } from '@folio/stripes-erm-components';
+import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 class ComparisonPointFieldArray extends React.Component {
@@ -71,6 +71,12 @@ class ComparisonPointFieldArray extends React.Component {
             index={index}
             name={`${name}[${index}]`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
+          />
+          <Field
+            component={Datepicker}
+            index={index}
+            label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
+            name={`${name}[${index}].onDate`}
           />
         </EditCard>
       );

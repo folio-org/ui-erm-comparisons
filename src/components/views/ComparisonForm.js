@@ -20,6 +20,8 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+import { requiredValidator } from '@folio/stripes-erm-components';
+
 import ComparisonPointFieldArray from '../ComparisonPointFieldArray';
 
 class ComparisonForm extends React.Component {
@@ -28,6 +30,7 @@ class ComparisonForm extends React.Component {
     handlers: PropTypes.shape({
       onClose: PropTypes.func.isRequired,
     }),
+    invalid: PropTypes.bool,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool
   }
@@ -39,7 +42,7 @@ class ComparisonForm extends React.Component {
   }
 
   renderPaneFooter() {
-    const { handlers, handleSubmit, pristine, submitting } = this.props;
+    const { handlers, handleSubmit, invalid, pristine, submitting } = this.props;
     const startButton = (
       <Button
         buttonStyle="default mega"
@@ -55,7 +58,7 @@ class ComparisonForm extends React.Component {
       <Button
         buttonStyle="primary mega"
         data-test-save-button
-        disabled={pristine || submitting}
+        disabled={invalid || pristine || submitting || this.state.currentComparisons < 2}
         marginBottom0
         onClick={handleSubmit}
         type="submit"
@@ -115,6 +118,8 @@ class ComparisonForm extends React.Component {
                       component={TextField}
                       label={<FormattedMessage id="ui-erm-comparisons.newComparison.name" />}
                       name="name"
+                      required
+                      validate={requiredValidator}
                     />
                   </Layout>
                   <Layout className="padding-top-gutter padding-bottom-gutter">
