@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cloneDeep } from 'lodash';
 
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import View from '../components/views/ComparisonForm';
@@ -22,6 +23,13 @@ class ComparisonCreateRoute extends React.Component {
     handlers: {},
   }
 
+  returnIdAndOnDate(valuesArray) {
+    const newValues = [];
+    valuesArray.forEach(obj => {
+      newValues.push({ id: obj.id, onDate: obj.onDate });
+    });
+    return newValues;
+  }
 
   handleClose = () => {
     const { location } = this.props;
@@ -29,22 +37,13 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   handleSubmit = (comparison) => {
-    const submitValues = comparison;
+    const submitValues = cloneDeep(comparison);
 
     if (submitValues.agreements) {
-      const newAgreements = [];
-      submitValues.agreements.forEach(agreement => {
-        newAgreements.push({ id: agreement.id });
-      });
-      submitValues.agreements = newAgreements;
+      submitValues.agreements = this.returnIdAndOnDate(submitValues.agreements);
     }
-
     if (submitValues.packages) {
-      const newPackages = [];
-      submitValues.packages.forEach(pkg => {
-        newPackages.push({ id: pkg.id });
-      });
-      submitValues.packages = newPackages;
+      submitValues.packages = this.returnIdAndOnDate(submitValues.packages);
     }
 
     console.log("Submitted: %o", submitValues);

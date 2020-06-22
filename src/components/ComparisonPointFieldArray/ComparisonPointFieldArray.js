@@ -1,4 +1,5 @@
 import React from 'react';
+import { now } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
@@ -6,6 +7,7 @@ import { Button, Tooltip, Datepicker } from '@folio/stripes/components';
 
 import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
+
 
 class ComparisonPointFieldArray extends React.Component {
   // Execution of this block only occurs with the find-user plugin existing in UserPicker.
@@ -47,7 +49,7 @@ class ComparisonPointFieldArray extends React.Component {
   }
 
   handleUpdateField = (index, field) => {
-    const { fields } = this.props;
+    const { fields, input } = this.props;
     fields.update(index, {
       ...fields.value[index],
       ...field,
@@ -55,7 +57,8 @@ class ComparisonPointFieldArray extends React.Component {
   }
 
   renderComparisonPoints = () => {
-    const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId, name } = this.props;
+    const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId } = this.props;
+    const { name } = fields;
     return fields?.value?.map((comparisonPoint, index) => {
       return (
         <EditCard
@@ -69,12 +72,11 @@ class ComparisonPointFieldArray extends React.Component {
             comparisonPoint={comparisonPoint}
             component={ComparisonPointField}
             index={index}
-            name={`${name}[${index}]`}
+            name={`${name}[${index}].comparisonPoint`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
           />
           <Field
             component={Datepicker}
-            defaultValue={new Date()}
             index={index}
             label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
             name={`${name}[${index}].onDate`}

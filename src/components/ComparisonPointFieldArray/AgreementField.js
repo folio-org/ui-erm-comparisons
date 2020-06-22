@@ -36,7 +36,6 @@ class AgreementField extends React.Component {
         onAgreementSelected={this.props.onAgreementSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
-
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonStyle': value ? 'default' : 'primary',
@@ -154,7 +153,6 @@ class AgreementField extends React.Component {
       input: { value },
       meta: { error, touched }
     } = this.props;
-
 
     // If no agreement has been selected, then the passed agreement will be {}. We want that to be null
     let agreement = null;
