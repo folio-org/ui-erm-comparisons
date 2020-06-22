@@ -33,7 +33,7 @@ class ComparisonCreateRoute extends React.Component {
 
     if (submitValues.agreements) {
       const newAgreements = [];
-      submitValues.agreements.array.forEach(agreement => {
+      submitValues.agreements.forEach(agreement => {
         newAgreements.push({ id: agreement.id });
       });
       submitValues.agreements = newAgreements;
@@ -41,8 +41,8 @@ class ComparisonCreateRoute extends React.Component {
 
     if (submitValues.packages) {
       const newPackages = [];
-      submitValues.packages.array.forEach(package => {
-        newPackages.push({ id: package.id });
+      submitValues.packages.forEach(pkg => {
+        newPackages.push({ id: pkg.id });
       });
       submitValues.packages = newPackages;
     }

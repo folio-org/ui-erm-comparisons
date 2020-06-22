@@ -32,6 +32,12 @@ class ComparisonForm extends React.Component {
     submitting: PropTypes.bool
   }
 
+  state = { currentComparisons: 0 }
+
+  static getDerivedStateFromProps(props) {
+    return { currentComparisons: (props.values?.agreements?.length || 0) + (props.values?.packages?.length || 0) };
+  }
+
   renderPaneFooter() {
     const { handlers, handleSubmit, pristine, submitting } = this.props;
     const startButton = (
@@ -84,8 +90,6 @@ class ComparisonForm extends React.Component {
   }
 
   render() {
-    const { values } = this.props;
-    const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparisons.create">
@@ -120,7 +124,7 @@ class ComparisonForm extends React.Component {
                       comparisonPoint="package"
                       component={ComparisonPointFieldArray}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
-                      disableAddNew={currentComparisons >= 2}
+                      disableAddNew={this.state.currentComparisons >= 2}
                       headerId="ui-erm-comparisons.newComparison.packageTitle"
                       id="comparison-point-form-packages"
                       name="packages"
@@ -133,7 +137,7 @@ class ComparisonForm extends React.Component {
                       comparisonPoint="agreement"
                       component={ComparisonPointFieldArray}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
-                      disableAddNew={currentComparisons >= 2}
+                      disableAddNew={this.state.currentComparisons >= 2}
                       headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"
