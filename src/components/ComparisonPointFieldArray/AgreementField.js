@@ -83,38 +83,45 @@ class AgreementField extends React.Component {
 
   renderAgreement = () => {
     const {
-      endDate = <NoValue />,
-      startDate = <NoValue />,
-      status = <NoValue />
+      endDate,
+      reasonForClosure,
+      startDate,
+      status
     } = this.props.agreement;
-
-    console.log("PROPS: %o", this.props)
-
 
     return (
       <div data-test-agreement-card>
         <Row>
-          <Col md={5} xs={4}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.startDate" />}>
               <span data-test-agreement-start-date>
                 {startDate}
               </span>
             </KeyValue>
           </Col>
-          <Col md={3} xs={4}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.endDate" />}>
               <span data-test-agreement-end-date>
-                {endDate}
+                {endDate || <NoValue />}
               </span>
             </KeyValue>
           </Col>
-          <Col md={4} xs={4}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.status" />}>
               <span data-test-agreement-status>
                 {status}
               </span>
             </KeyValue>
           </Col>
+          {reasonForClosure &&
+            <Col xs={3}>
+              <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.reasonForClosure" />}>
+                <span data-test-agreement-reason-for-closure>
+                  {reasonForClosure}
+                </span>
+              </KeyValue>
+            </Col>
+          }
         </Row>
       </div>
     );

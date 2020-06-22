@@ -15,6 +15,7 @@ class ComparisonPointFieldArray extends React.Component {
         this.handleUpdateField(index, {
           id: comparisonPoint.id,
           name: comparisonPoint.name,
+          reasonForClosure: comparisonPoint.reasonForClosure?.label,
           startDate: comparisonPoint.startDate,
           status: comparisonPoint.agreementStatus?.label,
           endDate: comparisonPoint.endDate
@@ -56,7 +57,6 @@ class ComparisonPointFieldArray extends React.Component {
   renderComparisonPoints = () => {
     const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId, name } = this.props;
     return fields?.value?.map((comparisonPoint, index) => {
-      console.log("Comparison Point: %o", comparisonPoint)
       return (
         <EditCard
           key={index}

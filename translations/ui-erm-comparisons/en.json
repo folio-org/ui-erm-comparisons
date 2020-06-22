@@ -60,6 +60,7 @@
   "newComparison.startDate": "Start date",
   "newComparison.endDate": "End date",
   "newComparison.status": "Status",
+  "newComparison.reasonForClosure": "Reason for closure",
   "newComparison.linkPackage": "Link package",
   "newComparison.noPackageLinked": "No package linked",
   "newComparison.linkPackageToStart": "Link a package to get started",
