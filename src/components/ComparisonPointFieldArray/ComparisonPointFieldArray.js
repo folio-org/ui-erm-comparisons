@@ -1,15 +1,16 @@
 import React from 'react';
-import { now } from 'lodash';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Button, Tooltip, Datepicker } from '@folio/stripes/components';
+import { Button, Datepicker } from '@folio/stripes/components';
 
 import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 
 class ComparisonPointFieldArray extends React.Component {
+  state = { currentDate: moment.utc().startOf('day').toISOString() }
   // Execution of this block only occurs with the find-user plugin existing in UserPicker.
   handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint, comparisonType) => {
     switch (comparisonType) {
@@ -56,6 +57,11 @@ class ComparisonPointFieldArray extends React.Component {
     });
   }
 
+
+  parseDateOnlyString = (value, _timeZone, dateFormat) => {
+    return (!value || value === '') ? value : moment(value).format(dateFormat);
+  };
+
   renderComparisonPoints = () => {
     const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId } = this.props;
     const { name } = fields;
@@ -72,14 +78,16 @@ class ComparisonPointFieldArray extends React.Component {
             comparisonPoint={comparisonPoint}
             component={ComparisonPointField}
             index={index}
-            name={`${name}[${index}].comparisonPoint`}
+            name={`${name}[${index}]`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
           />
           <Field
             component={Datepicker}
+            defaultValue={this.state.currentDate}
             index={index}
             label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
             name={`${name}[${index}].onDate`}
+            parser={this.parseDateOnlyString}
           />
         </EditCard>
       );

@@ -90,7 +90,6 @@ class ComparisonForm extends React.Component {
   render() {
     const { values } = this.props; 
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
-    console.log("Props: %o", this.props);
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparisons.create">

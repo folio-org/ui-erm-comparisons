@@ -49,6 +49,7 @@
     "@folio/eslint-config-stripes": "^5.2.0",
     "@folio/stripes": "^4.0.0",
     "@folio/stripes-cli": "^1.8.0",
+    "moment": "^2.22.2",
     "babel-eslint": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
@@ -81,6 +82,7 @@
     "react-intl": "^4.5.1",
     "react-redux": "*",
     "react-router-dom": "^4.1.1",
-    "redux": "*"
+    "redux": "*",
+    "moment": "^2.22.2"
   }
 }
