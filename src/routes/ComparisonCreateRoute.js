@@ -29,7 +29,25 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   handleSubmit = (comparison) => {
-    console.log("Submitted: %o", comparison);
+    const submitValues = comparison;
+
+    if (submitValues.agreements) {
+      const newAgreements = [];
+      submitValues.agreements.array.forEach(agreement => {
+        newAgreements.push({ id: agreement.id });
+      });
+      submitValues.agreements = newAgreements;
+    }
+
+    if (submitValues.packages) {
+      const newPackages = [];
+      submitValues.packages.array.forEach(package => {
+        newPackages.push({ id: package.id });
+      });
+      submitValues.packages = newPackages;
+    }
+
+    console.log("Submitted: %o", submitValues);
     window.alert('This will eventually submit a new comparison');
   }
 
