@@ -31,6 +31,8 @@
   "prop.runningStatus": "Running status",
   "prop.started": "Started",
   "prop.status": "Running status",
+  "prop.comparisonPointOne": "Comparison point 1",
+  "prop.comparisonPointTwo": "Comparison point 2",
 
   "source": "Source",
 

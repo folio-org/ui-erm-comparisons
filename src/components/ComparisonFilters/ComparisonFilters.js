@@ -20,13 +20,16 @@ export default class ComparisonFilters extends React.Component {
     activeFilters: {
       status: [],
       result: [],
-      class: [],
+      comparisonPointOne: [],
+      comparisonPointTwo: [],
     }
   };
 
   state = {
     status: [],
     result: [],
+    comparisonPointOne: [],
+    comparisonPointTwo: [],
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -68,12 +71,31 @@ export default class ComparisonFilters extends React.Component {
     );
   }
 
+  renderComparisonPointFilter = (name, props) => {
+    const { activeFilters } = this.props;
+    const groupFilters = activeFilters[name] || [];
+    return (
+      <Accordion
+        displayClearButton={groupFilters.length > 0}
+        header={FilterAccordionHeader}
+        id={`filter-accordion-${name}`}
+        label={<FormattedMessage id={`ui-erm-comparisons.prop.${name}`} />}
+        onClearFilter={() => { this.props.filterHandlers.clearGroup(name); }}
+        separator={false}
+        {...props}
+      >
+        <p> Hi </p>
+      </Accordion>
+    );
+  }
+
   render() {
     return (
       <div data-test-checkboxfilters>
         <AccordionSet>
           {this.renderCheckboxFilter('status')}
           {this.renderCheckboxFilter('result')}
+          {this.renderComparisonPointFilter('comparisonPointOne')}
         </AccordionSet>
       </div>
     );
