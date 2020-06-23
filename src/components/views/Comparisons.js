@@ -121,7 +121,7 @@ export default class Comparisons extends React.Component {
   }
 
   renderResultsFirstMenu = (filters) => {
-    //console.log("Filters: %o", filters)
+    console.log("Filters: %o", filters)
     const { filterPaneIsVisible } = this.state;
     const filterCount = filters.string !== '' ? filters.string.split(',').length : 0;
     const hideOrShowMessageId = filterPaneIsVisible ?
@@ -189,7 +189,7 @@ export default class Comparisons extends React.Component {
     const visibleColumns = ['comparisonName', 'runningStatus', 'result', 'errors', 'started', 'ended'];
 
     return (
-      <div ref={contentRef} data-test-localkbadmin>
+      <div ref={contentRef} data-test-ermcomparisons>
         <SearchAndSortQuery
           initialFilterState={{ status: ['Queued', 'In progress'] }}
           initialSearchState={{ query: '' }}

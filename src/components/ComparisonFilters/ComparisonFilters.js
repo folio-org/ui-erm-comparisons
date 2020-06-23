@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Accordion, AccordionSet, FilterAccordionHeader } from '@folio/stripes/components';
-import { CheckboxFilter, parseFilters, deparseFilters } from '@folio/stripes/smart-components';
+import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
 
@@ -99,7 +99,7 @@ export default class ComparisonFilters extends React.Component {
           this.state[`${name}DisplayLabel`] :
           <ComparisonPointFilter
             onAgreementSelected={(agreement) => {
-              this.props.filterHandlers.state({ ...activeFilters, [name]: agreement.id });
+              this.props.filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
               const newState = {};
               newState[`${name}DisplayLabel`] = agreement.name;
               this.setState(newState);
@@ -111,13 +111,13 @@ export default class ComparisonFilters extends React.Component {
   }
 
   render() {
-    console.log("PROPS: %o", this.props)
     return (
       <div data-test-checkboxfilters>
         <AccordionSet>
           {this.renderCheckboxFilter('status')}
           {this.renderCheckboxFilter('result')}
           {this.renderComparisonPointFilter('comparisonPointOne')}
+          {this.renderComparisonPointFilter('comparisonPointTwo')}
         </AccordionSet>
       </div>
     );
