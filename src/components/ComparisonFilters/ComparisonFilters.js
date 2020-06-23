@@ -4,9 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { Accordion, AccordionSet, FilterAccordionHeader } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
+import ComparisonPointFilter from './ComparisonPointFilter';
+
 const FILTERS = [
   'status',
-  'result',
+  'result'
 ];
 
 export default class ComparisonFilters extends React.Component {
@@ -28,8 +30,6 @@ export default class ComparisonFilters extends React.Component {
   state = {
     status: [],
     result: [],
-    comparisonPointOne: [],
-    comparisonPointTwo: [],
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -74,17 +74,22 @@ export default class ComparisonFilters extends React.Component {
   renderComparisonPointFilter = (name, props) => {
     const { activeFilters } = this.props;
     const groupFilters = activeFilters[name] || [];
+
+    console.log("PROPS: %o", this.props)
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
         header={FilterAccordionHeader}
         id={`filter-accordion-${name}`}
         label={<FormattedMessage id={`ui-erm-comparisons.prop.${name}`} />}
+        name={name}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(name); }}
         separator={false}
         {...props}
       >
-        <p> Hi </p>
+        <ComparisonPointFilter
+          onAgreementSelected={(agreement) => { this.props.filterHandlers.state({ ...activeFilters, [name]: agreement }); }}
+        />
       </Accordion>
     );
   }

@@ -69,7 +69,7 @@ class AgreementField extends React.Component {
               data-test-ic-link-agreement
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.newComparison.linkAgreement" />
+              <FormattedMessage id="ui-erm-comparisons.newComparison.addAgreement" />
             </Button>
           );
         }}

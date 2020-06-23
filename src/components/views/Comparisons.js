@@ -22,7 +22,7 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
-import ComparisonFilters from '../ComparisonFilters';
+import { ComparisonFilters } from '../ComparisonFilters';
 import FormattedDateTime from '../FormattedDateTime';
 import css from './Comparisons.css';
 
@@ -121,6 +121,7 @@ export default class Comparisons extends React.Component {
   }
 
   renderResultsFirstMenu = (filters) => {
+    //console.log("Filters: %o", filters)
     const { filterPaneIsVisible } = this.state;
     const filterCount = filters.string !== '' ? filters.string.split(',').length : 0;
     const hideOrShowMessageId = filterPaneIsVisible ?
