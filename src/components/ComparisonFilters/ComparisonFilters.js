@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Accordion, AccordionSet, FilterAccordionHeader } from '@folio/stripes/components';
-import { CheckboxFilter } from '@folio/stripes/smart-components';
+import { CheckboxFilter, parseFilters, deparseFilters } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
 
@@ -30,6 +30,10 @@ export default class ComparisonFilters extends React.Component {
   state = {
     status: [],
     result: [],
+    comparisonPointOne: [],
+    comparisonPointTwo: [],
+    comparisonPointOneDisplayLabel: '',
+    comparisonPointTwoDisplayLabel: '',
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -75,7 +79,6 @@ export default class ComparisonFilters extends React.Component {
     const { activeFilters } = this.props;
     const groupFilters = activeFilters[name] || [];
 
-    console.log("PROPS: %o", this.props)
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
@@ -83,18 +86,32 @@ export default class ComparisonFilters extends React.Component {
         id={`filter-accordion-${name}`}
         label={<FormattedMessage id={`ui-erm-comparisons.prop.${name}`} />}
         name={name}
-        onClearFilter={() => { this.props.filterHandlers.clearGroup(name); }}
+        onClearFilter={() => {
+          this.props.filterHandlers.clearGroup(name);
+          const newState = {};
+          newState[`${name}DisplayLabel`] = '';
+          this.setState(newState);
+        }}
         separator={false}
         {...props}
       >
-        <ComparisonPointFilter
-          onAgreementSelected={(agreement) => { this.props.filterHandlers.state({ ...activeFilters, [name]: agreement }); }}
-        />
+        {this.state[`${name}DisplayLabel`] ?
+          this.state[`${name}DisplayLabel`] :
+          <ComparisonPointFilter
+            onAgreementSelected={(agreement) => {
+              this.props.filterHandlers.state({ ...activeFilters, [name]: agreement.id });
+              const newState = {};
+              newState[`${name}DisplayLabel`] = agreement.name;
+              this.setState(newState);
+            }}
+          />
+        }
       </Accordion>
     );
   }
 
   render() {
+    console.log("PROPS: %o", this.props)
     return (
       <div data-test-checkboxfilters>
         <AccordionSet>

@@ -19,13 +19,10 @@ class ComparisonsRoute extends React.Component {
       path: 'erm/jobs',
       params: getSASParams({
         searchKey: 'name',
-        filterConfig: [{
-          name: 'class',
-          values: [
-            { name: 'Harvester', value: 'org.olf.general.jobs.PackageIngestJob' },
-            { name: 'File import', value: 'org.olf.general.jobs.PackageImportJob' }
-          ],
-        }],
+        filterKeys: {
+          'comparisonPointOne': 'titleList',
+          'comparisonPointTwo': 'titleList'
+        }
       })
     },
     resultValues: {
