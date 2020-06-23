@@ -76,6 +76,7 @@ class ComparisonPointFieldArray extends React.Component {
         >
           <Field
             comparisonPoint={comparisonPoint}
+            comparisonType={comparisonType}
             component={ComparisonPointField}
             index={index}
             name={`${name}[${index}]`}
