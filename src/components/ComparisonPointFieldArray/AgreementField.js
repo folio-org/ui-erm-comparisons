@@ -55,7 +55,7 @@ class AgreementField extends React.Component {
                 {({ ariaIds }) => (
                   <Button
                     aria-labelledby={ariaIds.text}
-                    data-test-ic-link-user
+                    data-test-ic-link-agreement
                     {...buttonProps}
                   >
                     <FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreement" />
@@ -127,7 +127,7 @@ class AgreementField extends React.Component {
   }
 
   renderEmpty = () => (
-    <div data-test-user-empty>
+    <div data-test-agreement-empty>
       <Layout className="textCentered">
         <strong>
           <FormattedMessage id="ui-erm-comparisons.newComparison.noAgreementLinked" />

@@ -55,7 +55,7 @@ class PackageField extends React.Component {
                 {({ ariaIds }) => (
                   <Button
                     aria-labelledby={ariaIds.text}
-                    data-test-ic-link-user
+                    data-test-ic-link-package
                     {...buttonProps}
                   >
                     <FormattedMessage id="ui-erm-comparisons.newComparison.replacePackage" />
@@ -117,7 +117,7 @@ class PackageField extends React.Component {
   }
 
   renderEmpty = () => (
-    <div data-test-user-empty>
+    <div data-test-package-empty>
       <Layout className="textCentered">
         <strong>
           <FormattedMessage id="ui-erm-comparisons.newComparison.noPackageLinked" />
