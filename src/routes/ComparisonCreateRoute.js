@@ -128,8 +128,6 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   render() {
-    console.log("Settled props: %o", this.props)
-    console.log("Settled state: %o", this.state)
     const entitlements = this.state.entitlementsWithIds || {};
     const { handlers } = this.props;
     return (
