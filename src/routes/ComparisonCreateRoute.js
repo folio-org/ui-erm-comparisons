@@ -8,17 +8,17 @@ import View from '../components/views/ComparisonForm';
 class ComparisonCreateRoute extends React.Component {
   static manifest = Object.freeze({
     entitlements: {
-      type: 'okapi',
-      path: 'erm/resource/%{query.path}',
-      records: 'results',
-      perRequest: 100,
-      recordsRequired: '%{query.entitlementsCount}',
       limitParam: 'perPage',
       params: {
         stats: 'true',
-      }
+      },
+      path: 'erm/resource/%{entitlementQueryParams.path}',
+      perRequest: 100,
+      records: 'results',
+      recordsRequired: '%{entitlementQueryParams.entitlementsCount}',
+      type: 'okapi',
     },
-    query: {
+    entitlementQueryParams: {
       initialValue: { entitlementsCount: 100 }
     }
   });
@@ -75,16 +75,16 @@ class ComparisonCreateRoute extends React.Component {
   componentDidUpdate() {
     const { mutator, resources } = this.props;
     const totalEntitlements = resources?.entitlements.records.totalRecords;
-    const { entitlementsCount } = resources.query;
+    const { entitlementsCount } = resources.entitlementQueryParams;
 
     if (totalEntitlements > entitlementsCount) {
-      mutator.query.update({ entitlementsCount: totalEntitlements });
+      mutator.entitlementQueryParams.update({ entitlementsCount: totalEntitlements });
     }
   }
 
   // This method forces the entitlements query to use the passed eresource id
   handleEResourceAdded(eResourceId) {
-    this.props.mutator.query.update({
+    this.props.mutator.entitlementQueryParams.update({
       path: `${eResourceId}/entitlements`
     });
     this.setState({ eResourceId });
@@ -97,7 +97,7 @@ class ComparisonCreateRoute extends React.Component {
     const newState = cloneDeep(entitlementsWithIds);
     delete newState[eResourceId];
 
-    this.setState({ entitlementsWithIds: newState });
+    this.setState({ entitlementsWithIds: newState, eResourceId: '' });
   }
 
   returnIdAndOnDate(valuesArray) {
@@ -128,6 +128,8 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   render() {
+    console.log("Settled props: %o", this.props)
+    console.log("Settled state: %o", this.state)
     const entitlements = this.state.entitlementsWithIds || {};
     const { handlers } = this.props;
     return (
