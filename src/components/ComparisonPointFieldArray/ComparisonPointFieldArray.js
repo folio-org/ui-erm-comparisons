@@ -58,8 +58,6 @@ class ComparisonPointFieldArray extends React.Component {
     // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
     const removedId = this.props.fields?.value?.[index]?.id;
     const addedId = field?.id;
-    console.log("RemovedId: %o", removedId)
-    console.log("addedId: %o", addedId)
     if (removedId) {
       this.props.handlers.onEResourceRemoved(removedId);
     }

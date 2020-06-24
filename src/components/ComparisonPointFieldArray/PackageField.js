@@ -86,10 +86,6 @@ class PackageField extends React.Component {
     const { entitlements, package: { id } } = this.props;
     const relevantEntitlements = entitlements[id] || [];
 
-    console.log("Package Id: %o", id)
-    console.log("Entitlements: %o", entitlements)
-    console.log("Relevant entitlements: %o", relevantEntitlements)
-
     const { headline, isEmptyMessage, visibleColumns } = this.props;
 
     return (

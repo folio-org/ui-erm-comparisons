@@ -35,13 +35,6 @@ class ComparisonForm extends React.Component {
     submitting: PropTypes.bool
   }
 
-  /* static getDerivedStateFromProps(props, state) {
-    const formState = props.form.getState();
-    console.log("FormState: %o", formState)
-
-    return null;
-  } */
-
   renderPaneFooter() {
     const { handlers, handleSubmit, invalid, pristine, submitting, values } = this.props;
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
