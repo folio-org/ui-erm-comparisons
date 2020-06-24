@@ -15,6 +15,8 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon, Pluggable } from '@folio/stripes/core';
 
+import EntitlementAgreementsList from '../EntitlementsAgreementsList';
+
 import css from './styles.css';
 
 class PackageField extends React.Component {
@@ -80,6 +82,27 @@ class PackageField extends React.Component {
     );
   }
 
+  renderEntitlementAgreements = () => {
+    const { entitlements, package: { id } } = this.props;
+    const relevantEntitlements = entitlements[id] || [];
+
+    console.log("Package Id: %o", id)
+    console.log("Entitlements: %o", entitlements)
+    console.log("Relevant entitlements: %o", relevantEntitlements)
+
+    const { headline, isEmptyMessage, visibleColumns } = this.props;
+
+    return (
+      <EntitlementAgreementsList
+        entitlements={relevantEntitlements}
+        headline={headline}
+        id="pci-agreements-list"
+        isEmptyMessage={isEmptyMessage}
+        visibleColumns={visibleColumns}
+      />
+    );
+  }
+
   renderPackage = () => {
     const {
       count,
@@ -104,6 +127,9 @@ class PackageField extends React.Component {
               </span>
             </KeyValue>
           </Col>
+        </Row>
+        <Row>
+          {this.renderEntitlementAgreements()}
         </Row>
       </div>
     );

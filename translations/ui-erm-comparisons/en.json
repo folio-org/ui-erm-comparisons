@@ -72,5 +72,10 @@
   "newComparison.linkPackageToStart": "Link a package to get started",
   "newComparison.noPackagePlugin": "No \"find-package\" plugin is installed",
   "newComparison.replacePackage": "Replace package",
-  "newComparison.replacePackageSpecific": "Replace package {package}"
+  "newComparison.replacePackageSpecific": "Replace package {package}",
+  "agreements.name": "Name",
+  "agreements.agreementStatus": "Status",
+  "agreementPeriods.periodStart": "Period start",
+  "agreementPeriods.periodEnd": "Period end",
+  "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource"
 }

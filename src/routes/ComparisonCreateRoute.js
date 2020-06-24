@@ -1,11 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, clone } from 'lodash';
 
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import View from '../components/views/ComparisonForm';
 
 class ComparisonCreateRoute extends React.Component {
+  static manifest = Object.freeze({
+    entitlements: {
+      type: 'okapi',
+      path: 'erm/resource/%{query.path}',
+      records: 'results',
+      perRequest: 100,
+      recordsRequired: '%{query.entitlementsCount}',
+      limitParam: 'perPage',
+      params: {
+        stats: 'true',
+      }
+    },
+    query: {
+      initialValue: { entitlementsCount: 100 }
+    }
+  });
+
   static propTypes = {
     handlers: PropTypes.object,
     history: PropTypes.shape({
@@ -21,6 +38,66 @@ class ComparisonCreateRoute extends React.Component {
 
   static defaultProps = {
     handlers: {},
+  }
+
+  constructor(props) {
+    super(props);
+    this.handleEResourceAdded = this.handleEResourceAdded.bind(this);
+    this.handleEResourceRemoved = this.handleEResourceRemoved.bind(this);
+    // We will store an object with keys being the eresource ids, and the values being the entitlements for that eresource
+    this.state = {
+      entitlementsWithIds: {},
+      eResourceId: '' // eslint-disable-line react/no-unused-state
+    };
+  }
+
+
+  static getDerivedStateFromProps(props, state) {
+    const { entitlementsWithIds, eResourceId } = state;
+    const { entitlements } = props.resources;
+
+    // When we switch to a new resource, we need to check that the records actually correspond to the new resource
+    const correctQuery = entitlements?.url?.includes(eResourceId) || false;
+
+    if (eResourceId !== '') {
+      // When we actually get the loaded entitlements, we want to add them to the state object, and clear the eResourceId from state
+      if (correctQuery && entitlements?.records?.[0] && !entitlementsWithIds[eResourceId]) {
+        // If that eresource isn't already accounted for in the entitlementsWithIds object, add it.
+        const newState = cloneDeep(entitlementsWithIds);
+        newState[eResourceId] = entitlements?.records;
+        return { entitlementsWithIds: newState, eResourceId: '' };
+      }
+    }
+    return null;
+  }
+
+  // These two methods handle the updating of the entitlements query when an eresource is added to the comparison form.
+  componentDidUpdate() {
+    const { mutator, resources } = this.props;
+    const totalEntitlements = resources?.entitlements.records.totalRecords;
+    const { entitlementsCount } = resources.query;
+
+    if (totalEntitlements > entitlementsCount) {
+      mutator.query.update({ entitlementsCount: totalEntitlements });
+    }
+  }
+
+  // This method forces the entitlements query to use the passed eresource id
+  handleEResourceAdded(eResourceId) {
+    this.props.mutator.query.update({
+      path: `${eResourceId}/entitlements`
+    });
+    this.setState({ eResourceId });
+  }
+
+  // When removing an eresource from the comparison form,
+  // we want it to be removed from the saved list of entitlements with ids as well
+  handleEResourceRemoved(eResourceId) {
+    const { entitlementsWithIds } = this.state;
+    const newState = cloneDeep(entitlementsWithIds);
+    delete newState[eResourceId];
+
+    this.setState({ entitlementsWithIds: newState });
   }
 
   returnIdAndOnDate(valuesArray) {
@@ -51,12 +128,18 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   render() {
+    const entitlements = this.state.entitlementsWithIds || {};
     const { handlers } = this.props;
     return (
       <View
+        data={{
+          entitlements
+        }}
         handlers={{
           ...handlers,
-          onClose: this.handleClose
+          onClose: this.handleClose,
+          onEResourceAdded: this.handleEResourceAdded,
+          onEResourceRemoved: this.handleEResourceRemoved
         }}
         onSubmit={this.handleSubmit}
       />

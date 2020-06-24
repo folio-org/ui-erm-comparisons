@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Button, Datepicker } from '@folio/stripes/components';
 
-import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
+import { EditCard } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 
@@ -25,13 +25,13 @@ class ComparisonPointFieldArray extends React.Component {
         });
         break;
       case 'package':
-        console.log("Package: %o", comparisonPoint)
         this.handleUpdateField(index, {
           id: comparisonPoint.id,
           name: comparisonPoint.name,
           count: comparisonPoint._object?.resourceCount,
           provider: comparisonPoint._object?.vendor?.name
         });
+        this.props.handlers.onEResourceAdded(comparisonPoint.id);
         break;
       default:
         break;
@@ -46,11 +46,24 @@ class ComparisonPointFieldArray extends React.Component {
   }
 
   handleDeleteField = (index) => {
+    const id = this.props.fields?.value?.[index]?.id;
+    this.props.handlers.onEResourceRemoved(id);
+
     this.props.fields.remove(index);
   }
 
   handleUpdateField = (index, field) => {
-    const { fields, input } = this.props;
+    const { fields } = this.props;
+
+    // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
+    const removedId = this.props.fields?.value?.[index]?.id;
+    const addedId = field?.id;
+    console.log("RemovedId: %o", removedId)
+    console.log("addedId: %o", addedId)
+    if (removedId) {
+      this.props.handlers.onEResourceRemoved(removedId);
+    }
+    this.props.handlers.onEResourceAdded(addedId);
     fields.update(index, {
       ...fields.value[index],
       ...field,
@@ -63,7 +76,7 @@ class ComparisonPointFieldArray extends React.Component {
   };
 
   renderComparisonPoints = () => {
-    const { comparisonPoint: comparisonType, deleteButtonTooltipId, fields, headerId } = this.props;
+    const { comparisonPoint: comparisonType, data, deleteButtonTooltipId, fields, headerId } = this.props;
     const { name } = fields;
     return fields?.value?.map((comparisonPoint, index) => {
       return (
@@ -78,6 +91,7 @@ class ComparisonPointFieldArray extends React.Component {
             comparisonPoint={comparisonPoint}
             comparisonType={comparisonType}
             component={ComparisonPointField}
+            entitlements={data?.entitlements}
             index={index}
             name={`${name}[${index}]`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}

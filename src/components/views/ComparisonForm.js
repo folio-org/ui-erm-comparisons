@@ -35,6 +35,13 @@ class ComparisonForm extends React.Component {
     submitting: PropTypes.bool
   }
 
+  /* static getDerivedStateFromProps(props, state) {
+    const formState = props.form.getState();
+    console.log("FormState: %o", formState)
+
+    return null;
+  } */
+
   renderPaneFooter() {
     const { handlers, handleSubmit, invalid, pristine, submitting, values } = this.props;
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
@@ -88,7 +95,7 @@ class ComparisonForm extends React.Component {
   }
 
   render() {
-    const { values } = this.props; 
+    const { data: { entitlements }, values } = this.props;
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
     return (
       <Paneset>
@@ -125,8 +132,13 @@ class ComparisonForm extends React.Component {
                       addLabelId="ui-erm-comparisons.newComparison.addPackage"
                       comparisonPoint="package"
                       component={ComparisonPointFieldArray}
+                      data={{entitlements: this.props.data?.entitlements}}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                       disableAddNew={currentComparisons >= 2}
+                      handlers={{
+                        onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
+                        onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
+                      }}
                       headerId="ui-erm-comparisons.newComparison.packageTitle"
                       id="comparison-point-form-packages"
                       name="packages"
@@ -140,6 +152,10 @@ class ComparisonForm extends React.Component {
                       component={ComparisonPointFieldArray}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
                       disableAddNew={currentComparisons >= 2}
+                      handlers={{
+                        onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
+                        onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
+                      }}
                       headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"

@@ -7,7 +7,7 @@ import PackageField from './PackageField';
 
 class ComparisonPointField extends React.Component {
   render() {
-    const { comparisonPoint, comparisonType, onComparisonPointSelected, ...props } = this.props;
+    const { comparisonPoint, comparisonType, entitlements, onComparisonPointSelected, ...props } = this.props;
     switch (comparisonType) {
       case 'agreement':
         return (
@@ -17,7 +17,7 @@ class ComparisonPointField extends React.Component {
         return (
           // Not sorting these props so they're the same as the above for clarity
           // eslint-disable-next-line react/jsx-sort-props
-          <PackageField package={comparisonPoint} onPackageSelected={onComparisonPointSelected} {...props} />
+          <PackageField entitlements={entitlements} package={comparisonPoint} onPackageSelected={onComparisonPointSelected} {...props} />
         );
       default:
         return null;
