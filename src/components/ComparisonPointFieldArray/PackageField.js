@@ -32,8 +32,7 @@ class PackageField extends React.Component {
     return (
       <Pluggable
         dataKey="package"
-        disableRecordCreation
-        onPackageSelected={this.props.onPackageSelected}
+        onEresourceSelected={this.props.onPackageSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
@@ -73,6 +72,7 @@ class PackageField extends React.Component {
             </Button>
           );
         }}
+        showTitles={false}
         type="find-eresource"
       >
         <FormattedMessage id="ui-erm-comparisons.newComparison.noPackagePlugin" />
@@ -90,21 +90,14 @@ class PackageField extends React.Component {
     return (
       <div data-test-package-card>
         <Row>
-          <Col xs={4}>
+          <Col xs={6}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.count" />}>
               <span data-test-package-count>
                 {count || <NoValue />}
               </span>
             </KeyValue>
           </Col>
-          <Col xs={4}>
-            <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.type" />}>
-              <span data-test-package-type>
-                {type || <NoValue />}
-              </span>
-            </KeyValue>
-          </Col>
-          <Col xs={4}>
+          <Col xs={6}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.provider" />}>
               <span data-test-package-provider>
                 {provider}

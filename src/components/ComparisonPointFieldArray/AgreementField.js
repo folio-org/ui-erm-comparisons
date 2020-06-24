@@ -32,7 +32,6 @@ class AgreementField extends React.Component {
     return (
       <Pluggable
         dataKey="agreement"
-        disableRecordCreation
         onAgreementSelected={this.props.onAgreementSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;

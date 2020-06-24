@@ -25,12 +25,12 @@ class ComparisonPointFieldArray extends React.Component {
         });
         break;
       case 'package':
+        console.log("Package: %o", comparisonPoint)
         this.handleUpdateField(index, {
           id: comparisonPoint.id,
           name: comparisonPoint.name,
-          type: comparisonPoint.type,
-          count: comparisonPoint.count,
-          provider: comparisonPoint.provider
+          count: comparisonPoint._object?.resourceCount,
+          provider: comparisonPoint._object?.vendor?.name
         });
         break;
       default:

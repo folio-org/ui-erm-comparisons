@@ -63,9 +63,14 @@
   "newComparison.startDate": "Start date",
   "newComparison.endDate": "End date",
   "newComparison.status": "Status",
+  "newComparison.type": "Type",
+  "newComparison.count": "Count",
+  "newComparison.provider": "Provider",
   "newComparison.reasonForClosure": "Reason for closure",
   "newComparison.linkPackage": "Link package",
   "newComparison.noPackageLinked": "No package linked",
   "newComparison.linkPackageToStart": "Link a package to get started",
-  "newComparison.noPackagePlugin": "No \"find-package\" plugin is installed"
+  "newComparison.noPackagePlugin": "No \"find-package\" plugin is installed",
+  "newComparison.replacePackage": "Replace package",
+  "newComparison.replacePackageSpecific": "Replace package {package}"
 }
