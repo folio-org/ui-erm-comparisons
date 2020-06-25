@@ -11,30 +11,24 @@ import ComparisonPointField from './ComparisonPointField';
 
 class ComparisonPointFieldArray extends React.Component {
   state = { currentDate: moment.utc().startOf('day').toISOString() }
-  // Execution of this block only occurs with the find-user plugin existing in UserPicker.
   handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint, comparisonType) => {
-    switch (comparisonType) {
-      case 'agreement':
-        this.handleUpdateField(index, {
-          id: comparisonPoint.id,
-          name: comparisonPoint.name,
-          reasonForClosure: comparisonPoint.reasonForClosure?.label,
-          startDate: comparisonPoint.startDate,
-          status: comparisonPoint.agreementStatus?.label,
-          endDate: comparisonPoint.endDate
-        });
-        break;
-      case 'package':
-        this.handleUpdateField(index, {
-          id: comparisonPoint.id,
-          name: comparisonPoint.name,
-          count: comparisonPoint._object?.resourceCount,
-          provider: comparisonPoint._object?.vendor?.name
-        }, true);
-        this.props.handlers.onEResourceAdded(comparisonPoint.id);
-        break;
-      default:
-        break;
+    if (comparisonType === 'agreement') {
+      this.handleUpdateField(index, {
+        id: comparisonPoint.id,
+        name: comparisonPoint.name,
+        reasonForClosure: comparisonPoint.reasonForClosure?.label,
+        startDate: comparisonPoint.startDate,
+        status: comparisonPoint.agreementStatus?.label,
+        endDate: comparisonPoint.endDate
+      });
+    } else if (comparisonType === 'package') {
+      this.props.handlers.onEResourceAdded(comparisonPoint.id);
+      this.handleUpdateField(index, {
+        id: comparisonPoint.id,
+        name: comparisonPoint.name,
+        count: comparisonPoint._object?.resourceCount,
+        provider: comparisonPoint._object?.vendor?.name
+      }, true);
     }
   }
 

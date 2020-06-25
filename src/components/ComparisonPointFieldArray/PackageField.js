@@ -85,13 +85,12 @@ class PackageField extends React.Component {
 
   renderEntitlementAgreements = () => {
     const { entitlements, package: { id } } = this.props;
-    const relevantEntitlements = entitlements[id] || [];
 
     const { headline, isEmptyMessage, visibleColumns } = this.props;
 
     return (
       <EntitlementAgreementsList
-        entitlements={relevantEntitlements}
+        entitlements={entitlements}
         headline={headline}
         id="pci-agreements-list"
         isEmptyMessage={isEmptyMessage}
