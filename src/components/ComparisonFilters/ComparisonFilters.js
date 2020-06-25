@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, AccordionSet, FilterAccordionHeader } from '@folio/stripes/components';
+import { Accordion, AccordionSet, FilterAccordionHeader, Row } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
@@ -96,8 +96,14 @@ export default class ComparisonFilters extends React.Component {
         {...props}
       >
         {this.state[`${name}DisplayLabel`] ?
-          this.state[`${name}DisplayLabel`] :
+          <Row>
+            {this.state[`${name}DisplayLabel`]}
+          </Row> : null
+        }
+        <Row>
           <ComparisonPointFilter
+            disabled={this.state[`${name}DisplayLabel`]}
+            name={name}
             onAgreementSelected={(agreement) => {
               this.props.filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
               const newState = {};
@@ -111,7 +117,7 @@ export default class ComparisonFilters extends React.Component {
               this.setState(newState);
             }}
           />
-        }
+        </Row>
       </Accordion>
     );
   }

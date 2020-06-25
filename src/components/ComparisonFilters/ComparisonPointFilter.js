@@ -15,33 +15,15 @@ class ComparisonPointFilter extends React.Component {
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonStyle': value ? 'default' : 'primary',
-            'id': `${this.props.name}-search-button`,
+            'id': `${this.props.name}-agreement-search-button`,
             'onClick': props.onClick,
             'buttonRef': this.triggerButton,
             'marginBottom0': true
           };
-          if (value) {
-            return (
-              <Tooltip
-                id={`${this.props.name}-agreement-button-tooltip`}
-                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.name }} />}
-                triggerRef={this.triggerButton}
-              >
-                {({ ariaIds }) => (
-                  <Button
-                    aria-labelledby={ariaIds.text}
-                    data-test-ic-link-agremement
-                    {...buttonProps}
-                  >
-                    <FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreement" />
-                  </Button>
-                )}
-              </Tooltip>
-            );
-          }
           return (
             <Button
-              key={`data-test-ic-add-${name}-agreement-filter`}
+              disabled={this.props.disabled}
+              key={`data-test-ic-add-${this.props.name}-agreement-filter`}
               {...buttonProps}
             >
               <FormattedMessage id="ui-erm-comparisons.newComparison.addAgreement" />
@@ -65,33 +47,15 @@ class ComparisonPointFilter extends React.Component {
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonStyle': value ? 'default' : 'primary',
-            'id': `${this.props.name}-search-button`,
+            'id': `${this.props.name}-package-search-button`,
             'onClick': props.onClick,
             'buttonRef': this.triggerButton,
             'marginBottom0': true
           };
-          if (value) {
-            return (
-              <Tooltip
-                id={`${this.props.name}-package-button-tooltip`}
-                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.name }} />}
-                triggerRef={this.triggerButton}
-              >
-                {({ ariaIds }) => (
-                  <Button
-                    aria-labelledby={ariaIds.text}
-                    data-test-ic-link-package
-                    {...buttonProps}
-                  >
-                    <FormattedMessage id="ui-erm-comparisons.newComparison.replacePackage" />
-                  </Button>
-                )}
-              </Tooltip>
-            );
-          }
           return (
             <Button
-              key={`data-test-ic-add-${name}-package-filter`}
+              disabled={this.props.disabled}
+              key={`data-test-ic-add-${this.props.name}-package-filter`}
               {...buttonProps}
             >
               <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />
