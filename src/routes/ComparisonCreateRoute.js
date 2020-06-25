@@ -44,7 +44,13 @@ class ComparisonCreateRoute extends React.Component {
     super(props);
     this.handleEResourceAdded = this.handleEResourceAdded.bind(this);
     this.handleEResourceRemoved = this.handleEResourceRemoved.bind(this);
-    // We will store an object with keys being the eresource ids, and the values being the entitlements for that eresource
+
+    /*
+      We save in state an object with keys of the ids of eResources, and the values of their entitlement information,
+      gleaned from a secondary API call made asyncronously. We also save the relevant eResourceId into state, so that we
+      can access that from getDerivedStateFromProps, which is where we check the incoming entitlement information against
+      the id.
+    */
     this.state = {
       entitlementsWithIds: {},
       eResourceId: '' // eslint-disable-line react/no-unused-state
@@ -56,22 +62,26 @@ class ComparisonCreateRoute extends React.Component {
     const { entitlementsWithIds, eResourceId } = state;
     const { entitlements } = props.resources;
 
-    // When we switch to a new resource, we need to check that the records actually correspond to the new resource
+    /*
+      Stripes appears to have an issue, whereby when a query URL is changed, it does not unload the current set of results.
+      Instead the current set of results remain loaded, along with a "loading" status of False, until the new results come through.
+      Hence the only way to currently check whether the correct set of results exists in the resources prop is to compare the url
+      of the query against the saved eResourceId.
+    */
     const correctQuery = entitlements?.url?.includes(eResourceId) || false;
 
-    if (eResourceId !== '') {
-      // When we actually get the loaded entitlements, we want to add them to the state object, and clear the eResourceId from state
-      if (correctQuery && entitlements?.records?.[0] && !entitlementsWithIds[eResourceId]) {
-        // If that eresource isn't already accounted for in the entitlementsWithIds object, add it.
-        const newState = cloneDeep(entitlementsWithIds);
-        newState[eResourceId] = entitlements?.records;
-        return { entitlementsWithIds: newState, eResourceId: '' };
-      }
+    // If we don't have an eResourceId saved in state then we can skip this logic.
+    // When we actually get the loaded entitlements, we want to add them to the state object, and clear the eResourceId from state.
+    if (eResourceId !== '' && correctQuery && entitlements?.records?.[0] && !entitlementsWithIds[eResourceId]) {
+      // If that eresource isn't already accounted for in the entitlementsWithIds object, add it.
+      const newState = cloneDeep(entitlementsWithIds);
+      newState[eResourceId] = entitlements?.records;
+      return { entitlementsWithIds: newState, eResourceId: '' };
     }
     return null;
   }
 
-  // These two methods handle the updating of the entitlements query when an eresource is added to the comparison form.
+  // This method ensures we're only ever making a call for the necessary number of entitlements on an eresource.
   componentDidUpdate() {
     const { mutator, resources } = this.props;
     const totalEntitlements = resources?.entitlements.records.totalRecords;
@@ -82,7 +92,14 @@ class ComparisonCreateRoute extends React.Component {
     }
   }
 
-  // This method forces the entitlements query to use the passed eresource id
+  /*
+    This callback changes a query parameter to allow a secondary API call to be made, and the entitlements information for this
+    eResource to be displayed. Due to the way this works asyncronously within stripes, we have to do a bunch of validation to ensure
+    we actually have the correct information for the correct eResource. Since this is unavoidable, and we don't actually want to submit
+    this information along with the form, we store the entitlements information in state manually rather than plugging it into form state.
+    Thus when we go to retrieve the entitlement information, we access the 'entitlementsWithIds' object, which has Keys of the eResource
+    ids, and Values of the entitlement information for that eResource.
+   */
   handleEResourceAdded(eResourceId) {
     this.props.mutator.entitlementQueryParams.update({
       id: eResourceId
