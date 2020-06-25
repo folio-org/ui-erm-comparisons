@@ -104,6 +104,12 @@ export default class ComparisonFilters extends React.Component {
               newState[`${name}DisplayLabel`] = agreement.name;
               this.setState(newState);
             }}
+            onPackageSelected={(pkg) => {
+              this.props.filterHandlers.state({ ...activeFilters, [name]: [pkg.id] });
+              const newState = {};
+              newState[`${name}DisplayLabel`] = pkg.name;
+              this.setState(newState);
+            }}
           />
         }
       </Accordion>

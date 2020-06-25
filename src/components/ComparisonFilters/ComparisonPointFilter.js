@@ -9,7 +9,6 @@ class ComparisonPointFilter extends React.Component {
     return (
       <Pluggable
         dataKey="agreement"
-        disableRecordCreation
         onAgreementSelected={this.props.onAgreementSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
@@ -31,7 +30,7 @@ class ComparisonPointFilter extends React.Component {
                 {({ ariaIds }) => (
                   <Button
                     aria-labelledby={ariaIds.text}
-                    data-test-ic-link-user
+                    data-test-ic-link-agremement
                     {...buttonProps}
                   >
                     <FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreement" />
@@ -56,9 +55,63 @@ class ComparisonPointFilter extends React.Component {
     );
   }
 
+  renderFilterPackageButton = value => {
+    return (
+      <Pluggable
+        dataKey="package"
+        onPackageSelected={this.props.onPackageSelected}
+        renderTrigger={(props) => {
+          this.triggerButton = props.buttonRef;
+          const buttonProps = {
+            'aria-haspopup': 'true',
+            'buttonStyle': value ? 'default' : 'primary',
+            'id': `${this.props.name}-search-button`,
+            'onClick': props.onClick,
+            'buttonRef': this.triggerButton,
+            'marginBottom0': true
+          };
+          if (value) {
+            return (
+              <Tooltip
+                id={`${this.props.name}-package-button-tooltip`}
+                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.name }} />}
+                triggerRef={this.triggerButton}
+              >
+                {({ ariaIds }) => (
+                  <Button
+                    aria-labelledby={ariaIds.text}
+                    data-test-ic-link-package
+                    {...buttonProps}
+                  >
+                    <FormattedMessage id="ui-erm-comparisons.newComparison.replacePackage" />
+                  </Button>
+                )}
+              </Tooltip>
+            );
+          }
+          return (
+            <Button
+              key={`data-test-ic-add-${name}-package-filter`}
+              {...buttonProps}
+            >
+              <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />
+            </Button>
+          );
+        }}
+        showTitles={false}
+        type="find-eresource"
+      >
+        <FormattedMessage id="ui-erm-comparisons.newComparison.noPackagePlugin" />
+      </Pluggable>
+    );
+  }
+
   render() {
     return (
-      this.renderFilterAgreementButton()
+      <>
+        {this.renderFilterAgreementButton()}
+        {this.renderFilterPackageButton()}
+      </>
     );
   }
 }
