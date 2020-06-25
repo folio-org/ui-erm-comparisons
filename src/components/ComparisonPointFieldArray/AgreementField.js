@@ -65,6 +65,7 @@ class AgreementField extends React.Component {
           }
           return (
             <Button
+              autoFocus
               data-test-ic-link-agreement
               {...buttonProps}
             >

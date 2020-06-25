@@ -67,6 +67,7 @@ class PackageField extends React.Component {
           }
           return (
             <Button
+              autoFocus
               data-test-ic-link-package
               {...buttonProps}
             >

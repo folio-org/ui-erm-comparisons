@@ -30,7 +30,7 @@ class ComparisonPointFieldArray extends React.Component {
           name: comparisonPoint.name,
           count: comparisonPoint._object?.resourceCount,
           provider: comparisonPoint._object?.vendor?.name
-        });
+        }, true);
         this.props.handlers.onEResourceAdded(comparisonPoint.id);
         break;
       default:
@@ -52,16 +52,19 @@ class ComparisonPointFieldArray extends React.Component {
     this.props.fields.remove(index);
   }
 
-  handleUpdateField = (index, field) => {
+  handleUpdateField = (index, field, updateEntitlementQuery = false) => {
     const { fields } = this.props;
 
-    // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
-    const removedId = this.props.fields?.value?.[index]?.id;
-    const addedId = field?.id;
-    if (removedId) {
-      this.props.handlers.onEResourceRemoved(removedId);
+    if (updateEntitlementQuery) {
+      // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
+      const removedId = this.props.fields?.value?.[index]?.id;
+      const addedId = field?.id;
+      if (removedId) {
+        this.props.handlers.onEResourceRemoved(removedId);
+      }
+      this.props.handlers.onEResourceAdded(addedId);
     }
-    this.props.handlers.onEResourceAdded(addedId);
+
     fields.update(index, {
       ...fields.value[index],
       ...field,

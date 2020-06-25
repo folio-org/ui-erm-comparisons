@@ -8,20 +8,18 @@ import PackageField from './PackageField';
 class ComparisonPointField extends React.Component {
   render() {
     const { comparisonPoint, comparisonType, entitlements, onComparisonPointSelected, ...props } = this.props;
-    switch (comparisonType) {
-      case 'agreement':
-        return (
-          <AgreementField agreement={comparisonPoint} onAgreementSelected={onComparisonPointSelected} {...props} />
-        );
-      case 'package':
-        return (
-          // Not sorting these props so they're the same as the above for clarity
-          // eslint-disable-next-line react/jsx-sort-props
-          <PackageField entitlements={entitlements} package={comparisonPoint} onPackageSelected={onComparisonPointSelected} {...props} />
-        );
-      default:
-        return null;
+    if (comparisonType === 'agreement') {
+      return (
+        <AgreementField agreement={comparisonPoint} onAgreementSelected={onComparisonPointSelected} {...props} />
+      );
+    } else if (comparisonType === 'package') {
+      return (
+        // Not sorting these props so they're the same as the above for clarity
+        // eslint-disable-next-line react/jsx-sort-props
+        <PackageField entitlements={entitlements} package={comparisonPoint} onPackageSelected={onComparisonPointSelected} {...props} />
+      );
     }
+    return null;
   }
 }
 

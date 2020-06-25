@@ -12,7 +12,7 @@ class ComparisonCreateRoute extends React.Component {
       params: {
         stats: 'true',
       },
-      path: 'erm/resource/%{entitlementQueryParams.path}',
+      path: 'erm/resource/%{entitlementQueryParams.id}/entitlements',
       perRequest: 100,
       records: 'results',
       recordsRequired: '%{entitlementQueryParams.entitlementsCount}',
@@ -85,7 +85,7 @@ class ComparisonCreateRoute extends React.Component {
   // This method forces the entitlements query to use the passed eresource id
   handleEResourceAdded(eResourceId) {
     this.props.mutator.entitlementQueryParams.update({
-      path: `${eResourceId}/entitlements`
+      id: eResourceId
     });
     this.setState({ eResourceId });
   }
