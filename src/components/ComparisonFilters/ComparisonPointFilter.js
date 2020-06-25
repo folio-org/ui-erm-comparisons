@@ -59,7 +59,7 @@ class ComparisonPointFilter extends React.Component {
     return (
       <Pluggable
         dataKey="package"
-        onPackageSelected={this.props.onPackageSelected}
+        onEresourceSelected={this.props.onPackageSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
