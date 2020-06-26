@@ -23,10 +23,11 @@ class ComparisonCreateRoute extends React.Component {
       initialValue: { entitlementsCount: 100 }
     },
     comparisons: {
-      type: 'okapi',
-      path: 'erm/jobs/comparison',
+      clientGeneratePk: false,
       fetch: false,
+      path: 'erm/jobs/comparison',
       shouldRefresh: () => false,
+      type: 'okapi',
     },
   });
 
@@ -138,11 +139,14 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   handleSubmit = (comparison) => {
+    console.log("Incoming comparison to submit: %o", comparison);
     const { history, location, mutator } = this.props;
+    console.log("Props?: %o", this.props)
 
     const submitValues = { name: comparison.name };
     submitValues.comparisonPoints = this.returnIdAndOnDate(comparison.agreements);
     submitValues.comparisonPoints = submitValues.comparisonPoints.concat(this.returnIdAndOnDate(comparison.packages));
+    console.log("Submit values: %o", submitValues);
     return mutator.comparisons
       .POST(submitValues)
       .then(response => {
