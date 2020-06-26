@@ -16,12 +16,12 @@ class ComparisonsRoute extends React.Component {
       records: 'results',
       perRequest: RESULT_COUNT_INCREMENT,
       limitParam: 'perPage',
-      path: 'erm/jobs',
+      path: 'erm/jobs/types/comparison',
       params: getSASParams({
         searchKey: 'name',
         filterKeys: {
-          'comparisonPointOne': 'titleList',
-          'comparisonPointTwo': 'titleList'
+          'comparisonPointOne': 'titleLists',
+          'comparisonPointTwo': 'titleLists'
         }
       })
     },
