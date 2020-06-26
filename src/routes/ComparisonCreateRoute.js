@@ -124,7 +124,7 @@ class ComparisonCreateRoute extends React.Component {
     this.setState({ entitlementsWithIds: newState, eResourceId: '' });
   }
 
-  returnIdAndOnDate(valuesArray) {
+  returnIdAndOnDate(valuesArray = []) {
     const newValues = [];
     valuesArray.forEach(obj => {
       newValues.push({ titleList: obj.id, date: obj.onDate });
@@ -141,17 +141,8 @@ class ComparisonCreateRoute extends React.Component {
     const { history, location, mutator } = this.props;
 
     const submitValues = { name: comparison.name };
-    const comparisonPoints = [];
-
-    if (comparison.agreements) {
-      comparisonPoints.concat(this.returnIdAndOnDate(comparison.agreements));
-    }
-    if (comparison.packages) {
-      comparisonPoints.concat(this.returnIdAndOnDate(comparison.packages));
-    }
-    submitValues.comparisonPoints = comparisonPoints;
-
-    console.log("Submitted: %o", submitValues);
+    submitValues.comparisonPoints = this.returnIdAndOnDate(comparison.agreements);
+    submitValues.comparisonPoints = submitValues.comparisonPoints.concat(this.returnIdAndOnDate(comparison.packages));
     return mutator.comparisons
       .POST(submitValues)
       .then(response => {
