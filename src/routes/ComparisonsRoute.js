@@ -16,7 +16,7 @@ class ComparisonsRoute extends React.Component {
       records: 'results',
       perRequest: RESULT_COUNT_INCREMENT,
       limitParam: 'perPage',
-      path: 'erm/jobs/types/comparison',
+      path: 'erm/jobs/type/comparison',
       params: getSASParams({
         searchKey: 'name',
         filterKeys: {

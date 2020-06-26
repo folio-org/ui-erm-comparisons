@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { cloneDeep, clone } from 'lodash';
+import { cloneDeep } from 'lodash';
 
+import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import View from '../components/views/ComparisonForm';
 
@@ -20,7 +21,13 @@ class ComparisonCreateRoute extends React.Component {
     },
     entitlementQueryParams: {
       initialValue: { entitlementsCount: 100 }
-    }
+    },
+    comparisons: {
+      type: 'okapi',
+      path: 'erm/jobs/comparison',
+      fetch: false,
+      shouldRefresh: () => false,
+    },
   });
 
   static propTypes = {
@@ -131,17 +138,29 @@ class ComparisonCreateRoute extends React.Component {
   }
 
   handleSubmit = (comparison) => {
-    const submitValues = cloneDeep(comparison);
+    const { history, location, mutator } = this.props;
 
-    if (submitValues.agreements) {
-      submitValues.agreements = this.returnIdAndOnDate(submitValues.agreements);
+    const submitValues = { name: comparison.name };
+    const titleLists = [];
+
+    if (comparison.agreements) {
+      titleLists.push(this.returnIdAndOnDate(comparison.agreements));
     }
-    if (submitValues.packages) {
-      submitValues.packages = this.returnIdAndOnDate(submitValues.packages);
+    if (comparison.packages) {
+      titleLists.push(this.returnIdAndOnDate(comparison.packages));
     }
+    submitValues.titleLists = titleLists;
 
     console.log("Submitted: %o", submitValues);
-    window.alert('This will eventually submit a new comparison');
+    return mutator.comparisons
+      .POST(submitValues)
+      .then(response => {
+        const comparisonId = response?.id ?? '';
+        const name = response?.name ?? '';
+
+        history.push(`/erm-comparison/${comparisonId}${location.search}`);
+        this.context.sendCallout({ message: <SafeHTMLMessage id="erm-comparison.comparison.created.success" values={{ name }} /> });
+      });
   }
 
   render() {
