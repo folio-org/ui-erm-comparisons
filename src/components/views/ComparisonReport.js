@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  Button,
   IconButton,
+  Layout,
   Pane,
-  PaneFooter,
   PaneMenu,
-  Paneset,
 } from '@folio/stripes/components';
 
 export default class ComparisonReport extends React.Component {
@@ -31,7 +29,6 @@ export default class ComparisonReport extends React.Component {
   }
 
   render() {
-    console.log("PROPS: %o", this.props)
     return (
       <Pane
         defaultWidth="100%"
@@ -39,7 +36,11 @@ export default class ComparisonReport extends React.Component {
         id="pane-report"
         paneTitle={<FormattedMessage id="ui-erm-comparisons.report.paneTitle" />}
       >
-        The report
+        <Layout
+          data-test-report-contents
+        >
+          The report
+        </Layout>
       </Pane>
     );
   }
