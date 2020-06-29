@@ -121,6 +121,7 @@ export default class Comparisons extends React.Component {
   }
 
   renderResultsFirstMenu = (filters) => {
+    console.log("FILTERS: %o", filters)
     const { filterPaneIsVisible } = this.state;
     const filterCount = filters.string !== '' ? filters.string.split(',').length : 0;
     const hideOrShowMessageId = filterPaneIsVisible ?

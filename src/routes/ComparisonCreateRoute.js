@@ -149,7 +149,7 @@ class ComparisonCreateRoute extends React.Component {
         const comparisonId = response?.id ?? '';
         const name = response?.name ?? '';
 
-        history.push(`/erm-comparison/${comparisonId}${location.search}`);
+        history.push(`/erm-comparisons/${comparisonId}${location.search}`);
         this.context.sendCallout({ message: <SafeHTMLMessage id="erm-comparison.comparison.created.success" values={{ name }} /> });
       });
   }

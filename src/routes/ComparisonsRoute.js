@@ -20,8 +20,8 @@ class ComparisonsRoute extends React.Component {
       params: getSASParams({
         searchKey: 'name',
         filterKeys: {
-          'comparisonPointOne': 'titleLists',
-          'comparisonPointTwo': 'titleLists'
+          'comparisonPointOne': 'comparisonPoints.titleList',
+          'comparisonPointTwo': 'comparisonPoints.titleList'
         }
       })
     },
@@ -106,6 +106,8 @@ class ComparisonsRoute extends React.Component {
     if (this.source) {
       this.source.update(this.props, 'comparisons');
     }
+
+    console.log("Location: %o", location)
 
     return (
       <View
