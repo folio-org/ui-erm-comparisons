@@ -33,6 +33,7 @@
   "prop.status": "Running status",
   "prop.comparisonPointOne": "Comparison point 1",
   "prop.comparisonPointTwo": "Comparison point 2",
+  "prop.viewReport": "View comparison report",
 
   "source": "Source",
 
@@ -77,5 +78,8 @@
   "agreements.agreementStatus": "Status",
   "agreementPeriods.periodStart": "Period start",
   "agreementPeriods.periodEnd": "Period end",
-  "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource"
+  "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource",
+
+  "report.close": "Close comparison report screen",
+  "report.paneTitle": "Comparison report"
 }

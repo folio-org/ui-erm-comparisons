@@ -185,6 +185,16 @@ export default class ComparisonInfo extends React.Component {
                 )
               }
             </Row>
+            <Row>
+              <Button
+                buttonStyle="primary mega"
+                data-test-comparison-report-view
+                marginBottom0
+                onClick={this.props.onViewReport}
+              >
+                <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
+              </Button>
+            </Row>
           </div>
           {
             isComparisonNotQueued ? (

@@ -62,6 +62,11 @@ class ComparisonViewRoute extends React.Component {
     this.props.history.push(`/erm-comparisons${this.props.location.search}`);
   };
 
+  handleViewReport = () => {
+    const { history, location } = this.props;
+    history.push(`${location.pathname}/report${location.search}`);
+  }
+
   showDeleteConfirmationModal = () => this.setState({ showConfirmDelete: true });
 
   hideDeleteConfirmationModal = () => this.setState({ showConfirmDelete: false });
@@ -89,6 +94,7 @@ class ComparisonViewRoute extends React.Component {
           isLoading={resources?.comparison?.isPending ?? true}
           onClose={this.handleClose}
           onDelete={this.showDeleteConfirmationModal}
+          onViewReport={this.handleViewReport}
         />
         {this.state.showConfirmDelete && (
           <ConfirmationModal
