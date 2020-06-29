@@ -107,8 +107,6 @@ class ComparisonsRoute extends React.Component {
       this.source.update(this.props, 'comparisons');
     }
 
-    console.log("Location: %o", location)
-
     return (
       <View
         data={{
