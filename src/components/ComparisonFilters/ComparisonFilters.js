@@ -79,6 +79,11 @@ export default class ComparisonFilters extends React.Component {
     const { activeFilters } = this.props;
     const groupFilters = activeFilters[name] || [];
 
+    let disabled = false;
+    if (this.state[`${name}DisplayLabel`]) {
+      disabled = true;
+    }
+
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
@@ -102,7 +107,7 @@ export default class ComparisonFilters extends React.Component {
         }
         <Row>
           <ComparisonPointFilter
-            disabled={this.state[`${name}DisplayLabel`]}
+            disabled={disabled}
             name={name}
             onAgreementSelected={(agreement) => {
               this.props.filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
