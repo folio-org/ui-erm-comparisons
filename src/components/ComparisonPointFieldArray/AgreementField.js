@@ -26,7 +26,7 @@ class AgreementField extends React.Component {
       startDate: PropTypes.string,
       status: PropTypes.string,
     }),
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     input: PropTypes.shape({
       name: PropTypes.string,
       value: PropTypes.object

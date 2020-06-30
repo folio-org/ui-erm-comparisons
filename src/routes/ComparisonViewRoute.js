@@ -75,15 +75,9 @@ class ComparisonViewRoute extends React.Component {
     const { resources } = this.props;
     const comparison = resources?.comparison?.records?.[0] ?? {};
     const name = comparison?.name ?? '';
-    const comparisonClass = comparison?.class ?? '';
 
-    let deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
-    let deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
-
-    if (comparisonClass !== '') {
-      deleteMessageId = `${deleteMessageId}.${comparisonClass}`;
-      deleteHeadingId = `${deleteHeadingId}.${comparisonClass}`;
-    }
+    const deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
+    const deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
 
     return (
       <>

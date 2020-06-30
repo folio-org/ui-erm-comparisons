@@ -37,12 +37,8 @@ class ComparisonForm extends React.Component {
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     values: PropTypes.shape({
-      agreements: PropTypes.shape({
-        length: PropTypes.number
-      }),
-      packages: PropTypes.shape({
-        length: PropTypes.number
-      })
+      agreements: PropTypes.arrayOf(PropTypes.object),
+      packages: PropTypes.arrayOf(PropTypes.object)
     })
   }
 

@@ -21,8 +21,8 @@ import css from './styles.css';
 
 class PackageField extends React.Component {
   static propTypes = {
-    entitlements: PropTypes.arrayOf(PropTypes.object),
-    id: PropTypes.string.isRequired,
+    entitlements: PropTypes.object,
+    id: PropTypes.string,
     input: PropTypes.shape({
       name: PropTypes.string,
       value: PropTypes.object
