@@ -93,8 +93,18 @@ class ComparisonsRoute extends React.Component {
     }
   }
 
-  querySetter = ({ nsValues }) => {
-    this.props.mutator.query.update(nsValues);
+  querySetter = ({ nsValues, state }) => {
+    const defaults = {
+      filters: null,
+      query: null,
+      sort: null,
+    };
+
+    if (/reset/.test(state.changeType)) {
+      this.props.mutator.query.update({ ...defaults, ...nsValues });
+    } else {
+      this.props.mutator.query.update(nsValues);
+    }
   }
 
   queryGetter = () => {
