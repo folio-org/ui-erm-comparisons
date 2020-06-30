@@ -13,9 +13,9 @@ class ComparisonPointFieldArray extends React.Component {
   static propTypes = {
     addButtonId: PropTypes.string,
     addLabelId: PropTypes.string,
-    comparisonPoint: PropTypes.object,
+    comparisonPoint: PropTypes.string,
     data: PropTypes.shape({
-      entitlements: PropTypes.arrayOf(PropTypes.object)
+      entitlements: PropTypes.object
     }),
     deleteButtonTooltipId: PropTypes.string,
     disableAddNew: PropTypes.bool,

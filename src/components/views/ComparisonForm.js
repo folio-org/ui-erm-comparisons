@@ -25,7 +25,7 @@ import ComparisonPointFieldArray from '../ComparisonPointFieldArray';
 class ComparisonForm extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
-      entitlements: PropTypes.arrayOf(PropTypes.object)
+      entitlements: PropTypes.object
     }),
     handleSubmit: PropTypes.func.isRequired,
     handlers: PropTypes.shape({
