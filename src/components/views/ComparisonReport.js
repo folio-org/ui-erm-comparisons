@@ -11,6 +11,10 @@ import {
 } from '@folio/stripes/components';
 
 export default class ComparisonReport extends React.Component {
+  static propTypes = {
+    onClose: PropTypes.func.isRequired
+  }
+
   renderFirstMenu() {
     return (
       <PaneMenu>

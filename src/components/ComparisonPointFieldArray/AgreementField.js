@@ -18,6 +18,26 @@ import { AppIcon, Pluggable } from '@folio/stripes/core';
 import css from './styles.css';
 
 class AgreementField extends React.Component {
+  static propTypes = {
+    agreement: PropTypes.shape({
+      endDate: PropTypes.string,
+      name: PropTypes.string,
+      reasonForClosure: PropTypes.string,
+      startDate: PropTypes.string,
+      status: PropTypes.string,
+    }),
+    id: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.object
+    }).isRequired,
+    meta: PropTypes.shape({
+      error: PropTypes.bool,
+      touched: PropTypes.bool
+    }),
+    onAgreementSelected: PropTypes.func.isRequired,
+  }
+
   static defaultProps = {
     agreement: {},
   }
@@ -150,7 +170,6 @@ class AgreementField extends React.Component {
   render() {
     const {
       id,
-      input: { value },
       meta: { error, touched }
     } = this.props;
 

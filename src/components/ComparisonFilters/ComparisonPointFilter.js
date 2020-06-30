@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Button, Tooltip } from '@folio/stripes/components';
+import { Button } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
 
 class ComparisonPointFilter extends React.Component {
+  static propTypes = {
+    disabled: PropTypes.bool,
+    name: PropTypes.string,
+    onAgreementSelected: PropTypes.func.isRequired,
+    onPackageSelected: PropTypes.func.isRequired,
+  };
+
   renderFilterAgreementButton = value => {
     return (
       <Pluggable
@@ -22,8 +29,8 @@ class ComparisonPointFilter extends React.Component {
           };
           return (
             <Button
-              disabled={this.props.disabled}
               key={`data-test-ic-add-${this.props.name}-agreement-filter`}
+              disabled={this.props.disabled}
               {...buttonProps}
             >
               <FormattedMessage id="ui-erm-comparisons.newComparison.addAgreement" />
@@ -54,8 +61,8 @@ class ComparisonPointFilter extends React.Component {
           };
           return (
             <Button
-              disabled={this.props.disabled}
               key={`data-test-ic-add-${this.props.name}-package-filter`}
+              disabled={this.props.disabled}
               {...buttonProps}
             >
               <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />

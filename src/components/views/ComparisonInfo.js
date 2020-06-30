@@ -28,6 +28,7 @@ export default class ComparisonInfo extends React.Component {
     isLoading: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     onDelete: PropTypes.func,
+    onViewReport: PropTypes.func.isRequired
   };
 
   state = {

@@ -8,7 +8,6 @@ import stripesFinalForm from '@folio/stripes/final-form';
 
 import {
   Button,
-  Col,
   IconButton,
   Layout,
   MessageBanner,
@@ -16,7 +15,6 @@ import {
   Paneset,
   PaneFooter,
   PaneMenu,
-  Row,
   TextField,
 } from '@folio/stripes/components';
 
@@ -26,13 +24,26 @@ import ComparisonPointFieldArray from '../ComparisonPointFieldArray';
 
 class ComparisonForm extends React.Component {
   static propTypes = {
+    data: PropTypes.shape({
+      entitlements: PropTypes.arrayOf(PropTypes.object)
+    }),
     handleSubmit: PropTypes.func.isRequired,
     handlers: PropTypes.shape({
       onClose: PropTypes.func.isRequired,
+      onEResourceAdded: PropTypes.func.isRequired,
+      onEResourceRemoved: PropTypes.func.isRequired
     }),
     invalid: PropTypes.bool,
     pristine: PropTypes.bool,
-    submitting: PropTypes.bool
+    submitting: PropTypes.bool,
+    values: PropTypes.shape({
+      agreements: PropTypes.shape({
+        length: PropTypes.number
+      }),
+      packages: PropTypes.shape({
+        length: PropTypes.number
+      })
+    })
   }
 
   renderPaneFooter() {
@@ -125,7 +136,7 @@ class ComparisonForm extends React.Component {
                       addLabelId="ui-erm-comparisons.newComparison.addPackage"
                       comparisonPoint="package"
                       component={ComparisonPointFieldArray}
-                      data={{entitlements: this.props.data?.entitlements}}
+                      data={{ entitlements }}
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                       disableAddNew={currentComparisons >= 2}
                       handlers={{

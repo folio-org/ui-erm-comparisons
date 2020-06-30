@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 
 import AgreementField from './AgreementField';
 import PackageField from './PackageField';
 
 class ComparisonPointField extends React.Component {
+  static propTypes = {
+    comparisonPoint: PropTypes.object,
+    comparisonType: PropTypes.string,
+    entitlements: PropTypes.arrayOf(PropTypes.object),
+    onComparisonPointSelected: PropTypes.func.isRequired
+  }
+
   render() {
     const { comparisonPoint, comparisonType, entitlements, onComparisonPointSelected, ...props } = this.props;
     if (comparisonType === 'agreement') {

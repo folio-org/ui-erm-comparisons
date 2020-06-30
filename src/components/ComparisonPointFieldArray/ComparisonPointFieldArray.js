@@ -10,6 +10,31 @@ import ComparisonPointField from './ComparisonPointField';
 
 
 class ComparisonPointFieldArray extends React.Component {
+  static propTypes = {
+    addButtonId: PropTypes.string,
+    addLabelId: PropTypes.string,
+    comparisonPoint: PropTypes.object,
+    data: PropTypes.shape({
+      entitlements: PropTypes.arrayOf(PropTypes.object)
+    }),
+    deleteButtonTooltipId: PropTypes.string,
+    disableAddNew: PropTypes.bool,
+    fields: PropTypes.shape({
+      insert: PropTypes.func.isRequired,
+      length: PropTypes.number,
+      name: PropTypes.string.isRequired,
+      remove: PropTypes.func.isRequired,
+      update: PropTypes.func.isRequired,
+      value: PropTypes.arrayOf(PropTypes.object)
+    }).isRequired,
+    handlers: PropTypes.shape({
+      onEResourceAdded: PropTypes.func.isRequired,
+      onEResourceRemoved: PropTypes.func.isRequired
+    }).isRequired,
+    headerId: PropTypes.string,
+    id: PropTypes.string,
+  }
+
   state = { currentDate: moment.utc().startOf('day').toISOString() }
   handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
@@ -105,7 +130,7 @@ class ComparisonPointFieldArray extends React.Component {
   }
 
   renderAddNewButton() {
-    const {addButtonId, addLabelId, disableAddNew } = this.props;
+    const { addButtonId, addLabelId, disableAddNew } = this.props;
     return (
       <Button disabled={disableAddNew} id={addButtonId} onClick={() => this.handleAddField()}>
         <FormattedMessage id={addLabelId} />

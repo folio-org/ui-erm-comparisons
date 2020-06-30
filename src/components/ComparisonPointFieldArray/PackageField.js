@@ -20,6 +20,26 @@ import EntitlementAgreementsList from '../EntitlementsAgreementsList';
 import css from './styles.css';
 
 class PackageField extends React.Component {
+  static propTypes = {
+    entitlements: PropTypes.arrayOf(PropTypes.object),
+    id: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.object
+    }).isRequired,
+    meta: PropTypes.shape({
+      error: PropTypes.bool,
+      touched: PropTypes.bool
+    }),
+    onPackageSelected: PropTypes.func.isRequired,
+    package: PropTypes.shape({
+      count: PropTypes.number,
+      id: PropTypes.string,
+      name: PropTypes.string,
+      provider: PropTypes.string,
+    }),
+  }
+
   static defaultProps = {
     package: {},
   }
@@ -87,15 +107,10 @@ class PackageField extends React.Component {
     const { entitlements, package: { id } } = this.props;
     const relevantEntitlements = entitlements[id] || [];
 
-    const { headline, isEmptyMessage, visibleColumns } = this.props;
-
     return (
       <EntitlementAgreementsList
         entitlements={relevantEntitlements}
-        headline={headline}
         id="pci-agreements-list"
-        isEmptyMessage={isEmptyMessage}
-        visibleColumns={visibleColumns}
       />
     );
   }
@@ -103,7 +118,6 @@ class PackageField extends React.Component {
   renderPackage = () => {
     const {
       count,
-      type,
       provider
     } = this.props.package;
 
@@ -156,7 +170,6 @@ class PackageField extends React.Component {
   render() {
     const {
       id,
-      input: { value },
       meta: { error, touched }
     } = this.props;
 

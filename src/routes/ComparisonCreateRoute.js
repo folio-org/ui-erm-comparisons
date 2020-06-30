@@ -40,6 +40,20 @@ class ComparisonCreateRoute extends React.Component {
     location: PropTypes.shape({
       search: PropTypes.string.isRequired,
     }).isRequired,
+    mutator: PropTypes.shape({
+      comparisons: PropTypes.shape({
+        POST: PropTypes.func.isRequired,
+      }).isRequired,
+      entitlementQueryParams: PropTypes.shape({
+        update: PropTypes.func,
+      }).isRequired,
+    }).isRequired,
+    resources: PropTypes.shape({
+      entitlements: PropTypes.object,
+      entitlementQueryParams: PropTypes.shape({
+        entitlementsCount: PropTypes.number,
+      })
+    }).isRequired,
   };
 
   static contextType = CalloutContext;
