@@ -15,7 +15,7 @@ class ComparisonPointFilter extends React.Component {
   renderFilterAgreementButton = value => {
     return (
       <Pluggable
-        dataKey="agreement"
+        dataKey={`agreement-${this.props.name}`}
         onAgreementSelected={this.props.onAgreementSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
@@ -47,7 +47,7 @@ class ComparisonPointFilter extends React.Component {
   renderFilterPackageButton = value => {
     return (
       <Pluggable
-        dataKey="package"
+        dataKey={`package-${this.props.name}`}
         onEresourceSelected={this.props.onPackageSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
