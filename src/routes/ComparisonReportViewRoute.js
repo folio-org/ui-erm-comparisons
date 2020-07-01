@@ -6,9 +6,9 @@ import View from '../components/views/ComparisonReport';
 
 class ComparisonReportViewRoute extends React.Component {
   static manifest = Object.freeze({
-    comparison: {
+    report: {
       type: 'okapi',
-      path: 'erm/jobs/:{id}',
+      path: 'erm/jobs/:{id}/downloadFileObject',
       shouldRefresh: () => false,
     },
   });
@@ -26,7 +26,7 @@ class ComparisonReportViewRoute extends React.Component {
       comparison: PropTypes.object,
     }).isRequired,
     resources: PropTypes.shape({
-      comparison: PropTypes.object,
+      report: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       okapi: PropTypes.object.isRequired,
@@ -42,7 +42,7 @@ class ComparisonReportViewRoute extends React.Component {
     const { resources } = this.props;
     return (
       <View
-        data={resources.comparison?.records?.[0]}
+        data={resources.report?.records?.[0]}
         onClose={this.handleClose}
       />
     );
