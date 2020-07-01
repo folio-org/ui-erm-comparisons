@@ -42,7 +42,7 @@ class ComparisonReportViewRoute extends React.Component {
     const { resources } = this.props;
     return (
       <View
-        data={resources.report?.records?.[0]}
+        data={resources.report?.records}
         onClose={this.handleClose}
       />
     );
