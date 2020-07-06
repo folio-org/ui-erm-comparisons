@@ -67,7 +67,7 @@ const EntitlementAgreementsList = (
 };
 
 EntitlementAgreementsList.defaultProps = {
-  isEmptyMessage: <FormattedMessage data-test-entitlements-empty-message id="ui-erm-comparisons.emptyAccordion.noAgreementsEresource" />,
+  isEmptyMessage: <FormattedMessage id="ui-erm-comparisons.emptyAccordion.noAgreementsEresource" />,
   visibleColumns: ['name', 'status', 'startDate', 'endDate']
 };
 

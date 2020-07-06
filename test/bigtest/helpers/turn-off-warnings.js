@@ -10,6 +10,7 @@ const warnBlacklist = [
 const error = console.error;
 const errorBlacklist = [
   /\[React Intl\]/,
+  /\[React Intl Error MISSING_TRANSLATION\]/,
   /Cannot update a component from inside the function body of a different component/,
   /Warning: Failed prop typ/,
   /perform a React state update on an unmounted component/,
