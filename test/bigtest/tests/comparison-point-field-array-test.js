@@ -78,7 +78,7 @@ const agreements = [{
   startDate: '1968-07-24',
 }];
 
-describe('Comparison point field array', () => {
+describe.only('Comparison point field array', () => {
   setupApplication();
   const interactor = new ComparisonsCreateInteractor();
 
@@ -183,25 +183,34 @@ describe('Comparison point field array', () => {
       });
 
       it('renders the package name', () => {
-        expect(interactor.packagesList.items(0).isPackageNamePresent).to.be.true;
+        expect(interactor.packagesList.items(0).packageName).to.have.string(packages[0].name);
       });
 
-      describe('Clicking the package name', () => {
+      it('renders the package count', () => {
+        expect(interactor.packagesList.items(0).packageCount).to.have.string(packages[0]._object.resourceCount);
+      });
+
+      it('renders the package provider', () => {
+        expect(interactor.packagesList.items(0).packageProvider).to.have.string(packages[0]._object.vendor.name);
+      });
+
+      describe('Replacing the first package', () => {
         beforeEach(async () => {
-          await interactor.packagesList.items(0).packageNameLink();
+          await interactor.packagesList.items(0).linkPackageButton();
         });
 
-        it('redirects to the package', () => {
-          console.log("test goes here")
-        })
-      });
-    });
+        it('renders the new package name', () => {
+          expect(interactor.packagesList.items(0).packageName).to.have.string(packages[1].name);
+        });
 
-    describe('Adding a second package', () => {
-      beforeEach(async function () {
-        await interactor.addPackageButton.click();
+        it('renders the new package count', () => {
+          expect(interactor.packagesList.items(0).packageCount).to.have.string(packages[1]._object.resourceCount);
+        });
+
+        it('renders the new package provider', () => {
+          expect(interactor.packagesList.items(0).packageProvider).to.have.string(packages[1]._object.vendor.name);
+        });
       });
     });
   });
-
 });

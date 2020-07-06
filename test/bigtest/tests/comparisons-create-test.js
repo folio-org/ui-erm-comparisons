@@ -7,7 +7,7 @@ import { expect } from 'chai';
 import setupApplication from '../helpers/setup-application';
 import ComparisonsCreateInteractor from '../interactors/comparisons-create';
 
-describe.only('Comparison create', () => {
+describe('Comparison create', () => {
   setupApplication();
   const interactor = new ComparisonsCreateInteractor();
 
