@@ -9,6 +9,8 @@ import {
   text
 } from '@bigtest/interactor';
 
+import EntitlementAgreementsListInteractor from './entitlement-list';
+
 @interactor class Button {
   isDisabled = is('[disabled]');
   click = clickable();
@@ -44,6 +46,8 @@ import {
   isOnDateFieldPresent = isPresent('#data-test-field-date-package');
   isEmptyPackageCardPresent = isPresent('[data-test-package-empty]');
   isPackageCardPresent = isPresent('[data-test-package-card]');
+  isEntitlementsTablePresent = isPresent('[data-test-package-entitlements]')
+  entitlements = new EntitlementAgreementsListInteractor();
   packageName = text('[data-test-package-name-link]');
   packageNameLink = clickable('[data-test-package-name-link]');
   packageCount = text('[data-test-package-count]');

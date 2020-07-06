@@ -50,7 +50,6 @@ export default function config() {
   });
 
   this.post('erm/jobs/comparison', (_, request) => {
-    console.log("Request body: %o", request.requestBody)
     const body = JSON.parse(request.requestBody);
     return server.create('comparison', body);
   });

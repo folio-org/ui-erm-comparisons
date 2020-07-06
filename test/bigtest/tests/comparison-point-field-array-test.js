@@ -8,8 +8,8 @@ import { expect } from 'chai';
 
 import { FieldArray } from 'react-final-form-arrays';
 
-import { dummyMount, getPluginModule } from '../helpers';
-import TestForm from '../TestForm';
+import { dummyMount, getPluginModule } from '@folio/stripes-erm-components/tests/helpers';
+import TestForm from '@folio/stripes-erm-components/tests/TestForm';
 
 import setupApplication from '../helpers/setup-application';
 import ComparisonsCreateInteractor from '../interactors/comparisons-create';
@@ -47,7 +47,40 @@ const packages = [{
   }
 }];
 
-const entitlements = [];
+const entitlements = {
+  'package-2': [
+    {
+      owner: {
+        agreementStatus: {
+          label: 'Active'
+        },
+        name: 'Agreement A',
+        startDate: '2001-12-06'
+      }
+    },
+    {
+      owner: {
+        agreementStatus: {
+          label: 'Closed'
+        },
+        name: 'Agreement B',
+        startDate: '2007-10-05',
+        endDate: '2018-03-29'
+      }
+    },
+  ],
+  'package-3': [
+    {
+      owner: {
+        agreementStatus: {
+          label: 'In negotiation'
+        },
+        name: 'Agreement C',
+        startDate: '2020-07-12',
+      }
+    }
+  ]
+};
 
 const agreements = [{
   id: 'agreement-1',
@@ -78,7 +111,7 @@ const agreements = [{
   startDate: '1968-07-24',
 }];
 
-describe.only('Comparison point field array', () => {
+describe('Comparison point field array', () => {
   setupApplication();
   const interactor = new ComparisonsCreateInteractor();
 
@@ -194,6 +227,10 @@ describe.only('Comparison point field array', () => {
         expect(interactor.packagesList.items(0).packageProvider).to.have.string(packages[0]._object.vendor.name);
       });
 
+      it('renders the package entitlements component', () => {
+        expect(interactor.packagesList.items(0).isEntitlementsTablePresent).to.be.true;
+      });
+
       describe('Replacing the first package', () => {
         beforeEach(async () => {
           await interactor.packagesList.items(0).linkPackageButton();
@@ -209,6 +246,10 @@ describe.only('Comparison point field array', () => {
 
         it('renders the new package provider', () => {
           expect(interactor.packagesList.items(0).packageProvider).to.have.string(packages[1]._object.vendor.name);
+        });
+
+        it('renders the package entitlements component', () => {
+          expect(interactor.packagesList.items(0).isEntitlementsTablePresent).to.be.true;
         });
       });
     });

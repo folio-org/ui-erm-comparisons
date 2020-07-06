@@ -109,6 +109,7 @@ class PackageField extends React.Component {
 
     return (
       <EntitlementAgreementsList
+        data-test-package-entitlements
         entitlements={relevantEntitlements}
         id="pci-agreements-list"
       />

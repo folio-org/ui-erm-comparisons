@@ -48,7 +48,9 @@ const EntitlementAgreementsList = (
   };
 
   return (
-    <div>
+    <div
+      data-test-entitlements-table
+    >
       {renderHeadline()}
       <MultiColumnList
         columnMapping={columnMapping}
@@ -65,8 +67,8 @@ const EntitlementAgreementsList = (
 };
 
 EntitlementAgreementsList.defaultProps = {
-  isEmptyMessage: <FormattedMessage id="ui-erm-comparisons.emptyAccordion.noAgreementsEresource" />,
-  visibleColumns: ['name', 'type', 'startDate', 'endDate']
+  isEmptyMessage: <FormattedMessage data-test-entitlements-empty-message id="ui-erm-comparisons.emptyAccordion.noAgreementsEresource" />,
+  visibleColumns: ['name', 'status', 'startDate', 'endDate']
 };
 
 EntitlementAgreementsList.propTypes = {
