@@ -115,7 +115,7 @@ class ComparisonPointFieldArray extends React.Component {
             comparisonType={comparisonType}
             component={ComparisonPointField}
             entitlements={data?.entitlements}
-            id={`data-test-field-comparison-point-${name}`}
+            id={`data-test-field-comparison-point-${comparisonType}`}
             index={index}
             name={`${name}[${index}]`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
@@ -123,7 +123,7 @@ class ComparisonPointFieldArray extends React.Component {
           <Field
             component={Datepicker}
             defaultValue={this.state.currentDate}
-            id={`data-test-field-date-${name}`}
+            id={`data-test-field-date-${comparisonType}`}
             index={index}
             label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
             name={`${name}[${index}].onDate`}

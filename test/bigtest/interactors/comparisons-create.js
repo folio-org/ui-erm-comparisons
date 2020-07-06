@@ -20,8 +20,11 @@ import {
 
 @interactor class AgreementInteractor {
   isLinkAgreementButtonPresent = isPresent('[data-test-ic-link-agreement]');
-  linkAgreementButton = new Button('[data-test-ic-link-agreement]');
+  linkAgreementButton = clickable('[data-test-ic-link-agreement]');
+  isOnDateFieldPresent = isPresent('#data-test-field-date-agreement');
   isEmptyAgreementCardPresent = isPresent('[data-test-agreement-empty]');
+  isAgreementNamePresent = isPresent('[data-test-agreement-name-link]');
+  agreementNameLink = clickable('[data-test-agreement-name-link]');
   isAgreementCardPresent = isPresent('[data-test-agreement-card]');
   isAgreementStartDatePresent = isPresent('[data-test-agreement-start-date]');
   isAgreementEndDatePresent = isPresent('[data-test-agreement-end-date]');
@@ -35,12 +38,15 @@ import {
 }
 
 @interactor class PackageInteractor {
-  isLinkPackageButtonPresent = isPresent('[data-test-ic-link-package]')
-  linkPackageButton = new Button('[data-test-ic-link-package]')
-  isEmptyPackageCardPresent = isPresent('[data-test-package-empty]')
-  isPackageCardPresent = isPresent('[data-test-package-card]')
-  isPackageCountPresent = isPresent('[data-test-package-count]')
-  isPackageProviderPresent = isPresent('[data-test-package-count]')
+  isLinkPackageButtonPresent = isPresent('[data-test-ic-link-package]');
+  linkPackageButton = clickable('[data-test-ic-link-package]');
+  isOnDateFieldPresent = isPresent('#data-test-field-date-package');
+  isEmptyPackageCardPresent = isPresent('[data-test-package-empty]');
+  isPackageNamePresent = isPresent('[data-test-package-name-link]');
+  packageNameLink = clickable('[data-test-package-name-link]');
+  isPackageCardPresent = isPresent('[data-test-package-card]');
+  isPackageCountPresent = isPresent('[data-test-package-count]');
+  isPackageProviderPresent = isPresent('[data-test-package-count]');
 }
 
 @interactor class PackagesListInteractor {
@@ -53,11 +59,11 @@ export default @interactor class ComparisonsCreate {
   fillComparisonName = fillable('[data-test-field-comparison-name]');
 
   isAddAgreementButtonPresent = isPresent('#data-test-add-agreement-button');
-  addAgreementButton = clickable('#data-test-add-agreement-button');
+  addAgreementButton = new Button('#data-test-add-agreement-button');
   agreementsList = new AgreementsListInteractor();
 
   isAddPackageButtonPresent = isPresent('#data-test-add-package-button');
-  addPackageButton = clickable('#data-test-add-package-button');
+  addPackageButton = new Button('#data-test-add-package-button');
   packagesList = new PackagesListInteractor();
 
 

@@ -97,6 +97,9 @@ class ComparisonForm extends React.Component {
   render() {
     const { data: { entitlements }, values } = this.props;
     const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
+
+    // The number of supported comparison points
+    const comparisonLimit = 2;
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparisons.create">
@@ -136,7 +139,7 @@ class ComparisonForm extends React.Component {
                       data={{ entitlements }}
                       data-test-field-array-packages
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
-                      disableAddNew={currentComparisons >= 2}
+                      disableAddNew={currentComparisons >= comparisonLimit}
                       handlers={{
                         onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
                         onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
@@ -154,7 +157,7 @@ class ComparisonForm extends React.Component {
                       component={ComparisonPointFieldArray}
                       data-test-field-array-agreements
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
-                      disableAddNew={currentComparisons >= 2}
+                      disableAddNew={currentComparisons >= comparisonLimit}
                       headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"

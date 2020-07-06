@@ -4,8 +4,7 @@ import {
   describe,
   it,
 } from '@bigtest/mocha';
-import chai, { expect } from 'chai';
-import spies from 'chai-spies';
+import { expect } from 'chai';
 
 import { FieldArray } from 'react-final-form-arrays';
 
@@ -16,9 +15,6 @@ import setupApplication from '../helpers/setup-application';
 import ComparisonsCreateInteractor from '../interactors/comparisons-create';
 
 import ComparisonPointFieldArray from '../../../src/components/ComparisonPointFieldArray';
-
-chai.use(spies);
-const { spy } = chai;
 
 const packages = [{
   id: 'package-1',
@@ -82,7 +78,7 @@ const agreements = [{
   startDate: '1968-07-24',
 }];
 
-describe.only('ComparisonCreate', () => {
+describe('Comparison point field array', () => {
   setupApplication();
   const interactor = new ComparisonsCreateInteractor();
 
@@ -153,8 +149,6 @@ describe.only('ComparisonCreate', () => {
       [findPackageModule, findAgreementModule]
     );
 
-    console.log("Count: %o", interactor.packagesList.size + interactor.agreementsList.size)
-
     this.visit('/dummy');
   });
 
@@ -168,19 +162,47 @@ describe.only('ComparisonCreate', () => {
 
   describe('Adding packages', () => {
     beforeEach(async function () {
-      await interactor.addPackageButton();
+      await interactor.addPackageButton.click();
     });
 
-    it('Adds a package card', () => {
+    it('adds a package card', () => {
       expect(interactor.packagesList.size).to.equal(1);
+    });
+
+    it('renders the link package button', () => {
+      expect(interactor.packagesList.items(0).isLinkPackageButtonPresent).to.be.true;
+    });
+
+    it('renders the date field', () => {
+      expect(interactor.packagesList.items(0).isOnDateFieldPresent).to.be.true;
+    });
+
+    describe('Linking a package', () => {
+      beforeEach(async () => {
+        await interactor.packagesList.items(0).linkPackageButton();
+      });
+
+      it('renders the package name', () => {
+        expect(interactor.packagesList.items(0).isPackageNamePresent).to.be.true;
+      });
+
+      describe('Clicking the package name', () => {
+        beforeEach(async () => {
+          await interactor.packagesList.items(0).packageNameLink();
+        });
+
+        it('redirects to the package', () => {
+          console.log("test goes here")
+        })
+      });
     });
 
     describe('Adding a second package', () => {
       beforeEach(async function () {
-        await interactor.addPackageButton();
+        await interactor.addPackageButton.click();
       });
 
-      it('Disables the add buttons', () => {
+      it('disables the add buttons', () => {
         console.log("Test goes here")
       });
     });
