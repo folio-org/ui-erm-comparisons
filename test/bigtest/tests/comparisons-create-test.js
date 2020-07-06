@@ -11,7 +11,7 @@ describe.only('Comparison create', () => {
   setupApplication();
   const interactor = new ComparisonsCreateInteractor();
 
-  const comparisonLimit = 15;
+  const comparisonLimit = 2;
 
   function additionalAgreements() {
     describe('Adding additional agreements', () => {

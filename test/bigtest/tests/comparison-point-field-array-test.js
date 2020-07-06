@@ -201,10 +201,6 @@ describe('Comparison point field array', () => {
       beforeEach(async function () {
         await interactor.addPackageButton.click();
       });
-
-      it('disables the add buttons', () => {
-        console.log("Test goes here")
-      });
     });
   });
 
