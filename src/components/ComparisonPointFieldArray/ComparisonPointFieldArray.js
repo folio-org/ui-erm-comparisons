@@ -66,8 +66,11 @@ class ComparisonPointFieldArray extends React.Component {
 
   handleDeleteField = (index) => {
     const id = this.props.fields?.value?.[index]?.id;
-    this.props.handlers.onEResourceRemoved(id);
+    const eResourceField = this.props.comparisonPoint === 'package';
 
+    if (eResourceField) {
+      this.props.handlers.onEResourceRemoved(id);
+    }
     this.props.fields.remove(index);
   }
 
@@ -101,10 +104,10 @@ class ComparisonPointFieldArray extends React.Component {
     return fields?.value?.map((comparisonPoint, index) => {
       return (
         <EditCard
-          key={index}
-          data-test-comparison-point-number={`${comparisonType} ${index}`}
+          key={`${comparisonType} ${index}`}
           deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
           header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
+          id={`data-test-comparison-point-${comparisonType}`}
           onDelete={() => this.handleDeleteField(index)}
         >
           <Field
@@ -112,6 +115,7 @@ class ComparisonPointFieldArray extends React.Component {
             comparisonType={comparisonType}
             component={ComparisonPointField}
             entitlements={data?.entitlements}
+            id={`data-test-field-comparison-point-${name}`}
             index={index}
             name={`${name}[${index}]`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
@@ -119,6 +123,7 @@ class ComparisonPointFieldArray extends React.Component {
           <Field
             component={Datepicker}
             defaultValue={this.state.currentDate}
+            id={`data-test-field-date-${name}`}
             index={index}
             label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
             name={`${name}[${index}].onDate`}

@@ -2,6 +2,7 @@ import { get, isEmpty } from 'lodash';
 import parseQueryString from './util';
 
 export default function config() {
+  const server = this;
   this.get('erm/jobs/type/comparison', (schema, request) => {
     const queryString = request.url.split('?')[1];
     const params = parseQueryString(queryString);
@@ -20,14 +21,14 @@ export default function config() {
 
     if (parsed) {
       return {
-        results: schema.jobs.where((job) => {
+        results: schema.comparisons.where((comparison) => {
           return parsed.reduce((acc, { name, value }) => {
-            return acc || get(job, name) === value;
+            return acc || get(comparison, name) === value;
           }, false);
         }).models
       };
     } else {
-      return { results: schema.jobs.all().models };
+      return { results: schema.comparisons.all().models };
     }
   });
 
@@ -46,5 +47,11 @@ export default function config() {
       { 'id': '2c9d81916c044334016c0444657d002f', 'value': 'in_progress', 'label': 'In progress' },
       { 'id': '2c9d81916c044334016c044465880030', 'value': 'ended', 'label': 'Ended' }
     ];
+  });
+
+  this.post('erm/jobs/comparison', (_, request) => {
+    console.log("Request body: %o", request.requestBody)
+    const body = JSON.parse(request.requestBody);
+    return server.create('comparison', body);
   });
 }

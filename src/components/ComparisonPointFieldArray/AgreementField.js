@@ -74,7 +74,7 @@ class AgreementField extends React.Component {
                 {({ ariaIds }) => (
                   <Button
                     aria-labelledby={ariaIds.text}
-                    data-test-ic-link-agreement
+                    data-test-link-agreement
                     {...buttonProps}
                   >
                     <FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreement" />
@@ -86,7 +86,7 @@ class AgreementField extends React.Component {
           return (
             <Button
               autoFocus
-              data-test-ic-link-agreement
+              data-test-link-agreement
               {...buttonProps}
             >
               <FormattedMessage id="ui-erm-comparisons.newComparison.addAgreement" />
@@ -160,7 +160,7 @@ class AgreementField extends React.Component {
   )
 
   renderError = () => (
-    <Layout className={`textCentered ${css.error}`} data-test-agreement-error>
+    <Layout className={`textCentered ${css.error}`}>
       <strong>
         {this.props.meta.error}
       </strong>

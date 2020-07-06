@@ -120,6 +120,7 @@ class ComparisonForm extends React.Component {
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <Field
                       component={TextField}
+                      data-test-field-comparison-name
                       label={<FormattedMessage id="ui-erm-comparisons.newComparison.name" />}
                       name="name"
                       required
@@ -128,11 +129,12 @@ class ComparisonForm extends React.Component {
                   </Layout>
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <FieldArray
-                      addButtonId="add-package-to-comparison-button"
+                      addButtonId="data-test-add-package-button"
                       addLabelId="ui-erm-comparisons.newComparison.addPackage"
                       comparisonPoint="package"
                       component={ComparisonPointFieldArray}
                       data={{ entitlements }}
+                      data-test-field-array-packages
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                       disableAddNew={currentComparisons >= 2}
                       handlers={{
@@ -146,16 +148,13 @@ class ComparisonForm extends React.Component {
                   </Layout>
                   <Layout className="padding-top-gutter padding-bottom-gutter">
                     <FieldArray
-                      addButtonId="add-agreement-to-comparison-button"
+                      addButtonId="data-test-add-agreement-button"
                       addLabelId="ui-erm-comparisons.newComparison.addAgreement"
                       comparisonPoint="agreement"
                       component={ComparisonPointFieldArray}
+                      data-test-field-array-agreements
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
                       disableAddNew={currentComparisons >= 2}
-                      handlers={{
-                        onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
-                        onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
-                      }}
                       headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"

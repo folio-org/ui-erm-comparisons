@@ -94,7 +94,7 @@ export default class Comparisons extends React.Component {
   }
 
   rowURL = (id) => {
-    return `/erm-comparisons/${id}${this.props.searchString}`;
+    return `/comparisons-erm/${id}${this.props.searchString}`;
   }
 
   toggleFilterPane = () => {
@@ -148,12 +148,13 @@ export default class Comparisons extends React.Component {
 
 
   renderResultsLastMenu() {
+    const { searchString } = this.props;
     return (
       <IfPermission perm="ui-local-kb-admin.jobs.edit">
         <Button
           bottomMargin0
           buttonStyle="primary"
-          to="/erm-comparisons/create"
+          to={`/comparisons-erm/create${searchString}`}
         >
           <FormattedMessage id="ui-erm-comparisons.comparison.new" />
         </Button>

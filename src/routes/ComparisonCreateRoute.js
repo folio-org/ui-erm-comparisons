@@ -149,7 +149,7 @@ class ComparisonCreateRoute extends React.Component {
 
   handleClose = () => {
     const { location } = this.props;
-    this.props.history.push(`/erm-comparisons${location.search}`);
+    this.props.history.push(`/comparisons-erm${location.search}`);
   }
 
   handleSubmit = (comparison) => {
@@ -163,7 +163,7 @@ class ComparisonCreateRoute extends React.Component {
         const comparisonId = response?.id ?? '';
         const name = response?.name ?? '';
 
-        history.push(`/erm-comparisons/${comparisonId}${location.search}`);
+        history.push(`/comparisons-erm/${comparisonId}${location.search}`);
         this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparison.comparison.created.success" values={{ name }} /> });
       });
   }

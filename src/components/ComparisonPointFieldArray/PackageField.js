@@ -160,7 +160,7 @@ class PackageField extends React.Component {
   )
 
   renderError = () => (
-    <Layout className={`textCentered ${css.error}`} data-test-package-error>
+    <Layout className={`textCentered ${css.error}`}>
       <strong>
         {this.props.meta.error}
       </strong>

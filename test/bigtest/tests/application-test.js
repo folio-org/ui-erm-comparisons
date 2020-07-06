@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import setupApplication from '../helpers/setup-application';
 import ApplicationInteractor from '../interactors/application';
 
-describe.only('Application', () => {
+describe('Application', () => {
   const app = new ApplicationInteractor();
 
   setupApplication();
