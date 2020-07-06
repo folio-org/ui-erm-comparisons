@@ -6,7 +6,7 @@ import {
 import MultiColumnListInteractor from '@folio/stripes-components/lib/MultiColumnList/tests/interactor';
 
 export default @interactor class EntitlementAgreementsListInteractor {
-  static defaultScope = '[data-test-package-entitlements]';
+  static defaultScope = '[data-test-entitlements-table]';
 
   table = new MultiColumnListInteractor('#pci-agreements-list');
   isTablePresent = isPresent('#pci-agreements-list');

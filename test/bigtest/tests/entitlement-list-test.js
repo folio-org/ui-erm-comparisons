@@ -6,7 +6,8 @@ import {
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-import { dummyMount } from '@folio/stripes-erm-components/tests/helpers';
+import { StaticRouter as Router } from 'react-router-dom';
+import { dummyMount, mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
 
 import setupApplication from '../helpers/setup-application';
 import EntitlementAgreementsListInteractor from '../interactors/entitlement-list';
@@ -49,17 +50,18 @@ const twoEntitlements = [
   },
 ];
 
-describe('Entitlements agreements list', () => {
-  setupApplication();
+describe.only('Entitlements agreements list', () => {
   const interactor = new EntitlementAgreementsListInteractor();
 
   describe('No entitlements', () => {
     beforeEach(async function () {
-      await dummyMount(
-        <EntitlementAgreementsList
-          entitlements={noEntitlements}
-          id="pci-agreements-list"
-        />
+      await mountWithContext(
+        <Router context={{}}>
+          <EntitlementAgreementsList
+            entitlements={noEntitlements}
+            id="pci-agreements-list"
+          />
+        </Router>
       );
 
       this.visit('/dummy');
@@ -72,12 +74,13 @@ describe('Entitlements agreements list', () => {
 
   describe.only('One entitlement', () => {
     beforeEach(async function () {
-      await dummyMount(
-        <EntitlementAgreementsList
-          data-test-package-entitlements
-          entitlements={oneEntitlement}
-          id="pci-agreements-list"
-        />
+      await mountWithContext(
+        <Router context={{}}>
+          <EntitlementAgreementsList
+            entitlements={oneEntitlement}
+            id="pci-agreements-list"
+          />
+        </Router>
       );
 
       this.visit('/dummy');
@@ -109,7 +112,7 @@ describe('Entitlements agreements list', () => {
 
   describe('Two entitlements', () => {
     beforeEach(async function () {
-      await dummyMount(
+      await mountWithContext(
         <EntitlementAgreementsList
           entitlements={twoEntitlements}
           id="pci-agreements-list"
