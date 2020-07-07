@@ -35,6 +35,8 @@
   "prop.comparisonPointOne": "Comparison point 1",
   "prop.comparisonPointTwo": "Comparison point 2",
   "prop.viewReport": "View comparison report",
+  "prop.comparisonPoints": "Comparison points",
+  "prop.noComparisonPoints": "No comparison points",
 
   "source": "Source",
 

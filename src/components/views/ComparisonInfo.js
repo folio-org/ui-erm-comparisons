@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  Accordion,
   AccordionSet,
+  Badge,
   Button,
   Col,
   ExpandAllButton,
@@ -24,6 +26,7 @@ export default class ComparisonInfo extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
       comparison: PropTypes.object,
+      comparisonPointData: PropTypes.arrayOf(PropTypes.object)
     }),
     isLoading: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
@@ -101,8 +104,7 @@ export default class ComparisonInfo extends React.Component {
   }
 
   render() {
-    const { data: { comparison }, isLoading } = this.props;
-
+    const { data: { comparison, comparisonPointData }, isLoading } = this.props;
     if (isLoading) return this.renderLoadingPane();
     const isComparisonNotQueued = comparison?.status?.value !== 'queued';
 
@@ -209,6 +211,24 @@ export default class ComparisonInfo extends React.Component {
                     />
                   </Col>
                 </Row>
+                <Accordion
+                  displayWhenClosed={<Badge>{comparison.comparisonPoints.length}</Badge>}
+                  displayWhenOpen={<Badge>{comparison.comparisonPoints.length}</Badge>}
+                  id="comparison-view-comparison-points"
+                  label={<FormattedMessage id="ui-erm-comparisons.prop.comparisonPoints" />}
+                >
+                  {comparison.comparisonPoints.length ?
+                    <ul>
+                      {comparison.comparisonPoints.map(cp => (
+                        <li>
+                          {comparisonPointData[cp.titleList.id]?.name}
+                        </li>
+                      ))}
+                    </ul>
+                    :
+                    <FormattedMessage id="ui-erm-comparisons.prop.noComparisonPoints" />
+                  }
+                </Accordion>
                 <Logs
                   type="error"
                   {...this.getSectionProps('errorLogs')}

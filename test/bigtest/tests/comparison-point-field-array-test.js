@@ -115,7 +115,7 @@ const agreements = [{
 let addPackageId;
 let removedPackageId;
 
-describe.only('Comparison point field array', () => {
+describe('Comparison point field array', () => {
   setupApplication();
   const interactor = new ComparisonsCreateInteractor();
 

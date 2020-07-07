@@ -2,7 +2,6 @@ import {
   clickable,
   collection,
   count,
-  fillable,
   interactor,
   isPresent,
   is,
