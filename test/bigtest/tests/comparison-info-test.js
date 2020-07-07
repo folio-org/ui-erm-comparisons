@@ -50,7 +50,7 @@ const comparison = {
   }
 };
 
-describe.only('Comparison info', () => {
+describe('Comparison info', () => {
   const interactor = new ComparisonsInfoInteractor();
 
   describe('Comparison not queued', () => {

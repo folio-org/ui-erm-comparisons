@@ -26,17 +26,22 @@ export default class ComparisonInfo extends React.Component {
         id={id}
         label={<FormattedMessage id="ui-erm-comparisons.prop.comparisonPoints" />}
       >
-        {comparison.comparisonPoints.length ?
-          <ul>
-            {comparison.comparisonPoints.map(cp => (
-              <li>
+        <ul
+          data-test-comparison-points-list
+        >
+          {comparison.comparisonPoints.map((cp, index) => (
+            <li
+              key={`comparison-point${index}`}
+              id="comparison-point"
+            >
+              <p
+                data-test-comparison-point-name
+              >
                 {comparisonPointData[cp.titleList.id]?.name}
-              </li>
-            ))}
-          </ul>
-          :
-          <FormattedMessage id="ui-erm-comparisons.prop.noComparisonPoints" />
-        }
+              </p>
+            </li>
+          ))}
+        </ul>
       </Accordion>
     );
   }
