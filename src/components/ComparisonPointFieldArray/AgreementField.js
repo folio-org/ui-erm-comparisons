@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedDate } from 'react-intl';
 import {
   Button,
   Card,
@@ -114,14 +114,14 @@ class AgreementField extends React.Component {
           <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.startDate" />}>
               <span data-test-agreement-start-date>
-                {startDate}
+                <FormattedDate value={startDate} />
               </span>
             </KeyValue>
           </Col>
           <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.endDate" />}>
               <span data-test-agreement-end-date>
-                {endDate || <NoValue />}
+                {endDate ? <FormattedDate value={endDate} /> : <NoValue />}
               </span>
             </KeyValue>
           </Col>

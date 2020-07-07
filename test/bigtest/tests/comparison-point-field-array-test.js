@@ -410,7 +410,7 @@ describe.only('Comparison point field array', () => {
           });
 
           it('has a field count of two', () => {
-            expect(interactor.packagesList.size).to.equal(2);
+            expect(interactor.agreementsList.size).to.equal(2);
           });
 
           it('renders the date field', () => {

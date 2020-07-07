@@ -43,7 +43,7 @@ import EntitlementAgreementsListInteractor from './entitlement-list';
 }
 
 @interactor class PackageInteractor {
-  isLinkPackageButtonPresent = isPresent('[data-test-ic-link-package]');
+  isLinkPackageButtonPresent = isPresent('[data-test-link-package]');
   linkPackageButton = clickable('[data-test-link-package]');
   isOnDateFieldPresent = isPresent('#data-test-field-date-package');
   isEmptyPackageCardPresent = isPresent('[data-test-package-empty]');
