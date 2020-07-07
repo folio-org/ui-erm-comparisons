@@ -7,9 +7,8 @@ import {
 import { expect } from 'chai';
 
 import { StaticRouter as Router } from 'react-router-dom';
-import { dummyMount, mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
+import { mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
 
-import setupApplication from '../helpers/setup-application';
 import EntitlementAgreementsListInteractor from '../interactors/entitlement-list';
 
 import EntitlementAgreementsList from '../../../src/components/EntitlementsAgreementsList';
@@ -50,7 +49,7 @@ const twoEntitlements = [
   },
 ];
 
-describe.only('Entitlements agreements list', () => {
+describe('Entitlements agreements list', () => {
   const interactor = new EntitlementAgreementsListInteractor();
 
   describe('No entitlements', () => {
@@ -63,8 +62,6 @@ describe.only('Entitlements agreements list', () => {
           />
         </Router>
       );
-
-      this.visit('/dummy');
     });
 
     it('does not render the table', () => {
@@ -72,7 +69,7 @@ describe.only('Entitlements agreements list', () => {
     });
   });
 
-  describe.only('One entitlement', () => {
+  describe('One entitlement', () => {
     beforeEach(async function () {
       await mountWithContext(
         <Router context={{}}>
@@ -82,8 +79,6 @@ describe.only('Entitlements agreements list', () => {
           />
         </Router>
       );
-
-      this.visit('/dummy');
     });
 
     describe('Rendering tests', () => {
@@ -113,13 +108,13 @@ describe.only('Entitlements agreements list', () => {
   describe('Two entitlements', () => {
     beforeEach(async function () {
       await mountWithContext(
-        <EntitlementAgreementsList
-          entitlements={twoEntitlements}
-          id="pci-agreements-list"
-        />
+        <Router context={{}}>
+          <EntitlementAgreementsList
+            entitlements={twoEntitlements}
+            id="pci-agreements-list"
+          />
+        </Router>
       );
-
-      this.visit('/dummy');
     });
 
     describe('Rendering tests', () => {

@@ -67,17 +67,20 @@ describe('Comparison create', () => {
     await this.visit('/comparisons-erm/create');
   });
 
-  it('renders the comparison name field', () => {
-    expect(interactor.isComparisonNameFieldPresent).to.be.true;
+  describe('Everything renders', () => {
+    it('renders the comparison name field', () => {
+      expect(interactor.isComparisonNameFieldPresent).to.be.true;
+    });
+
+    it('renders the package add button', () => {
+      expect(interactor.isAddPackageButtonPresent).to.be.true;
+    });
+
+    it('renders the agreement add button', () => {
+      expect(interactor.isAddAgreementButtonPresent).to.be.true;
+    });
   });
 
-  it('renders the package add button', () => {
-    expect(interactor.isAddPackageButtonPresent).to.be.true;
-  });
-
-  it('renders the agreement add button', () => {
-    expect(interactor.isAddAgreementButtonPresent).to.be.true;
-  });
 
   describe('Adding packages', () => {
     beforeEach(async function () {

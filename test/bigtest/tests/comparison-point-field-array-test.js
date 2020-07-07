@@ -252,6 +252,39 @@ describe('Comparison point field array', () => {
           expect(interactor.packagesList.items(0).isEntitlementsTablePresent).to.be.true;
         });
       });
+
+      describe.only('Clicking the add button again', () => {
+        beforeEach(async () => {
+          await interactor.addPackageButton.click();
+        });
+
+        it('has a field count of two', () => {
+          expect(interactor.packagesList.size).to.equal(2);
+        });
+
+        describe('Linking the second package', () => {
+          beforeEach(async () => {
+            await interactor.packagesList.items(1).linkPackageButton();
+          });
+
+          it('renders the second package name', () => {
+            expect(interactor.packagesList.items(1).packageName).to.have.string(packages[2].name);
+          });
+
+          it('renders the second package count', () => {
+            expect(interactor.packagesList.items(1).packageCount).to.have.string(packages[2]._object.resourceCount);
+          });
+
+          it('renders the second package provider', () => {
+            expect(interactor.packagesList.items(1).packageProvider).to.have.string(packages[2]._object.vendor.name);
+          });
+
+          it('renders the second package entitlements component', () => {
+            expect(interactor.packagesList.items(1).isEntitlementsTablePresent).to.be.true;
+          });
+
+        });
+      });
     });
   });
 });

@@ -61,7 +61,6 @@ import EntitlementAgreementsListInteractor from './entitlement-list';
 
 export default @interactor class ComparisonsCreate {
   isComparisonNameFieldPresent = isPresent('[data-test-field-comparison-name]');
-  fillComparisonName = fillable('[data-test-field-comparison-name]');
 
   isAddAgreementButtonPresent = isPresent('#data-test-add-agreement-button');
   addAgreementButton = new Button('#data-test-add-agreement-button');
