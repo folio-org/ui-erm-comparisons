@@ -6,7 +6,7 @@ import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import { ConfirmationModal } from '@folio/stripes/components';
 
-import ComparisonInfo from '../components/views/ComparisonInfo';
+import View from '../components/views/ComparisonView';
 
 class ComparisonViewRoute extends React.Component {
   static manifest = Object.freeze({
@@ -133,7 +133,7 @@ class ComparisonViewRoute extends React.Component {
 
     return (
       <>
-        <ComparisonInfo
+        <View
           data={{
             comparison,
             comparisonPointData
