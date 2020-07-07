@@ -5,17 +5,13 @@ import {
   describe,
   it,
 } from '@bigtest/mocha';
-import chai from 'chai';
-import spies from 'chai-spies';
+import { expect } from 'chai';
 
 import { StaticRouter as Router } from 'react-router-dom';
 import { mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
 
 import { ComparisonInfo } from '../../../src/components/ComparisonSections';
 import ComparisonsInfoInteractor from '../interactors/comparisons-info';
-
-chai.use(spies);
-const { expect, spy } = chai;
 
 const comparison = {
   class: 'org.olf.general.jobs.ComparisonJob',

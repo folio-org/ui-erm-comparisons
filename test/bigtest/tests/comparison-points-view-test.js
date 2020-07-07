@@ -55,7 +55,7 @@ const comparisonPointsData = {
   }
 };
 
-describe.only('Comparison points view', () => {
+describe('Comparison points view', () => {
   const interactor = new ComparisonPointsInteractor();
 
   beforeEach(async function () {
