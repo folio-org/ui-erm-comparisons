@@ -105,6 +105,10 @@ class ComparisonPointFieldArray extends React.Component {
       return (
         <EditCard
           key={`${comparisonType} ${index}`}
+          deleteBtnProps={{
+            'data-test-comparison-point-delete-button': true,
+            'id': `${name}-delete-${index}`,
+          }}
           deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
           header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
           id={`data-test-comparison-point-${comparisonType}`}

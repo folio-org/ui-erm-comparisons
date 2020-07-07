@@ -21,8 +21,8 @@ import EntitlementAgreementsListInteractor from './entitlement-list';
 }
 
 @interactor class AgreementInteractor {
-  isLinkAgreementButtonPresent = isPresent('[data-test-ic-link-agreement]');
-  linkAgreementButton = clickable('[data-test-ic-link-agreement]');
+  isLinkAgreementButtonPresent = isPresent('[data-test-link-agreement]');
+  linkAgreementButton = clickable('[data-test-link-agreement]');
   isOnDateFieldPresent = isPresent('#data-test-field-date-agreement');
   isEmptyAgreementCardPresent = isPresent('[data-test-agreement-empty]');
   isAgreementCardPresent = isPresent('[data-test-agreement-card]');
@@ -33,6 +33,8 @@ import EntitlementAgreementsListInteractor from './entitlement-list';
   agreementStatus = text('[data-test-agreement-status]');
   isAgreementReasonForClosurePresent = isPresent('[data-test-agreement-reason-for-closure]');
   agreementReasonForClosure = text('[data-test-agreement-reason-for-closure]');
+
+  clickDeleteButton = clickable('[data-test-comparison-point-delete-button]');
 }
 
 @interactor class AgreementsListInteractor {
@@ -42,16 +44,18 @@ import EntitlementAgreementsListInteractor from './entitlement-list';
 
 @interactor class PackageInteractor {
   isLinkPackageButtonPresent = isPresent('[data-test-ic-link-package]');
-  linkPackageButton = clickable('[data-test-ic-link-package]');
+  linkPackageButton = clickable('[data-test-link-package]');
   isOnDateFieldPresent = isPresent('#data-test-field-date-package');
   isEmptyPackageCardPresent = isPresent('[data-test-package-empty]');
   isPackageCardPresent = isPresent('[data-test-package-card]');
-  isEntitlementsTablePresent = isPresent('[data-test-package-entitlements]')
+  isEntitlementsTablePresent = isPresent('#pci-agreements-list')
   entitlements = new EntitlementAgreementsListInteractor();
   packageName = text('[data-test-package-name-link]');
   packageNameLink = clickable('[data-test-package-name-link]');
   packageCount = text('[data-test-package-count]');
   packageProvider = text('[data-test-package-provider]');
+
+  clickDeleteButton = clickable('[data-test-comparison-point-delete-button]');
 }
 
 @interactor class PackagesListInteractor {
@@ -69,7 +73,6 @@ export default @interactor class ComparisonsCreate {
   isAddPackageButtonPresent = isPresent('#data-test-add-package-button');
   addPackageButton = new Button('#data-test-add-package-button');
   packagesList = new PackagesListInteractor();
-
 
   saveButton = new Button('[data-test-save-button]');
   closeButton = clickable('#close-comparison-form-button');

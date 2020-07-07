@@ -76,7 +76,7 @@ class PackageField extends React.Component {
                 {({ ariaIds }) => (
                   <Button
                     aria-labelledby={ariaIds.text}
-                    data-test-ic-link-package
+                    data-test-link-package
                     {...buttonProps}
                   >
                     <FormattedMessage id="ui-erm-comparisons.newComparison.replacePackage" />
@@ -88,7 +88,7 @@ class PackageField extends React.Component {
           return (
             <Button
               autoFocus
-              data-test-ic-link-package
+              data-test-link-package
               {...buttonProps}
             >
               <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />
@@ -109,6 +109,7 @@ class PackageField extends React.Component {
 
     return (
       <EntitlementAgreementsList
+        data-test-package-entitlements
         entitlements={relevantEntitlements}
         id="pci-agreements-list"
       />
