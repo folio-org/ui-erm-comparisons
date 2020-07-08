@@ -106,13 +106,12 @@ describe('Comparison info', () => {
 
   describe('Comparison queued', () => {
     beforeEach(async function () {
-      let viewButtonClicked = false;
       await mountWithContext(
         <Router context={{}}>
           <ComparisonInfo
             comparison={comparison}
             isComparisonNotQueued={false}
-            onViewReport={() => { viewButtonClicked = true; }}
+            onViewReport={() => {}}
           />
         </Router>
       );
