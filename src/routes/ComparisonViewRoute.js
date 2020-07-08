@@ -53,7 +53,7 @@ class ComparisonViewRoute extends React.Component {
       .then(() => {
         this.props.history.replace(
           {
-            pathname: '/erm-comparisons',
+            pathname: '/comparisons-erm',
             search: this.props.location.search,
           }
         );
@@ -62,7 +62,7 @@ class ComparisonViewRoute extends React.Component {
   };
 
   handleClose = () => {
-    this.props.history.push(`/erm-comparisons${this.props.location.search}`);
+    this.props.history.push(`/comparisons-erm${this.props.location.search}`);
   };
 
   handleViewReport = () => {
