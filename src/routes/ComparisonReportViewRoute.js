@@ -42,14 +42,6 @@ class ComparisonReportViewRoute extends React.Component {
     }).isRequired,
   };
 
-  componentDidUpdate(prevProps) {
-    const { mutator, resources } = this.props;
-    const { comparison: { records } } = resources;
-    if (records.length && records.length !== prevProps.resources?.comparison?.records?.length) {
-      mutator.titleListQueryParams.update({ noOfComparisonPoints: records[0].comparisonPoints.length });
-    }
-  }
-
   handleClose = () => {
     const { history, location } = this.props;
     history.push(location?.pathname?.replace('/report', ''));
