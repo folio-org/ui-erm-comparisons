@@ -10,15 +10,20 @@ import {
 import { FormattedMessage } from 'react-intl';
 
 
-export default class ComparisonInfo extends React.Component {
+export default class ComparisonPoints extends React.Component {
   static propTypes = {
-    comparison: PropTypes.object.isRequired,
-    comparisonPointData: PropTypes.arrayOf(PropTypes.object),
+    comparison: PropTypes.shape({
+      comparisonPoints: PropTypes.arrayOf(PropTypes.shape({
+        titleList: PropTypes.shape({
+          name: PropTypes.string.isRequired
+        }).isRequired
+      })).isRequired,
+    }),
     id: PropTypes.string.isRequired
   };
 
   render() {
-    const { comparison, comparisonPointData, id } = this.props;
+    const { comparison, id } = this.props;
     return (
       <Accordion
         displayWhenClosed={<Badge>{comparison.comparisonPoints.length}</Badge>}
@@ -37,7 +42,7 @@ export default class ComparisonInfo extends React.Component {
               <p
                 data-test-comparison-point-name
               >
-                {comparisonPointData[cp.titleList.id]?.name}
+                {cp.titleList.name}
               </p>
             </li>
           ))}

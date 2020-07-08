@@ -17,32 +17,6 @@ class ComparisonReportViewRoute extends React.Component {
       path: 'erm/jobs/:{id}',
       shouldRefresh: () => false,
     },
-    agreements: {
-      type: 'okapi',
-      params: (_q, _p, _r, _l, props) => {
-        const filters = (props.resources?.comparison?.records?.[0]?.comparisonPoints || [])
-          .map(cp => `id==${cp.titleList.id}`)
-          .join('||');
-        return filters ? { filters } : null;
-      },
-      path: 'erm/sas',
-      recordsRequired: '%{titleListQueryParams.noOfComparisonPoints}',
-      perRequest: '%{titleListQueryParams.noOfComparisonPoints}',
-      limitParam: 'perPage',
-    },
-    packages: {
-      type: 'okapi',
-      params: (_q, _p, _r, _l, props) => {
-        const filters = (props.resources?.comparison?.records?.[0]?.comparisonPoints || [])
-          .map(cp => `id==${cp.titleList.id}`)
-          .join('||');
-        return filters ? { filters } : null;
-      },
-      path: 'erm/resource/electronic',
-      perRequest: '%{titleListQueryParams.noOfComparisonPoints}',
-      limitParam: 'perPage',
-    },
-    titleListQueryParams: { noOfComparisonPoints: 2 },
   });
 
   static propTypes = {
@@ -82,27 +56,8 @@ class ComparisonReportViewRoute extends React.Component {
     history.push(location?.pathname?.replace('/report', ''));
   };
 
-  enrichComparisonPointData(cpArray) {
-    const aArray = this.props.resources?.agreements?.records ?? [];
-    const pArray = this.props.resources?.packages?.records ?? [];
-
-    const newCpArray = cloneDeep(cpArray);
-    cpArray.forEach((cp, index) => {
-      const cpId = cp.titleList.id;
-      const agreement = aArray.filter(a => a.id === cpId)?.[0] ?? {};
-      const pkg = pArray.filter(p => p.id === cpId)?.[0] ?? {};
-      if (agreement.name) {
-        newCpArray[index].titleList.name = agreement.name;
-      } else if (pkg.name) {
-        newCpArray[index].titleList.name = pkg.name;
-      }
-    });
-    return newCpArray;
-  }
-
   render() {
-    const comparisonPoints = this.props.resources?.comparison?.records?.[0]?.comparisonPoints || [];
-    const comparisonPointData = this.enrichComparisonPointData(comparisonPoints);
+    const comparisonPointData = this.props.resources?.comparison?.records?.[0]?.comparisonPoints || [];
     return (
       <View
         data={{

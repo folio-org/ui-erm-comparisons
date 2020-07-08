@@ -14,33 +14,7 @@ class ComparisonViewRoute extends React.Component {
       type: 'okapi',
       path: 'erm/jobs/:{id}',
       shouldRefresh: () => false,
-    },
-    agreements: {
-      type: 'okapi',
-      params: (_q, _p, _r, _l, props) => {
-        const filters = (props.resources?.comparison?.records?.[0]?.comparisonPoints || [])
-          .map(cp => `id==${cp.titleList.id}`)
-          .join('||');
-        return filters ? { filters } : null;
-      },
-      path: 'erm/sas',
-      recordsRequired: '%{titleListQueryParams.noOfComparisonPoints}',
-      perRequest: '%{titleListQueryParams.noOfComparisonPoints}',
-      limitParam: 'perPage',
-    },
-    packages: {
-      type: 'okapi',
-      params: (_q, _p, _r, _l, props) => {
-        const filters = (props.resources?.comparison?.records?.[0]?.comparisonPoints || [])
-          .map(cp => `id==${cp.titleList.id}`)
-          .join('||');
-        return filters ? { filters } : null;
-      },
-      path: 'erm/resource/electronic',
-      perRequest: '%{titleListQueryParams.noOfComparisonPoints}',
-      limitParam: 'perPage',
-    },
-    titleListQueryParams: { noOfComparisonPoints: 2 },
+    }
   });
 
   static propTypes = {
@@ -69,14 +43,6 @@ class ComparisonViewRoute extends React.Component {
   static contextType = CalloutContext;
 
   state = { showConfirmDelete: false };
-
-  componentDidUpdate(prevProps) {
-    const { mutator, resources } = this.props;
-    const { comparison: { records } } = resources;
-    if (records.length && records.length !== prevProps.resources?.comparison?.records?.length) {
-      mutator.titleListQueryParams.update({ noOfComparisonPoints: records[0].comparisonPoints.length });
-    }
-  }
 
   handleDelete = () => {
     const { resources } = this.props;
@@ -108,25 +74,11 @@ class ComparisonViewRoute extends React.Component {
 
   hideDeleteConfirmationModal = () => this.setState({ showConfirmDelete: false });
 
-  buildComparisonPointData(agreementsArray, packagesArray) {
-    const comparisonPoints = {};
-    agreementsArray.forEach(agreement => {
-      comparisonPoints[agreement.id] = { name: agreement.name };
-    });
-    packagesArray.forEach(pkg => {
-      comparisonPoints[pkg.id] = { name: pkg.name };
-    });
-    return comparisonPoints;
-  }
-
   render() {
     const { resources } = this.props;
     const comparison = resources?.comparison?.records?.[0] ?? {};
-    const agreementsArray = resources?.agreements?.records ?? [];
-    const packagesArray = resources?.packages?.records ?? [];
     const name = comparison?.name ?? '';
 
-    const comparisonPointData = this.buildComparisonPointData(agreementsArray, packagesArray);
 
     const deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
     const deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
@@ -135,8 +87,7 @@ class ComparisonViewRoute extends React.Component {
       <>
         <View
           data={{
-            comparison,
-            comparisonPointData
+            comparison
           }}
           isLoading={resources?.comparison?.isPending ?? true}
           onClose={this.handleClose}

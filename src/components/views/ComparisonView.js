@@ -56,11 +56,10 @@ export default class ComparisonView extends React.Component {
   }
 
   getSectionProps = (id) => {
-    const { data: { comparison, comparisonPointData } } = this.props;
+    const { data: { comparison } } = this.props;
     return {
       id,
       comparison,
-      comparisonPointData,
       onToggle: this.handleSectionToggle,
       open: this.state.sections[id],
     };
