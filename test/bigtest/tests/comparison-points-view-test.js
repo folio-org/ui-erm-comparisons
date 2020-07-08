@@ -20,14 +20,16 @@ const comparison = {
       date: '2017-05-13',
       id: 'comparison-point-1',
       titleList: {
-        id: 'titleList1'
+        id: 'titleList1',
+        name: 'Some agreement'
       }
     },
     {
       date: '2004-11-08',
       id: 'comparison-point-2',
       titleList: {
-        id: 'titleList2'
+        id: 'titleList2',
+        name: 'Some package'
       }
     }
   ],
@@ -46,15 +48,6 @@ const comparison = {
   }
 };
 
-const comparisonPointsData = {
-  titleList1: {
-    name: 'Some agreement'
-  },
-  titleList2: {
-    name: 'Some package'
-  }
-};
-
 describe('Comparison points view', () => {
   const interactor = new ComparisonPointsInteractor();
 
@@ -63,7 +56,6 @@ describe('Comparison points view', () => {
       <Router context={{}}>
         <ComparisonPoints
           comparison={comparison}
-          comparisonPointsData={comparisonPointsData}
           id="12345"
         />
       </Router>
@@ -81,7 +73,7 @@ describe('Comparison points view', () => {
   describe('Rendering each comparison point', () => {
     comparison.comparisonPoints.forEach((cp, index) => {
       it(`should render comparison point ${index + 1}'s name correctly`, () => {
-        expect(interactor.comparisonPoints(index).comparisonPointName).to.equal(comparisonPointsData[cp.titleList.id]);
+        expect(interactor.comparisonPoints(index).comparisonPointName).to.equal(cp.titleList.name);
       });
     });
   });

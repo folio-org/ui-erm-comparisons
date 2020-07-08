@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
-import { cloneDeep } from 'lodash';
 
 import View from '../components/views/ComparisonReport';
 
