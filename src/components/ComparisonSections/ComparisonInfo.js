@@ -58,7 +58,7 @@ export default class ComparisonInfo extends React.Component {
               <Col xs={4}>
                 <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.errors" />}>
                   <div data-test-comparison-errors>
-                    {comparison.errorLog ? comparison.errorLog.length : '0'}
+                    {comparison.errorLog ? comparison.errorLog?.length : '0'}
                   </div>
                 </KeyValue>
               </Col>

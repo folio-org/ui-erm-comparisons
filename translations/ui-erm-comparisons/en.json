@@ -8,6 +8,8 @@
   "infoLogNo": "No information notices for this comparison.",
   "errorLogNo": "No errors to report.",
   "loading": "Loading...",
+  "package": "Package",
+  "agreement": "Agreement",
 
   "columns.errorLogMessage": "Error",
   "columns.infoLogMessage": "Message",
@@ -19,7 +21,7 @@
   "comparison.delete.heading": "Delete comparison",
   "comparison.delete.message": "Comparison <strong>{name}</strong> will be <strong>deleted</strong>",
   "comparison.deleted.success": "Comparison <strong>{name}</strong> was successfully <strong>deleted</strong>",
-  "comparison.created.success": "Comparison <strong>{name}</strong> was successfully <strong>create</strong>",
+  "comparison.created.success": "Comparison <strong>{name}</strong> was successfully <strong>created</strong>",
 
   "prop.class": "Comparison type",
   "prop.ended": "Ended",
@@ -45,6 +47,22 @@
   "comparison.new": "New",
   "comparison.newComparison": "New comparison",
   "comparison.close": "Close comparison",
+
+  "comparisonReport.titleOnPlatform": "Title on platform",
+  "comparisonReport.title": "Title",
+  "comparisonReport.availableVia": "Available via",
+  "comparisonReport.coverage": "Coverage",
+  "comparisonReport.isPresent": "Is present in {type} on {date} {name}",
+  "comparisonReport.isNotPresent": "Is not present in {type} on {date} {name}",
+  "comparisonReport.overlap": "Overlap",
+  "comparisonReport.type": "<strong>{type}</strong> on <strong>{date}</strong> {name}",
+  "comparisonReport.accessTitleOnPlatform": "Access \"{title}\" on platform \"{platform}\".",
+  "comparisonReport.resourceTitle": "{type} on {date}: \"name\" ",
+  "comparisonReport.info.type": "Type",
+  "comparisonReport.info.resourceType": "Resource type",
+  "comparisonReport.info.ezb": "EZB",
+  "comparisonReport.info.zdb": "ZDB",
+  "comparisonReport.info.eissn": "ISSN (Online)",
 
   "newComparison.info": "Select two items for comparison",
   "newComparison.name": "Comparison job name",
@@ -83,6 +101,5 @@
   "agreementPeriods.periodEnd": "Period end",
   "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource",
 
-  "report.close": "Close comparison report screen",
-  "report.paneTitle": "Comparison report"
+  "report.close": "Close comparison report screen"
 }

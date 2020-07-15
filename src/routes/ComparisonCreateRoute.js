@@ -79,7 +79,6 @@ class ComparisonCreateRoute extends React.Component {
     };
   }
 
-
   static getDerivedStateFromProps(props, state) {
     const { entitlementsWithIds, eResourceId } = state;
     const { entitlements } = props.resources;
@@ -164,7 +163,7 @@ class ComparisonCreateRoute extends React.Component {
         const name = response?.name ?? '';
 
         history.push(`/comparisons-erm/${comparisonId}${location.search}`);
-        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparison.comparison.created.success" values={{ name }} /> });
+        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.success" values={{ name }} /> });
       });
   }
 

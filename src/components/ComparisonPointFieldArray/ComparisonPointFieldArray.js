@@ -8,7 +8,6 @@ import { Button, Datepicker } from '@folio/stripes/components';
 import { EditCard } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
-
 class ComparisonPointFieldArray extends React.Component {
   static propTypes = {
     addButtonId: PropTypes.string,

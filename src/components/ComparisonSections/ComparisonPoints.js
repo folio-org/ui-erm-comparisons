@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
 import {
   Accordion,
   Badge,
 } from '@folio/stripes/components';
 
 import { FormattedMessage } from 'react-intl';
-
 
 export default class ComparisonPoints extends React.Component {
   static propTypes = {
@@ -26,15 +23,15 @@ export default class ComparisonPoints extends React.Component {
     const { comparison, id } = this.props;
     return (
       <Accordion
-        displayWhenClosed={<Badge>{comparison.comparisonPoints.length}</Badge>}
-        displayWhenOpen={<Badge>{comparison.comparisonPoints.length}</Badge>}
+        displayWhenClosed={<Badge>{comparison.comparisonPoints?.length}</Badge>}
+        displayWhenOpen={<Badge>{comparison.comparisonPoints?.length}</Badge>}
         id={id}
         label={<FormattedMessage id="ui-erm-comparisons.prop.comparisonPoints" />}
       >
         <ul
           data-test-comparison-points-list
         >
-          {comparison.comparisonPoints.map((cp, index) => (
+          {comparison?.comparisonPoints?.map((cp, index) => (
             <li
               key={`comparison-point${index}`}
               id="comparison-point"

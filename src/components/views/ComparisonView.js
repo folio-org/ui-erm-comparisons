@@ -103,6 +103,7 @@ export default class ComparisonView extends React.Component {
 
   render() {
     const { data: { comparison }, isLoading, onViewReport } = this.props;
+
     if (isLoading) return this.renderLoadingPane();
     const isComparisonNotQueued = comparison?.status?.value !== 'queued';
 

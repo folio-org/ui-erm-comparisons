@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { FormattedMessage } from 'react-intl';
-
 import {
   IconButton,
-  Layout,
+  LoadingPane,
   Pane,
   PaneMenu,
+  Paneset
 } from '@folio/stripes/components';
+
+import ComparisonReportList from './ComparisonReportList';
 
 export default class ComparisonReport extends React.Component {
   static propTypes = {
@@ -33,19 +35,26 @@ export default class ComparisonReport extends React.Component {
   }
 
   render() {
+    const paneProps = {
+      defaultWidth: 'fill',
+      id: 'pane-report',
+      onClose: this.props.onClose,
+    };
+
+    if (this.props.isLoading) return <LoadingPane data-loading {...paneProps} />;
+
+    const { comparisonPointData: { name } } = this.props.data;
+
     return (
-      <Pane
-        defaultWidth="100%"
-        firstMenu={this.renderFirstMenu()}
-        id="pane-report"
-        paneTitle={<FormattedMessage id="ui-erm-comparisons.report.paneTitle" />}
-      >
-        <Layout
-          data-test-report-contents
+      <Paneset>
+        <Pane
+          firstMenu={this.renderFirstMenu()}
+          paneTitle={name}
+          {...paneProps}
         >
-          The report
-        </Layout>
-      </Pane>
+          <ComparisonReportList sourceData={this.props.data} />
+        </Pane>
+      </Paneset>
     );
   }
 }

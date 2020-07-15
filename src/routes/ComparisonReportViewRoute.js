@@ -47,14 +47,22 @@ class ComparisonReportViewRoute extends React.Component {
     history.push(location?.pathname?.replace('/report', ''));
   };
 
+  isLoading = () => {
+    const { resources } = this.props;
+
+    return resources?.report?.isPending;
+  }
+
   render() {
-    const comparisonPointData = this.props.resources?.comparison?.records?.[0]?.comparisonPoints || [];
+    const { resources } = this.props;
+
     return (
       <View
         data={{
-          comparisonPointData,
-          report: this.props.resources.report?.records
+          comparisonPointData: resources?.comparison?.records?.[0] ?? {},
+          report: resources?.report?.records ?? []
         }}
+        isLoading={this.isLoading()}
         onClose={this.handleClose}
       />
     );
