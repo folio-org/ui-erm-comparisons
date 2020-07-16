@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Button, Datepicker } from '@folio/stripes/components';
 
-import { EditCard } from '@folio/stripes-erm-components';
+import { EditCard, withKiwtFieldArray } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 class ComparisonPointFieldArray extends React.Component {
@@ -18,24 +18,22 @@ class ComparisonPointFieldArray extends React.Component {
     }),
     deleteButtonTooltipId: PropTypes.string,
     disableAddNew: PropTypes.bool,
-    fields: PropTypes.shape({
-      insert: PropTypes.func.isRequired,
-      length: PropTypes.number,
-      name: PropTypes.string.isRequired,
-      remove: PropTypes.func.isRequired,
-      update: PropTypes.func.isRequired,
-      value: PropTypes.arrayOf(PropTypes.object)
-    }).isRequired,
     handlers: PropTypes.shape({
       onEResourceAdded: PropTypes.func.isRequired,
       onEResourceRemoved: PropTypes.func.isRequired
     }).isRequired,
     headerId: PropTypes.string,
     id: PropTypes.string,
+    items: PropTypes.arrayOf(PropTypes.object),
+    name: PropTypes.string.isRequired,
+    onAddField: PropTypes.func.isRequired,
+    onDeleteField: PropTypes.func.isRequired,
+    onUpdateField: PropTypes.func.isRequired,
   }
 
   state = { currentDate: moment.utc().startOf('day').toISOString() }
-  handleComparisonPointSelected = /* istanbul ignore next */ (index, comparisonPoint, comparisonType) => {
+
+  handleComparisonPointSelected = (index, comparisonPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
       this.handleUpdateField(index, {
         id: comparisonPoint.id,
@@ -56,51 +54,30 @@ class ComparisonPointFieldArray extends React.Component {
     }
   }
 
-
-  // We don't need a full blown withKiwtFieldArray here since these will never be edited, just these small handlers will do
-  handleAddField = () => {
-    const { fields } = this.props;
-    fields.insert(fields.length, {});
-  }
-
-  handleDeleteField = (index) => {
-    const id = this.props.fields?.value?.[index]?.id;
-    const eResourceField = this.props.comparisonPoint === 'package';
-
-    if (eResourceField) {
-      this.props.handlers.onEResourceRemoved(id);
-    }
-    this.props.fields.remove(index);
-  }
-
   handleUpdateField = (index, field, updateEntitlementQuery = false) => {
-    const { fields } = this.props;
+    const { handlers, items, onUpdateField } = this.props;
 
     if (updateEntitlementQuery) {
       // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
-      const removedId = this.props.fields?.value?.[index]?.id;
+      const removedId = items?.[index]?.id;
       const addedId = field?.id;
       if (removedId) {
-        this.props.handlers.onEResourceRemoved(removedId);
+        handlers.onEResourceRemoved(removedId);
       }
-      this.props.handlers.onEResourceAdded(addedId);
+      handlers.onEResourceAdded(addedId);
     }
 
-    fields.update(index, {
-      ...fields.value[index],
-      ...field,
-    });
+    onUpdateField(index, field);
   }
-
 
   parseDateOnlyString = (value, _timeZone, dateFormat) => {
     return (!value || value === '') ? value : moment(value).format(dateFormat);
   };
 
   renderComparisonPoints = () => {
-    const { comparisonPoint: comparisonType, data, deleteButtonTooltipId, fields, headerId } = this.props;
-    const { name } = fields;
-    return fields?.value?.map((comparisonPoint, index) => {
+    const { comparisonPoint: comparisonType, data, deleteButtonTooltipId, headerId } = this.props;
+    const { name } = this.props;
+    return this.props.items.map((comparisonPoint, index) => {
       return (
         <EditCard
           key={`${comparisonType} ${index}`}
@@ -111,7 +88,7 @@ class ComparisonPointFieldArray extends React.Component {
           deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
           header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
           id={`data-test-comparison-point-${comparisonType}`}
-          onDelete={() => this.handleDeleteField(index)}
+          onDelete={() => this.props.onDeleteField(index, comparisonPoint)}
         >
           <Field
             comparisonPoint={comparisonPoint}
@@ -140,7 +117,12 @@ class ComparisonPointFieldArray extends React.Component {
   renderAddNewButton() {
     const { addButtonId, addLabelId, disableAddNew } = this.props;
     return (
-      <Button disabled={disableAddNew} id={addButtonId} onClick={() => this.handleAddField()}>
+      <Button
+        disabled={disableAddNew}
+        id={addButtonId}
+        marginBottom0
+        onClick={() => this.props.onAddField()}
+      >
         <FormattedMessage id={addLabelId} />
       </Button>
     );
@@ -159,4 +141,4 @@ class ComparisonPointFieldArray extends React.Component {
   }
 }
 
-export default ComparisonPointFieldArray;
+export default withKiwtFieldArray(ComparisonPointFieldArray);

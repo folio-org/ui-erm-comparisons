@@ -8,6 +8,6 @@ import MultiColumnListInteractor from '@folio/stripes-components/lib/MultiColumn
 export default @interactor class EntitlementAgreementsListInteractor {
   static defaultScope = '[data-test-entitlements-table]';
 
-  table = new MultiColumnListInteractor('#pci-agreements-list');
-  isTablePresent = isPresent('#pci-agreements-list');
+  table = new MultiColumnListInteractor('#package-agreements-list');
+  isTablePresent = isPresent('#package-agreements-list');
 }

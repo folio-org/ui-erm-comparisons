@@ -83,7 +83,7 @@ export default class ComparisonView extends React.Component {
     const isComparisonNotInProgress = comparison?.status?.value !== 'in_progress';
 
     return (
-      <IfPermission perm="ui-local-kb-admin.jobs.delete">
+      <IfPermission perm="ui-erm-comparisons.jobs.delete">
         <Button
           buttonStyle="dropdownItem"
           disabled={!isComparisonNotInProgress}

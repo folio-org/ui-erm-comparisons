@@ -125,6 +125,7 @@ class ComparisonCreateRoute extends React.Component {
     this.props.mutator.entitlementQueryParams.update({
       id: eResourceId
     });
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ eResourceId });
   }
 
@@ -135,6 +136,7 @@ class ComparisonCreateRoute extends React.Component {
     const newState = cloneDeep(entitlementsWithIds);
     delete newState[eResourceId];
 
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ entitlementsWithIds: newState, eResourceId: '' });
   }
 
@@ -163,7 +165,7 @@ class ComparisonCreateRoute extends React.Component {
         const name = response?.name ?? '';
 
         history.push(`/comparisons-erm/${comparisonId}${location.search}`);
-        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.success" values={{ name }} /> });
+        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparison.comparison.created.success" values={{ name }} /> });
       });
   }
 

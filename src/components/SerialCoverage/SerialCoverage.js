@@ -22,7 +22,7 @@ export default class SerialCoverage extends React.Component {
 
     return (
       <>
-        <FormattedMessage id="ui-agreements.coverage.volumeShort" />
+        <FormattedMessage id="ui-erm-comparisons.coverage.volumeShort" />
         {volume}
       </>
     );
@@ -33,7 +33,7 @@ export default class SerialCoverage extends React.Component {
 
     return (
       <>
-        <FormattedMessage id="ui-agreements.coverage.issueShort" />
+        <FormattedMessage id="ui-erm-comparisons.coverage.issueShort" />
         {issue}
       </>
     );

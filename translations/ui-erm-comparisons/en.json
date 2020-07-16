@@ -10,10 +10,15 @@
   "loading": "Loading...",
   "package": "Package",
   "agreement": "Agreement",
+  "selectPackage": "Select package",
+  "selectAgreement": "Select agreement",
 
   "columns.errorLogMessage": "Error",
   "columns.infoLogMessage": "Message",
   "columns.recordNumber": "Record number",
+
+  "coverage.volumeShort": "Vol:",
+  "coverage.issueShort": "Iss:",
 
   "comparison.delete": "Delete",
 
@@ -34,8 +39,6 @@
   "prop.runningStatus": "Running status",
   "prop.started": "Started",
   "prop.status": "Running status",
-  "prop.comparisonPointOne": "Comparison point 1",
-  "prop.comparisonPointTwo": "Comparison point 2",
   "prop.viewReport": "View comparison report",
   "prop.comparisonPoints": "Comparison points",
   "prop.noComparisonPoints": "No comparison points",

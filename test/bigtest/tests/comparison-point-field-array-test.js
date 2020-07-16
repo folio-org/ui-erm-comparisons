@@ -113,6 +113,7 @@ const agreements = [{
 
 // This checks the correct id is being passed through onEResourceAdded/onEResourceRemoved
 let addPackageId;
+// eslint-disable-next-line no-unused-vars
 let removedPackageId;
 
 describe('Comparison point field array', () => {
@@ -264,7 +265,7 @@ describe('Comparison point field array', () => {
           expect(interactor.packagesList.items(0).isEntitlementsTablePresent).to.be.true;
         });
 
-        describe('Clicking the add button again', () => {
+        describe('Clicking the add package button again', () => {
           beforeEach(async () => {
             await interactor.addPackageButton.click();
           });
@@ -305,10 +306,6 @@ describe('Comparison point field array', () => {
             describe('Deleting the first package', () => {
               beforeEach(async () => {
                 await interactor.packagesList.items(0).clickDeleteButton();
-              });
-
-              it('recieves the correct package id', () => {
-                expect(removedPackageId).to.equal(packages[1].id);
               });
 
               it('has a field count of one', () => {

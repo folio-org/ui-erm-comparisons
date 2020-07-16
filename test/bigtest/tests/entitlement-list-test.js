@@ -58,7 +58,7 @@ describe('Entitlements agreements list', () => {
         <Router context={{}}>
           <EntitlementAgreementsList
             entitlements={noEntitlements}
-            id="pci-agreements-list"
+            id="package-agreements-list"
           />
         </Router>
       );
@@ -75,7 +75,7 @@ describe('Entitlements agreements list', () => {
         <Router context={{}}>
           <EntitlementAgreementsList
             entitlements={oneEntitlement}
-            id="pci-agreements-list"
+            id="package-agreements-list"
           />
         </Router>
       );
@@ -111,7 +111,7 @@ describe('Entitlements agreements list', () => {
         <Router context={{}}>
           <EntitlementAgreementsList
             entitlements={twoEntitlements}
-            id="pci-agreements-list"
+            id="package-agreements-list"
           />
         </Router>
       );

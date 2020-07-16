@@ -57,11 +57,11 @@ class AgreementField extends React.Component {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
+            'buttonRef': this.triggerButton,
             'buttonStyle': value ? 'default' : 'primary',
             'id': `${this.props.id}-search-button`,
             'name': this.props.input.name,
             'onClick': props.onClick,
-            'buttonRef': this.triggerButton,
             'marginBottom0': true
           };
           if (value) {

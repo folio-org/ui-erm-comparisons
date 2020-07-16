@@ -36,11 +36,9 @@ export default class ComparisonPoints extends React.Component {
               key={`comparison-point${index}`}
               id="comparison-point"
             >
-              <p
-                data-test-comparison-point-name
-              >
+              <div data-test-comparison-point-name>
                 {cp.titleList.name}
-              </p>
+              </div>
             </li>
           ))}
         </ul>

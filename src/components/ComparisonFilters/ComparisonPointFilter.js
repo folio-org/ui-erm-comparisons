@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Button } from '@folio/stripes/components';
+import { Button, Layout } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
 
 class ComparisonPointFilter extends React.Component {
@@ -12,7 +12,7 @@ class ComparisonPointFilter extends React.Component {
     onPackageSelected: PropTypes.func.isRequired,
   };
 
-  renderFilterAgreementButton = value => {
+  renderFilterAgreementButton = () => {
     return (
       <Pluggable
         dataKey={`agreement-${this.props.name}`}
@@ -21,19 +21,17 @@ class ComparisonPointFilter extends React.Component {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
-            'buttonStyle': value ? 'default' : 'primary',
+            'buttonRef': this.triggerButton,
             'id': `${this.props.name}-agreement-search-button`,
             'onClick': props.onClick,
-            'buttonRef': this.triggerButton,
-            'marginBottom0': true
           };
           return (
             <Button
-              key={`data-test-ic-add-${this.props.name}-agreement-filter`}
+              key={`data-test-add-${this.props.name}-agreement-filter`}
               disabled={this.props.disabled}
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.newComparison.addAgreement" />
+              <FormattedMessage id="ui-erm-comparisons.selectAgreement" />
             </Button>
           );
         }}
@@ -44,7 +42,7 @@ class ComparisonPointFilter extends React.Component {
     );
   }
 
-  renderFilterPackageButton = value => {
+  renderFilterPackageButton = () => {
     return (
       <Pluggable
         dataKey={`package-${this.props.name}`}
@@ -53,19 +51,17 @@ class ComparisonPointFilter extends React.Component {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
-            'buttonStyle': value ? 'default' : 'primary',
+            'buttonRef': this.triggerButton,
             'id': `${this.props.name}-package-search-button`,
             'onClick': props.onClick,
-            'buttonRef': this.triggerButton,
-            'marginBottom0': true
           };
           return (
             <Button
-              key={`data-test-ic-add-${this.props.name}-package-filter`}
+              key={`data-test-add-${this.props.name}-package-filter`}
               disabled={this.props.disabled}
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />
+              <FormattedMessage id="ui-erm-comparisons.selectPackage" />
             </Button>
           );
         }}
@@ -80,8 +76,10 @@ class ComparisonPointFilter extends React.Component {
   render() {
     return (
       <>
-        {this.renderFilterAgreementButton()}
-        {this.renderFilterPackageButton()}
+        <Layout className="flex-direction-column">
+          {this.renderFilterAgreementButton()}
+          {this.renderFilterPackageButton()}
+        </Layout>
       </>
     );
   }

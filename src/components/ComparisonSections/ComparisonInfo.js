@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
 import {
   Button,
   Col,
@@ -12,7 +10,6 @@ import {
 
 import { FormattedMessage } from 'react-intl';
 import FormattedDateTime from '../FormattedDateTime';
-
 
 export default class ComparisonInfo extends React.Component {
   static propTypes = {

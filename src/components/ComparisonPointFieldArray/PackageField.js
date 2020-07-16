@@ -59,33 +59,31 @@ class PackageField extends React.Component {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
+            'buttonRef': this.triggerButton,
             'buttonStyle': value ? 'default' : 'primary',
             'id': `${this.props.id}-search-button`,
             'name': this.props.input.name,
             'onClick': props.onClick,
-            'buttonRef': this.triggerButton,
             'marginBottom0': true
           };
-          if (value) {
-            return (
-              <Tooltip
-                id={`${this.props.id}-package-button-tooltip`}
-                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.name }} />}
-                triggerRef={this.triggerButton}
-              >
-                {({ ariaIds }) => (
-                  <Button
-                    aria-labelledby={ariaIds.text}
-                    data-test-link-package
-                    {...buttonProps}
-                  >
-                    <FormattedMessage id="ui-erm-comparisons.newComparison.replacePackage" />
-                  </Button>
-                )}
-              </Tooltip>
-            );
-          }
-          return (
+
+          return value ? (
+            <Tooltip
+              id={`${this.props.id}-package-button-tooltip`}
+              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.name }} />}
+              triggerRef={this.triggerButton}
+            >
+              {({ ariaIds }) => (
+                <Button
+                  aria-labelledby={ariaIds.text}
+                  data-test-link-package
+                  {...buttonProps}
+                >
+                  <FormattedMessage id="ui-erm-comparisons.newComparison.replacePackage" />
+                </Button>
+              )}
+            </Tooltip>
+          ) : (
             <Button
               autoFocus
               data-test-link-package
@@ -111,16 +109,13 @@ class PackageField extends React.Component {
       <EntitlementAgreementsList
         data-test-package-entitlements
         entitlements={relevantEntitlements}
-        id="pci-agreements-list"
+        id="package-agreements-list"
       />
     );
   }
 
   renderPackage = () => {
-    const {
-      count,
-      provider
-    } = this.props.package;
+    const { package: { count, provider } } = this.props;
 
     return (
       <div data-test-package-card>
@@ -163,7 +158,7 @@ class PackageField extends React.Component {
   renderError = () => (
     <Layout className={`textCentered ${css.error}`}>
       <strong>
-        {this.props.meta.error}
+        {this.props.meta?.error}
       </strong>
     </Layout>
   )

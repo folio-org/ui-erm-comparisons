@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, AccordionSet, FilterAccordionHeader, Row } from '@folio/stripes/components';
+import { Accordion, AccordionSet, FilterAccordionHeader, Layout, Row } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
@@ -32,8 +32,8 @@ export default class ComparisonFilters extends React.Component {
     result: [],
     comparisonPointOne: [],
     comparisonPointTwo: [],
-    comparisonPointOneDisplayLabel: '',
-    comparisonPointTwoDisplayLabel: '',
+    comparisonPointOneValue: '',
+    comparisonPointTwoValue: '',
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -80,7 +80,7 @@ export default class ComparisonFilters extends React.Component {
     const groupFilters = activeFilters[name] || [];
 
     let disabled = false;
-    if (this.state[`${name}DisplayLabel`]) {
+    if (this.state[`${name}Value`]) {
       disabled = true;
     }
 
@@ -93,17 +93,15 @@ export default class ComparisonFilters extends React.Component {
         name={name}
         onClearFilter={() => {
           this.props.filterHandlers.clearGroup(name);
-          const newState = {};
-          newState[`${name}DisplayLabel`] = '';
-          this.setState(newState);
+          this.setState({ [`${name}Value`]: '' });
         }}
         separator={false}
         {...props}
       >
-        {this.state[`${name}DisplayLabel`] ?
-          <Row>
-            {this.state[`${name}DisplayLabel`]}
-          </Row> : null
+        {this.state[`${name}Value`] ?
+          <Layout className="padding-bottom-gutter">
+            {this.state[`${name}Value`]}
+          </Layout> : null
         }
         <Row>
           <ComparisonPointFilter
@@ -111,15 +109,11 @@ export default class ComparisonFilters extends React.Component {
             name={name}
             onAgreementSelected={(agreement) => {
               this.props.filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
-              const newState = {};
-              newState[`${name}DisplayLabel`] = agreement.name;
-              this.setState(newState);
+              this.setState({ [`${name}Value`] : agreement.name });
             }}
             onPackageSelected={(pkg) => {
               this.props.filterHandlers.state({ ...activeFilters, [name]: [pkg.id] });
-              const newState = {};
-              newState[`${name}DisplayLabel`] = pkg.name;
-              this.setState(newState);
+              this.setState({ [`${name}Value`]: pkg.name });
             }}
           />
         </Row>

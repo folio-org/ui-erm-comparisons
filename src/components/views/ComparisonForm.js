@@ -42,9 +42,16 @@ class ComparisonForm extends React.Component {
     })
   }
 
-  renderPaneFooter() {
-    const { handlers, handleSubmit, invalid, pristine, submitting, values } = this.props;
-    const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
+  shouldDisableAddNew({ agreements = [], packages = [] }, comparisonLimit) {
+    const agreementCount = agreements.filter(agreement => agreement._delete === false).length;
+    const packagesCount = packages.filter(pkg => pkg._delete === false).length;
+
+    return agreementCount + packagesCount === comparisonLimit;
+  }
+
+  renderPaneFooter(disableAddNew) {
+    const { handlers, handleSubmit, invalid, pristine, submitting } = this.props;
+
     const startButton = (
       <Button
         buttonStyle="default mega"
@@ -60,7 +67,7 @@ class ComparisonForm extends React.Component {
       <Button
         buttonStyle="primary mega"
         data-test-save-button
-        disabled={invalid || pristine || submitting || currentComparisons < 2}
+        disabled={invalid || pristine || submitting || !disableAddNew}
         marginBottom0
         onClick={handleSubmit}
         type="submit"
@@ -96,20 +103,19 @@ class ComparisonForm extends React.Component {
 
   render() {
     const { data: { entitlements }, values } = this.props;
-    const currentComparisons = (values?.agreements?.length || 0) + (values?.packages?.length || 0);
-
-    // The number of supported comparison points
     const comparisonLimit = 2;
+    const disableAddNew = this.shouldDisableAddNew(values, comparisonLimit);
+
     return (
       <Paneset>
         <FormattedMessage id="ui-erm-comparisons.create">
           {create => (
             <Pane
-              appIcon={<AppIcon app="local-kb-admin" />}
+              appIcon={<AppIcon app="erm-comparisons" />}
               centerContent
               defaultWidth="100%"
               firstMenu={this.renderFirstMenu()}
-              footer={this.renderPaneFooter()}
+              footer={this.renderPaneFooter(disableAddNew)}
               id="pane-comparison-form"
               paneTitle={<FormattedMessage id="ui-erm-comparisons.comparison.newComparison" />}
             >
@@ -120,7 +126,7 @@ class ComparisonForm extends React.Component {
               </Layout>
               <TitleManager record={create}>
                 <form>
-                  <Layout className="padding-top-gutter padding-bottom-gutter">
+                  <Layout className="padding-top-gutter">
                     <Field
                       component={TextField}
                       data-test-field-comparison-name
@@ -130,7 +136,7 @@ class ComparisonForm extends React.Component {
                       validate={requiredValidator}
                     />
                   </Layout>
-                  <Layout className="padding-top-gutter padding-bottom-gutter">
+                  <Layout className="padding-bottom-gutter">
                     <FieldArray
                       addButtonId="data-test-add-package-button"
                       addLabelId="ui-erm-comparisons.newComparison.addPackage"
@@ -139,7 +145,7 @@ class ComparisonForm extends React.Component {
                       data={{ entitlements }}
                       data-test-field-array-packages
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
-                      disableAddNew={currentComparisons >= comparisonLimit}
+                      disableAddNew={disableAddNew}
                       handlers={{
                         onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
                         onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
@@ -149,7 +155,7 @@ class ComparisonForm extends React.Component {
                       name="packages"
                     />
                   </Layout>
-                  <Layout className="padding-top-gutter padding-bottom-gutter">
+                  <Layout className="padding-bottom-gutter">
                     <FieldArray
                       addButtonId="data-test-add-agreement-button"
                       addLabelId="ui-erm-comparisons.newComparison.addAgreement"
@@ -157,7 +163,7 @@ class ComparisonForm extends React.Component {
                       component={ComparisonPointFieldArray}
                       data-test-field-array-agreements
                       deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
-                      disableAddNew={currentComparisons >= comparisonLimit}
+                      disableAddNew={disableAddNew}
                       headerId="ui-erm-comparisons.newComparison.agreementTitle"
                       id="comparison-point-form-agreements"
                       name="agreements"

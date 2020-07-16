@@ -47,7 +47,7 @@ import EntitlementAgreementsListInteractor from './entitlement-list';
   isOnDateFieldPresent = isPresent('#data-test-field-date-package');
   isEmptyPackageCardPresent = isPresent('[data-test-package-empty]');
   isPackageCardPresent = isPresent('[data-test-package-card]');
-  isEntitlementsTablePresent = isPresent('#pci-agreements-list')
+  isEntitlementsTablePresent = isPresent('#package-agreements-list')
   entitlements = new EntitlementAgreementsListInteractor();
   packageName = text('[data-test-package-name-link]');
   packageNameLink = clickable('[data-test-package-name-link]');

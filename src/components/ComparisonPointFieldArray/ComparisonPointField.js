@@ -13,19 +13,28 @@ class ComparisonPointField extends React.Component {
   }
 
   render() {
-    const { comparisonPoint, comparisonType, entitlements, onComparisonPointSelected, ...props } = this.props;
-    if (comparisonType === 'agreement') {
-      return (
-        <AgreementField agreement={comparisonPoint} onAgreementSelected={onComparisonPointSelected} {...props} />
-      );
-    } else if (comparisonType === 'package') {
-      return (
-        // Not sorting these props so they're the same as the above for clarity
-        // eslint-disable-next-line react/jsx-sort-props
-        <PackageField entitlements={entitlements} package={comparisonPoint} onPackageSelected={onComparisonPointSelected} {...props} />
-      );
-    }
-    return null;
+    const {
+      comparisonPoint,
+      comparisonType,
+      entitlements,
+      onComparisonPointSelected,
+      ...rest
+    } = this.props;
+
+    return comparisonType === 'agreement' ? (
+      <AgreementField
+        agreement={comparisonPoint}
+        onAgreementSelected={onComparisonPointSelected}
+        {...rest}
+      />
+    ) : (
+      <PackageField
+        entitlements={entitlements}
+        onPackageSelected={onComparisonPointSelected}
+        package={comparisonPoint}
+        {...rest}
+      />
+    );
   }
 }
 

@@ -150,7 +150,7 @@ export default class Comparisons extends React.Component {
   renderResultsLastMenu() {
     const { searchString } = this.props;
     return (
-      <IfPermission perm="ui-local-kb-admin.jobs.edit">
+      <IfPermission perm="ui-erm-comparisons.jobs.edit">
         <Button
           bottomMargin0
           buttonStyle="primary"
@@ -274,7 +274,7 @@ export default class Comparisons extends React.Component {
                       </form>
                     </Pane> }
                   <Pane
-                    appIcon={<AppIcon app="local-kb-admin" />}
+                    appIcon={<AppIcon app="erm-comparisons" />}
                     defaultWidth="fill"
                     firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     lastMenu={this.renderResultsLastMenu()}
