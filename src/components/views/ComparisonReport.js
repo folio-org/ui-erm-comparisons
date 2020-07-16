@@ -14,6 +14,10 @@ import ComparisonReportList from './ComparisonReportList';
 
 export default class ComparisonReport extends React.Component {
   static propTypes = {
+    data: PropTypes.shape({
+      comparisonPointData: PropTypes.object,
+    }),
+    isLoading: PropTypes.bool,
     onClose: PropTypes.func.isRequired
   }
 
@@ -43,13 +47,13 @@ export default class ComparisonReport extends React.Component {
 
     if (this.props.isLoading) return <LoadingPane data-loading {...paneProps} />;
 
-    const { comparisonPointData: { name } } = this.props.data;
+    const { comparisonPointData } = this.props.data;
 
     return (
       <Paneset>
         <Pane
           firstMenu={this.renderFirstMenu()}
-          paneTitle={name}
+          paneTitle={comparisonPointData?.name}
           {...paneProps}
         >
           <ComparisonReportList sourceData={this.props.data} />

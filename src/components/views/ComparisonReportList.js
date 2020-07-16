@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 import {
   InfoPopover,
   Layout,
@@ -226,5 +227,16 @@ const ComparisonReportList = ({ sourceData }) => {
     />
   );
 };
+
+ComparisonReportList.propTypes = {
+  sourceData: PropTypes.shape({
+    comparisonPointData: PropTypes.shape({
+      comparisonPoints: PropTypes.array,
+    }),
+
+  }),
+  report: PropTypes.arrayOf(PropTypes.object)
+};
+
 
 export default ComparisonReportList;
