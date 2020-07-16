@@ -233,9 +233,8 @@ ComparisonReportList.propTypes = {
     comparisonPointData: PropTypes.shape({
       comparisonPoints: PropTypes.array,
     }),
-
+    report: PropTypes.arrayOf(PropTypes.object)
   }),
-  report: PropTypes.arrayOf(PropTypes.object)
 };
 
 
