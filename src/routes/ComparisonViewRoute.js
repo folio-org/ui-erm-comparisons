@@ -6,7 +6,7 @@ import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import { ConfirmationModal } from '@folio/stripes/components';
 
-import ComparisonInfo from '../components/views/ComparisonInfo';
+import View from '../components/views/ComparisonView';
 
 class ComparisonViewRoute extends React.Component {
   static manifest = Object.freeze({
@@ -14,7 +14,7 @@ class ComparisonViewRoute extends React.Component {
       type: 'okapi',
       path: 'erm/jobs/:{id}',
       shouldRefresh: () => false,
-    },
+    }
   });
 
   static propTypes = {
@@ -28,6 +28,9 @@ class ComparisonViewRoute extends React.Component {
     }).isRequired,
     mutator: PropTypes.shape({
       comparison: PropTypes.object,
+      titleListQueryParams: PropTypes.shape({
+        update: PropTypes.func.isRequired,
+      })
     }).isRequired,
     resources: PropTypes.shape({
       comparison: PropTypes.object,
@@ -45,23 +48,27 @@ class ComparisonViewRoute extends React.Component {
     const { resources } = this.props;
     const comparison = resources?.comparison?.records?.[0] ?? {};
     const name = comparison?.name ?? '';
-    const comparisonClass = comparison?.class ?? '';
     this.props.mutator.comparison
       .DELETE(comparison)
       .then(() => {
         this.props.history.replace(
           {
-            pathname: '/local-kb-admin',
+            pathname: '/comparisons-erm',
             search: this.props.location.search,
           }
         );
-        this.context.sendCallout({ message: <SafeHTMLMessage id={`ui-local-kb-admin.job.deleted.success.${comparisonClass}`} values={{ name }} /> });
+        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.deleted.success" values={{ name }} /> });
       });
   };
 
   handleClose = () => {
-    this.props.history.push(`/local-kb-admin${this.props.location.search}`);
+    this.props.history.push(`/comparisons-erm${this.props.location.search}`);
   };
+
+  handleViewReport = () => {
+    const { history, location } = this.props;
+    history.push(`${location.pathname}/report${location.search}`);
+  }
 
   showDeleteConfirmationModal = () => this.setState({ showConfirmDelete: true });
 
@@ -71,30 +78,26 @@ class ComparisonViewRoute extends React.Component {
     const { resources } = this.props;
     const comparison = resources?.comparison?.records?.[0] ?? {};
     const name = comparison?.name ?? '';
-    const comparisonClass = comparison?.class ?? '';
 
-    let deleteMessageId = 'ui-local-kb-admin.job.delete.message';
-    let deleteHeadingId = 'ui-local-kb-admin.job.delete.heading';
 
-    if (comparisonClass !== '') {
-      deleteMessageId = `${deleteMessageId}.${comparisonClass}`;
-      deleteHeadingId = `${deleteHeadingId}.${comparisonClass}`;
-    }
+    const deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
+    const deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
 
     return (
       <>
-        <ComparisonInfo
+        <View
           data={{
             comparison
           }}
           isLoading={resources?.comparison?.isPending ?? true}
           onClose={this.handleClose}
           onDelete={this.showDeleteConfirmationModal}
+          onViewReport={this.handleViewReport}
         />
         {this.state.showConfirmDelete && (
           <ConfirmationModal
             buttonStyle="danger"
-            confirmLabel={<FormattedMessage id="ui-local-kb-admin.job.delete.confirmLabel" />}
+            confirmLabel={<FormattedMessage id="ui-erm-comparisons.comparison.delete.confirmLabel" />}
             heading={<FormattedMessage id={deleteHeadingId} />}
             id="delete-comparison-confirmation"
             message={<SafeHTMLMessage id={deleteMessageId} values={{ name }} />}

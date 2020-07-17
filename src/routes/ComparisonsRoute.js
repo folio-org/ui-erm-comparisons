@@ -16,16 +16,13 @@ class ComparisonsRoute extends React.Component {
       records: 'results',
       perRequest: RESULT_COUNT_INCREMENT,
       limitParam: 'perPage',
-      path: 'erm/jobs',
+      path: 'erm/jobs/type/comparison',
       params: getSASParams({
         searchKey: 'name',
-        filterConfig: [{
-          name: 'class',
-          values: [
-            { name: 'Harvester', value: 'org.olf.general.jobs.PackageIngestJob' },
-            { name: 'File import', value: 'org.olf.general.jobs.PackageImportJob' }
-          ],
-        }],
+        filterKeys: {
+          'comparisonPointOne': 'comparisonPoints.titleList.id',
+          'comparisonPointTwo': 'comparisonPoints.titleList.id'
+        }
       })
     },
     resultValues: {
@@ -91,7 +88,7 @@ class ComparisonsRoute extends React.Component {
 
       if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
         const record = newRecords[0];
-        history.push(`/local-kb-admin/${record.id}${location.search}`);
+        history.push(`/comparisons-erm/${record.id}${location.search}`);
       }
     }
   }

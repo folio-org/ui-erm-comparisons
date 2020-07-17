@@ -1,0 +1,58 @@
+@import "@folio/stripes-components/lib/variables.css";
+
+.nestedMcl {
+  & [role="row"] {
+    background: none;
+
+    & div {
+      background: none !important;
+    }
+  }
+
+  & div[role="gridcell"]:not(:empty) {
+    border-top: 1px solid var(--color-border-p2);
+  }
+}
+
+/* overlap column coloring classes */
+.none {
+  background-color: color(var(--error, #900));
+  color: var(--bg);
+  border-bottom: 1px solid var(--bg);
+}
+
+.partial {
+  background-color: color(var(--warn, #943e00));
+  color: var(--bg);
+  border-bottom: 1px solid var(--bg);
+}
+
+.full {
+  background-color: color(var(--success, #060));
+  color: var(--bg);
+  border-bottom: 1px solid var(--bg);
+}
+
+/* MCL header classes */
+.resourceA {
+  font-weight: var(--text-weight-regular);
+  justify-content: center;
+}
+
+.resourceB {
+  font-weight: var(--text-weight-regular);
+  justify-content: center;
+}
+
+.overlap {
+  justify-content: center;
+}
+
+.coverage {
+  justify-content: center;
+}
+
+/* info popover class */
+.titleInfoPopoverContent {
+  text-align: left;
+}

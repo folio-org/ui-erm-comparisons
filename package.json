@@ -1,9 +1,9 @@
 {
-  "name": "@folio/erm-comparison",
+  "name": "@folio/erm-comparisons",
   "version": "1.0.0",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
-  "repository": "folio-org/ui-erm-comparison",
+  "repository": "folio-org/ui-erm-comparisons",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
@@ -22,9 +22,9 @@
       "app",
       "settings"
     ],
-    "displayName": "ui-erm-comparison.meta.title",
-    "route": "/erm-comparison",
-    "home": "/erm-comparison",
+    "displayName": "ui-erm-comparisons.meta.title",
+    "route": "/comparisons-erm",
+    "home": "/comparisons-erm",
     "hasSettings": true,
     "queryResource": "query",
     "okapiInterfaces": {
@@ -47,24 +47,25 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.2.0",
-    "@folio/stripes": "^4.0.0",
+    "@folio/stripes": "^5.0.0",
     "@folio/stripes-cli": "^1.8.0",
     "babel-eslint": "^9.0.0",
-    "babel-polyfill": "^6.26.0",
+    "babel-polyfill": "6.26.0",
     "chai": "^4.2.0",
     "eslint": "^6.2.1",
-    "mocha": "^6.2.0",
+    "mocha": "^8.0.1",
+    "moment": "^2.22.2",
     "react": "^16.6.0",
-    "react-intl": "^4.5.1",
     "react-dom": "^16.6.0",
+    "react-intl": "^4.5.1",
     "react-redux": "^5.1.0",
-    "react-router-dom": "^4.1.1",
+    "react-router-dom": "^5.2.0",
     "redux": "^3.7.0",
-    "sinon": "^7.3.2"
+    "sinon": "^9.0.2"
   },
   "dependencies": {
-    "@folio/stripes-erm-components": "^3.0.0",
     "@folio/react-intl-safe-html": "^2.0.0",
+    "@folio/stripes-erm-components": "^3.0.0",
     "compose-function": "^3.0.3",
     "final-form": "^4.18.5",
     "final-form-arrays": "^3.0.1",
@@ -75,12 +76,54 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "@folio/stripes": "^4.0.0",
+    "moment": "^2.22.2",
+    "@folio/stripes": "^5.0.0",
     "react": "*",
     "react-dom": "*",
     "react-intl": "^4.5.1",
     "react-redux": "*",
-    "react-router-dom": "^4.1.1",
+    "react-router-dom": "^5.2.0",
     "redux": "*"
-  }
+  },
+  "permissionSets": [
+    {
+      "permissionName": "module.erm-comparisons.enabled",
+      "displayName": "UI: ui-erm-comparisons module is enabled"
+    },
+    {
+      "permissionName": "ui-erm-comparisons.jobs.view",
+      "displayName": "ERM comparisons: View jobs",
+      "visible": true,
+      "subPermissions": [
+        "module.erm-comparisons.enabled",
+        "erm.jobs.view",
+        "erm.refdata.view"
+      ]
+    },
+    {
+      "permissionName": "ui-erm-comparisons.jobs.edit",
+      "displayName": "ERM Comparisons: Create jobs",
+      "visible": true,
+      "subPermissions": [
+        "ui-erm-comparisons.jobs.view",
+        "erm.jobs.edit"
+      ]
+    },
+    {
+      "permissionName": "ui-erm-comparisons.jobs.delete",
+      "displayName": "ERM Comparisons: Delete jobs",
+      "visible": true,
+      "subPermissions": [
+        "ui-erm-comparisons.jobs.view",
+        "erm.jobs.item.delete"
+      ]
+    },
+    {
+      "permissionName": "settings.erm-comparisons.enabled",
+      "displayName": "Settings (ERM comparisons): display list of settings pages",
+      "subPermissions": [
+        "settings.enabled"
+      ]
+    }
+  ]
 }

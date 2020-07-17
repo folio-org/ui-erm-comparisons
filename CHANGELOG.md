@@ -1,3 +1,3 @@
-# Change history for ui-erm-comparison
+# Change history for ui-erm-comparisons
 
-## 1.0.0 First formal release 
+## 1.0.0 First formal release

@@ -7,8 +7,6 @@ import { AppIcon, IfPermission } from '@folio/stripes/core';
 
 import {
   Button,
-  Dropdown,
-  DropdownMenu,
   Icon,
   MultiColumnList,
   NoValue,
@@ -24,7 +22,7 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
-import ComparisonFilters from '../ComparisonFilters';
+import { ComparisonFilters } from '../ComparisonFilters';
 import FormattedDateTime from '../FormattedDateTime';
 import css from './Comparisons.css';
 
@@ -51,12 +49,12 @@ export default class Comparisons extends React.Component {
   }
 
   columnMapping = {
-    comparisonName: <FormattedMessage id="ui-local-kb-admin.prop.jobName" />,
-    runningStatus: <FormattedMessage id="ui-local-kb-admin.prop.runningStatus" />,
-    result: <FormattedMessage id="ui-local-kb-admin.prop.outcome" />,
-    errors: <FormattedMessage id="ui-local-kb-admin.prop.errors" />,
-    started: <FormattedMessage id="ui-local-kb-admin.prop.started" />,
-    ended: <FormattedMessage id="ui-local-kb-admin.prop.ended" />,
+    comparisonName: <FormattedMessage id="ui-erm-comparisons.prop.comparisonName" />,
+    runningStatus: <FormattedMessage id="ui-erm-comparisons.prop.runningStatus" />,
+    result: <FormattedMessage id="ui-erm-comparisons.prop.outcome" />,
+    errors: <FormattedMessage id="ui-erm-comparisons.prop.errors" />,
+    started: <FormattedMessage id="ui-erm-comparisons.prop.started" />,
+    ended: <FormattedMessage id="ui-erm-comparisons.prop.ended" />,
   }
 
   columnWidths = {
@@ -96,7 +94,7 @@ export default class Comparisons extends React.Component {
   }
 
   rowURL = (id) => {
-    return `/local-kb-admin/${id}${this.props.searchString}`;
+    return `/comparisons-erm/${id}${this.props.searchString}`;
   }
 
   toggleFilterPane = () => {
@@ -148,44 +146,18 @@ export default class Comparisons extends React.Component {
     );
   }
 
-  renderNewComparisonMenu = ({ onToggle }) => (
-    <DropdownMenu
-      data-role="menu"
-      onToggle={onToggle}
-    >
-      <FormattedMessage id="ui-local-kb-admin.job.newJob">
-        {() => (
-          <>
-            <Button
-              buttonStyle="dropdownItem"
-              id="clickable-new-JSON-job"
-              marginBottom0
-              to={`/local-kb-admin/create/JSON${this.props.searchString}`}
-            >
-              <FormattedMessage id="ui-local-kb-admin.job.JSONImportJob" />
-            </Button>
-            <Button
-              buttonStyle="dropdownItem"
-              id="clickable-new-KBART-job"
-              marginBottom0
-              to={`/local-kb-admin/create/KBART${this.props.searchString}`}
-            >
-              <FormattedMessage id="ui-local-kb-admin.job.KBARTImportJob" />
-            </Button>
-          </>
-        )}
-      </FormattedMessage>
-    </DropdownMenu>
-  );
 
   renderResultsLastMenu() {
+    const { searchString } = this.props;
     return (
-      <IfPermission perm="ui-local-kb-admin.jobs.edit">
-        <Dropdown
-          buttonProps={{ buttonStyle: 'primary' }}
-          label={<FormattedMessage id="ui-local-kb-admin.job.new" />}
-          renderMenu={this.renderNewComparisonMenu}
-        />
+      <IfPermission perm="ui-erm-comparisons.jobs.edit">
+        <Button
+          bottomMargin0
+          buttonStyle="primary"
+          to={`/comparisons-erm/create${searchString}`}
+        >
+          <FormattedMessage id="ui-erm-comparisons.comparison.new" />
+        </Button>
       </IfPermission>
     );
   }
@@ -217,7 +189,7 @@ export default class Comparisons extends React.Component {
     const visibleColumns = ['comparisonName', 'runningStatus', 'result', 'errors', 'started', 'ended'];
 
     return (
-      <div ref={contentRef} data-test-localkbadmin>
+      <div ref={contentRef} data-test-ermcomparisons>
         <SearchAndSortQuery
           initialFilterState={{ status: ['Queued', 'In progress'] }}
           initialSearchState={{ query: '' }}
@@ -240,7 +212,7 @@ export default class Comparisons extends React.Component {
               const disableReset = () => (!filterChanged && !searchChanged);
 
               return (
-                <Paneset id="local-kb-admin-paneset">
+                <Paneset id="erm-comparisons-paneset">
                   {this.state.filterPaneIsVisible &&
                     <Pane
                       defaultWidth="20%"
@@ -250,14 +222,14 @@ export default class Comparisons extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {/* TODO: Use forthcoming <SearchGroup> or similar component */}
                         <div className={css.searchGroupWrap}>
-                          <FormattedMessage id="ui-local-kb-admin.searchInputLabel">
+                          <FormattedMessage id="ui-erm-comparisons.searchInputLabel">
                             {ariaLabel => (
                               <SearchField
                                 aria-label={ariaLabel}
                                 autoFocus
                                 className={css.searchField}
-                                data-test-local-kb-admin-search-input
-                                id="input-local-kb-admin-search"
+                                data-test-erm-comparisons-search-input
+                                id="input-erm-comparisons-search"
                                 inputRef={this.searchField}
                                 marginBottom0
                                 name="query"
@@ -302,14 +274,14 @@ export default class Comparisons extends React.Component {
                       </form>
                     </Pane> }
                   <Pane
-                    appIcon={<AppIcon app="local-kb-admin" />}
+                    appIcon={<AppIcon app="erm-comparisons" />}
                     defaultWidth="fill"
                     firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     lastMenu={this.renderResultsLastMenu()}
                     noOverflow
                     padContent={false}
                     paneSub={this.renderResultsPaneSubtitle(source)}
-                    paneTitle={<FormattedMessage id="ui-erm-comparison.meta.title" />}
+                    paneTitle={<FormattedMessage id="ui-erm-comparisons.meta.title" />}
                   >
                     <MultiColumnList
                       autosize
