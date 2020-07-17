@@ -43,7 +43,6 @@
   },
   "devDependencies": {
     "@bigtest/interactor": "^0.9.2",
-    "@bigtest/mirage": "^0.0.1",
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.2.0",
@@ -53,6 +52,9 @@
     "babel-polyfill": "6.26.0",
     "chai": "^4.2.0",
     "eslint": "^6.2.1",
+    "faker": "^4.1.0",
+    "inflected": "^2.0.4",
+    "miragejs": "^0.1.40",
     "mocha": "^8.0.1",
     "moment": "^2.22.2",
     "react": "^16.6.0",
@@ -76,8 +78,8 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "moment": "^2.22.2",
     "@folio/stripes": "^5.0.0",
+    "moment": "^2.22.2",
     "react": "*",
     "react-dom": "*",
     "react-intl": "^4.5.1",
