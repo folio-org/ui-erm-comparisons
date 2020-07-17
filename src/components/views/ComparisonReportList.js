@@ -237,5 +237,4 @@ ComparisonReportList.propTypes = {
   }),
 };
 
-
 export default ComparisonReportList;
