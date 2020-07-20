@@ -41,6 +41,8 @@
   "prop.status": "Running status",
   "prop.viewReport": "View comparison report",
   "prop.comparisonPoints": "Comparison points",
+  "prop.comparisonPointOne": "Comparison point 1",
+  "prop.comparisonPointTwo": "Comparison point 2",
   "prop.noComparisonPoints": "No comparison points",
 
   "source": "Source",
