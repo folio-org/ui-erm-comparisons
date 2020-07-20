@@ -28,6 +28,7 @@ const ComparisonReportList = ({ sourceData }) => {
   const [comparisonResourceA, comparisonResourceB] = comparisonPoints;
 
   const getCoverage = (statements, embargo) => {
+    if (!statements.length && !embargo) return null;
     return (
       <Layout className="full" data-test-coverage>
         <SerialCoverage statements={statements} />
@@ -54,8 +55,8 @@ const ComparisonReportList = ({ sourceData }) => {
         title: 400,
         availableVia: 400,
         coverage: 300,
-        resourceA: 250,
-        resourceB: 250,
+        resourceA: 300,
+        resourceB: 300,
         overlap: 120
       }}
       contentData={report}
@@ -122,8 +123,8 @@ const ComparisonReportList = ({ sourceData }) => {
                   columnWidths={{
                     availableVia: 400,
                     coverage: 300,
-                    resourceA: 250,
-                    resourceB: 250,
+                    resourceA: 300,
+                    resourceB: 300,
                   }}
                   contentData={Object.values(rowData.availability)}
                   formatter={{
@@ -170,8 +171,8 @@ const ComparisonReportList = ({ sourceData }) => {
                             <MultiColumnList
                               columnWidths={{
                                 coverage: 300,
-                                resourceA: 250,
-                                resourceB: 250,
+                                resourceA: 300,
+                                resourceB: 300,
                               }}
                               contentData={Object.values(rowData.coverage)}
                               formatter={{
