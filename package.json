@@ -1,6 +1,6 @@
 {
   "name": "@folio/erm-comparisons",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
   "repository": "folio-org/ui-erm-comparisons",
@@ -38,6 +38,47 @@
         "name": "app",
         "alt": "ERM: Comparison App for Stripes",
         "title": "ERMComparison"
+      }
+    ],
+    "permissionSets": [
+      {
+        "permissionName": "module.erm-comparisons.enabled",
+        "displayName": "UI: ui-erm-comparisons module is enabled"
+      },
+      {
+        "permissionName": "ui-erm-comparisons.jobs.view",
+        "displayName": "ERM comparisons: View jobs",
+        "visible": true,
+        "subPermissions": [
+          "module.erm-comparisons.enabled",
+          "erm.jobs.view",
+          "erm.refdata.view"
+        ]
+      },
+      {
+        "permissionName": "ui-erm-comparisons.jobs.edit",
+        "displayName": "ERM Comparisons: Create jobs",
+        "visible": true,
+        "subPermissions": [
+          "ui-erm-comparisons.jobs.view",
+          "erm.jobs.edit"
+        ]
+      },
+      {
+        "permissionName": "ui-erm-comparisons.jobs.delete",
+        "displayName": "ERM Comparisons: Delete jobs",
+        "visible": true,
+        "subPermissions": [
+          "ui-erm-comparisons.jobs.view",
+          "erm.jobs.item.delete"
+        ]
+      },
+      {
+        "permissionName": "settings.erm-comparisons.enabled",
+        "displayName": "Settings (ERM comparisons): display list of settings pages",
+        "subPermissions": [
+          "settings.enabled"
+        ]
       }
     ]
   },
@@ -84,46 +125,5 @@
     "react-redux": "*",
     "react-router-dom": "^5.2.0",
     "redux": "*"
-  },
-  "permissionSets": [
-    {
-      "permissionName": "module.erm-comparisons.enabled",
-      "displayName": "UI: ui-erm-comparisons module is enabled"
-    },
-    {
-      "permissionName": "ui-erm-comparisons.jobs.view",
-      "displayName": "ERM comparisons: View jobs",
-      "visible": true,
-      "subPermissions": [
-        "module.erm-comparisons.enabled",
-        "erm.jobs.view",
-        "erm.refdata.view"
-      ]
-    },
-    {
-      "permissionName": "ui-erm-comparisons.jobs.edit",
-      "displayName": "ERM Comparisons: Create jobs",
-      "visible": true,
-      "subPermissions": [
-        "ui-erm-comparisons.jobs.view",
-        "erm.jobs.edit"
-      ]
-    },
-    {
-      "permissionName": "ui-erm-comparisons.jobs.delete",
-      "displayName": "ERM Comparisons: Delete jobs",
-      "visible": true,
-      "subPermissions": [
-        "ui-erm-comparisons.jobs.view",
-        "erm.jobs.item.delete"
-      ]
-    },
-    {
-      "permissionName": "settings.erm-comparisons.enabled",
-      "displayName": "Settings (ERM comparisons): display list of settings pages",
-      "subPermissions": [
-        "settings.enabled"
-      ]
-    }
-  ]
+  }
 }
