@@ -13,25 +13,26 @@ export default class ComparisonPoints extends React.Component {
       comparisonPoints: PropTypes.arrayOf(PropTypes.shape({
         titleList: PropTypes.shape({
           name: PropTypes.string.isRequired
-        }).isRequired
-      })).isRequired,
-    }),
+        })
+      })),
+    }).isRequired,
     id: PropTypes.string.isRequired
   };
 
   render() {
-    const { comparison, id } = this.props;
+    const { comparison: { comparisonPoints = [] }, id } = this.props;
+
     return (
       <Accordion
-        displayWhenClosed={<Badge>{comparison.comparisonPoints?.length}</Badge>}
-        displayWhenOpen={<Badge>{comparison.comparisonPoints?.length}</Badge>}
+        displayWhenClosed={<Badge>{comparisonPoints?.length}</Badge>}
+        displayWhenOpen={<Badge>{comparisonPoints?.length}</Badge>}
         id={id}
         label={<FormattedMessage id="ui-erm-comparisons.prop.comparisonPoints" />}
       >
         <ul
           data-test-comparison-points-list
         >
-          {comparison?.comparisonPoints?.map((cp, index) => (
+          {comparisonPoints?.map((cp, index) => (
             <li
               key={`comparison-point${index}`}
               id="comparison-point"

@@ -5,7 +5,7 @@ import { Accordion, Badge } from '@folio/stripes/components';
 
 import ComparisonLogContainer from '../../containers/ComparisonLogContainer';
 
-export default class LogsList extends React.Component {
+export default class Logs extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     comparison: PropTypes.object,

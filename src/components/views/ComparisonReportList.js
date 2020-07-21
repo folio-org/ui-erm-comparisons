@@ -7,9 +7,12 @@ import {
   MultiColumnList,
 } from '@folio/stripes/components';
 
-import { Embargo } from '@folio/stripes-erm-components';
-import PlatformTitleLink from '../PlatformTitleLink';
-import SerialCoverage from '../SerialCoverage';
+import {
+  Embargo,
+  SerialCoverage,
+  TitleOnPlatformLink
+} from '@folio/stripes-erm-components';
+
 import TitleInfoPopover from '../TitleInfoPopover';
 import {
   getResourceProperties,
@@ -135,10 +138,10 @@ const ComparisonReportList = ({ sourceData }) => {
                       const { platform, url } = r;
 
                       return (
-                        <PlatformTitleLink
+                        <TitleOnPlatformLink
                           id={id}
+                          name={name}
                           platform={platform}
-                          title={name}
                           url={url}
                         />
                       );
