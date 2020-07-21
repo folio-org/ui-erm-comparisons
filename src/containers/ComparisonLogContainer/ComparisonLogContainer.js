@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LogsList from '../../components/LogsList';
+import { LogsList } from '@folio/stripes-erm-components';
 import { resultCount } from '../../constants';
 
 export default class ComparisonLogContainer extends React.Component {
@@ -66,7 +66,7 @@ export default class ComparisonLogContainer extends React.Component {
   }
 
   render() {
-    const { resources, ...rest } = this.props;
+    const { comparison, resources, ...rest } = this.props;
 
     const records = this.getLogRecords();
     const isPending = resources.logs?.isPending ?? true;
@@ -79,6 +79,7 @@ export default class ComparisonLogContainer extends React.Component {
 
     return (
       <LogsList
+        job={comparison}
         logs={logs}
         onNeedMoreLogs={this.handleNeedMoreLogs}
         {...rest}

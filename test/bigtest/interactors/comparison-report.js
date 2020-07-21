@@ -11,7 +11,7 @@ import {
 }
 
 @interactor class availabilityMCLRowsInteractor {
-  platform = text('[data-test-platform]');
+  platform = text('[data-test-platform-name]');
 }
 
 @interactor class coverageMCLRowsInteractor {
