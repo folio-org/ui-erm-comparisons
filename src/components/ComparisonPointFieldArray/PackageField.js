@@ -120,14 +120,14 @@ class PackageField extends React.Component {
     return (
       <div data-test-package-card>
         <Row>
-          <Col xs={6}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.count" />}>
               <span data-test-package-count>
                 {count || <NoValue />}
               </span>
             </KeyValue>
           </Col>
-          <Col xs={6}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.provider" />}>
               <span data-test-package-provider>
                 {provider}
@@ -136,7 +136,9 @@ class PackageField extends React.Component {
           </Col>
         </Row>
         <Row>
-          {this.renderEntitlementAgreements()}
+          <Col xs={12}>
+            {this.renderEntitlementAgreements()}
+          </Col>
         </Row>
       </div>
     );
