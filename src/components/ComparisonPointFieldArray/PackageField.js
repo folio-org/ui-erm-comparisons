@@ -106,11 +106,13 @@ class PackageField extends React.Component {
     const relevantEntitlements = entitlements[id] || [];
 
     return (
-      <EntitlementAgreementsList
-        data-test-package-entitlements
-        entitlements={relevantEntitlements}
-        id="package-agreements-list"
-      />
+      <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.packageAgreements" />}>
+        <EntitlementAgreementsList
+          data-test-package-entitlements
+          entitlements={relevantEntitlements}
+          id="package-agreements-list"
+        />
+      </KeyValue>
     );
   }
 

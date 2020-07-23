@@ -106,6 +106,7 @@
   "newComparison.noPackagePlugin": "No \"find-package\" plugin is installed",
   "newComparison.replacePackage": "Replace package",
   "newComparison.replacePackageSpecific": "Replace package {package}",
+  "newComparison.packageAgreements": "Agreements for this package",
   "agreements.name": "Name",
   "agreements.agreementStatus": "Status",
   "agreementPeriods.periodStart": "Period start",
