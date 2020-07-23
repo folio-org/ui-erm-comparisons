@@ -38,6 +38,11 @@
         "name": "app",
         "alt": "ERM: Comparison App for Stripes",
         "title": "ERMComparison"
+      },
+      {
+        "name": "eresource",
+        "alt": "ERM: EResource",
+        "title": "EResource"
       }
     ],
     "permissionSets": [

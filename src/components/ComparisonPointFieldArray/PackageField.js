@@ -190,7 +190,7 @@ class PackageField extends React.Component {
         cardStyle={pkg ? 'positive' : 'negative'}
         headerEnd={this.renderLinkPackageButton(pkg)}
         headerStart={
-          <AppIcon app="agreements" size="small">
+          <AppIcon app="erm-comparisons" iconKey="eresource" size="small">
             <strong>
               {pkg ?
                 <Link
