@@ -89,7 +89,7 @@ class PackageField extends React.Component {
               data-test-link-package
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />
+              <FormattedMessage id="ui-erm-comparisons.newComparison.linkPackage" />
             </Button>
           );
         }}

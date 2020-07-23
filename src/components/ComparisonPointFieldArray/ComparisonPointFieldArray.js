@@ -3,7 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Button, Datepicker } from '@folio/stripes/components';
+import { Button, Col, Datepicker, Row } from '@folio/stripes/components';
 
 import { EditCard, withKiwtFieldArray } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
@@ -100,15 +100,19 @@ class ComparisonPointFieldArray extends React.Component {
             name={`${name}[${index}]`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
           />
-          <Field
-            component={Datepicker}
-            defaultValue={this.state.currentDate}
-            id={`data-test-field-date-${comparisonType}`}
-            index={index}
-            label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
-            name={`${name}[${index}].onDate`}
-            parser={this.parseDateOnlyString}
-          />
+          <Row>
+            <Col xs={3}>
+              <Field
+                component={Datepicker}
+                defaultValue={this.state.currentDate}
+                id={`data-test-field-date-${comparisonType}`}
+                index={index}
+                label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
+                name={`${name}[${index}].onDate`}
+                parser={this.parseDateOnlyString}
+              />
+            </Col>
+          </Row>
         </EditCard>
       );
     });
