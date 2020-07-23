@@ -27,6 +27,7 @@ class ComparisonCreateRoute extends React.Component {
       fetch: false,
       path: 'erm/jobs/comparison',
       shouldRefresh: () => false,
+      throwErrors: false,
       type: 'okapi',
     },
   });
@@ -166,6 +167,21 @@ class ComparisonCreateRoute extends React.Component {
 
         history.push(`/comparisons-erm/${comparisonId}${location.search}`);
         this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.success" values={{ name }} /> });
+      })
+      .catch(response => {
+        response.json()
+          .then(error => {
+            if (error.errors.some(err => (
+              err?.message.includes('Property [titleList] of class [class org.olf.erm.ComparisonPoint] cannot be null')))
+            ) {
+              this.context.sendCallout({ type: 'error', message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.error.noComparisonLinked" /> });
+            } else {
+              error.errors.forEach(err => (
+                this.context.sendCallout({ type: 'error', message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.error.generalError" values={{ err: err.message }} /> })
+              ));
+            }
+          })
+          .catch(() => this.context.sendCallout({ type: 'error', message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.error.unknownError" /> }));
       });
   }
 

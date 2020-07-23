@@ -28,7 +28,7 @@ class PackageField extends React.Component {
       value: PropTypes.object
     }).isRequired,
     meta: PropTypes.shape({
-      error: PropTypes.bool,
+      error: PropTypes.object,
       touched: PropTypes.bool
     }),
     onPackageSelected: PropTypes.func.isRequired,
@@ -155,19 +155,25 @@ class PackageField extends React.Component {
     </div>
   )
 
-  renderError = () => (
-    <Layout className={`textCentered ${css.error}`}>
-      <strong>
-        {this.props.meta?.error}
-      </strong>
-    </Layout>
-  )
+  renderError = () => {
+    const { input: { name }, meta: { error } } = this.props;
+    return (
+      <Layout className={`textCentered ${css.error}`}>
+        <strong>
+          {error?.[name]}
+        </strong>
+      </Layout>
+    );
+  }
 
   render() {
     const {
       id,
+      input: { name },
       meta: { error, touched }
     } = this.props;
+
+    const relevantError = error?.[name];
 
     // If no package has been selected, then the passed package will be {}. We want that to be null
     let pkg = null;
@@ -198,7 +204,7 @@ class PackageField extends React.Component {
         roundedBorder
       >
         {pkg ? this.renderPackage() : this.renderEmpty()}
-        {touched && error ? this.renderError() : null}
+        {touched && relevantError ? this.renderError() : null}
       </Card>
     );
   }

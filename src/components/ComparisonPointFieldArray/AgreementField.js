@@ -32,7 +32,7 @@ class AgreementField extends React.Component {
       value: PropTypes.object
     }).isRequired,
     meta: PropTypes.shape({
-      error: PropTypes.bool,
+      error: PropTypes.object,
       touched: PropTypes.bool
     }),
     onAgreementSelected: PropTypes.func.isRequired,
@@ -159,19 +159,25 @@ class AgreementField extends React.Component {
     </div>
   )
 
-  renderError = () => (
-    <Layout className={`textCentered ${css.error}`}>
-      <strong>
-        {this.props.meta.error}
-      </strong>
-    </Layout>
-  )
+  renderError = () => {
+    const { input: { name }, meta: { error } } = this.props;
+    return (
+      <Layout className={`textCentered ${css.error}`}>
+        <strong>
+          {error?.[name]}
+        </strong>
+      </Layout>
+    );
+  }
 
   render() {
     const {
       id,
+      input: { name },
       meta: { error, touched }
     } = this.props;
+
+    const relevantError = error?.[name];
 
     // If no agreement has been selected, then the passed agreement will be {}. We want that to be null
     let agreement = null;
@@ -202,7 +208,7 @@ class AgreementField extends React.Component {
         roundedBorder
       >
         {agreement ? this.renderAgreement() : this.renderEmpty()}
-        {touched && error ? this.renderError() : null}
+        {touched && relevantError ? this.renderError() : null}
       </Card>
     );
   }

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Button, Col, Datepicker, Row } from '@folio/stripes/components';
 
-import { EditCard, withKiwtFieldArray } from '@folio/stripes-erm-components';
+import { EditCard, requiredValidator, withKiwtFieldArray } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
 class ComparisonPointFieldArray extends React.Component {
@@ -21,7 +21,7 @@ class ComparisonPointFieldArray extends React.Component {
     handlers: PropTypes.shape({
       onEResourceAdded: PropTypes.func.isRequired,
       onEResourceRemoved: PropTypes.func.isRequired
-    }).isRequired,
+    }),
     headerId: PropTypes.string,
     id: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object),
@@ -110,6 +110,8 @@ class ComparisonPointFieldArray extends React.Component {
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
                 name={`${name}[${index}].onDate`}
                 parser={this.parseDateOnlyString}
+                required
+                validate={requiredValidator}
               />
             </Col>
           </Row>
