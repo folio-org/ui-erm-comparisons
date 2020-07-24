@@ -53,7 +53,8 @@ class PackageField extends React.Component {
   }
 
   renderLinkPackageButton = value => {
-    const { id, input: { name }, onPackageSelected, package: { comparisonPoint: { name: cpName } } } = this.props;
+    const { id, input: { name }, onPackageSelected, package: { comparisonPoint } } = this.props;
+    const cpName = comparisonPoint ? comparisonPoint?.name : '';
     return (
       <Pluggable
         dataKey="package"

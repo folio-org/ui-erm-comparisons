@@ -51,7 +51,8 @@ class AgreementField extends React.Component {
   }
 
   renderLinkAgreementButton = value => {
-    const { agreement: { comparisonPoint: { name: cpName } }, id, input: { name }, onAgreementSelected } = this.props;
+    const { agreement: { comparisonPoint }, id, input: { name }, onAgreementSelected } = this.props;
+    const cpName = comparisonPoint ? comparisonPoint?.name : '';
     return (
       <Pluggable
         dataKey="agreement"
