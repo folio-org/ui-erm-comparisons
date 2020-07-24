@@ -20,11 +20,13 @@ import css from './styles.css';
 class AgreementField extends React.Component {
   static propTypes = {
     agreement: PropTypes.shape({
-      endDate: PropTypes.string,
-      name: PropTypes.string,
-      reasonForClosure: PropTypes.string,
-      startDate: PropTypes.string,
-      status: PropTypes.string,
+      comparisonPoint: PropTypes.shape({
+        endDate: PropTypes.string,
+        name: PropTypes.string,
+        reasonForClosure: PropTypes.string,
+        startDate: PropTypes.string,
+        status: PropTypes.string,
+      })
     }),
     id: PropTypes.string,
     input: PropTypes.shape({
@@ -68,7 +70,7 @@ class AgreementField extends React.Component {
             return (
               <Tooltip
                 id={`${this.props.id}-agreement-button-tooltip`}
-                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.name }} />}
+                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.comparisonPoint.name }} />}
                 triggerRef={this.triggerButton}
               >
                 {({ ariaIds }) => (
@@ -101,12 +103,12 @@ class AgreementField extends React.Component {
   }
 
   renderAgreement = () => {
-    const {
+    const { agreement: { comparisonPoint: {
       endDate,
       reasonForClosure,
       startDate,
       status
-    } = this.props.agreement;
+    } } } = this.props;
 
     return (
       <div data-test-agreement-card>
@@ -178,8 +180,8 @@ class AgreementField extends React.Component {
 
     // If no agreement has been selected, then the passed agreement will be {}. We want that to be null
     let agreement = null;
-    if (this.props.agreement?.id) {
-      agreement = this.props.agreement;
+    if (this.props.agreement?.comparisonPoint?.id) {
+      agreement = this.props.agreement.comparisonPoint;
     }
 
     return (

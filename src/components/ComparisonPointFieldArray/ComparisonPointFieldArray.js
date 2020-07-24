@@ -38,20 +38,24 @@ class ComparisonPointFieldArray extends React.Component {
   handleComparisonPointSelected = (index, comparisonPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
       this.handleUpdateField(index, {
-        id: comparisonPoint.id,
-        name: comparisonPoint.name,
-        reasonForClosure: comparisonPoint.reasonForClosure?.label,
-        startDate: comparisonPoint.startDate,
-        status: comparisonPoint.agreementStatus?.label,
-        endDate: comparisonPoint.endDate
+        'comparisonPoint': {
+          id: comparisonPoint.id,
+          name: comparisonPoint.name,
+          reasonForClosure: comparisonPoint.reasonForClosure?.label,
+          startDate: comparisonPoint.startDate,
+          status: comparisonPoint.agreementStatus?.label,
+          endDate: comparisonPoint.endDate
+        }
       });
     } else if (comparisonType === 'package') {
       this.props.handlers.onEResourceAdded(comparisonPoint.id);
       this.handleUpdateField(index, {
-        id: comparisonPoint.id,
-        name: comparisonPoint.name,
-        count: comparisonPoint._object?.resourceCount,
-        provider: comparisonPoint._object?.vendor?.name
+        'comparisonPoint': {
+          id: comparisonPoint.id,
+          name: comparisonPoint.name,
+          count: comparisonPoint._object?.resourceCount,
+          provider: comparisonPoint._object?.vendor?.name
+        }
       }, true);
     }
   }
@@ -61,8 +65,8 @@ class ComparisonPointFieldArray extends React.Component {
 
     if (updateEntitlementQuery) {
       // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
-      const removedId = items?.[index]?.id;
-      const addedId = field?.id;
+      const removedId = items?.[index]?.comparisonPoint?.id;
+      const addedId = field?.comparisonPoint?.id;
       if (removedId) {
         handlers.onEResourceRemoved(removedId);
       }

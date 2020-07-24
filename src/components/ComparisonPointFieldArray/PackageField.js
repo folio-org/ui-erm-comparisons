@@ -33,10 +33,12 @@ class PackageField extends React.Component {
     }),
     onPackageSelected: PropTypes.func.isRequired,
     package: PropTypes.shape({
-      count: PropTypes.number,
-      id: PropTypes.string,
-      name: PropTypes.string,
-      provider: PropTypes.string,
+      comparisonPoint: PropTypes.shape({
+        count: PropTypes.number,
+        id: PropTypes.string,
+        name: PropTypes.string,
+        provider: PropTypes.string,
+      })
     }),
   }
 
@@ -70,7 +72,7 @@ class PackageField extends React.Component {
           return value ? (
             <Tooltip
               id={`${this.props.id}-package-button-tooltip`}
-              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.name }} />}
+              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.comparisonPoint.name }} />}
               triggerRef={this.triggerButton}
             >
               {({ ariaIds }) => (
@@ -102,7 +104,7 @@ class PackageField extends React.Component {
   }
 
   renderEntitlementAgreements = () => {
-    const { entitlements, package: { id } } = this.props;
+    const { entitlements, package: { comparisonPoint: { id } } } = this.props;
     const relevantEntitlements = entitlements[id] || [];
 
     return (
@@ -117,7 +119,7 @@ class PackageField extends React.Component {
   }
 
   renderPackage = () => {
-    const { package: { count, provider } } = this.props;
+    const { package: { comparisonPoint: { count, provider } } } = this.props;
 
     return (
       <div data-test-package-card>
@@ -179,8 +181,8 @@ class PackageField extends React.Component {
 
     // If no package has been selected, then the passed package will be {}. We want that to be null
     let pkg = null;
-    if (this.props.package?.id) {
-      pkg = this.props.package;
+    if (this.props.package?.comparisonPoint?.id) {
+      pkg = this.props.package.comparisonPoint;
     }
 
     return (

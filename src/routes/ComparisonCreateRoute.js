@@ -144,7 +144,7 @@ class ComparisonCreateRoute extends React.Component {
   returnIdAndOnDate(valuesArray = []) {
     const newValues = [];
     valuesArray.forEach(obj => {
-      newValues.push({ titleList: obj.id, date: obj.onDate });
+      newValues.push({ titleList: obj.comparisonPoint?.id, date: obj.onDate });
     });
     return newValues;
   }
