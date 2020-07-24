@@ -36,9 +36,11 @@ const ComparisonReportList = ({ sourceData }) => {
     return (
       <Layout className="full" data-test-coverage>
         <SerialCoverage statements={statements} />
-        <Layout className="padding-top-gutter">
-          <Embargo embargo={embargo} />
-        </Layout>
+        {embargo &&
+          <Layout className="padding-top-gutter">
+            <Embargo embargo={embargo} />
+          </Layout>
+        }
       </Layout>
     );
   };
@@ -162,13 +164,6 @@ const ComparisonReportList = ({ sourceData }) => {
                     },
                     coverage: () => true
                   }}
-                  getCellClass={(defaultClass, _, column) => {
-                    if (column === 'availableVia') {
-                      return `${defaultClass} ${css.availableViaCell}`;
-                    }
-
-                    return defaultClass;
-                  }}
                   headerRowClass="sr-only"
                   id={`availability-mcl-${rowData.id}`}
                   interactive={interactive}
@@ -207,13 +202,6 @@ const ComparisonReportList = ({ sourceData }) => {
                                 },
                                 resourceA: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceA)),
                                 resourceB: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceB))
-                              }}
-                              getCellClass={(defaultClass, _, column) => {
-                                if (column === 'coverage') {
-                                  return `${defaultClass} ${css.coverageCell}`;
-                                }
-
-                                return defaultClass;
                               }}
                               headerRowClass="sr-only"
                               id={uniqueId('coverage-mcl')}
