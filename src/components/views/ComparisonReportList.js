@@ -7,6 +7,7 @@ import {
   Layout,
   MultiColumnList,
 } from '@folio/stripes/components';
+import SafeHTMLMessage from '@folio/react-intl-safe-html';
 
 import {
   Embargo,
@@ -81,9 +82,16 @@ const ComparisonReportList = ({ sourceData }) => {
           );
         },
         overlap: r => {
+          const { overlap } = r;
           return (
             <Layout className="centered" data-test-overlap>
-              <strong>{r.overlap}</strong>
+              <strong>
+                <FormattedMessage
+                  id="ui-erm-comparisons.comparisonReport.overlapType"
+                  values={{ overlap }}
+                />
+              </strong>
+
             </Layout>
           );
         },
