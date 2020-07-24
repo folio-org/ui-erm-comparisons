@@ -179,7 +179,7 @@ class ComparisonCreateRoute extends React.Component {
 
     return mutator.comparisons
       .POST({
-        name: comparison.name,
+        name,
         comparisonPoints: this.getComparisonPointsData(comparison)
       })
       .then(({ id }) => {
