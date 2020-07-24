@@ -8,7 +8,7 @@ import {
 import { expect } from 'chai';
 
 import { StaticRouter as Router } from 'react-router-dom';
-import { mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
+import { mountWithContext } from '../helpers/mountWithContext';
 
 import { ComparisonPoints } from '../../../src/components/ComparisonSections';
 import ComparisonPointsInteractor from '../interactors/comparison-points';

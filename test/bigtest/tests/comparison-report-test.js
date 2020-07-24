@@ -6,7 +6,7 @@ import {
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-import { mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
+import { mountWithContext } from '../helpers/mountWithContext';
 import ComparisonReportInteractor from '../interactors/comparison-report';
 
 import ComparisonReportList from '../../../src/components/views/ComparisonReportList';
