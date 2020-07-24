@@ -160,11 +160,11 @@ class PackageField extends React.Component {
   )
 
   renderError = () => {
-    const { input: { name }, meta: { error } } = this.props;
+    const { meta: { error } } = this.props;
     return (
       <Layout className={`textCentered ${css.error}`}>
         <strong>
-          {error?.[name]}
+          {error}
         </strong>
       </Layout>
     );
@@ -173,11 +173,9 @@ class PackageField extends React.Component {
   render() {
     const {
       id,
-      input: { name },
       meta: { error, touched }
     } = this.props;
 
-    const relevantError = error?.[name];
 
     // If no package has been selected, then the passed package will be {}. We want that to be null
     let pkg = null;
@@ -208,7 +206,7 @@ class PackageField extends React.Component {
         roundedBorder
       >
         {pkg ? this.renderPackage() : this.renderEmpty()}
-        {touched && relevantError ? this.renderError() : null}
+        {touched && error ? this.renderError() : null}
       </Card>
     );
   }

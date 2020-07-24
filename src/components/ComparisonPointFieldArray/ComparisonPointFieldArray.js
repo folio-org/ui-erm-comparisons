@@ -95,8 +95,10 @@ class ComparisonPointFieldArray extends React.Component {
             entitlements={data?.entitlements}
             id={`data-test-field-comparison-point-${comparisonType}`}
             index={index}
-            name={`${name}[${index}]`}
+            name={`${name}[${index}].comparisonPoint`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
+            required
+            validate={requiredValidator}
           />
           <Row>
             <Col xs={3}>

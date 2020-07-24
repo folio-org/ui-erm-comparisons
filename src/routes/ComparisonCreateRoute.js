@@ -157,9 +157,9 @@ class ComparisonCreateRoute extends React.Component {
   sendCallout = (operation, outcome, specificError = undefined, errorMessage = '') => {
     let messageId = `ui-erm-comparisons.comparison.${operation}.${outcome}`;
     if (specificError) {
-      messageId += `${specificError}`;
+      messageId += `.${specificError}`;
     }
-    this.callout.sendCallout({
+    this.context.sendCallout({
       type: outcome,
       message: <SafeHTMLMessage id={messageId} values={{ err: errorMessage }} />,
       timeout: (errorMessage || specificError) ? 0 : undefined, // Don't autohide callouts with a specified error message.
@@ -183,15 +183,9 @@ class ComparisonCreateRoute extends React.Component {
       .catch(response => {
         response.json()
           .then(error => {
-            if (error.errors.some(err => (
-              err?.message.includes('Property [titleList] of class [class org.olf.erm.ComparisonPoint] cannot be null')))
-            ) {
-              this.sendCallout('created', 'error', 'noComparisonLinked');
-            } else {
-              error.errors.forEach(err => (
-                this.sendCallout('created', 'error', undefined, err.message)
-              ));
-            }
+            error.errors.forEach(err => (
+              this.sendCallout('created', 'error', undefined, err.message)
+            ));
           })
           .catch(() => this.sendCallout('created', 'error', 'unknownError'));
       });
