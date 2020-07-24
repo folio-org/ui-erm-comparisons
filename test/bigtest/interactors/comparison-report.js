@@ -23,9 +23,9 @@ export default @interactor class ComparisonReportInteractor {
   availabilityMCLRows = collection('[data-test-availability-mcl-row]', availabilityMCLRowsInteractor)
   coverageMCLRows = collection('[data-test-coverage-mcl-row]', coverageMCLRowsInteractor)
 
-  isReportMCLPresent = isPresent('#comparison-report-mcl');
-  isCoverageMCLPresent = isPresent('#coverage-mcl');
-  isAvailabilityMCLPresent = isPresent('#availability-mcl');
+  isReportMCLPresent = isPresent('[id^=comparison-report-mcl]');
+  isCoverageMCLPresent = isPresent('[id^=coverage-mcl]');
+  isAvailabilityMCLPresent = isPresent('[id^=availability-mcl]');
 
   title = text('[data-test-title');
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
 import {
   InfoPopover,
   Layout,
@@ -31,7 +32,7 @@ const ComparisonReportList = ({ sourceData }) => {
   const [comparisonResourceA, comparisonResourceB] = comparisonPoints;
 
   const getCoverage = (statements, embargo) => {
-    if (!statements.length && !embargo) return null;
+    if (!statements.length && !embargo) return '';
     return (
       <Layout className="full" data-test-coverage>
         <SerialCoverage statements={statements} />
@@ -56,11 +57,10 @@ const ComparisonReportList = ({ sourceData }) => {
       columnMapping={columnMapping}
       columnWidths={{
         title: 400,
-        availableVia: 400,
+        availableVia: 250,
         coverage: 300,
-        resourceA: 300,
-        resourceB: 300,
-        overlap: 120
+        resourceA: 250,
+        resourceB: 250,
       }}
       contentData={report}
       formatter={{
@@ -81,16 +81,30 @@ const ComparisonReportList = ({ sourceData }) => {
           );
         },
         overlap: r => {
+          const { overlap } = r;
           return (
             <Layout className="centered" data-test-overlap>
-              {r.overlap}
+              <strong>
+                <FormattedMessage
+                  id="ui-erm-comparisons.comparisonReport.overlapType"
+                  values={{ overlap }}
+                />
+              </strong>
             </Layout>
           );
         },
+        coverage: () => true
       }}
       getCellClass={(defaultClass, rowData, column) => {
         const { overlap } = rowData;
-        return column === 'overlap' ? `${defaultClass} ${css[overlap]}` : defaultClass;
+
+        if (column === 'overlap') {
+          return `${defaultClass} ${css[overlap]}`;
+        } else if (column === 'title') {
+          return `${defaultClass} ${css.titleCell}`;
+        }
+
+        return defaultClass;
       }}
       getHeaderCellClass={(header) => {
         return ['coverage', 'resourceA', 'resourceB', 'overlap'].includes(header) ? css[header] : undefined;
@@ -121,34 +135,42 @@ const ComparisonReportList = ({ sourceData }) => {
               cells[0]
             }
             {
-              <div className={css.nestedMcl}>
+              <div aria-colspan="4" className={css.nestedMcl} role="gridcell">
                 <MultiColumnList
                   columnWidths={{
-                    availableVia: 400,
+                    availableVia: 250,
                     coverage: 300,
-                    resourceA: 300,
-                    resourceB: 300,
+                    resourceA: 250,
+                    resourceB: 250,
                   }}
                   contentData={Object.values(rowData.availability)}
                   formatter={{
                     availableVia: r => {
                       if (r.platform === Object.values(rowData.availability)[r.rowIndex - 1]?.platform) return ''; // logic to display the platform only once per title
 
-                      const { id, name } = rowData;
-                      const { platform, url } = r;
+                      const { id } = rowData;
+                      const { longName, platform, url } = r;
 
                       return (
                         <TitleOnPlatformLink
                           id={id}
-                          name={name}
+                          name={longName}
                           platform={platform}
                           url={url}
                         />
                       );
+                    },
+                    coverage: () => true
+                  }}
+                  getCellClass={(defaultClass, _, column) => {
+                    if (column === 'availableVia') {
+                      return `${defaultClass} ${css.availableViaCell}`;
                     }
+
+                    return defaultClass;
                   }}
                   headerRowClass="sr-only"
-                  id="availability-mcl"
+                  id={`availability-mcl-${rowData.id}`}
                   interactive={interactive}
                   rowFormatter={({
                     /* eslint-disable no-shadow */
@@ -170,12 +192,12 @@ const ComparisonReportList = ({ sourceData }) => {
                       >
                         {cells[0]}
                         {
-                          <div className={css.nestedMcl}>
+                          <div aria-colspan="3" className={css.nestedMcl} role="gridcell">
                             <MultiColumnList
                               columnWidths={{
                                 coverage: 300,
-                                resourceA: 300,
-                                resourceB: 300,
+                                resourceA: 250,
+                                resourceB: 250,
                               }}
                               contentData={Object.values(rowData.coverage)}
                               formatter={{
@@ -186,8 +208,15 @@ const ComparisonReportList = ({ sourceData }) => {
                                 resourceA: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceA)),
                                 resourceB: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceB))
                               }}
+                              getCellClass={(defaultClass, _, column) => {
+                                if (column === 'coverage') {
+                                  return `${defaultClass} ${css.coverageCell}`;
+                                }
+
+                                return defaultClass;
+                              }}
                               headerRowClass="sr-only"
-                              id="coverage-mcl"
+                              id={uniqueId('coverage-mcl')}
                               interactive={interactive}
                               rowFormatter={({
                                 /* eslint-disable no-shadow */
@@ -202,12 +231,13 @@ const ComparisonReportList = ({ sourceData }) => {
                                     className={rowClass}
                                     data-test-coverage-mcl-row
                                     {...rowProps}
+                                    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+                                    tabIndex="0"
                                   >
                                     {cells}
                                   </div>
                                 );
                               }}
-                              tabIndex="-1"
                               visibleColumns={['coverage', 'resourceA', 'resourceB']}
                             />
                           </div>
@@ -215,8 +245,7 @@ const ComparisonReportList = ({ sourceData }) => {
                       </div>
                     );
                   }}
-                  tabIndex="-1"
-                  visibleColumns={['availableVia']}
+                  visibleColumns={['availableVia', 'coverage', 'resourceA', 'resourceB']}
                 />
               </div>
             }

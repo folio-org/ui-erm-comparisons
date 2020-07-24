@@ -9,6 +9,7 @@ import {
   PaneMenu,
   Paneset
 } from '@folio/stripes/components';
+import { AppIcon } from '@folio/stripes/core';
 
 import ComparisonReportList from './ComparisonReportList';
 
@@ -52,6 +53,7 @@ export default class ComparisonReport extends React.Component {
     return (
       <Paneset>
         <Pane
+          appIcon={<AppIcon app="erm-comparisons" />}
           firstMenu={this.renderFirstMenu()}
           paneTitle={comparisonPointData?.name}
           {...paneProps}
