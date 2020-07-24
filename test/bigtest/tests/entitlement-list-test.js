@@ -7,7 +7,7 @@ import {
 import { expect } from 'chai';
 
 import { StaticRouter as Router } from 'react-router-dom';
-import { mountWithContext } from '@folio/stripes-erm-components/tests/helpers';
+import { mountWithContext } from '../helpers/mountWithContext';
 
 import EntitlementAgreementsListInteractor from '../interactors/entitlement-list';
 

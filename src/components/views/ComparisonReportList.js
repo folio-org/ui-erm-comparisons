@@ -81,9 +81,15 @@ const ComparisonReportList = ({ sourceData }) => {
           );
         },
         overlap: r => {
+          const { overlap } = r;
           return (
             <Layout className="centered" data-test-overlap>
-              <strong>{r.overlap}</strong>
+              <strong>
+                <FormattedMessage
+                  id="ui-erm-comparisons.comparisonReport.overlapType"
+                  values={{ overlap }}
+                />
+              </strong>
             </Layout>
           );
         },
