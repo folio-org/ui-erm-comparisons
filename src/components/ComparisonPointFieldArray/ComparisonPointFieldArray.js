@@ -93,7 +93,6 @@ class ComparisonPointFieldArray extends React.Component {
           onDelete={() => this.props.onDeleteField(index, comparisonPoint)}
         >
           <Field
-            comparisonPoint={comparisonPoint}
             comparisonType={comparisonType}
             component={ComparisonPointField}
             entitlements={data?.entitlements}

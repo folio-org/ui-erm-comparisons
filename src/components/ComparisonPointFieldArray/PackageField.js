@@ -32,18 +32,6 @@ class PackageField extends React.Component {
       touched: PropTypes.bool
     }),
     onPackageSelected: PropTypes.func.isRequired,
-    package: PropTypes.shape({
-      comparisonPoint: PropTypes.shape({
-        count: PropTypes.number,
-        id: PropTypes.string,
-        name: PropTypes.string,
-        provider: PropTypes.string,
-      })
-    }),
-  }
-
-  static defaultProps = {
-    package: {},
   }
 
   componentDidMount() {
@@ -53,8 +41,7 @@ class PackageField extends React.Component {
   }
 
   renderLinkPackageButton = value => {
-    const { id, input: { name }, onPackageSelected, package: { comparisonPoint } } = this.props;
-    const cpName = comparisonPoint ? comparisonPoint?.name : '';
+    const { id, input: { name }, onPackageSelected } = this.props;
     return (
       <Pluggable
         dataKey="package"
@@ -74,7 +61,7 @@ class PackageField extends React.Component {
           return value ? (
             <Tooltip
               id={`${id}-package-button-tooltip`}
-              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: cpName }} />}
+              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: value.name }} />}
               triggerRef={this.triggerButton}
             >
               {({ ariaIds }) => (
@@ -106,7 +93,7 @@ class PackageField extends React.Component {
   }
 
   renderEntitlementAgreements = () => {
-    const { entitlements, package: { comparisonPoint: { id } } } = this.props;
+    const { entitlements, input: { value: { id } } } = this.props;
     const relevantEntitlements = entitlements[id] || [];
 
     return (
@@ -121,7 +108,7 @@ class PackageField extends React.Component {
   }
 
   renderPackage = () => {
-    const { package: { comparisonPoint: { count, provider } } } = this.props;
+    const { input: { value: { count, provider } } } = this.props;
 
     return (
       <div data-test-package-card>
@@ -178,29 +165,22 @@ class PackageField extends React.Component {
     const {
       id,
       meta: { error, touched },
-      package: { comparisonPoint }
+      input: { value },
     } = this.props;
-
-
-    // If no package has been selected, then the passed package will be {}. We want that to be null
-    let pkg = null;
-    if (comparisonPoint?.id) {
-      pkg = comparisonPoint;
-    }
 
     return (
       <Card
-        cardStyle={pkg ? 'positive' : 'negative'}
-        headerEnd={this.renderLinkPackageButton(pkg)}
+        cardStyle={value ? 'positive' : 'negative'}
+        headerEnd={this.renderLinkPackageButton(value)}
         headerStart={
           <AppIcon app="erm-comparisons" iconKey="eresource" size="small">
             <strong>
-              {pkg ?
+              {value ?
                 <Link
                   data-test-package-name-link
-                  to={`/erm/eresources/${pkg.id}`}
+                  to={`/erm/eresources/${value.id}`}
                 >
-                  {pkg.name}
+                  {value.name}
                 </Link> :
                 <FormattedMessage id="ui-erm-comparisons.newComparison.package" />
               }
@@ -210,7 +190,7 @@ class PackageField extends React.Component {
         id={id}
         roundedBorder
       >
-        {pkg ? this.renderPackage() : this.renderEmpty()}
+        {value ? this.renderPackage() : this.renderEmpty()}
         {touched && error ? this.renderError() : null}
       </Card>
     );
