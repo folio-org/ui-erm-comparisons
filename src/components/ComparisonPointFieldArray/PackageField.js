@@ -53,26 +53,27 @@ class PackageField extends React.Component {
   }
 
   renderLinkPackageButton = value => {
+    const { id, input: { name }, onPackageSelected, package: { comparisonPoint: { name: cpName } } } = this.props;
     return (
       <Pluggable
         dataKey="package"
-        onEresourceSelected={this.props.onPackageSelected}
+        onEresourceSelected={onPackageSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonRef': this.triggerButton,
             'buttonStyle': value ? 'default' : 'primary',
-            'id': `${this.props.id}-search-button`,
-            'name': this.props.input.name,
+            'id': `${id}-search-button`,
+            'name': name,
             'onClick': props.onClick,
             'marginBottom0': true
           };
 
           return value ? (
             <Tooltip
-              id={`${this.props.id}-package-button-tooltip`}
-              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.comparisonPoint.name }} />}
+              id={`${id}-package-button-tooltip`}
+              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: cpName }} />}
               triggerRef={this.triggerButton}
             >
               {({ ariaIds }) => (
@@ -175,14 +176,15 @@ class PackageField extends React.Component {
   render() {
     const {
       id,
-      meta: { error, touched }
+      meta: { error, touched },
+      package: { comparisonPoint }
     } = this.props;
 
 
     // If no package has been selected, then the passed package will be {}. We want that to be null
     let pkg = null;
-    if (this.props.package?.comparisonPoint?.id) {
-      pkg = this.props.package.comparisonPoint;
+    if (comparisonPoint?.id) {
+      pkg = comparisonPoint;
     }
 
     return (

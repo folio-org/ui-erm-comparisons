@@ -51,26 +51,27 @@ class AgreementField extends React.Component {
   }
 
   renderLinkAgreementButton = value => {
+    const { agreement: { comparisonPoint: { name: cpName } }, id, input: { name }, onAgreementSelected } = this.props;
     return (
       <Pluggable
         dataKey="agreement"
-        onAgreementSelected={this.props.onAgreementSelected}
+        onAgreementSelected={onAgreementSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonRef': this.triggerButton,
             'buttonStyle': value ? 'default' : 'primary',
-            'id': `${this.props.id}-search-button`,
-            'name': this.props.input.name,
+            'id': `${id}-search-button`,
+            'name': name,
             'onClick': props.onClick,
             'marginBottom0': true
           };
           if (value) {
             return (
               <Tooltip
-                id={`${this.props.id}-agreement-button-tooltip`}
-                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.comparisonPoint.name }} />}
+                id={`${id}-agreement-button-tooltip`}
+                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: cpName }} />}
                 triggerRef={this.triggerButton}
               >
                 {({ ariaIds }) => (
@@ -174,14 +175,15 @@ class AgreementField extends React.Component {
 
   render() {
     const {
+      agreement: { comparisonPoint },
       id,
       meta: { error, touched }
     } = this.props;
 
     // If no agreement has been selected, then the passed agreement will be {}. We want that to be null
     let agreement = null;
-    if (this.props.agreement?.comparisonPoint?.id) {
-      agreement = this.props.agreement.comparisonPoint;
+    if (comparisonPoint?.id) {
+      agreement = comparisonPoint;
     }
 
     return (
