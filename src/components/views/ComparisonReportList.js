@@ -7,7 +7,6 @@ import {
   Layout,
   MultiColumnList,
 } from '@folio/stripes/components';
-import SafeHTMLMessage from '@folio/react-intl-safe-html';
 
 import {
   Embargo,
