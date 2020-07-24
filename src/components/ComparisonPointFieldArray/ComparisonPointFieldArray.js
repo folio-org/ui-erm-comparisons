@@ -3,10 +3,12 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Button, Datepicker } from '@folio/stripes/components';
+import { Button, Col, Datepicker, Row } from '@folio/stripes/components';
 
-import { EditCard, withKiwtFieldArray } from '@folio/stripes-erm-components';
+import { EditCard, requiredValidator, withKiwtFieldArray } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
+
+import { parseDateOnlyString } from '../utilities';
 
 class ComparisonPointFieldArray extends React.Component {
   static propTypes = {
@@ -21,7 +23,7 @@ class ComparisonPointFieldArray extends React.Component {
     handlers: PropTypes.shape({
       onEResourceAdded: PropTypes.func.isRequired,
       onEResourceRemoved: PropTypes.func.isRequired
-    }).isRequired,
+    }),
     headerId: PropTypes.string,
     id: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object),
@@ -31,25 +33,27 @@ class ComparisonPointFieldArray extends React.Component {
     onUpdateField: PropTypes.func.isRequired,
   }
 
-  state = { currentDate: moment.utc().startOf('day').toISOString() }
-
   handleComparisonPointSelected = (index, comparisonPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
       this.handleUpdateField(index, {
-        id: comparisonPoint.id,
-        name: comparisonPoint.name,
-        reasonForClosure: comparisonPoint.reasonForClosure?.label,
-        startDate: comparisonPoint.startDate,
-        status: comparisonPoint.agreementStatus?.label,
-        endDate: comparisonPoint.endDate
+        'comparisonPoint': {
+          id: comparisonPoint.id,
+          name: comparisonPoint.name,
+          reasonForClosure: comparisonPoint.reasonForClosure?.label,
+          startDate: comparisonPoint.startDate,
+          status: comparisonPoint.agreementStatus?.label,
+          endDate: comparisonPoint.endDate
+        }
       });
     } else if (comparisonType === 'package') {
       this.props.handlers.onEResourceAdded(comparisonPoint.id);
       this.handleUpdateField(index, {
-        id: comparisonPoint.id,
-        name: comparisonPoint.name,
-        count: comparisonPoint._object?.resourceCount,
-        provider: comparisonPoint._object?.vendor?.name
+        'comparisonPoint': {
+          id: comparisonPoint.id,
+          name: comparisonPoint.name,
+          count: comparisonPoint._object?.resourceCount,
+          provider: comparisonPoint._object?.vendor?.name
+        }
       }, true);
     }
   }
@@ -59,8 +63,8 @@ class ComparisonPointFieldArray extends React.Component {
 
     if (updateEntitlementQuery) {
       // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
-      const removedId = items?.[index]?.id;
-      const addedId = field?.id;
+      const removedId = items?.[index]?.comparisonPoint?.id;
+      const addedId = field?.comparisonPoint?.id;
       if (removedId) {
         handlers.onEResourceRemoved(removedId);
       }
@@ -69,10 +73,6 @@ class ComparisonPointFieldArray extends React.Component {
 
     onUpdateField(index, field);
   }
-
-  parseDateOnlyString = (value, _timeZone, dateFormat) => {
-    return (!value || value === '') ? value : moment(value).format(dateFormat);
-  };
 
   renderComparisonPoints = () => {
     const { comparisonPoint: comparisonType, data, deleteButtonTooltipId, headerId } = this.props;
@@ -91,24 +91,31 @@ class ComparisonPointFieldArray extends React.Component {
           onDelete={() => this.props.onDeleteField(index, comparisonPoint)}
         >
           <Field
-            comparisonPoint={comparisonPoint}
             comparisonType={comparisonType}
             component={ComparisonPointField}
             entitlements={data?.entitlements}
             id={`data-test-field-comparison-point-${comparisonType}`}
             index={index}
-            name={`${name}[${index}]`}
+            name={`${name}[${index}].comparisonPoint`}
             onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
+            required
+            validate={requiredValidator}
           />
-          <Field
-            component={Datepicker}
-            defaultValue={this.state.currentDate}
-            id={`data-test-field-date-${comparisonType}`}
-            index={index}
-            label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
-            name={`${name}[${index}].onDate`}
-            parser={this.parseDateOnlyString}
-          />
+          <Row>
+            <Col xs={3}>
+              <Field
+                component={Datepicker}
+                defaultValue={moment.utc().startOf('day').toISOString()}
+                id={`data-test-field-date-${comparisonType}`}
+                index={index}
+                label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
+                name={`${name}[${index}].onDate`}
+                parser={parseDateOnlyString}
+                required
+                validate={requiredValidator}
+              />
+            </Col>
+          </Row>
         </EditCard>
       );
     });

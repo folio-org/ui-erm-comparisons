@@ -28,20 +28,10 @@ class PackageField extends React.Component {
       value: PropTypes.object
     }).isRequired,
     meta: PropTypes.shape({
-      error: PropTypes.bool,
+      error: PropTypes.object,
       touched: PropTypes.bool
     }),
     onPackageSelected: PropTypes.func.isRequired,
-    package: PropTypes.shape({
-      count: PropTypes.number,
-      id: PropTypes.string,
-      name: PropTypes.string,
-      provider: PropTypes.string,
-    }),
-  }
-
-  static defaultProps = {
-    package: {},
   }
 
   componentDidMount() {
@@ -51,26 +41,32 @@ class PackageField extends React.Component {
   }
 
   renderLinkPackageButton = value => {
+    const {
+      id,
+      input: { name },
+      onPackageSelected
+    } = this.props;
+
     return (
       <Pluggable
         dataKey="package"
-        onEresourceSelected={this.props.onPackageSelected}
+        onEresourceSelected={onPackageSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonRef': this.triggerButton,
             'buttonStyle': value ? 'default' : 'primary',
-            'id': `${this.props.id}-search-button`,
-            'name': this.props.input.name,
+            'id': `${id}-search-button`,
+            'name': name,
             'onClick': props.onClick,
             'marginBottom0': true
           };
 
           return value ? (
             <Tooltip
-              id={`${this.props.id}-package-button-tooltip`}
-              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: this.props.package.name }} />}
+              id={`${id}-package-button-tooltip`}
+              text={<FormattedMessage id="ui-erm-comparisons.newComparison.replacePackageSpecific" values={{ package: value.name }} />}
               triggerRef={this.triggerButton}
             >
               {({ ariaIds }) => (
@@ -89,7 +85,7 @@ class PackageField extends React.Component {
               data-test-link-package
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.newComparison.addPackage" />
+              <FormattedMessage id="ui-erm-comparisons.newComparison.linkPackage" />
             </Button>
           );
         }}
@@ -102,32 +98,38 @@ class PackageField extends React.Component {
   }
 
   renderEntitlementAgreements = () => {
-    const { entitlements, package: { id } } = this.props;
-    const relevantEntitlements = entitlements[id] || [];
+    const {
+      entitlements,
+      input: { value: { id } }
+    } = this.props;
+
+    const relevantEntitlements = entitlements?.[id] ?? [];
 
     return (
-      <EntitlementAgreementsList
-        data-test-package-entitlements
-        entitlements={relevantEntitlements}
-        id="package-agreements-list"
-      />
+      <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.packageAgreements" />}>
+        <EntitlementAgreementsList
+          data-test-package-entitlements
+          entitlements={relevantEntitlements}
+          id="package-agreements-list"
+        />
+      </KeyValue>
     );
   }
 
   renderPackage = () => {
-    const { package: { count, provider } } = this.props;
+    const { input: { value: { count, provider } } } = this.props;
 
     return (
       <div data-test-package-card>
         <Row>
-          <Col xs={6}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.count" />}>
               <span data-test-package-count>
                 {count || <NoValue />}
               </span>
             </KeyValue>
           </Col>
-          <Col xs={6}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.provider" />}>
               <span data-test-package-provider>
                 {provider}
@@ -136,7 +138,9 @@ class PackageField extends React.Component {
           </Col>
         </Row>
         <Row>
-          {this.renderEntitlementAgreements()}
+          <Col xs={12}>
+            {this.renderEntitlementAgreements()}
+          </Col>
         </Row>
       </div>
     );
@@ -155,41 +159,40 @@ class PackageField extends React.Component {
     </div>
   )
 
-  renderError = () => (
-    <Layout className={`textCentered ${css.error}`}>
-      <strong>
-        {this.props.meta?.error}
-      </strong>
-    </Layout>
-  )
+  renderError = () => {
+    const { meta: { error } } = this.props;
+    return (
+      <Layout className={`textCentered ${css.error}`}>
+        <strong>
+          {error}
+        </strong>
+      </Layout>
+    );
+  }
 
   render() {
     const {
       id,
-      meta: { error, touched }
+      meta: { error, touched },
+      input: { value },
     } = this.props;
-
-    // If no package has been selected, then the passed package will be {}. We want that to be null
-    let pkg = null;
-    if (this.props.package?.id) {
-      pkg = this.props.package;
-    }
 
     return (
       <Card
-        cardStyle={pkg ? 'positive' : 'negative'}
-        headerEnd={this.renderLinkPackageButton(pkg)}
+        cardStyle={value ? 'positive' : 'negative'}
+        headerEnd={this.renderLinkPackageButton(value)}
         headerStart={
-          <AppIcon app="agreements" size="small">
+          <AppIcon app="erm-comparisons" iconKey="eresource" size="small">
             <strong>
-              {pkg ?
-                <Link
-                  data-test-package-name-link
-                  to={`/erm/eresources/${pkg.id}`}
-                >
-                  {pkg.name}
-                </Link> :
-                <FormattedMessage id="ui-erm-comparisons.newComparison.package" />
+              {value ?
+                (
+                  <Link
+                    data-test-package-name-link
+                    to={`/erm/eresources/${value.id}`}
+                  >
+                    {value.name}
+                  </Link>
+                ) : <FormattedMessage id="ui-erm-comparisons.newComparison.package" />
               }
             </strong>
           </AppIcon>
@@ -197,7 +200,7 @@ class PackageField extends React.Component {
         id={id}
         roundedBorder
       >
-        {pkg ? this.renderPackage() : this.renderEmpty()}
+        {value ? this.renderPackage() : this.renderEmpty()}
         {touched && error ? this.renderError() : null}
       </Card>
     );

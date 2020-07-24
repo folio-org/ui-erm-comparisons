@@ -27,6 +27,7 @@ class ComparisonCreateRoute extends React.Component {
       fetch: false,
       path: 'erm/jobs/comparison',
       shouldRefresh: () => false,
+      throwErrors: false,
       type: 'okapi',
     },
   });
@@ -113,6 +114,21 @@ class ComparisonCreateRoute extends React.Component {
     }
   }
 
+  getComparisonPointsData({ agreements = [], packages = [] }) {
+    return [
+      ...agreements
+        .map(agreement => ({
+          titleList: agreement.comparisonPoint?.id,
+          date: agreement.onDate
+        })),
+      ...packages
+        .map(pkg => ({
+          titleList: pkg.comparisonPoint?.id,
+          date: pkg.onDate
+        }))
+    ];
+  }
+
   /*
     This callback changes a query parameter to allow a secondary API call to be made, and the entitlements information for this
     eResource to be displayed. Due to the way this works asyncronously within stripes, we have to do a bunch of validation to ensure
@@ -140,32 +156,44 @@ class ComparisonCreateRoute extends React.Component {
     this.setState({ entitlementsWithIds: newState, eResourceId: '' });
   }
 
-  returnIdAndOnDate(valuesArray = []) {
-    const newValues = [];
-    valuesArray.forEach(obj => {
-      newValues.push({ titleList: obj.id, date: obj.onDate });
-    });
-    return newValues;
-  }
-
   handleClose = () => {
     const { location } = this.props;
     this.props.history.push(`/comparisons-erm${location.search}`);
   }
 
+  sendCallout = (operation, outcome, specificError = undefined, errorMessage = '') => {
+    let messageId = `ui-erm-comparisons.comparison.${operation}.${outcome}`;
+    if (specificError) {
+      messageId = `${messageId}.${specificError}`;
+    }
+    this.context.sendCallout({
+      type: outcome,
+      message: <SafeHTMLMessage id={messageId} values={{ err: errorMessage }} />,
+      timeout: (errorMessage || specificError) ? 0 : undefined, // Don't autohide callouts with a specified error message.
+    });
+  }
+
   handleSubmit = (comparison) => {
     const { history, location, mutator } = this.props;
-    const submitValues = { name: comparison.name };
-    submitValues.comparisonPoints = this.returnIdAndOnDate(comparison.agreements);
-    submitValues.comparisonPoints = submitValues.comparisonPoints.concat(this.returnIdAndOnDate(comparison.packages));
-    return mutator.comparisons
-      .POST(submitValues)
-      .then(response => {
-        const comparisonId = response?.id ?? '';
-        const name = response?.name ?? '';
+    const { name } = comparison;
 
-        history.push(`/comparisons-erm/${comparisonId}${location.search}`);
+    return mutator.comparisons
+      .POST({
+        name,
+        comparisonPoints: this.getComparisonPointsData(comparison)
+      })
+      .then(({ id }) => {
+        history.push(`/comparisons-erm/${id}${location.search}`);
         this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.success" values={{ name }} /> });
+      })
+      .catch(response => {
+        response.json()
+          .then(({ errors }) => {
+            errors.forEach(err => (
+              this.sendCallout('created', 'error', undefined, err.message)
+            ));
+          })
+          .catch(() => this.sendCallout('created', 'error', 'unknownError'));
       });
   }
 

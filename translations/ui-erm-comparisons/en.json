@@ -12,6 +12,8 @@
   "agreement": "Agreement",
   "selectPackage": "Select package",
   "selectAgreement": "Select agreement",
+  "linkPackage": "Link package",
+  "linkAgreement": "Link agreement",
 
   "columns.errorLogMessage": "Error",
   "columns.infoLogMessage": "Message",
@@ -27,6 +29,10 @@
   "comparison.delete.message": "Comparison <strong>{name}</strong> will be <strong>deleted</strong>",
   "comparison.deleted.success": "Comparison <strong>{name}</strong> was successfully <strong>deleted</strong>",
   "comparison.created.success": "Comparison <strong>{name}</strong> was successfully <strong>created</strong>",
+
+  "comparison.created.error.noComparisonLinked": "Error creating <strong>comparison</strong>: One or more comparisons were not linked",
+  "comparison.created.error": "Error creating <strong>comparison</strong>: {err}",
+  "comparison.created.error.unknownError": "Error creating <strong>comparison</strong>",
 
   "prop.class": "Comparison type",
   "prop.ended": "Ended",
@@ -71,7 +77,7 @@
   "comparisonReport.info.eissn": "ISSN (Online)",
 
   "newComparison.info": "Select two items for comparison",
-  "newComparison.name": "Comparison job name",
+  "newComparison.name": "Name",
   "newComparison.agreement": "Agreement",
   "newComparison.package": "Package",
   "newComparison.addPackage": "Add package",
@@ -101,6 +107,7 @@
   "newComparison.noPackagePlugin": "No \"find-package\" plugin is installed",
   "newComparison.replacePackage": "Replace package",
   "newComparison.replacePackageSpecific": "Replace package {package}",
+  "newComparison.packageAgreements": "Agreements for this package",
   "agreements.name": "Name",
   "agreements.agreementStatus": "Status",
   "agreementPeriods.periodStart": "Period start",

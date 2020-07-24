@@ -19,27 +19,16 @@ import css from './styles.css';
 
 class AgreementField extends React.Component {
   static propTypes = {
-    agreement: PropTypes.shape({
-      endDate: PropTypes.string,
-      name: PropTypes.string,
-      reasonForClosure: PropTypes.string,
-      startDate: PropTypes.string,
-      status: PropTypes.string,
-    }),
     id: PropTypes.string,
     input: PropTypes.shape({
       name: PropTypes.string,
       value: PropTypes.object
     }).isRequired,
     meta: PropTypes.shape({
-      error: PropTypes.bool,
+      error: PropTypes.object,
       touched: PropTypes.bool
     }),
     onAgreementSelected: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    agreement: {},
   }
 
   componentDidMount() {
@@ -49,26 +38,32 @@ class AgreementField extends React.Component {
   }
 
   renderLinkAgreementButton = value => {
+    const {
+      id,
+      input: { name },
+      onAgreementSelected
+    } = this.props;
+
     return (
       <Pluggable
         dataKey="agreement"
-        onAgreementSelected={this.props.onAgreementSelected}
+        onAgreementSelected={onAgreementSelected}
         renderTrigger={(props) => {
           this.triggerButton = props.buttonRef;
           const buttonProps = {
             'aria-haspopup': 'true',
             'buttonRef': this.triggerButton,
             'buttonStyle': value ? 'default' : 'primary',
-            'id': `${this.props.id}-search-button`,
-            'name': this.props.input.name,
+            'id': `${id}-search-button`,
+            'name': name,
             'onClick': props.onClick,
             'marginBottom0': true
           };
           if (value) {
             return (
               <Tooltip
-                id={`${this.props.id}-agreement-button-tooltip`}
-                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: this.props.agreement.name }} />}
+                id={`${id}-agreement-button-tooltip`}
+                text={<FormattedMessage id="ui-erm-comparisons.newComparison.replaceAgreementSpecific" values={{ agreement: value.name }} />}
                 triggerRef={this.triggerButton}
               >
                 {({ ariaIds }) => (
@@ -89,7 +84,7 @@ class AgreementField extends React.Component {
               data-test-link-agreement
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.newComparison.addAgreement" />
+              <FormattedMessage id="ui-erm-comparisons.newComparison.linkAgreement" />
             </Button>
           );
         }}
@@ -101,12 +96,14 @@ class AgreementField extends React.Component {
   }
 
   renderAgreement = () => {
+    const { input: { value } } = this.props;
+
     const {
       endDate,
       reasonForClosure,
       startDate,
       status
-    } = this.props.agreement;
+    } = value;
 
     return (
       <div data-test-agreement-card>
@@ -159,39 +156,37 @@ class AgreementField extends React.Component {
     </div>
   )
 
-  renderError = () => (
-    <Layout className={`textCentered ${css.error}`}>
-      <strong>
-        {this.props.meta.error}
-      </strong>
-    </Layout>
-  )
+  renderError = () => {
+    const { meta: { error } } = this.props;
+    return (
+      <Layout className={`textCentered ${css.error}`}>
+        <strong>
+          {error}
+        </strong>
+      </Layout>
+    );
+  }
 
   render() {
     const {
       id,
+      input: { value },
       meta: { error, touched }
     } = this.props;
 
-    // If no agreement has been selected, then the passed agreement will be {}. We want that to be null
-    let agreement = null;
-    if (this.props.agreement?.id) {
-      agreement = this.props.agreement;
-    }
-
     return (
       <Card
-        cardStyle={agreement ? 'positive' : 'negative'}
-        headerEnd={this.renderLinkAgreementButton(agreement)}
+        cardStyle={value ? 'positive' : 'negative'}
+        headerEnd={this.renderLinkAgreementButton(value)}
         headerStart={
           <AppIcon app="agreements" size="small">
             <strong>
-              {agreement ?
+              {value ?
                 <Link
                   data-test-agreement-name-link
-                  to={`/erm/agreements/${agreement.id}`}
+                  to={`/erm/agreements/${value.id}`}
                 >
-                  {agreement.name}
+                  {value.name}
                 </Link> :
                 <FormattedMessage id="ui-erm-comparisons.newComparison.agreement" />
               }
@@ -201,7 +196,7 @@ class AgreementField extends React.Component {
         id={id}
         roundedBorder
       >
-        {agreement ? this.renderAgreement() : this.renderEmpty()}
+        {value ? this.renderAgreement() : this.renderEmpty()}
         {touched && error ? this.renderError() : null}
       </Card>
     );

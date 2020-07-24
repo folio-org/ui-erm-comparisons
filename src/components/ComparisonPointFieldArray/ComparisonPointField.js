@@ -6,7 +6,6 @@ import PackageField from './PackageField';
 
 class ComparisonPointField extends React.Component {
   static propTypes = {
-    comparisonPoint: PropTypes.object,
     comparisonType: PropTypes.string,
     entitlements: PropTypes.object,
     onComparisonPointSelected: PropTypes.func.isRequired
@@ -14,7 +13,6 @@ class ComparisonPointField extends React.Component {
 
   render() {
     const {
-      comparisonPoint,
       comparisonType,
       entitlements,
       onComparisonPointSelected,
@@ -23,7 +21,6 @@ class ComparisonPointField extends React.Component {
 
     return comparisonType === 'agreement' ? (
       <AgreementField
-        agreement={comparisonPoint}
         onAgreementSelected={onComparisonPointSelected}
         {...rest}
       />
@@ -31,7 +28,6 @@ class ComparisonPointField extends React.Component {
       <PackageField
         entitlements={entitlements}
         onPackageSelected={onComparisonPointSelected}
-        package={comparisonPoint}
         {...rest}
       />
     );
