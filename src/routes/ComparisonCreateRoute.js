@@ -154,6 +154,18 @@ class ComparisonCreateRoute extends React.Component {
     this.props.history.push(`/comparisons-erm${location.search}`);
   }
 
+  sendCallout = (operation, outcome, specificError = undefined, errorMessage = '') => {
+    let messageId = `ui-erm-comparisons.comparison.${operation}.${outcome}`;
+    if (specificError) {
+      messageId += `${specificError}`;
+    }
+    this.callout.sendCallout({
+      type: outcome,
+      message: <SafeHTMLMessage id={messageId} values={{ err: errorMessage }} />,
+      timeout: (errorMessage || specificError) ? 0 : undefined, // Don't autohide callouts with a specified error message.
+    });
+  }
+
   handleSubmit = (comparison) => {
     const { history, location, mutator } = this.props;
     const submitValues = { name: comparison.name };
@@ -174,14 +186,14 @@ class ComparisonCreateRoute extends React.Component {
             if (error.errors.some(err => (
               err?.message.includes('Property [titleList] of class [class org.olf.erm.ComparisonPoint] cannot be null')))
             ) {
-              this.context.sendCallout({ type: 'error', message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.error.noComparisonLinked" /> });
+              this.sendCallout('created', 'error', 'noComparisonLinked');
             } else {
               error.errors.forEach(err => (
-                this.context.sendCallout({ type: 'error', message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.error.generalError" values={{ err: err.message }} /> })
+                this.sendCallout('created', 'error', undefined, err.message)
               ));
             }
           })
-          .catch(() => this.context.sendCallout({ type: 'error', message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.error.unknownError" /> }));
+          .catch(() => this.sendCallout('created', 'error', 'unknownError'));
       });
   }
 
