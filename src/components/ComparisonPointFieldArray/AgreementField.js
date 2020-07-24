@@ -38,7 +38,12 @@ class AgreementField extends React.Component {
   }
 
   renderLinkAgreementButton = value => {
-    const { id, input: { name }, onAgreementSelected } = this.props;
+    const {
+      id,
+      input: { name },
+      onAgreementSelected
+    } = this.props;
+
     return (
       <Pluggable
         dataKey="agreement"
@@ -91,12 +96,14 @@ class AgreementField extends React.Component {
   }
 
   renderAgreement = () => {
-    const { input: { value: {
+    const { input: { value } } = this.props;
+
+    const {
       endDate,
       reasonForClosure,
       startDate,
       status
-    } } } = this.props;
+    } = value;
 
     return (
       <div data-test-agreement-card>

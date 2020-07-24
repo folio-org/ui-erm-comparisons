@@ -33,8 +33,6 @@ class ComparisonPointFieldArray extends React.Component {
     onUpdateField: PropTypes.func.isRequired,
   }
 
-  state = { currentDate: moment.utc().startOf('day').toISOString() }
-
   handleComparisonPointSelected = (index, comparisonPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
       this.handleUpdateField(index, {
@@ -107,7 +105,7 @@ class ComparisonPointFieldArray extends React.Component {
             <Col xs={3}>
               <Field
                 component={Datepicker}
-                defaultValue={this.state.currentDate}
+                defaultValue={moment.utc().startOf('day').toISOString()}
                 id={`data-test-field-date-${comparisonType}`}
                 index={index}
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}

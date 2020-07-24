@@ -6,7 +6,6 @@ import PackageField from './PackageField';
 
 class ComparisonPointField extends React.Component {
   static propTypes = {
-    comparisonPoint: PropTypes.object,
     comparisonType: PropTypes.string,
     entitlements: PropTypes.object,
     onComparisonPointSelected: PropTypes.func.isRequired

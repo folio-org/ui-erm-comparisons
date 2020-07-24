@@ -76,7 +76,7 @@
   "comparisonReport.info.eissn": "ISSN (Online)",
 
   "newComparison.info": "Select two items for comparison",
-  "newComparison.name": "Comparison job name",
+  "newComparison.name": "Name",
   "newComparison.agreement": "Agreement",
   "newComparison.package": "Package",
   "newComparison.addPackage": "Add package",

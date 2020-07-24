@@ -41,7 +41,12 @@ class PackageField extends React.Component {
   }
 
   renderLinkPackageButton = value => {
-    const { id, input: { name }, onPackageSelected } = this.props;
+    const {
+      id,
+      input: { name },
+      onPackageSelected
+    } = this.props;
+
     return (
       <Pluggable
         dataKey="package"
@@ -93,8 +98,12 @@ class PackageField extends React.Component {
   }
 
   renderEntitlementAgreements = () => {
-    const { entitlements, input: { value: { id } } } = this.props;
-    const relevantEntitlements = entitlements[id] || [];
+    const {
+      entitlements,
+      input: { value: { id } }
+    } = this.props;
+
+    const relevantEntitlements = entitlements?.[id] ?? [];
 
     return (
       <KeyValue label={<FormattedMessage id="ui-erm-comparisons.newComparison.packageAgreements" />}>
@@ -176,13 +185,14 @@ class PackageField extends React.Component {
           <AppIcon app="erm-comparisons" iconKey="eresource" size="small">
             <strong>
               {value ?
-                <Link
-                  data-test-package-name-link
-                  to={`/erm/eresources/${value.id}`}
-                >
-                  {value.name}
-                </Link> :
-                <FormattedMessage id="ui-erm-comparisons.newComparison.package" />
+                (
+                  <Link
+                    data-test-package-name-link
+                    to={`/erm/eresources/${value.id}`}
+                  >
+                    {value.name}
+                  </Link>
+                ) : <FormattedMessage id="ui-erm-comparisons.newComparison.package" />
               }
             </strong>
           </AppIcon>
