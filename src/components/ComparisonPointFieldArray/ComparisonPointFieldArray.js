@@ -8,6 +8,8 @@ import { Button, Col, Datepicker, Row } from '@folio/stripes/components';
 import { EditCard, requiredValidator, withKiwtFieldArray } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
+import { parseDateOnlyString } from '../utilities';
+
 class ComparisonPointFieldArray extends React.Component {
   static propTypes = {
     addButtonId: PropTypes.string,
@@ -70,10 +72,6 @@ class ComparisonPointFieldArray extends React.Component {
     onUpdateField(index, field);
   }
 
-  parseDateOnlyString = (value, _timeZone, dateFormat) => {
-    return (!value || value === '') ? value : moment(value).format(dateFormat);
-  };
-
   renderComparisonPoints = () => {
     const { comparisonPoint: comparisonType, data, deleteButtonTooltipId, headerId } = this.props;
     const { name } = this.props;
@@ -109,7 +107,7 @@ class ComparisonPointFieldArray extends React.Component {
                 index={index}
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
                 name={`${name}[${index}].onDate`}
-                parser={this.parseDateOnlyString}
+                parser={parseDateOnlyString}
                 required
                 validate={requiredValidator}
               />
