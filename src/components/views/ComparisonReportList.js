@@ -90,7 +90,6 @@ const ComparisonReportList = ({ sourceData }) => {
                   values={{ overlap }}
                 />
               </strong>
-
             </Layout>
           );
         },
