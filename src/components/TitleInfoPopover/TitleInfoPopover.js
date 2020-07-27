@@ -29,16 +29,20 @@ const TitleInfoPopover = ({ titleInstance }) => {
     </div>
   );
 
-  const renderIdentifier = (identifierType) => (
-    <div>
-      <strong>
-        <FormattedMessage id={`ui-erm-comparisons.comparisonReport.info.${identifierType}`} />
-      </strong>
-      :
-      &nbsp;
-      {getResourceIdentifier(titleInstance, identifierType) ?? <NoValue />}
-    </div>
-  );
+  const renderIdentifier = (identifierType) => {
+    const identifier = getResourceIdentifier(titleInstance, identifierType);
+    return identifier ?
+      (
+        <div>
+          <strong>
+            <FormattedMessage id={`ui-erm-comparisons.comparisonReport.info.${identifierType}`} />
+          </strong>
+          :
+          &nbsp;
+          {identifier}
+        </div>
+      ) : null;
+  };
 
   return (
     <Layout className="display-flex flex-direction-column">
