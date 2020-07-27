@@ -93,5 +93,12 @@
     "agreementPeriods.periodStart": "بدء الفترة",
     "agreementPeriods.periodEnd": "انتهاء الفترة",
     "emptyAccordion.noAgreementsEresource": "لا توجد اتفاقيات لهذا المورد الإلكتروني",
-    "report.close": "إغلاق شاشة تقرير المقارنة"
+    "report.close": "إغلاق شاشة تقرير المقارنة",
+    "comparisonReport.overlapType": "{overlap}",
+    "linkPackage": "ربط الحزمة",
+    "linkAgreement": "ربط الاتفاقية",
+    "comparison.created.error.noComparisonLinked": "خطأ في إنشاء <strong>المقارنة</strong>: لم يتم ربط إحدى المقارنات أو أكثر",
+    "comparison.created.error": "خطأ في إنشاء <strong>المقارنة</strong>: {err}",
+    "comparison.created.error.unknownError": "خطأ في إنشاء <strong>المقارنة</strong>",
+    "newComparison.packageAgreements": "اتفاقيات لهذه الحزمة"
 }
