@@ -14,6 +14,7 @@
   }
 
   & div[role="gridcell"]:empty {
+    border-top: 1px solid var(--color-border-p2);
     height: 150px;
   }
 }
