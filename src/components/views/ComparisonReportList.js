@@ -137,7 +137,7 @@ const ComparisonReportList = ({ sourceData }) => {
               cells[0]
             }
             {
-              <div aria-colspan="4" className={css.nestedMcl} role="gridcell">
+              <div aria-colspan="4" className={css.nestedMcl}>
                 <MultiColumnList
                   columnWidths={{
                     availableVia: 250,
@@ -187,7 +187,7 @@ const ComparisonReportList = ({ sourceData }) => {
                       >
                         {cells[0]}
                         {
-                          <div aria-colspan="3" className={css.nestedMcl} role="gridcell">
+                          <div aria-colspan="3" className={css.nestedMcl}>
                             <MultiColumnList
                               columnWidths={{
                                 coverage: 300,
