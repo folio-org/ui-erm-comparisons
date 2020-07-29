@@ -123,30 +123,32 @@ export default class ComparisonView extends React.Component {
       >
         <TitleManager data-test-title-name record={comparison.name}>
           <ComparisonInfo {...{ comparison, isComparisonNotQueued, onViewReport }} />
-          {
-            isComparisonNotQueued ? (
-              <AccordionSet>
-                <Row end="xs">
-                  <Col xs>
-                    <ExpandAllButton
-                      accordionStatus={this.state.sections}
-                      id="clickable-expand-all"
-                      onToggle={this.handleAllSectionsToggle}
-                    />
-                  </Col>
-                </Row>
-                <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
-                <Logs
-                  type="error"
-                  {...this.getSectionProps('errorLogs')}
+          <AccordionSet>
+            <Row end="xs">
+              <Col xs>
+                <ExpandAllButton
+                  accordionStatus={this.state.sections}
+                  id="clickable-expand-all"
+                  onToggle={this.handleAllSectionsToggle}
                 />
-                <Logs
-                  type="info"
-                  {...this.getSectionProps('infoLogs')}
-                />
-              </AccordionSet>
-            ) : null
-          }
+              </Col>
+            </Row>
+            <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
+            {
+              isComparisonNotQueued ? (
+                <>
+                  <Logs
+                    type="error"
+                    {...this.getSectionProps('errorLogs')}
+                  />
+                  <Logs
+                    type="info"
+                    {...this.getSectionProps('infoLogs')}
+                  />
+                </>
+              ) : null
+            }
+          </AccordionSet>
         </TitleManager>
       </Pane>
     );
