@@ -67,9 +67,22 @@ export default class Comparisons extends React.Component {
   }
 
   formatter = {
+    comparisonName: ({ name }) => {
+      return (
+        <AppIcon
+          app="erm-comparisons"
+          iconAlignment="baseline"
+          iconKey="app"
+          size="small"
+        >
+          <div style={{ overflowWrap: 'break-word', width: 460 }}>
+            {name}
+          </div>
+        </AppIcon>
+      );
+    },
     ended: ({ ended }) => (ended ? <FormattedDateTime date={ended} /> : <NoValue />),
     errors: ({ errorLogCount }) => errorLogCount,
-    comparisonName: ({ name }) => name,
     runningStatus: ({ status }) => status && status.label,
     result: ({ result }) => result && result.label,
     started: ({ started }) => (started ? <FormattedDateTime date={started} /> : <NoValue />),
