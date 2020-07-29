@@ -25,6 +25,9 @@ export default class ComparisonView extends React.Component {
       comparison: PropTypes.object,
       comparisonPointData: PropTypes.arrayOf(PropTypes.object)
     }),
+    handlers: PropTypes.shape({
+      onExportReportAsJSON: PropTypes.func,
+    }),
     isLoading: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     onDelete: PropTypes.func,
@@ -83,21 +86,37 @@ export default class ComparisonView extends React.Component {
     const isComparisonNotInProgress = comparison?.status?.value !== 'in_progress';
 
     return (
-      <IfPermission perm="ui-erm-comparisons.jobs.delete">
-        <Button
-          buttonStyle="dropdownItem"
-          disabled={!isComparisonNotInProgress}
-          id="clickable-dropdown-delete-comparison"
-          onClick={() => {
-            onToggle();
-            this.props.onDelete();
-          }}
-        >
-          <Icon icon="trash">
-            <FormattedMessage id="ui-erm-comparisons.comparison.delete" />
-          </Icon>
-        </Button>
-      </IfPermission>
+      <>
+        <IfPermission perm="ui-erm-comparisons.jobs.delete">
+          <Button
+            buttonStyle="dropdownItem"
+            disabled={!isComparisonNotInProgress}
+            id="clickable-dropdown-delete-comparison"
+            onClick={() => {
+              onToggle();
+              this.props.onDelete();
+            }}
+          >
+            <Icon icon="trash">
+              <FormattedMessage id="ui-erm-comparisons.comparison.delete" />
+            </Icon>
+          </Button>
+        </IfPermission>
+        <IfPermission perm="ui-erm-comparisons.jobs.view">
+          <Button
+            buttonStyle="dropdownItem"
+            id="clickable-dropdown-export-comparison-report"
+            onClick={() => {
+              this.props.handlers.onExportReportAsJSON();
+              onToggle();
+            }}
+          >
+            <Icon icon="download">
+              <FormattedMessage id="ui-erm-comparisons.comparison.export" />
+            </Icon>
+          </Button>
+        </IfPermission>
+      </>
     );
   }
 
