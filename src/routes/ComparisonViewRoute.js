@@ -44,6 +44,18 @@ class ComparisonViewRoute extends React.Component {
 
   state = { showConfirmDelete: false };
 
+  downloadBlob = (name) => (
+    blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+  )
+
   handleDelete = () => {
     const { resources } = this.props;
     const comparison = resources?.comparison?.records?.[0] ?? {};
@@ -64,6 +76,19 @@ class ComparisonViewRoute extends React.Component {
   handleClose = () => {
     this.props.history.push(`/comparisons-erm${this.props.location.search}`);
   };
+
+  handleExportReportAsJSON = () => {
+    const { resources, stripes: { okapi } } = this.props;
+    const { id, name } = resources?.comparison?.records?.[0] ?? {};
+
+    return fetch(`${okapi.url}/erm/jobs/${id}/downloadFileObject`, {
+      headers: {
+        'X-Okapi-Tenant': okapi.tenant,
+        'X-Okapi-Token': okapi.token,
+      },
+    }).then(response => response.blob())
+      .then(this.downloadBlob(name));
+  }
 
   handleViewReport = () => {
     const { history, location } = this.props;
@@ -88,6 +113,9 @@ class ComparisonViewRoute extends React.Component {
         <View
           data={{
             comparison
+          }}
+          handlers={{
+            onExportReportAsJSON: this.handleExportReportAsJSON,
           }}
           isLoading={resources?.comparison?.isPending ?? true}
           onClose={this.handleClose}

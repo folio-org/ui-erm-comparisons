@@ -23,6 +23,7 @@
   "coverage.issueShort": "Iss:",
 
   "comparison.delete": "Delete",
+  "comparison.export": "Export comparison report as JSON",
 
   "comparison.delete.confirmLabel": "Delete",
   "comparison.delete.heading": "Delete comparison",
