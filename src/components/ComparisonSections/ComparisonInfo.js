@@ -32,7 +32,7 @@ export default class ComparisonInfo extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={4}>
+          <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.runningStatus" />}>
               <div data-test-comparison-status>
                 {comparison?.status?.label ?? <NoValue />}
@@ -41,61 +41,60 @@ export default class ComparisonInfo extends React.Component {
           </Col>
           {
             isComparisonNotQueued && (
-              <Col xs={4}>
-                <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.outcome" />}>
-                  <div data-test-comparison-result>
-                    {comparison?.result?.label ?? <NoValue />}
-                  </div>
-                </KeyValue>
-              </Col>
-            )
-          }
-          {
-            isComparisonNotQueued && (
-              <Col xs={4}>
-                <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.errors" />}>
-                  <div data-test-comparison-errors>
-                    {comparison.errorLog ? comparison.errorLog?.length : '0'}
-                  </div>
-                </KeyValue>
-              </Col>
-            )
-          }
-        </Row>
-        <Row>
-          {
-            isComparisonNotQueued && (
-              <Col xs={4}>
-                <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.started" />}>
-                  <div data-test-comparison-started>
-                    {comparison.started ? <FormattedDateTime date={comparison.started} /> : <NoValue />}
-                  </div>
-                </KeyValue>
-              </Col>
-            )
-          }
-          {
-            isComparisonNotQueued && (
-              <Col xs={4}>
-                <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.ended" />}>
-                  <div data-test-comparison-ended>
-                    {comparison.ended ? <FormattedDateTime date={comparison.ended} /> : <NoValue />}
-                  </div>
-                </KeyValue>
-              </Col>
+              <>
+                <Col xs={3}>
+                  <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.outcome" />}>
+                    <div data-test-comparison-result>
+                      {comparison?.result?.label ?? <NoValue />}
+                    </div>
+                  </KeyValue>
+                </Col>
+                <Col xs={3}>
+                  <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.started" />}>
+                    <div data-test-comparison-started>
+                      {comparison.started ? <FormattedDateTime date={comparison.started} /> : <NoValue />}
+                    </div>
+                  </KeyValue>
+                </Col>
+                <Col xs={3}>
+                  <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.ended" />}>
+                    <div data-test-comparison-ended>
+                      {comparison.ended ? <FormattedDateTime date={comparison.ended} /> : <NoValue />}
+                    </div>
+                  </KeyValue>
+                </Col>
+              </>
             )
           }
         </Row>
-        <Row>
-          <Button
-            buttonStyle="primary mega"
-            data-test-comparison-report-view
-            marginBottom0
-            onClick={onViewReport}
-          >
-            <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
-          </Button>
-        </Row>
+        {
+          isComparisonNotQueued && (
+            <>
+              <Row>
+                <Col xs={3}>
+                  <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.errors" />}>
+                    <div data-test-comparison-errors>
+                      {comparison.errorLog ? comparison.errorLog?.length : '0'}
+                    </div>
+                  </KeyValue>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <Button
+                    buttonStyle="primary"
+                    data-test-comparison-report-view
+                    fullWidth
+                    marginBottom0
+                    onClick={onViewReport}
+                  >
+                    <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
+                  </Button>
+                </Col>
+              </Row>
+            </>
+          )
+        }
       </div>
     );
   }
