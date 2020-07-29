@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Col,
+  Headline,
   KeyValue,
   NoValue,
   Row,
@@ -23,12 +24,14 @@ export default class ComparisonInfo extends React.Component {
     return (
       <div>
         <Row>
-          <Col xs={9}>
-            <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.comparisonName" />}>
-              <div data-test-comparison-name>
-                <strong>{comparison.name}</strong>
-              </div>
-            </KeyValue>
+          <Col xs={12}>
+            <Headline
+              data-test-comparison-name
+              size="xx-large"
+              tag="h2"
+            >
+              {comparison.name}
+            </Headline>
           </Col>
         </Row>
         <Row>

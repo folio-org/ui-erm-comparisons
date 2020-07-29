@@ -13,7 +13,7 @@ import {
   Row,
   Spinner
 } from '@folio/stripes/components';
-import { IfPermission, TitleManager } from '@folio/stripes/core';
+import { AppIcon, IfPermission, TitleManager } from '@folio/stripes/core';
 
 import { ComparisonInfo, ComparisonPoints } from '../ComparisonSections';
 
@@ -110,6 +110,7 @@ export default class ComparisonView extends React.Component {
     return (
       <Pane
         actionMenu={this.getActionMenu}
+        appIcon={<AppIcon app="erm-comparisons" />}
         data-test-comparison-details
         defaultWidth="45%"
         dismissible
