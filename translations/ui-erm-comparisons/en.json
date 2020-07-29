@@ -38,7 +38,7 @@
   "prop.ended": "Ended",
   "prop.errors": "Errors",
   "prop.filename": "Filename",
-  "prop.comparisonName": "Comparison name",
+  "prop.comparisonName": "Name",
   "prop.noOfErrors": "No. of errors",
   "prop.outcome": "Import outcome",
   "prop.result": "Result",

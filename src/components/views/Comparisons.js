@@ -191,7 +191,7 @@ export default class Comparisons extends React.Component {
     return (
       <div ref={contentRef} data-test-ermcomparisons>
         <SearchAndSortQuery
-          initialFilterState={{ status: ['Queued', 'In progress'] }}
+          initialFilterState={{ }}
           initialSearchState={{ query: '' }}
           initialSortState={{ sort: '-started' }}
           queryGetter={queryGetter}
