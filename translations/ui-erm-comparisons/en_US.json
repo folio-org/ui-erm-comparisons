@@ -28,7 +28,7 @@
     "prop.filename": "Filename",
     "prop.comparisonName": "Name",
     "prop.noOfErrors": "No. of errors",
-    "prop.outcome": "Import outcome",
+    "prop.outcome": "Outcome",
     "prop.result": "Result",
     "prop.runningStatus": "Running status",
     "prop.started": "Started",
