@@ -142,8 +142,8 @@ describe('Comparison info', () => {
         expect(interactor.isComparisonEndedPresent).to.be.false;
       });
 
-      it('renders \'view report\' button', () => {
-        expect(interactor.isViewReportButtonPresent).to.be.true;
+      it('does not render \'view report\' button', () => {
+        expect(interactor.isViewReportButtonPresent).to.be.false;
       });
     });
   });
