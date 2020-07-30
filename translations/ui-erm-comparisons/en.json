@@ -23,6 +23,7 @@
   "coverage.issueShort": "Iss:",
 
   "comparison.delete": "Delete",
+  "comparison.export": "Export comparison report as JSON",
 
   "comparison.delete.confirmLabel": "Delete",
   "comparison.delete.heading": "Delete comparison",
@@ -59,6 +60,7 @@
   "comparison.newComparison": "New comparison",
   "comparison.close": "Close comparison",
 
+  "comparisonReport.loadMore": "Load more",
   "comparisonReport.titleOnPlatform": "Title on platform",
   "comparisonReport.title": "Title",
   "comparisonReport.availableVia": "Available via",

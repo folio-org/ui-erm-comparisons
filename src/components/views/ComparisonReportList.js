@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+
 import {
   InfoPopover,
   Layout,
@@ -15,15 +16,15 @@ import {
 } from '@folio/stripes-erm-components';
 
 import TitleInfoPopover from '../TitleInfoPopover';
+
 import {
   getResourceProperties,
   getResourceColumnHeader,
   getResourceOccurrence
 } from '../utilities';
-
 import css from './ComparisonReportList.css';
 
-const ComparisonReportList = ({ sourceData }) => {
+const ComparisonReportList = ({ sourceData, totalCount }) => {
   const {
     comparisonPointData: { comparisonPoints = [] },
     report
@@ -66,6 +67,7 @@ const ComparisonReportList = ({ sourceData }) => {
       }}
       contentData={report}
       formatter={{
+        coverage: () => true,
         title: rowData => {
           return (
             <Layout className="display-flex">
@@ -94,18 +96,15 @@ const ComparisonReportList = ({ sourceData }) => {
               </strong>
             </Layout>
           );
-        },
-        coverage: () => true
+        }
       }}
       getCellClass={(defaultClass, rowData, column) => {
         const { overlap } = rowData;
-
         if (column === 'overlap') {
           return `${defaultClass} ${css[overlap]}`;
         } else if (column === 'title') {
           return `${defaultClass} ${css.titleCell}`;
         }
-
         return defaultClass;
       }}
       getHeaderCellClass={(header) => {
@@ -149,10 +148,8 @@ const ComparisonReportList = ({ sourceData }) => {
                   formatter={{
                     availableVia: r => {
                       if (r.platform === Object.values(rowData.availability)[r.rowIndex - 1]?.platform) return ''; // logic to display the platform only once per title
-
                       const { id } = rowData;
                       const { longName, platform, url } = r;
-
                       return (
                         <TitleOnPlatformLink
                           id={id}
@@ -244,6 +241,7 @@ const ComparisonReportList = ({ sourceData }) => {
           </div>
         );
       }}
+      totalCount={totalCount}
       visibleColumns={['title', 'availableVia', 'coverage', 'resourceA', 'resourceB', 'overlap']}
     />
   );
@@ -256,6 +254,7 @@ ComparisonReportList.propTypes = {
     }),
     report: PropTypes.arrayOf(PropTypes.object)
   }),
+  totalCount: PropTypes.number
 };
 
 export default ComparisonReportList;
