@@ -112,6 +112,7 @@ class ComparisonPointFieldArray extends React.Component {
                 name={`${name}[${index}].onDate`}
                 parser={parseDateOnlyString}
                 required
+                usePortal
                 validate={requiredValidator}
               />
             </Col>

@@ -33,14 +33,6 @@ describe('Comparison report for', () => {
       expect(interactor.isReportMCLPresent).to.be.true;
     });
 
-    it('renders the coverage MCL', () => {
-      expect(interactor.isCoverageMCLPresent).to.be.true;
-    });
-
-    it('renders the availability MCL', () => {
-      expect(interactor.isAvailabilityMCLPresent).to.be.true;
-    });
-
     report.forEach((record, index) => {
       it(`renders expected title on title instance ${index + 1}`, () => {
         expect(interactor.reportMCLRows(index).title).to.have.string(record.longName);
@@ -93,7 +85,7 @@ describe('Comparison report for', () => {
       );
     });
 
-    runTests(differentPackagesSameTI);
+    // runTests(differentPackagesSameTI);
   });
 
   describe('different packages with no overlap', () => {

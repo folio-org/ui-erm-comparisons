@@ -37,7 +37,7 @@ const getResourceColumnHeader = (resource) => {
   );
 };
 
-const getResourceOccurrence = (rowData, resource) => {
+const getResourceOccurrence = (coverage, resource) => {
   const {
     date,
     id: resourceId,
@@ -45,7 +45,7 @@ const getResourceOccurrence = (rowData, resource) => {
     type
   } = resource;
 
-  const { occurrences, id } = rowData;
+  const { occurrences, id } = coverage;
   const isResourceInPackage = occurrences[resourceId] === true;
   const icon = isResourceInPackage ? 'check-circle' : 'times-circle-solid';
   const status = isResourceInPackage ? 'success' : 'error';

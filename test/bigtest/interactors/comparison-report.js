@@ -20,7 +20,7 @@ import {
 
 export default @interactor class ComparisonReportInteractor {
   reportMCLRows = collection('[data-test-report-mcl-row]', reportMCLRowsInteractor)
-  availabilityMCLRows = collection('[data-test-availability-mcl-row]', availabilityMCLRowsInteractor)
+  availabilityMCLRows = collection('[data-test-report-mcl-row]', availabilityMCLRowsInteractor)
   coverageMCLRows = collection('[data-test-coverage-mcl-row]', coverageMCLRowsInteractor)
 
   isReportMCLPresent = isPresent('[id^=comparison-report-mcl]');

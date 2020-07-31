@@ -60,7 +60,8 @@
   "comparison.newComparison": "New comparison",
   "comparison.close": "Close comparison",
 
-  "comparisonReport.loadMore": "Load more",
+  "comparisonReport.buildingReport": "Building report for display...",
+  "comparisonReport.loadAll": "Load all",
   "comparisonReport.titleOnPlatform": "Title on platform",
   "comparisonReport.title": "Title",
   "comparisonReport.availableVia": "Available via",
