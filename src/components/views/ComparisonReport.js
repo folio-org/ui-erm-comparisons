@@ -3,19 +3,17 @@ import PropTypes from 'prop-types';
 
 import { FormattedMessage } from 'react-intl';
 import {
-  Button,
   IconButton,
-  Layout,
-  LoadingPane,
   Pane,
   PaneMenu,
   Paneset
 } from '@folio/stripes/components';
+
 import { AppIcon } from '@folio/stripes/core';
 
 import ComparisonReportList from './ComparisonReportList';
 
-const resourceCount = 100;
+const resourceCount = 200;
 const ComparisonReport = ({ data, isLoading, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(resourceCount);
 
@@ -37,7 +35,7 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
   };
 
   const handleNeedMoreData = () => {
-    setCurrentIndex(currentIndex + resourceCount);
+    setCurrentIndex(data?.report?.length ?? 0);
   };
 
   const paneProps = {
@@ -45,8 +43,6 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
     id: 'pane-report',
     onClose,
   };
-
-  if (isLoading) return <LoadingPane data-loading {...paneProps} />;
 
   const { comparisonPointData } = data;
   const currentResources = data?.report?.slice(0, currentIndex);
@@ -60,24 +56,12 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
         paneTitle={comparisonPointData?.name}
         {...paneProps}
       >
-        <div>
-          <ComparisonReportList
-            sourceData={{ comparisonPointData, report: currentResources }}
-            totalCount={totalCount}
-          />
-          {
-            currentResources.length < totalCount && (
-              <Layout className="marginTop1 textCentered">
-                <Button
-                  onClick={handleNeedMoreData}
-                  style={{ width: '75%' }}
-                >
-                  <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadMore" />
-                </Button>
-              </Layout>
-            )
-          }
-        </div>
+        <ComparisonReportList
+          isLoading={isLoading}
+          onNeedMoreData={() => setTimeout(handleNeedMoreData, 0)}
+          sourceData={{ comparisonPointData, report: currentResources }}
+          totalCount={totalCount}
+        />
       </Pane>
     </Paneset>
   );

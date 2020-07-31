@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
 import {
+  Icon,
   InfoPopover,
   Layout,
   MultiColumnList,
@@ -24,13 +25,45 @@ import {
 } from '../utilities';
 import css from './ComparisonReportList.css';
 
-const ComparisonReportList = ({ sourceData, totalCount }) => {
+const ComparisonReportList = (
+  {
+    isLoading,
+    onNeedMoreData,
+    sourceData,
+    totalCount
+  }
+) => {
   const {
     comparisonPointData: { comparisonPoints = [] },
     report
   } = sourceData;
 
+  const icon = 'spinner-ellipsis';
+  const label = <FormattedMessage id="ui-erm-comparisons.comparisonReport.buildingReport" />;
+
+  if (isLoading) {
+    return (
+      <div className={css.emptyReportMessage}>
+        <div className={css.emptyReportMessageLabelWrap}>
+          {icon && <Icon icon={icon} iconRootClass={css.emptyReportMessageIcon} />}
+          <span className={css.emptyReportMessageLabel}>{label}</span>
+        </div>
+      </div>
+    );
+  }
+
   const [comparisonResourceA, comparisonResourceB] = comparisonPoints;
+
+  // Nest MCL only if we need to
+  const shouldNestMCL = (rowData) => {
+    const availability = Object.values(rowData.availability);
+    if (availability.length <= 1) {
+      const coverage = Object.values(availability?.[0]?.coverage ?? {});
+      if (coverage.length <= 1) return false;
+    }
+
+    return true;
+  };
 
   const getCoverage = (statements, embargo) => {
     if (!statements.length && !embargo) return '';
@@ -67,7 +100,66 @@ const ComparisonReportList = ({ sourceData, totalCount }) => {
       }}
       contentData={report}
       formatter={{
-        coverage: () => true,
+        availableVia: rowData => {
+          const { id } = rowData;
+
+          return !shouldNestMCL(rowData) ? (
+            <Layout className="display-flex flex-direction-column">
+              {Object.values(rowData.availability).map(value => {
+                const { longName, platform, url } = value;
+                return (
+                  <TitleOnPlatformLink
+                    id={id}
+                    name={longName}
+                    platform={platform}
+                    url={url}
+                  />
+                );
+              })
+              }
+            </Layout>
+          ) : true;
+        },
+        coverage: rowData => {
+          return !shouldNestMCL(rowData) ? (
+            <Layout className="display-flex flex-direction-column full">
+              {Object.values(rowData.availability).map(availability => {
+                const { coverage } = availability;
+                return Object.values(coverage).map(cov => {
+                  const { statements, embargo } = cov;
+                  return getCoverage(statements, embargo);
+                });
+              })
+              }
+            </Layout>
+          ) : true;
+        },
+        resourceA: rowData => {
+          return !shouldNestMCL(rowData) ? (
+            <Layout className="display-flex full">
+              {Object.values(rowData.availability).map(availability => {
+                const { coverage } = availability;
+                return Object.values(coverage).map(cov => {
+                  return getResourceOccurrence(cov, getResourceProperties(comparisonResourceA));
+                });
+              })
+              }
+            </Layout>
+          ) : true;
+        },
+        resourceB: rowData => {
+          return !shouldNestMCL(rowData) ? (
+            <Layout className="display-flex full">
+              {Object.values(rowData.availability).map(availability => {
+                const { coverage } = availability;
+                return Object.values(coverage).map(cov => {
+                  return getResourceOccurrence(cov, getResourceProperties(comparisonResourceB));
+                });
+              })
+              }
+            </Layout>
+          ) : true;
+        },
         title: rowData => {
           return (
             <Layout className="display-flex">
@@ -96,7 +188,7 @@ const ComparisonReportList = ({ sourceData, totalCount }) => {
               </strong>
             </Layout>
           );
-        }
+        },
       }}
       getCellClass={(defaultClass, rowData, column) => {
         const { overlap } = rowData;
@@ -112,6 +204,9 @@ const ComparisonReportList = ({ sourceData, totalCount }) => {
       }}
       id="comparison-report-mcl"
       interactive={false}
+      onNeedMoreData={onNeedMoreData}
+      pagingButtonLabel={<FormattedMessage id="ui-erm-comparisons.comparisonReport.loadAll" />}
+      pagingType="click"
       rowFormatter={({
         cells,
         interactive,
@@ -121,7 +216,7 @@ const ComparisonReportList = ({ sourceData, totalCount }) => {
         rowIndex,
         rowProps,
       }) => {
-        return (
+        return shouldNestMCL(rowData) ? (
           <div
             key={`row-${rowIndex}`}
             aria-label={labelStrings[0]}
@@ -239,7 +334,16 @@ const ComparisonReportList = ({ sourceData, totalCount }) => {
               cells[5]
             }
           </div>
-        );
+        ) :
+          <div
+            key={`row-${rowIndex}`}
+            aria-label={labelStrings[0]}
+            className={rowClass}
+            data-test-report-mcl-row
+            {...rowProps}
+          >
+            {cells}
+          </div>;
       }}
       totalCount={totalCount}
       visibleColumns={['title', 'availableVia', 'coverage', 'resourceA', 'resourceB', 'overlap']}
@@ -248,6 +352,7 @@ const ComparisonReportList = ({ sourceData, totalCount }) => {
 };
 
 ComparisonReportList.propTypes = {
+  isLoading: PropTypes.bool,
   sourceData: PropTypes.shape({
     comparisonPointData: PropTypes.shape({
       comparisonPoints: PropTypes.array,
