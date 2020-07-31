@@ -81,7 +81,7 @@ div[role="gridcell"] {
   justify-content: center;
 }
 
-.noResultsMessageLabelWrap {
+.emptyReportMessageLabelWrap {
   font-size: var(--font-size-large);
 }
 
