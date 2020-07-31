@@ -7,13 +7,15 @@ import {
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
+import { cloneDeep } from 'lodash';
+
 import { StaticRouter as Router } from 'react-router-dom';
 import { mountWithContext } from '../helpers/mountWithContext';
 
 import { ComparisonInfo } from '../../../src/components/ComparisonSections';
 import ComparisonsInfoInteractor from '../interactors/comparisons-info';
 
-const comparison = {
+const queuedComparison = {
   class: 'org.olf.general.jobs.ComparisonJob',
   comparisonPoints: [
     {
@@ -42,20 +44,120 @@ const comparison = {
     label: 'Success'
   },
   status: {
-    label: 'Ended'
+    label: 'Queued',
+    value: 'queued'
   }
+};
+
+const inProgressComparison = cloneDeep(queuedComparison);
+inProgressComparison.status = {
+  label: 'In progress',
+  value: 'in_progress'
+};
+
+const endedComparison = cloneDeep(queuedComparison);
+endedComparison.status = {
+  label: 'Ended',
+  value: 'ended'
 };
 
 describe('Comparison info', () => {
   const interactor = new ComparisonsInfoInteractor();
 
-  describe('Comparison not queued', () => {
+  describe('Comparison queued', () => {
+    beforeEach(async function () {
+      await mountWithContext(
+        <Router context={{}}>
+          <ComparisonInfo
+            comparison={queuedComparison}
+            onViewReport={() => {}}
+          />
+        </Router>
+      );
+    });
+
+    describe('Render tests', () => {
+      it('renders correct comparison name', () => {
+        expect(interactor.comparisonName).to.equal(queuedComparison.name);
+      });
+
+      it('renders correct comparison status', () => {
+        expect(interactor.comparisonStatus).to.equal(queuedComparison.status.label);
+      });
+
+      it('does not render result', () => {
+        expect(interactor.isComparisonResultPresent).to.be.false;
+      });
+
+      it('does not render errors', () => {
+        expect(interactor.isComparisonErrorsPresent).to.be.false;
+      });
+
+      it('does not render started', () => {
+        expect(interactor.isComparisonStartedPresent).to.be.false;
+      });
+
+      it('does not render ended', () => {
+        expect(interactor.isComparisonEndedPresent).to.be.false;
+      });
+
+      it('does not render \'view report\' button', () => {
+        expect(interactor.isViewReportButtonPresent).to.be.false;
+      });
+    });
+  });
+
+  describe('Comparison in progress', () => {
+    beforeEach(async function () {
+      await mountWithContext(
+        <Router context={{}}>
+          <ComparisonInfo
+            comparison={inProgressComparison}
+            isComparisonNotQueued
+            onViewReport={() => {}}
+          />
+        </Router>
+      );
+    });
+
+    describe('Render tests', () => {
+      it('renders correct comparison name', () => {
+        expect(interactor.comparisonName).to.equal(inProgressComparison.name);
+      });
+
+      it('renders correct comparison status', () => {
+        expect(interactor.comparisonStatus).to.equal(inProgressComparison.status.label);
+      });
+
+      it('renders correct comparison result', () => {
+        expect(interactor.comparisonResult).to.equal(inProgressComparison.result.label);
+      });
+
+      it('renders correct comparison errors', () => {
+        expect(interactor.comparisonErrors).to.equal('0');
+      });
+
+      it('renders correct comparison started', () => {
+        expect(interactor.comparisonStarted).to.equal('2/8/2009 1:00 AM');
+      });
+
+      it('renders correct comparison ended', () => {
+        expect(interactor.comparisonEnded).to.equal('4/5/2016 2:58 PM');
+      });
+
+      it('does not render \'view report\' button', () => {
+        expect(interactor.isViewReportButtonPresent).to.be.false;
+      });
+    });
+  });
+
+  describe('Comparison ended', () => {
     let viewButtonClicked = false;
     beforeEach(async function () {
       await mountWithContext(
         <Router context={{}}>
           <ComparisonInfo
-            comparison={comparison}
+            comparison={endedComparison}
             isComparisonNotQueued
             onViewReport={() => { viewButtonClicked = true; }}
           />
@@ -65,15 +167,15 @@ describe('Comparison info', () => {
 
     describe('Render tests', () => {
       it('renders correct comparison name', () => {
-        expect(interactor.comparisonName).to.equal(comparison.name);
+        expect(interactor.comparisonName).to.equal(endedComparison.name);
       });
 
       it('renders correct comparison status', () => {
-        expect(interactor.comparisonStatus).to.equal(comparison.status.label);
+        expect(interactor.comparisonStatus).to.equal(endedComparison.status.label);
       });
 
       it('renders correct comparison result', () => {
-        expect(interactor.comparisonResult).to.equal(comparison.result.label);
+        expect(interactor.comparisonResult).to.equal(endedComparison.result.label);
       });
 
       it('renders correct comparison errors', () => {
@@ -100,50 +202,6 @@ describe('Comparison info', () => {
         it('calls onViewReport', () => {
           expect(viewButtonClicked).to.be.true;
         });
-      });
-    });
-  });
-
-  describe('Comparison queued', () => {
-    beforeEach(async function () {
-      await mountWithContext(
-        <Router context={{}}>
-          <ComparisonInfo
-            comparison={comparison}
-            isComparisonNotQueued={false}
-            onViewReport={() => {}}
-          />
-        </Router>
-      );
-    });
-
-    describe('Render tests', () => {
-      it('renders correct comparison name', () => {
-        expect(interactor.comparisonName).to.equal(comparison.name);
-      });
-
-      it('renders correct comparison status', () => {
-        expect(interactor.comparisonStatus).to.equal(comparison.status.label);
-      });
-
-      it('does not render result', () => {
-        expect(interactor.isComparisonResultPresent).to.be.false;
-      });
-
-      it('does not render errors', () => {
-        expect(interactor.isComparisonErrorsPresent).to.be.false;
-      });
-
-      it('does not render started', () => {
-        expect(interactor.isComparisonStartedPresent).to.be.false;
-      });
-
-      it('does not render ended', () => {
-        expect(interactor.isComparisonEndedPresent).to.be.false;
-      });
-
-      it('does not render \'view report\' button', () => {
-        expect(interactor.isViewReportButtonPresent).to.be.false;
       });
     });
   });
