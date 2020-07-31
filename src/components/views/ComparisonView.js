@@ -13,7 +13,7 @@ import {
   Row,
   Spinner
 } from '@folio/stripes/components';
-import { IfPermission, TitleManager } from '@folio/stripes/core';
+import { AppIcon, IfPermission, TitleManager } from '@folio/stripes/core';
 
 import { ComparisonInfo, ComparisonPoints } from '../ComparisonSections';
 
@@ -124,11 +124,12 @@ export default class ComparisonView extends React.Component {
     const { data: { comparison }, isLoading, onViewReport } = this.props;
 
     if (isLoading) return this.renderLoadingPane();
-    const isComparisonNotQueued = comparison?.status?.value !== 'queued';
+    const isComparisonEnded = comparison?.status?.value === 'ended';
 
     return (
       <Pane
         actionMenu={this.getActionMenu}
+        appIcon={<AppIcon app="erm-comparisons" />}
         data-test-comparison-details
         defaultWidth="45%"
         dismissible
@@ -141,31 +142,33 @@ export default class ComparisonView extends React.Component {
         }
       >
         <TitleManager data-test-title-name record={comparison.name}>
-          <ComparisonInfo {...{ comparison, isComparisonNotQueued, onViewReport }} />
-          {
-            isComparisonNotQueued ? (
-              <AccordionSet>
-                <Row end="xs">
-                  <Col xs>
-                    <ExpandAllButton
-                      accordionStatus={this.state.sections}
-                      id="clickable-expand-all"
-                      onToggle={this.handleAllSectionsToggle}
-                    />
-                  </Col>
-                </Row>
-                <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
-                <Logs
-                  type="error"
-                  {...this.getSectionProps('errorLogs')}
+          <ComparisonInfo comparison={comparison} onViewReport={onViewReport} />
+          <AccordionSet>
+            <Row end="xs">
+              <Col xs>
+                <ExpandAllButton
+                  accordionStatus={this.state.sections}
+                  id="clickable-expand-all"
+                  onToggle={this.handleAllSectionsToggle}
                 />
-                <Logs
-                  type="info"
-                  {...this.getSectionProps('infoLogs')}
-                />
-              </AccordionSet>
-            ) : null
-          }
+              </Col>
+            </Row>
+            <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
+            {
+              isComparisonEnded ? (
+                <>
+                  <Logs
+                    type="error"
+                    {...this.getSectionProps('errorLogs')}
+                  />
+                  <Logs
+                    type="info"
+                    {...this.getSectionProps('infoLogs')}
+                  />
+                </>
+              ) : null
+            }
+          </AccordionSet>
         </TitleManager>
       </Pane>
     );
