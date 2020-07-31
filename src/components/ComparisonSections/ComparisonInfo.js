@@ -15,12 +15,13 @@ import FormattedDateTime from '../FormattedDateTime';
 export default class ComparisonInfo extends React.Component {
   static propTypes = {
     comparison: PropTypes.object.isRequired,
-    isComparisonNotQueued: PropTypes.bool.isRequired,
     onViewReport: PropTypes.func.isRequired
   };
 
   render() {
-    const { comparison, isComparisonNotQueued, onViewReport } = this.props;
+    const { comparison, onViewReport } = this.props;
+    const isComparisonNotQueued = comparison?.status?.value !== 'queued';
+    const isComparisonEnded = comparison?.status?.value === 'ended';
     return (
       <div>
         <Row>
@@ -72,30 +73,32 @@ export default class ComparisonInfo extends React.Component {
         </Row>
         {
           isComparisonNotQueued && (
-            <>
-              <Row>
-                <Col xs={3}>
-                  <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.errors" />}>
-                    <div data-test-comparison-errors>
-                      {comparison.errorLog ? comparison.errorLog?.length : '0'}
-                    </div>
-                  </KeyValue>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12}>
-                  <Button
-                    buttonStyle="primary"
-                    data-test-comparison-report-view
-                    fullWidth
-                    marginBottom0
-                    onClick={onViewReport}
-                  >
-                    <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
-                  </Button>
-                </Col>
-              </Row>
-            </>
+            <Row>
+              <Col xs={3}>
+                <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.errors" />}>
+                  <div data-test-comparison-errors>
+                    {comparison.errorLog ? comparison.errorLog?.length : '0'}
+                  </div>
+                </KeyValue>
+              </Col>
+            </Row>
+          )
+        }
+        {
+          isComparisonEnded && (
+            <Row>
+              <Col xs={12}>
+                <Button
+                  buttonStyle="primary"
+                  data-test-comparison-report-view
+                  fullWidth
+                  marginBottom0
+                  onClick={onViewReport}
+                >
+                  <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
+                </Button>
+              </Col>
+            </Row>
           )
         }
       </div>
