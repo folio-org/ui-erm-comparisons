@@ -142,7 +142,7 @@ export default class ComparisonView extends React.Component {
         }
       >
         <TitleManager data-test-title-name record={comparison.name}>
-          <ComparisonInfo {...{ comparison, onViewReport }} />
+          <ComparisonInfo comparison={comparison} onViewReport={onViewReport} />
           <AccordionSet>
             <Row end="xs">
               <Col xs>
