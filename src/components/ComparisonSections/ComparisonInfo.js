@@ -20,7 +20,7 @@ export default class ComparisonInfo extends React.Component {
 
   render() {
     const { comparison, onViewReport } = this.props;
-    const isComparisonNotQueued = comparison?.status?.value !== 'queued';
+    const isComparisonQueued = comparison?.status?.value === 'queued';
     const isComparisonEnded = comparison?.status?.value === 'ended';
     return (
       <div>
@@ -44,7 +44,7 @@ export default class ComparisonInfo extends React.Component {
             </KeyValue>
           </Col>
           {
-            isComparisonNotQueued && (
+            !isComparisonQueued && (
               <>
                 <Col xs={3}>
                   <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.outcome" />}>
@@ -72,7 +72,7 @@ export default class ComparisonInfo extends React.Component {
           }
         </Row>
         {
-          isComparisonNotQueued && (
+          !isComparisonQueued && (
             <Row>
               <Col xs={3}>
                 <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.errors" />}>
