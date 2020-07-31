@@ -124,7 +124,7 @@ export default class ComparisonView extends React.Component {
     const { data: { comparison }, isLoading, onViewReport } = this.props;
 
     if (isLoading) return this.renderLoadingPane();
-    const isComparisonNotQueued = comparison?.status?.value !== 'queued';
+    const isComparisonEnded = comparison?.status?.value === 'ended';
 
     return (
       <Pane
@@ -142,7 +142,7 @@ export default class ComparisonView extends React.Component {
         }
       >
         <TitleManager data-test-title-name record={comparison.name}>
-          <ComparisonInfo {...{ comparison, isComparisonNotQueued, onViewReport }} />
+          <ComparisonInfo comparison={comparison} onViewReport={onViewReport} />
           <AccordionSet>
             <Row end="xs">
               <Col xs>
@@ -155,7 +155,7 @@ export default class ComparisonView extends React.Component {
             </Row>
             <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
             {
-              isComparisonNotQueued ? (
+              isComparisonEnded ? (
                 <>
                   <Logs
                     type="error"
