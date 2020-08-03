@@ -78,6 +78,9 @@
   "comparisonReport.info.ezb": "EZB",
   "comparisonReport.info.zdb": "ZDB",
   "comparisonReport.info.eissn": "ISSN (Online)",
+  "comparisonReport.info.issn": "ISSN",
+  "comparisonReport.info.isbn": "ISBN",
+  "comparisonReport.info.eisbn": "ISBN (Online)",
 
   "newComparison.info": "Select two items for comparison",
   "newComparison.name": "Name",

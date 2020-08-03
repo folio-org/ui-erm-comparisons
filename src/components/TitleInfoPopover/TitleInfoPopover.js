@@ -51,6 +51,9 @@ const TitleInfoPopover = ({ titleInstance }) => {
       {renderIdentifier('ezb')}
       {renderIdentifier('zdb')}
       {renderIdentifier('eissn')}
+      {renderIdentifier('issn')}
+      {renderIdentifier('isbn')}
+      {renderIdentifier('eisbn')}
     </Layout>
   );
 };
