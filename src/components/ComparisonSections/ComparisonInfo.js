@@ -11,6 +11,7 @@ import {
 
 import { FormattedMessage } from 'react-intl';
 import FormattedDateTime from '../FormattedDateTime';
+import { ConditionalTooltip } from '../utilities';
 
 export default class ComparisonInfo extends React.Component {
   static propTypes = {
@@ -84,23 +85,28 @@ export default class ComparisonInfo extends React.Component {
             </Row>
           )
         }
-        {
-          isComparisonEnded && (
-            <Row>
-              <Col xs={12}>
+        <Row>
+          <Col xs={12}>
+            <ConditionalTooltip
+              condition={!isComparisonEnded}
+              id="viewReport"
+              text={<FormattedMessage id="ui-erm-comparisons.prop.viewReportReload" />}
+            >
+              <div>
                 <Button
                   buttonStyle="primary"
                   data-test-comparison-report-view
+                  disabled={!isComparisonEnded}
                   fullWidth
                   marginBottom0
                   onClick={onViewReport}
                 >
                   <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
                 </Button>
-              </Col>
-            </Row>
-          )
-        }
+              </div>
+            </ConditionalTooltip>
+          </Col>
+        </Row>
       </div>
     );
   }
