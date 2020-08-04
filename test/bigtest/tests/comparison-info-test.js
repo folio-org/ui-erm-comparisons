@@ -101,8 +101,12 @@ describe('Comparison info', () => {
         expect(interactor.isComparisonEndedPresent).to.be.false;
       });
 
-      it('does not render \'view report\' button', () => {
-        expect(interactor.isViewReportButtonPresent).to.be.false;
+      it('renders \'view report\' button', () => {
+        expect(interactor.isViewReportButtonPresent).to.be.true;
+      });
+
+      it('\'view report\' button is disabled', () => {
+        expect(interactor.isviewReportButtonDisabled).to.be.true;
       });
     });
   });
@@ -145,8 +149,12 @@ describe('Comparison info', () => {
         expect(interactor.comparisonEnded).to.equal('4/5/2016 2:58 PM');
       });
 
-      it('does not render \'view report\' button', () => {
-        expect(interactor.isViewReportButtonPresent).to.be.false;
+      it('renders \'view report\' button', () => {
+        expect(interactor.isViewReportButtonPresent).to.be.true;
+      });
+
+      it('\'view report\' button is disabled', () => {
+        expect(interactor.isviewReportButtonDisabled).to.be.true;
       });
     });
   });
@@ -192,6 +200,10 @@ describe('Comparison info', () => {
 
       it('renders \'view report\' button', () => {
         expect(interactor.isViewReportButtonPresent).to.be.true;
+      });
+
+      it('\'view report\' button is not disabled', () => {
+        expect(interactor.isviewReportButtonDisabled).to.be.false;
       });
 
       describe('Clicking the view report button', () => {

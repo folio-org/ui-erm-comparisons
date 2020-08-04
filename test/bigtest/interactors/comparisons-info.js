@@ -2,6 +2,7 @@ import {
   clickable,
   interactor,
   isPresent,
+  property,
   text
 } from '@bigtest/interactor';
 
@@ -24,4 +25,5 @@ export default @interactor class ComparisonsInfoInteractor {
 
   isViewReportButtonPresent = isPresent('[data-test-comparison-report-view]');
   viewReportButton = clickable('[data-test-comparison-report-view]');
+  isviewReportButtonDisabled = property('[data-test-comparison-report-view]', 'disabled');
 }
