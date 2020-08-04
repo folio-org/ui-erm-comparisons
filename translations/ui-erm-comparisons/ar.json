@@ -100,5 +100,11 @@
     "comparison.created.error.noComparisonLinked": "خطأ في إنشاء <strong>المقارنة</strong>: لم يتم ربط إحدى المقارنات أو أكثر",
     "comparison.created.error": "خطأ في إنشاء <strong>المقارنة</strong>: {err}",
     "comparison.created.error.unknownError": "خطأ في إنشاء <strong>المقارنة</strong>",
-    "newComparison.packageAgreements": "اتفاقيات لهذه الحزمة"
+    "newComparison.packageAgreements": "اتفاقيات لهذه الحزمة",
+    "comparison.export": "تصدير تقرير المقارنة كـ JSON",
+    "comparisonReport.buildingReport": "جاري بناء تقرير للعرض...",
+    "comparisonReport.loadAll": "تحميل الكل",
+    "comparisonReport.info.issn": "ردمد",
+    "comparisonReport.info.isbn": "ردمك",
+    "comparisonReport.info.eisbn": "ردمك (عبر الإنترنت)"
 }

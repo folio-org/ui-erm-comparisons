@@ -26,9 +26,9 @@
     "prop.ended": "Terminé",
     "prop.errors": "Erreurs",
     "prop.filename": "Nom de fichier",
-    "prop.comparisonName": "Comparison name",
+    "prop.comparisonName": "Nom",
     "prop.noOfErrors": "No. of errors",
-    "prop.outcome": "Import outcome",
+    "prop.outcome": "Résultat",
     "prop.result": "Résultat",
     "prop.runningStatus": "Running status",
     "prop.started": "Started",
@@ -100,5 +100,11 @@
     "comparison.created.error.noComparisonLinked": "Erreur lors de la création de la <strong> comparaison </strong> : une ou plusieurs comparaisons n'ont pas été liées",
     "comparison.created.error": "Erreur lors de la création de la <strong> comparaison </strong> : {err}",
     "comparison.created.error.unknownError": "Erreur lors de la création de la <strong> comparaison </strong>",
-    "newComparison.packageAgreements": "Accords pour ce bouquet"
+    "newComparison.packageAgreements": "Accords pour ce bouquet",
+    "comparison.export": "Export comparison report as JSON",
+    "comparisonReport.buildingReport": "Building report for display...",
+    "comparisonReport.loadAll": "Charger tout",
+    "comparisonReport.info.issn": "ISSN",
+    "comparisonReport.info.isbn": "ISBN",
+    "comparisonReport.info.eisbn": "ISBN (en ligne)"
 }
