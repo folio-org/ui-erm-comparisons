@@ -12,7 +12,6 @@ import {
 
 import { FormattedMessage } from 'react-intl';
 import FormattedDateTime from '../FormattedDateTime';
-import { ConditionalTooltip } from '../utilities';
 
 export default class ComparisonInfo extends React.Component {
   static propTypes = {
