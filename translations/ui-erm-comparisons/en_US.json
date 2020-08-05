@@ -100,5 +100,11 @@
     "comparison.created.error.noComparisonLinked": "Error creating <strong>comparison</strong>: One or more comparisons were not linked",
     "comparison.created.error": "Error creating <strong>comparison</strong>: {err}",
     "comparison.created.error.unknownError": "Error creating <strong>comparison</strong>",
-    "newComparison.packageAgreements": "Agreements for this package"
+    "newComparison.packageAgreements": "Agreements for this package",
+    "comparison.export": "Export comparison report as JSON",
+    "comparisonReport.buildingReport": "Building report for display...",
+    "comparisonReport.loadAll": "Load all",
+    "comparisonReport.info.issn": "ISSN",
+    "comparisonReport.info.isbn": "ISBN",
+    "comparisonReport.info.eisbn": "ISBN (Online)"
 }
