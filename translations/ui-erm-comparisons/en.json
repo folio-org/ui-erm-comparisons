@@ -47,6 +47,7 @@
   "prop.started": "Started",
   "prop.status": "Running status",
   "prop.viewReport": "View comparison report",
+  "prop.viewReportReload": "Reload page to refresh button once job has ended",
   "prop.comparisonPoints": "Comparison points",
   "prop.comparisonPointOne": "Comparison point 1",
   "prop.comparisonPointTwo": "Comparison point 2",

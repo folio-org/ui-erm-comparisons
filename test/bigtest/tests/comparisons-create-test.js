@@ -100,7 +100,7 @@ describe('Comparison create', () => {
       await interactor.addAgreementButton.click();
     });
 
-    it('adds a package card', () => {
+    it('adds an agreement card', () => {
       expect(interactor.agreementsList.size).to.equal(1);
     });
 

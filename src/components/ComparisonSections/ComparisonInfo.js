@@ -7,6 +7,7 @@ import {
   KeyValue,
   NoValue,
   Row,
+  Tooltip
 } from '@folio/stripes/components';
 
 import { FormattedMessage } from 'react-intl';
@@ -22,6 +23,15 @@ export default class ComparisonInfo extends React.Component {
     const { comparison, onViewReport } = this.props;
     const isComparisonQueued = comparison?.status?.value === 'queued';
     const isComparisonEnded = comparison?.status?.value === 'ended';
+
+    const viewReportButtonProps = {
+      'buttonStyle': 'primary',
+      'data-test-comparison-report-view': true,
+      'disabled': !isComparisonEnded,
+      'fullWidth': true,
+      'marginBottom0': true,
+      'onClick': onViewReport
+    };
     return (
       <div>
         <Row>
@@ -84,23 +94,35 @@ export default class ComparisonInfo extends React.Component {
             </Row>
           )
         }
-        {
-          isComparisonEnded && (
-            <Row>
-              <Col xs={12}>
+        <Row>
+          <Col xs={12}>
+            {
+              !isComparisonEnded ?
+                <Tooltip
+                  id="view-reoprt-tooltip"
+                  text={<FormattedMessage id="ui-erm-comparisons.prop.viewReportReload" />}
+                >
+                  {({ ref, ariaIds }) => (
+                    <div
+                      ref={ref}
+                      aria-labelledby={ariaIds.text}
+                    >
+                      <Button
+                        {...viewReportButtonProps}
+                      >
+                        <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
+                      </Button>
+                    </div>
+                  )}
+                </Tooltip> :
                 <Button
-                  buttonStyle="primary"
-                  data-test-comparison-report-view
-                  fullWidth
-                  marginBottom0
-                  onClick={onViewReport}
+                  {...viewReportButtonProps}
                 >
                   <FormattedMessage id="ui-erm-comparisons.prop.viewReport" />
                 </Button>
-              </Col>
-            </Row>
-          )
-        }
+              }
+          </Col>
+        </Row>
       </div>
     );
   }
