@@ -106,5 +106,6 @@
     "comparisonReport.loadAll": "تحميل الكل",
     "comparisonReport.info.issn": "ردمد",
     "comparisonReport.info.isbn": "ردمك",
-    "comparisonReport.info.eisbn": "ردمك (عبر الإنترنت)"
+    "comparisonReport.info.eisbn": "ردمك (عبر الإنترنت)",
+    "prop.viewReportReload": "إعادة تحميل الصفحة لتحديث الزر بمجرد انتهاء المهمة"
 }

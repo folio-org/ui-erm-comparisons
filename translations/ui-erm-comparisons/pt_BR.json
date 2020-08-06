@@ -106,5 +106,6 @@
     "comparisonReport.loadAll": "Carregar tudo",
     "comparisonReport.info.issn": "ISSN",
     "comparisonReport.info.isbn": "ISBN",
-    "comparisonReport.info.eisbn": "ISBN (Online)"
+    "comparisonReport.info.eisbn": "ISBN (Online)",
+    "prop.viewReportReload": "Recarregue a página para atualizar o botão assim que o job terminar"
 }
