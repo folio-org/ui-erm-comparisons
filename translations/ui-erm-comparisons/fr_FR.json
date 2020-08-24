@@ -101,7 +101,7 @@
     "comparison.created.error": "Erreur lors de la création de la <strong> comparaison </strong> : {err}",
     "comparison.created.error.unknownError": "Erreur lors de la création de la <strong> comparaison </strong>",
     "newComparison.packageAgreements": "Accords pour ce bouquet",
-    "comparison.export": "Export comparison report as JSON",
+    "comparison.export": "Exporter le rapport de comparaison au format JSON",
     "comparisonReport.buildingReport": "Rapport en cours pour affichage",
     "comparisonReport.loadAll": "Charger tout",
     "comparisonReport.info.issn": "ISSN",
