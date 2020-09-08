@@ -26,9 +26,9 @@
     "prop.ended": "Ended",
     "prop.errors": "Errors",
     "prop.filename": "Filename",
-    "prop.comparisonName": "Comparison name",
+    "prop.comparisonName": "Name",
     "prop.noOfErrors": "No. of errors",
-    "prop.outcome": "Import outcome",
+    "prop.outcome": "Outcome",
     "prop.result": "Result",
     "prop.runningStatus": "Running status",
     "prop.started": "Started",
@@ -100,5 +100,12 @@
     "comparison.created.error.noComparisonLinked": "Ошибка создания <strong>сравнения</strong>: Одно или несколько сравнений не были связаны",
     "comparison.created.error": "Ошибка создания <strong>сравнения</strong>: {err}",
     "comparison.created.error.unknownError": "Ошибка создания <strong>сравнения</strong>",
-    "newComparison.packageAgreements": "Соглашения для этого пакета"
+    "newComparison.packageAgreements": "Соглашения для этого пакета",
+    "comparison.export": "Export comparison report as JSON",
+    "comparisonReport.buildingReport": "Building report for display...",
+    "comparisonReport.loadAll": "Load all",
+    "comparisonReport.info.issn": "ISSN",
+    "comparisonReport.info.isbn": "ISBN",
+    "comparisonReport.info.eisbn": "ISBN (Online)",
+    "prop.viewReportReload": "Reload page to refresh button once job has ended"
 }

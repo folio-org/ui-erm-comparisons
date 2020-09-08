@@ -1,5 +1,5 @@
 {
-    "meta.title": "Comparações de ERM",
+    "meta.title": "Comparações de Coleções",
     "dummy.title": "título fictício",
     "create": "Criar",
     "errorLog": "Log de erros",
@@ -26,9 +26,9 @@
     "prop.ended": "Finalizado",
     "prop.errors": "Erros",
     "prop.filename": "Nome do arquivo",
-    "prop.comparisonName": "Nome da comparação",
+    "prop.comparisonName": "Nome",
     "prop.noOfErrors": "Núm. de erros",
-    "prop.outcome": "Resultado de importação",
+    "prop.outcome": "Resultado",
     "prop.result": "Resultado",
     "prop.runningStatus": "Status de execução",
     "prop.started": "Iniciado",
@@ -100,5 +100,12 @@
     "comparison.created.error.noComparisonLinked": "Erro ao criar <strong>comparação</strong>: uma ou mais comparações não foram vinculadas",
     "comparison.created.error": "Erro ao criar <strong>comparação</strong>: {err}",
     "comparison.created.error.unknownError": "Erro ao criar <strong>comparação</strong>",
-    "newComparison.packageAgreements": "Contratos para este pacote"
+    "newComparison.packageAgreements": "Contratos para este pacote",
+    "comparison.export": "Exportar relatório de comparação como JSON",
+    "comparisonReport.buildingReport": "Gerando relatório para exibição …",
+    "comparisonReport.loadAll": "Carregar tudo",
+    "comparisonReport.info.issn": "ISSN",
+    "comparisonReport.info.isbn": "ISBN",
+    "comparisonReport.info.eisbn": "ISBN (Online)",
+    "prop.viewReportReload": "Recarregue a página para atualizar o botão assim que o job terminar"
 }
