@@ -97,6 +97,7 @@ const ComparisonReportList = (
         coverage: 300,
         resourceA: 250,
         resourceB: 250,
+        overlap: { max: 200 }
       }}
       contentData={report}
       formatter={{
