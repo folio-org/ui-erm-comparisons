@@ -31,7 +31,7 @@ class ComparisonPointFilter extends React.Component {
               disabled={this.props.disabled}
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.linkAgreement" />
+              <FormattedMessage id="ui-erm-comparisons.selectAgreement" />
             </Button>
           );
         }}
@@ -61,7 +61,7 @@ class ComparisonPointFilter extends React.Component {
               disabled={this.props.disabled}
               {...buttonProps}
             >
-              <FormattedMessage id="ui-erm-comparisons.linkPackage" />
+              <FormattedMessage id="ui-erm-comparisons.selectPackage" />
             </Button>
           );
         }}
