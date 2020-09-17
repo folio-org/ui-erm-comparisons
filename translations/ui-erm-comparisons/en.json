@@ -15,6 +15,10 @@
   "linkPackage": "Link package",
   "linkAgreement": "Link agreement",
 
+  "permission.jobs.view": "ERM comparisons: View jobs",
+  "permission.jobs.edit": "ERM Comparisons: Create jobs",
+  "permission.jobs.delete": "ERM Comparisons: Delete jobs",
+
   "columns.errorLogMessage": "Error",
   "columns.infoLogMessage": "Message",
   "columns.recordNumber": "Record number",
