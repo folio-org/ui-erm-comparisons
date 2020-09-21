@@ -107,5 +107,8 @@
     "comparisonReport.info.issn": "ISSN",
     "comparisonReport.info.isbn": "ISBN",
     "comparisonReport.info.eisbn": "ISBN (online)",
-    "prop.viewReportReload": "Reload page to refresh button once job has ended"
+    "prop.viewReportReload": "Reload page to refresh button once job has ended",
+    "permission.jobs.view": "ERM comparisons: View jobs",
+    "permission.jobs.edit": "ERM Comparisons: Create jobs",
+    "permission.jobs.delete": "ERM Comparisons: Delete jobs"
 }

@@ -107,5 +107,8 @@
     "comparisonReport.info.issn": "ISSN",
     "comparisonReport.info.isbn": "ISBN",
     "comparisonReport.info.eisbn": "ISBN（在线）",
-    "prop.viewReportReload": "任务结束后，重新加载页面以刷新按钮"
+    "prop.viewReportReload": "任务结束后，重新加载页面以刷新按钮",
+    "permission.jobs.view": "ERM comparisons: View jobs",
+    "permission.jobs.edit": "ERM Comparisons: Create jobs",
+    "permission.jobs.delete": "ERM Comparisons: Delete jobs"
 }
