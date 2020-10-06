@@ -72,7 +72,7 @@ const ComparisonReportList = (
         <SerialCoverage statements={statements} />
         {embargo &&
           <Layout className="padding-top-gutter">
-            <Embargo embargo={embargo} />
+            <Embargo alignment="centerContent" embargo={embargo} />
           </Layout>
         }
       </Layout>
