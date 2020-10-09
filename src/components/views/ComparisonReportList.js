@@ -354,6 +354,7 @@ const ComparisonReportList = (
 
 ComparisonReportList.propTypes = {
   isLoading: PropTypes.bool,
+  onNeedMoreData: PropTypes.func,
   sourceData: PropTypes.shape({
     comparisonPointData: PropTypes.shape({
       comparisonPoints: PropTypes.array,
