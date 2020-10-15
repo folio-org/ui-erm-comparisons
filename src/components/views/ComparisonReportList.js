@@ -357,7 +357,7 @@ ComparisonReportList.propTypes = {
   onNeedMoreData: PropTypes.func,
   sourceData: PropTypes.shape({
     comparisonPointData: PropTypes.shape({
-      comparisonPoints: PropTypes.array,
+      comparisonPoints: PropTypes.arrayOf(PropTypes.object),
     }),
     report: PropTypes.arrayOf(PropTypes.object)
   }),
