@@ -70,6 +70,7 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
 ComparisonReport.propTypes = {
   data: PropTypes.shape({
     comparisonPointData: PropTypes.object,
+    report: PropTypes.arrayOf(PropTypes.object),
   }),
   isLoading: PropTypes.bool,
   onClose: PropTypes.func.isRequired
