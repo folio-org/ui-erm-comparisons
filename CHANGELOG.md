@@ -1,5 +1,8 @@
 # Change history for ui-erm-comparisons
 
+## 1.1.1 2020-11-05
+* Fixes bug where incorrect Dates are saved when tenant timezone is ahead of UTC. ERM-1202
+
 ## 1.1.0 2020-10-15
 
 * New app created
