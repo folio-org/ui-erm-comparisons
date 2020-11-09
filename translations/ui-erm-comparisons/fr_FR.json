@@ -92,7 +92,7 @@
     "agreements.agreementStatus": "Statut",
     "agreementPeriods.periodStart": "Début de période",
     "agreementPeriods.periodEnd": "Fin de période",
-    "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource",
+    "emptyAccordion.noAgreementsEresource": "Aucun accord pour cette ressource électronique",
     "report.close": "Close comparison report screen",
     "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Lier le bouquet",
