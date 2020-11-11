@@ -80,7 +80,7 @@
     "newComparison.status": "Status",
     "newComparison.type": "Type",
     "newComparison.count": "Count",
-    "newComparison.provider": "Provider",
+    "newComparison.provider": "Fornitore",
     "newComparison.reasonForClosure": "Reason for closure",
     "newComparison.linkPackage": "Link package",
     "newComparison.noPackageLinked": "No package linked",
