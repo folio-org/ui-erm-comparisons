@@ -13,13 +13,13 @@ import {
   Row,
   Spinner
 } from '@folio/stripes/components';
-import { AppIcon, IfPermission, TitleManager } from '@folio/stripes/core';
+import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 
 import { ComparisonInfo, ComparisonPoints } from '../ComparisonSections';
 
 import Logs from '../Logs';
 
-export default class ComparisonView extends React.Component {
+class ComparisonView extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
       comparison: PropTypes.object,
@@ -31,7 +31,10 @@ export default class ComparisonView extends React.Component {
     isLoading: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     onDelete: PropTypes.func,
-    onViewReport: PropTypes.func.isRequired
+    onViewReport: PropTypes.func.isRequired,
+    stripes: PropTypes.shape({
+      hasPerm: PropTypes.func
+    })
   };
 
   state = {
@@ -82,42 +85,46 @@ export default class ComparisonView extends React.Component {
   }
 
   getActionMenu = ({ onToggle }) => {
-    const { data: { comparison } } = this.props;
+    const { data: { comparison }, stripes } = this.props;
     const isComparisonNotInProgress = comparison?.status?.value !== 'in_progress';
+    const buttons = [];
 
-    return (
-      <>
-        <IfPermission perm="ui-erm-comparisons.jobs.delete">
-          <Button
-            buttonStyle="dropdownItem"
-            disabled={!isComparisonNotInProgress}
-            id="clickable-dropdown-delete-comparison"
-            onClick={() => {
-              onToggle();
-              this.props.onDelete();
-            }}
-          >
-            <Icon icon="trash">
-              <FormattedMessage id="ui-erm-comparisons.comparison.delete" />
-            </Icon>
-          </Button>
-        </IfPermission>
-        <IfPermission perm="ui-erm-comparisons.jobs.view">
-          <Button
-            buttonStyle="dropdownItem"
-            id="clickable-dropdown-export-comparison-report"
-            onClick={() => {
-              this.props.handlers.onExportReportAsJSON();
-              onToggle();
-            }}
-          >
-            <Icon icon="download">
-              <FormattedMessage id="ui-erm-comparisons.comparison.export" />
-            </Icon>
-          </Button>
-        </IfPermission>
-      </>
-    );
+    if (stripes.hasPerm('ui-erm-comparisons.jobs.delete')) {
+      buttons.push(
+        <Button
+          buttonStyle="dropdownItem"
+          disabled={!isComparisonNotInProgress}
+          id="clickable-dropdown-delete-comparison"
+          onClick={() => {
+            onToggle();
+            this.props.onDelete();
+          }}
+        >
+          <Icon icon="trash">
+            <FormattedMessage id="ui-erm-comparisons.comparison.delete" />
+          </Icon>
+        </Button>
+      );
+    }
+
+    if (stripes.hasPerm('ui-erm-comparisons.jobs.view')) {
+      buttons.push(
+        <Button
+          buttonStyle="dropdownItem"
+          id="clickable-dropdown-export-comparison-report"
+          onClick={() => {
+            this.props.handlers.onExportReportAsJSON();
+            onToggle();
+          }}
+        >
+          <Icon icon="download">
+            <FormattedMessage id="ui-erm-comparisons.comparison.export" />
+          </Icon>
+        </Button>
+      );
+    }
+
+    return buttons.length ? buttons : null;
   }
 
   render() {
@@ -174,3 +181,5 @@ export default class ComparisonView extends React.Component {
     );
   }
 }
+
+export default withStripes(ComparisonView);
