@@ -1,5 +1,7 @@
 # Change history for ui-erm-comparisons
 
+## 2.0.0 IN PROGRESS
+* Upgrade to Stripes 6.0
 ## 1.1.1 2020-11-05
 * Fixes bug where incorrect Dates are saved when tenant timezone is ahead of UTC. ERM-1202
 

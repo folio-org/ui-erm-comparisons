@@ -1,6 +1,6 @@
 {
   "name": "@folio/erm-comparisons",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
   "repository": "folio-org/ui-erm-comparisons",
@@ -92,7 +92,7 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.2.0",
-    "@folio/stripes": "^5.0.0",
+    "@folio/stripes": "^6.0.0",
     "@folio/stripes-cli": "^1.8.0",
     "babel-eslint": "^9.0.0",
     "babel-polyfill": "6.26.0",
@@ -111,7 +111,7 @@
   },
   "dependencies": {
     "@folio/react-intl-safe-html": "^2.0.0",
-    "@folio/stripes-erm-components": "^4.0.0",
+    "@folio/stripes-erm-components": "^5.0.0",
     "compose-function": "^3.0.3",
     "final-form": "^4.18.5",
     "final-form-arrays": "^3.0.1",
@@ -122,7 +122,7 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "@folio/stripes": "^5.0.0",
+    "@folio/stripes": "^6.0.0",
     "moment": "^2.22.2",
     "react": "*",
     "react-dom": "*",
