@@ -1,5 +1,5 @@
 {
-    "meta.title": "ERM comparisons",
+    "meta.title": "eVergleich",
     "dummy.title": "Dummy-Titel",
     "create": "Erstellen",
     "errorLog": "Fehlerprotokoll",
@@ -108,7 +108,7 @@
     "comparisonReport.info.isbn": "ISBN",
     "comparisonReport.info.eisbn": "ISBN (Online)",
     "prop.viewReportReload": "Seite neu laden, um die Schaltfläche nach dem Ende des Auftrags zu aktualisieren",
-    "permission.jobs.view": "ERM comparisons: View jobs",
-    "permission.jobs.edit": "ERM Comparisons: Create jobs",
-    "permission.jobs.delete": "ERM Comparisons: Delete jobs"
+    "permission.jobs.view": "eVergleich: Jobs anzeigen",
+    "permission.jobs.edit": "eVergleich: Jobs erstellen",
+    "permission.jobs.delete": "eVergleich: Jobs löschen"
 }
