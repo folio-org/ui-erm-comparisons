@@ -2,6 +2,8 @@
 
 ## 2.0.0 IN PROGRESS
 * Upgrade to Stripes 6.0
+* Upgrade to React 17. ERM-1526.
+
 ## 1.1.1 2020-11-05
 * Fixes bug where incorrect Dates are saved when tenant timezone is ahead of UTC. ERM-1202
 
