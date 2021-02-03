@@ -4,14 +4,19 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   AccordionSet,
+  AccordionStatus,
   Button,
   Col,
   ExpandAllButton,
+  HasCommand,
   Icon,
   Layout,
   Pane,
   Row,
-  Spinner
+  Spinner,
+  checkScope,
+  collapseAllSections,
+  expandAllSections
 } from '@folio/stripes/components';
 import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 
@@ -37,12 +42,17 @@ class ComparisonView extends React.Component {
     })
   };
 
-  state = {
-    sections: {
+  constructor(props) {
+    super(props);
+    this.accordionStatusRef = React.createRef();
+  }
+
+  getInitialAccordionsState = () => {
+    return {
       comparisonPoints: false,
       errorLogs: false,
       infoLogs: false,
-    }
+    };
   }
 
   renderLoadingPane = () => {
@@ -66,22 +76,7 @@ class ComparisonView extends React.Component {
     return {
       id,
       comparison,
-      onToggle: this.handleSectionToggle,
-      open: this.state.sections[id],
     };
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState((prevState) => ({
-      sections: {
-        ...prevState.sections,
-        [id]: !prevState.sections[id],
-      }
-    }));
-  }
-
-  handleAllSectionsToggle = (sections) => {
-    this.setState({ sections });
   }
 
   getActionMenu = ({ onToggle }) => {
@@ -133,35 +128,49 @@ class ComparisonView extends React.Component {
     if (isLoading) return this.renderLoadingPane();
     const isComparisonEnded = comparison?.status?.value === 'ended';
 
+    const shortcuts = [
+      {
+        name: 'expandAllSections',
+        handler: (e) => expandAllSections(e, this.accordionStatusRef),
+      },
+      {
+        name: 'collapseAllSections',
+        handler: (e) => collapseAllSections(e, this.accordionStatusRef)
+      },
+    ];
+
     return (
-      <Pane
-        actionMenu={this.getActionMenu}
-        appIcon={<AppIcon app="erm-comparisons" />}
-        data-test-comparison-details
-        defaultWidth="45%"
-        dismissible
-        id="pane-view-comparison"
-        onClose={this.props.onClose}
-        paneTitle={
-          <span data-test-header-title>
-            {comparison.name}
-          </span>
-        }
+      <HasCommand
+        commands={shortcuts}
+        isWithinScope={checkScope}
+        scope={document.body}
       >
-        <TitleManager data-test-title-name record={comparison.name}>
-          <ComparisonInfo comparison={comparison} onViewReport={onViewReport} />
-          <AccordionSet>
-            <Row end="xs">
-              <Col xs>
-                <ExpandAllButton
-                  accordionStatus={this.state.sections}
-                  id="clickable-expand-all"
-                  onToggle={this.handleAllSectionsToggle}
-                />
-              </Col>
-            </Row>
-            <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
-            {
+        <>
+          <Pane
+            actionMenu={this.getActionMenu}
+            appIcon={<AppIcon app="erm-comparisons" />}
+            data-test-comparison-details
+            defaultWidth="45%"
+            dismissible
+            id="pane-view-comparison"
+            onClose={this.props.onClose}
+            paneTitle={
+              <span data-test-header-title>
+                {comparison.name}
+              </span>
+            }
+          >
+            <TitleManager data-test-title-name record={comparison.name}>
+              <ComparisonInfo comparison={comparison} onViewReport={onViewReport} />
+              <AccordionStatus ref={this.accordionStatusRef}>
+                <Row end="xs">
+                  <Col xs>
+                    <ExpandAllButton />
+                  </Col>
+                </Row>
+                <AccordionSet initialStatus={this.getInitialAccordionsState()}>
+                  <ComparisonPoints {...this.getSectionProps('comparisonPoints')} />
+                  {
               isComparisonEnded ? (
                 <>
                   <Logs
@@ -175,9 +184,12 @@ class ComparisonView extends React.Component {
                 </>
               ) : null
             }
-          </AccordionSet>
-        </TitleManager>
-      </Pane>
+                </AccordionSet>
+              </AccordionStatus>
+            </TitleManager>
+          </Pane>
+        </>
+      </HasCommand>
     );
   }
 }

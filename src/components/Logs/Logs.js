@@ -9,13 +9,11 @@ export default class Logs extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     comparison: PropTypes.object,
-    onToggle: PropTypes.func,
-    open: PropTypes.bool,
     type: PropTypes.string.isRequired,
   };
 
   render() {
-    const { id, comparison, onToggle, open, type } = this.props;
+    const { id, comparison, type } = this.props;
 
     return (
       <Accordion
@@ -23,17 +21,11 @@ export default class Logs extends React.Component {
         displayWhenOpen={<Badge>{comparison[`${type}LogCount`]}</Badge>}
         id={id}
         label={<FormattedMessage id={`ui-erm-comparisons.${type}Log`} />}
-        onToggle={onToggle}
-        open={open}
       >
-        { open ?
-          <ComparisonLogContainer
-            comparison={comparison}
-            type={type}
-          />
-          :
-          <div />
-        }
+        <ComparisonLogContainer
+          comparison={comparison}
+          type={type}
+        />
       </Accordion>
     );
   }
