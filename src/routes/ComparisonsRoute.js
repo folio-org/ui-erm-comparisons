@@ -112,7 +112,7 @@ class ComparisonsRoute extends React.Component {
   }
 
   render() {
-    const { children, location, match, resources } = this.props;
+    const { children, history, location, match, resources } = this.props;
     if (this.source) {
       this.source.update(this.props, 'comparisons');
     }
@@ -124,6 +124,7 @@ class ComparisonsRoute extends React.Component {
           resultValues: resources?.resultValues?.records ?? [],
           statusValues: resources?.statusValues?.records ?? [],
         }}
+        history={history}
         queryGetter={this.queryGetter}
         querySetter={this.querySetter}
         searchString={location.search}
