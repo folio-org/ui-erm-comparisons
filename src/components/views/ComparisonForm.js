@@ -8,6 +8,7 @@ import stripesFinalForm from '@folio/stripes/final-form';
 
 import {
   Button,
+  HasCommand,
   IconButton,
   Layout,
   MessageBanner,
@@ -16,9 +17,10 @@ import {
   PaneFooter,
   PaneMenu,
   TextField,
+  checkScope
 } from '@folio/stripes/components';
 
-import { requiredValidator } from '@folio/stripes-erm-components';
+import { handleSaveKeyCommand, requiredValidator } from '@folio/stripes-erm-components';
 
 import ComparisonPointFieldArray from '../ComparisonPointFieldArray';
 
@@ -101,80 +103,93 @@ class ComparisonForm extends React.Component {
     );
   }
 
+  shortcuts = [
+    {
+      name: 'save',
+      handler: (e) => handleSaveKeyCommand(e, this.props),
+    },
+  ];
+
   render() {
     const { data: { entitlements }, values } = this.props;
     const comparisonLimit = 2;
     const disableAddNew = this.shouldDisableAddNew(values, comparisonLimit);
 
     return (
-      <Paneset>
-        <FormattedMessage id="ui-erm-comparisons.create">
-          {create => (
-            <Pane
-              appIcon={<AppIcon app="erm-comparisons" />}
-              centerContent
-              defaultWidth="100%"
-              firstMenu={this.renderFirstMenu()}
-              footer={this.renderPaneFooter(disableAddNew)}
-              id="pane-comparison-form"
-              paneTitle={<FormattedMessage id="ui-erm-comparisons.comparison.newComparison" />}
-            >
-              <Layout className="padding-top-gutter padding-bottom-gutter">
-                <MessageBanner>
-                  <FormattedMessage id="ui-erm-comparisons.newComparison.info" />
-                </MessageBanner>
-              </Layout>
-              <TitleManager record={create}>
-                <form>
-                  <Layout className="padding-top-gutter">
-                    <Field
-                      component={TextField}
-                      data-test-field-comparison-name
-                      label={<FormattedMessage id="ui-erm-comparisons.newComparison.name" />}
-                      name="name"
-                      required
-                      validate={requiredValidator}
-                    />
-                  </Layout>
-                  <Layout className="padding-bottom-gutter">
-                    <FieldArray
-                      addButtonId="data-test-add-package-button"
-                      addLabelId="ui-erm-comparisons.newComparison.addPackage"
-                      comparisonPoint="package"
-                      component={ComparisonPointFieldArray}
-                      data={{ entitlements }}
-                      data-test-field-array-packages
-                      deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
-                      disableAddNew={disableAddNew}
-                      handlers={{
-                        onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
-                        onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
-                      }}
-                      headerId="ui-erm-comparisons.newComparison.packageTitle"
-                      id="comparison-point-form-packages"
-                      name="packages"
-                    />
-                  </Layout>
-                  <Layout className="padding-bottom-gutter">
-                    <FieldArray
-                      addButtonId="data-test-add-agreement-button"
-                      addLabelId="ui-erm-comparisons.newComparison.addAgreement"
-                      comparisonPoint="agreement"
-                      component={ComparisonPointFieldArray}
-                      data-test-field-array-agreements
-                      deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
-                      disableAddNew={disableAddNew}
-                      headerId="ui-erm-comparisons.newComparison.agreementTitle"
-                      id="comparison-point-form-agreements"
-                      name="agreements"
-                    />
-                  </Layout>
-                </form>
-              </TitleManager>
-            </Pane>
-          )}
-        </FormattedMessage>
-      </Paneset>
+      <HasCommand
+        commands={this.shortcuts}
+        isWithinScope={checkScope}
+        scope={document.body}
+      >
+        <Paneset>
+          <FormattedMessage id="ui-erm-comparisons.create">
+            {create => (
+              <Pane
+                appIcon={<AppIcon app="erm-comparisons" />}
+                centerContent
+                defaultWidth="100%"
+                firstMenu={this.renderFirstMenu()}
+                footer={this.renderPaneFooter(disableAddNew)}
+                id="pane-comparison-form"
+                paneTitle={<FormattedMessage id="ui-erm-comparisons.comparison.newComparison" />}
+              >
+                <Layout className="padding-top-gutter padding-bottom-gutter">
+                  <MessageBanner>
+                    <FormattedMessage id="ui-erm-comparisons.newComparison.info" />
+                  </MessageBanner>
+                </Layout>
+                <TitleManager record={create}>
+                  <form>
+                    <Layout className="padding-top-gutter">
+                      <Field
+                        component={TextField}
+                        data-test-field-comparison-name
+                        label={<FormattedMessage id="ui-erm-comparisons.newComparison.name" />}
+                        name="name"
+                        required
+                        validate={requiredValidator}
+                      />
+                    </Layout>
+                    <Layout className="padding-bottom-gutter">
+                      <FieldArray
+                        addButtonId="data-test-add-package-button"
+                        addLabelId="ui-erm-comparisons.newComparison.addPackage"
+                        comparisonPoint="package"
+                        component={ComparisonPointFieldArray}
+                        data={{ entitlements }}
+                        data-test-field-array-packages
+                        deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
+                        disableAddNew={disableAddNew}
+                        handlers={{
+                          onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
+                          onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
+                        }}
+                        headerId="ui-erm-comparisons.newComparison.packageTitle"
+                        id="comparison-point-form-packages"
+                        name="packages"
+                      />
+                    </Layout>
+                    <Layout className="padding-bottom-gutter">
+                      <FieldArray
+                        addButtonId="data-test-add-agreement-button"
+                        addLabelId="ui-erm-comparisons.newComparison.addAgreement"
+                        comparisonPoint="agreement"
+                        component={ComparisonPointFieldArray}
+                        data-test-field-array-agreements
+                        deleteButtonTooltipId="ui-erm-comparisons.newComparison.removeAgreement"
+                        disableAddNew={disableAddNew}
+                        headerId="ui-erm-comparisons.newComparison.agreementTitle"
+                        id="comparison-point-form-agreements"
+                        name="agreements"
+                      />
+                    </Layout>
+                  </form>
+                </TitleManager>
+              </Pane>
+            )}
+          </FormattedMessage>
+        </Paneset>
+      </HasCommand>
     );
   }
 }

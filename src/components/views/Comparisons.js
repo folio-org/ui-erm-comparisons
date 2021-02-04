@@ -7,6 +7,7 @@ import { AppIcon, IfPermission } from '@folio/stripes/core';
 
 import {
   Button,
+  HasCommand,
   Icon,
   MultiColumnList,
   NoValue,
@@ -14,6 +15,7 @@ import {
   PaneMenu,
   Paneset,
   SearchField,
+  checkScope
 } from '@folio/stripes/components';
 
 import {
@@ -31,6 +33,7 @@ export default class Comparisons extends React.Component {
     children: PropTypes.node,
     contentRef: PropTypes.object,
     data: PropTypes.object,
+    history: PropTypes.object,
     onNeedMoreData: PropTypes.func,
     queryGetter: PropTypes.func,
     querySetter: PropTypes.func,
@@ -189,9 +192,11 @@ export default class Comparisons extends React.Component {
       children,
       contentRef,
       data,
+      history,
       onNeedMoreData,
       queryGetter,
       querySetter,
+      searchString,
       selectedRecordId,
       source,
     } = this.props;
@@ -201,16 +206,32 @@ export default class Comparisons extends React.Component {
     const sortOrder = query.sort || '';
     const visibleColumns = ['comparisonName', 'runningStatus', 'result', 'errors', 'started', 'ended'];
 
+    const goToNew = () => {
+      history.push(`/comparisons-erm/create${searchString}`);
+    };
+
+    const shortcuts = [
+      {
+        name: 'new',
+        handler: goToNew,
+      },
+    ];
+
     return (
-      <div ref={contentRef} data-test-ermcomparisons>
-        <SearchAndSortQuery
-          initialFilterState={{ }}
-          initialSearchState={{ query: '' }}
-          initialSortState={{ sort: '-started' }}
-          queryGetter={queryGetter}
-          querySetter={querySetter}
-        >
-          {
+      <HasCommand
+        commands={shortcuts}
+        isWithinScope={checkScope}
+        scope={document.body}
+      >
+        <div ref={contentRef} data-test-ermcomparisons>
+          <SearchAndSortQuery
+            initialFilterState={{ }}
+            initialSearchState={{ query: '' }}
+            initialSortState={{ sort: '-started' }}
+            queryGetter={queryGetter}
+            querySetter={querySetter}
+          >
+            {
             ({
               searchValue,
               getSearchHandlers,
@@ -320,8 +341,9 @@ export default class Comparisons extends React.Component {
               );
             }
           }
-        </SearchAndSortQuery>
-      </div>
+          </SearchAndSortQuery>
+        </div>
+      </HasCommand>
     );
   }
 }
