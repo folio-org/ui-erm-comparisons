@@ -42,7 +42,7 @@ export default class ComparisonFilters extends React.Component {
     FILTERS.forEach(filter => {
       const values = props.data[`${filter}Values`];
       if (values.length !== state[filter].length) {
-        newState[filter] = values.map(({ label }) => ({ label, value: label }));
+        newState[filter] = values;
       }
     });
 

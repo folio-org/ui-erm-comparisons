@@ -18,7 +18,7 @@ export default Factory.extend({
   ended: () => faker.date.recent().getTime(),
   started: () => faker.date.recent().getTime(),
   status: () => {
-    const val = faker.random.arrayElement(['Queued', 'In progress', 'Ended']);
+    const val = faker.random.arrayElement(['queued', 'in_progress', 'ended']);
     return {
       id: () => faker.random.uuid(),
       value: val,
@@ -26,7 +26,7 @@ export default Factory.extend({
     };
   },
   result: () => {
-    const val = faker.random.arrayElement(['Success', 'Partial success', 'Failure', 'Interrupted']);
+    const val = faker.random.arrayElement(['success', 'partial_success', 'failure', 'interrupted']);
     return {
       id: () => faker.random.uuid(),
       value: val,
