@@ -20,8 +20,10 @@ class ComparisonsRoute extends React.Component {
       params: getSASParams({
         searchKey: 'name',
         filterKeys: {
+          status: 'status.value',
+          result: 'result.value',
           'comparisonPointOne': 'comparisonPoints.titleList.id',
-          'comparisonPointTwo': 'comparisonPoints.titleList.id'
+          'comparisonPointTwo': 'comparisonPoints.titleList.id',
         }
       })
     },
