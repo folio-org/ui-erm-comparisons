@@ -46,7 +46,7 @@
     "comparisonReport.titleOnPlatform": "平台标题",
     "comparisonReport.title": "题名",
     "comparisonReport.availableVia": "可通过",
-    "comparisonReport.coverage": "覆盖率",
+    "comparisonReport.coverage": "收录范围",
     "comparisonReport.isPresent": "在{date} {name}出现在{type}",
     "comparisonReport.isNotPresent": "在{date} “ {name} ”的{type}不存在",
     "comparisonReport.overlap": "重叠",
