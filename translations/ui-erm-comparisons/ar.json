@@ -45,7 +45,7 @@
     "comparison.close": "إغلاق المقارنة",
     "comparisonReport.titleOnPlatform": "العنوان على المنصة",
     "comparisonReport.title": "عنوان",
-    "comparisonReport.availableVia": "متاح عبر",
+    "comparisonReport.availableVia": "متاحة عبر",
     "comparisonReport.coverage": "التغطية",
     "comparisonReport.isPresent": "موجود في {type} في {date} \"{name}\"",
     "comparisonReport.isNotPresent": "غير موجود في {type} في {date} \"{name}\"",
