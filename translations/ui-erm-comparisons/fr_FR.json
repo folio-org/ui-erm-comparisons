@@ -108,7 +108,7 @@
     "comparisonReport.info.isbn": "ISBN",
     "comparisonReport.info.eisbn": "ISBN (en ligne)",
     "prop.viewReportReload": "Reload page to refresh button once job has ended",
-    "permission.jobs.view": "ERM comparisons: View jobs",
-    "permission.jobs.edit": "ERM Comparisons: Create jobs",
-    "permission.jobs.delete": "ERM Comparisons: Delete jobs"
+    "permission.jobs.view": "Comparaisons ERM: voir les tâches",
+    "permission.jobs.edit": "Comparaisons ERM: créer des tâches",
+    "permission.jobs.delete": "Comparaisons ERM: supprimer des tâches"
 }
