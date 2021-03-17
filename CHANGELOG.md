@@ -1,8 +1,11 @@
 # Change history for ui-erm-comparisons
 
-## 2.0.0 IN PROGRESS
-* Upgrade to Stripes 6.0
+## 2.0.0 2021-03-17
+* ERM Comparisons: filters for Running status and Result use labels not values. ERM-1553
+* Upgrade to stripes-cli v2 ERM-1550
 * Added keyboard shortcuts. ERM-1241
+* Action button should not show if user would see no options in Action dropdown. ERM-1225
+* Upgrade to Stripes 6.0
 
 ## 1.1.1 2020-11-05
 * Fixes bug where incorrect Dates are saved when tenant timezone is ahead of UTC. ERM-1202
