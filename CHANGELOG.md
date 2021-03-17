@@ -1,5 +1,7 @@
 # Change history for ui-erm-comparisons
 
+## 2.1.0 In progress
+
 ## 2.0.0 2021-03-17
 * ERM Comparisons: filters for Running status and Result use labels not values. ERM-1553
 * Upgrade to stripes-cli v2 ERM-1550
