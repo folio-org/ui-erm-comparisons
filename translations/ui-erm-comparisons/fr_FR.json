@@ -107,7 +107,7 @@
     "comparisonReport.info.issn": "ISSN",
     "comparisonReport.info.isbn": "ISBN",
     "comparisonReport.info.eisbn": "ISBN (en ligne)",
-    "prop.viewReportReload": "Reload page to refresh button once job has ended",
+    "prop.viewReportReload": "Recharger la page pour actualiser le bouton une fois la tâche terminée",
     "permission.jobs.view": "Comparaisons ERM: voir les tâches",
     "permission.jobs.edit": "Comparaisons ERM: créer des tâches",
     "permission.jobs.delete": "Comparaisons ERM: supprimer des tâches"
