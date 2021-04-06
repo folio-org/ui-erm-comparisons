@@ -51,7 +51,7 @@
     "comparisonReport.isNotPresent": "Nie ma w {type} dnia {date} „ {name} ”",
     "comparisonReport.overlap": "Nakładają się",
     "comparisonReport.type": "<strong>{type}</strong> w dniu <strong>{date}</strong> \"{name}”",
-    "comparisonReport.accessTitleOnPlatform": "Dostęp do \"{tytuł}\" na platformie \"{platforma}\".",
+    "comparisonReport.accessTitleOnPlatform": "Dostęp do \"{title}\" na platformie \"{platform}\".",
     "comparisonReport.resourceTitle": "{type} w dniu {date}: „nazwa” ",
     "comparisonReport.info.type": "Rodzaj",
     "comparisonReport.info.resourceType": "Typ zasobu",
