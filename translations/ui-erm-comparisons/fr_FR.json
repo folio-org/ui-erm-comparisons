@@ -93,7 +93,7 @@
     "agreementPeriods.periodStart": "Début de période",
     "agreementPeriods.periodEnd": "Fin de période",
     "emptyAccordion.noAgreementsEresource": "Aucun accord pour cette ressource électronique",
-    "report.close": "Close comparison report screen",
+    "report.close": "Fermer l'écran du rapport de comparaison",
     "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Lier le bouquet",
     "linkAgreement": "Lier un accord",
