@@ -9,7 +9,7 @@
     "loading": "Chargement...",
     "package": "Bouquet",
     "agreement": "Accord",
-    "selectPackage": "Sélectionnez le bouquet",
+    "selectPackage": "Sélectionner un bouquet",
     "selectAgreement": "Sélectionner un accord",
     "columns.errorLogMessage": "Erreur",
     "columns.infoLogMessage": "Message",
