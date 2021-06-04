@@ -81,7 +81,7 @@
     "newComparison.type": "유형",
     "newComparison.count": "카운트",
     "newComparison.provider": "제공사",
-    "newComparison.reasonForClosure": "폐쇄 이유",
+    "newComparison.reasonForClosure": "종료 이유",
     "newComparison.linkPackage": "패키지 링크",
     "newComparison.noPackageLinked": "연결된 패키지 없음",
     "newComparison.linkPackageToStart": "시작하려면 패키지 연결",
