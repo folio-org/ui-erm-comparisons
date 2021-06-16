@@ -142,11 +142,11 @@ class ComparisonForm extends React.Component {
                   <form>
                     <Layout className="padding-top-gutter">
                       <Field
+                        autoFocus
                         component={TextField}
                         data-test-field-comparison-name
                         label={<FormattedMessage id="ui-erm-comparisons.newComparison.name" />}
                         name="name"
-                        autoFocus
                         required
                         validate={requiredValidator}
                       />
