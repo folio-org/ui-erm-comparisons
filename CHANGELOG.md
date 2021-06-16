@@ -1,5 +1,7 @@
 # Change history for ui-erm-comparisons
 
+## 2.2.0 (In Progress)
+
 ## 2.1.0 2021-06-16
  * ERM-1596 Add descriptions to visible permission set in ui-erm-comparison
  * ERM-1557 ERM comparisons: Give focus to the Name field on opening the "New" pane
