@@ -1,6 +1,8 @@
 # Change history for ui-erm-comparisons
 
-## 2.1.0 In progress
+## 2.1.0 2021-06-16
+ * ERM-1596 Add descriptions to visible permission set in ui-erm-comparison
+ * ERM-1557 ERM comparisons: Give focus to the Name field on opening the "New" pane
  * bumped babel-eslint dep to 10.0.0
 
 ## 2.0.0 2021-03-17
