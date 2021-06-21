@@ -1,6 +1,7 @@
 # Change history for ui-erm-comparisons
 
-## 2.2.0 (In Progress)
+## 3.0.0 (In Progress)
+* Included interface dependency for erm 5.0
 
 ## 2.1.0 2021-06-16
  * ERM-1596 Add descriptions to visible permission set in ui-erm-comparison

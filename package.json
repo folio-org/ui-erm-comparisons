@@ -1,6 +1,6 @@
 {
   "name": "@folio/erm-comparisons",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
   "repository": "folio-org/ui-erm-comparisons",
@@ -28,7 +28,7 @@
     "hasSettings": true,
     "queryResource": "query",
     "okapiInterfaces": {
-      "erm": "1.0 2.0 3.0 4.0"
+      "erm": "1.0 2.0 3.0 4.0 5.0"
     },
     "stripesDeps": [
       "@folio/stripes-erm-components"
