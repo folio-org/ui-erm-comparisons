@@ -15,6 +15,8 @@
   "linkPackage": "Link package",
   "linkAgreement": "Link agreement",
 
+  "appMenu.keyboardShortcuts": "Keyboard shortcuts",
+
   "permission.jobs.view": "ERM comparisons: View jobs",
   "permission.jobs.edit": "ERM Comparisons: Create jobs",
   "permission.jobs.delete": "ERM Comparisons: Delete jobs",
