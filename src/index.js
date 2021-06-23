@@ -1,11 +1,16 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
-import { Route } from '@folio/stripes/core';
+import { AppContextMenu, Route } from '@folio/stripes/core';
 
 import {
   CommandList,
   HasCommand,
+  KeyboardShortcutsModal,
+  NavList,
+  NavListItem,
+  NavListSection,
   checkScope,
   defaultKeyboardShortcuts,
 } from '@folio/stripes/components';
@@ -24,6 +29,19 @@ export default class App extends React.Component {
     location: PropTypes.object,
     match: PropTypes.object.isRequired,
     stripes: PropTypes.object.isRequired,
+  }
+
+  state = {
+    showKeyboardShortcutsModal: false,
+  };
+
+  changeKeyboardShortcutsModal = (modalState) => {
+    this.setState({ showKeyboardShortcutsModal: modalState });
+  };
+
+  shortcutModalToggle(handleToggle) {
+    handleToggle();
+    this.changeKeyboardShortcutsModal(true);
   }
 
   searchInput = () => {
@@ -47,6 +65,10 @@ export default class App extends React.Component {
       name: 'search',
       handler: this.focusSearchField
     },
+    {
+      name: 'openShortcutModal',
+      handler: this.changeKeyboardShortcutsModal
+    },
   ];
 
   render() {
@@ -59,21 +81,44 @@ export default class App extends React.Component {
     }
 
     return (
-      <CommandList commands={defaultKeyboardShortcuts}>
-        <HasCommand
-          commands={this.shortcuts}
-          isWithinScope={checkScope}
-          scope={document.body}
-        >
-          <Switch>
-            <Route component={ComparisonCreateRoute} path={`${path}/create`} />
-            <Route component={ComparisonReportViewRoute} path={`${path}/:id/report`} />
-            <Route component={ComparisonsRoute} path={`${path}/:id?`}>
-              <Route component={ComparisonViewRoute} path={`${path}/:id`} />
-            </Route>
-          </Switch>
-        </HasCommand>
-      </CommandList>
+      <>
+        <CommandList commands={defaultKeyboardShortcuts}>
+          <HasCommand
+            commands={this.shortcuts}
+            isWithinScope={checkScope}
+            scope={document.body}
+          >
+            <AppContextMenu>
+              {(handleToggle) => (
+                <NavList>
+                  <NavListSection>
+                    <NavListItem
+                      id="keyboard-shortcuts-item"
+                      onClick={() => { this.shortcutModalToggle(handleToggle); }}
+                    >
+                      <FormattedMessage id="ui-agreements.appMenu.keyboardShortcuts" />
+                    </NavListItem>
+                  </NavListSection>
+                </NavList>
+              )}
+            </AppContextMenu>
+            <Switch>
+              <Route component={ComparisonCreateRoute} path={`${path}/create`} />
+              <Route component={ComparisonReportViewRoute} path={`${path}/:id/report`} />
+              <Route component={ComparisonsRoute} path={`${path}/:id?`}>
+                <Route component={ComparisonViewRoute} path={`${path}/:id`} />
+              </Route>
+            </Switch>
+          </HasCommand>
+        </CommandList>
+        { this.state.showKeyboardShortcutsModal && (
+        <KeyboardShortcutsModal
+          allCommands={defaultKeyboardShortcuts}
+          onClose={() => { this.changeKeyboardShortcutsModal(false); }}
+          open
+        />
+        )}
+      </>
     );
   }
 }
