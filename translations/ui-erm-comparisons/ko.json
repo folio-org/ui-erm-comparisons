@@ -110,5 +110,6 @@
     "prop.viewReportReload": "작업이 종료되면 페이지를 새로고침하여 다시 로드합니다.",
     "permission.jobs.view": "ERM 비교 : 보기",
     "permission.jobs.edit": "ERM 비교 : 만들기",
-    "permission.jobs.delete": "ERM 비교 :  삭제"
+    "permission.jobs.delete": "ERM 비교 :  삭제",
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
 }

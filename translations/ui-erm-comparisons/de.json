@@ -110,5 +110,6 @@
     "prop.viewReportReload": "Seite neu laden, um die Schaltfläche nach dem Ende des Auftrags zu aktualisieren",
     "permission.jobs.view": "eVergleich: Jobs anzeigen",
     "permission.jobs.edit": "eVergleich: Jobs erstellen",
-    "permission.jobs.delete": "eVergleich: Jobs löschen"
+    "permission.jobs.delete": "eVergleich: Jobs löschen",
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
 }

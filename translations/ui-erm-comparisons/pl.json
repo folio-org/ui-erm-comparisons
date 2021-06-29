@@ -110,5 +110,6 @@
     "prop.viewReportReload": "Przycisk Odśwież stronę, aby odświeżyć po zakończeniu zadania",
     "permission.jobs.view": "Porównania e-zasobów: Wyświetlanie zadań",
     "permission.jobs.edit": "Porównania e-zasobów: Tworzenie zadań",
-    "permission.jobs.delete": "Porównania e-zasobów: Usuwanie zadań"
+    "permission.jobs.delete": "Porównania e-zasobów: Usuwanie zadań",
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
 }

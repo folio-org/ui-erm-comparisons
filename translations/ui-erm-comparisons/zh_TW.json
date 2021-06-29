@@ -110,5 +110,6 @@
     "prop.viewReportReload": "任务结束后，重新加载页面以刷新按钮",
     "permission.jobs.view": "ERM比较：查看任务",
     "permission.jobs.edit": "ERM比较：创建任务",
-    "permission.jobs.delete": "ERM比较：删除任务"
+    "permission.jobs.delete": "ERM比较：删除任务",
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
 }

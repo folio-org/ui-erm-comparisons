@@ -110,5 +110,6 @@
     "prop.viewReportReload": "Reload page to refresh button once job has ended",
     "permission.jobs.view": "ERM比較: ジョブの表示",
     "permission.jobs.edit": "ERM比較: ジョブの作成",
-    "permission.jobs.delete": "ERM比較: ジョブの削除"
+    "permission.jobs.delete": "ERM比較: ジョブの削除",
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
 }
