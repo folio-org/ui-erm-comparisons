@@ -110,5 +110,6 @@
     "prop.viewReportReload": "Recharger la page pour actualiser le bouton une fois la tâche terminée",
     "permission.jobs.view": "Comparaisons ERM: voir les tâches",
     "permission.jobs.edit": "Comparaisons ERM: créer des tâches",
-    "permission.jobs.delete": "Comparaisons ERM: supprimer des tâches"
+    "permission.jobs.delete": "Comparaisons ERM: supprimer des tâches",
+    "appMenu.keyboardShortcuts": "Raccourcis clavier"
 }

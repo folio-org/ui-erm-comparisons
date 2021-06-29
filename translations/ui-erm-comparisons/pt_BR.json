@@ -110,5 +110,6 @@
     "prop.viewReportReload": "Recarregue a página para atualizar o botão assim que o job terminar",
     "permission.jobs.view": "Comparações de ERM: Ver jobs",
     "permission.jobs.edit": "Comparações ERM: Criar jobs",
-    "permission.jobs.delete": "Comparações de ERM: Excluir jobs"
+    "permission.jobs.delete": "Comparações de ERM: Excluir jobs",
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
 }
