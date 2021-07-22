@@ -127,5 +127,12 @@
   "agreementPeriods.periodEnd": "Period end",
   "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource",
 
-  "report.close": "Close comparison report screen"
+  "report.close": "Close comparison report screen",
+
+  "shortcut.createRecord": "Create a new record",
+  "shortcut.saveRecord": "Save a record",
+  "shortcut.expandAll": "Expand all accordions",
+  "shortcut.collapseAll": "Collapse all accordions",
+  "shortcut.expandOrCollapse": "Expand or collapse an accordion",
+  "shortcut.goToSearchFilter": "Go to \"Search & filter\" pane" 
 }
