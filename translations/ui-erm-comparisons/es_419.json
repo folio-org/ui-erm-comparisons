@@ -111,5 +111,5 @@
     "permission.jobs.view": "ERM comparisons: View jobs",
     "permission.jobs.edit": "ERM Comparisons: Create jobs",
     "permission.jobs.delete": "ERM Comparisons: Delete jobs",
-    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
+    "appMenu.keyboardShortcuts": "Atajos del teclado"
 }
