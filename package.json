@@ -15,7 +15,8 @@
     "start": "stripes serve",
     "build": "stripes build --output ./output",
     "lint": "eslint .",
-    "test": "stripes test karma"
+    "test": "stripes test karma",
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-erm-comparisons ./translations/ui-erm-comparisons/compiled"
   },
   "stripes": {
     "actsAs": [
@@ -97,6 +98,7 @@
     "@folio/eslint-config-stripes": "^5.2.0",
     "@folio/stripes": "^7.0.0",
     "@folio/stripes-cli": "^2.3.0",
+    "@formatjs/cli": "^4.2.31",
     "babel-eslint": "^10.0.0",
     "babel-polyfill": "6.26.0",
     "chai": "^4.2.0",
