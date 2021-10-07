@@ -1,7 +1,9 @@
 # Change history for ui-erm-comparisons
 
-## 3.0.0 (In Progress)
-* Included interface dependency for erm 5.0
+## 4.0.0 2021-10-07
+* Upgrade to stripes v7
+* Display keyboard shortcuts modal. ERM-1737
+* Included interface dependency for erm 5.0. ERM-1747
 
 ## 2.1.0 2021-06-16
  * ERM-1596 Add descriptions to visible permission set in ui-erm-comparison
