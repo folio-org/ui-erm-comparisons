@@ -1,5 +1,9 @@
 # Change history for ui-erm-comparisons
 
+## 4.1.0 IN PROGRESS
+
+* Upgrade `@folio/react-intl-safe-html` for compatibility with `@folio/stripes` `v7`. ERM-1895.
+
 ## 4.0.0 2021-10-07
 * Upgrade to stripes v7
 * Display keyboard shortcuts modal. ERM-1737
