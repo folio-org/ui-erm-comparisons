@@ -8,9 +8,5 @@
      // TODO: Remove when https://issues.folio.org/browse/STRIPES-742 to reinstate these rules. 
      "template-curly-spacing" : "off",
      "indent" : "off"
-  },
-  "env": {
-    "jest/globals": true
-  },
-  "plugins": ["jest"]
+  }
 }
