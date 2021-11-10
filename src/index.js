@@ -12,10 +12,8 @@ import {
   NavListItem,
   NavListSection,
   checkScope,
+  importShortcuts,
 } from '@folio/stripes/components';
-
-import { ermDefaultKeyboardShortcuts } from '@folio/stripes-erm-components';
-import appKeyboardShortcuts from './appKeyboardShortcuts';
 
 import ComparisonCreateRoute from './routes/ComparisonCreateRoute';
 import ComparisonsRoute from './routes/ComparisonsRoute';
@@ -24,8 +22,7 @@ import ComparisonReportViewRoute from './routes/ComparisonReportViewRoute';
 
 import Settings from './settings';
 
-const commands = [...appKeyboardShortcuts, ...ermDefaultKeyboardShortcuts];
-
+const appSpecificShortcuts = importShortcuts(['new', 'save', 'expandAllSections', 'collapseAllSections', 'expandOrCollapseAccordion', 'search']);
 export default class App extends React.Component {
   static propTypes = {
     actAs: PropTypes.string.isRequired,
@@ -86,7 +83,7 @@ export default class App extends React.Component {
 
     return (
       <>
-        <CommandList commands={commands}>
+        <CommandList commands={appSpecificShortcuts}>
           <HasCommand
             commands={this.shortcuts}
             isWithinScope={checkScope}
@@ -115,12 +112,12 @@ export default class App extends React.Component {
             </Switch>
           </HasCommand>
         </CommandList>
-        { this.state.showKeyboardShortcutsModal && (
-        <KeyboardShortcutsModal
-          allCommands={commands}
-          onClose={() => { this.changeKeyboardShortcutsModal(false); }}
-          open
-        />
+        {this.state.showKeyboardShortcutsModal && (
+          <KeyboardShortcutsModal
+            allCommands={appSpecificShortcuts}
+            onClose={() => { this.changeKeyboardShortcutsModal(false); }}
+            open
+          />
         )}
       </>
     );
