@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import setupApplication from '../helpers/setup-application';
 import ApplicationInteractor from '../interactors/application';
 
-/* describe('Application', () => {
+describe('Application', () => {
   const app = new ApplicationInteractor();
 
   setupApplication();
@@ -17,4 +17,3 @@ import ApplicationInteractor from '../interactors/application';
     expect(app.isPresent).to.be.true;
   });
 });
- */
