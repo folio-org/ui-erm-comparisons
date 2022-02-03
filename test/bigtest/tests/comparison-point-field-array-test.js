@@ -195,7 +195,7 @@ describe('Comparison point field array', () => {
   });
 
   it('renders the agreement add button', () => {
-    expect(interactor.isAddAgreementButtonPresent).to.be.true;
+    expect(interactor.isAddAgreementButtonPresent).to.be.false;
   });
 
   describe('Adding packages', () => {
