@@ -90,6 +90,7 @@ const ComparisonReportList = (
 
   return (
     <MultiColumnList
+      autosize
       columnMapping={columnMapping}
       columnWidths={{
         title: 400,
@@ -331,7 +332,7 @@ const ComparisonReportList = (
               </div>
             }
             {
-               /* Render the overlap cell as-is because it'll only ever be one row and we can trust the `formatter` */
+              /* Render the overlap cell as-is because it'll only ever be one row and we can trust the `formatter` */
               cells[5]
             }
           </div>

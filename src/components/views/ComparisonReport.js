@@ -41,6 +41,7 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
   const paneProps = {
     defaultWidth: 'fill',
     id: 'pane-report',
+    height: '100vh',
     onClose,
   };
 

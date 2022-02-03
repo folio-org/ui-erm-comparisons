@@ -16,6 +16,7 @@
     "build": "stripes build --output ./output",
     "lint": "eslint .",
     "test": "stripes test karma",
+    "test-bigtest-once": "stripes test karma --karma.singleRun",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-erm-comparisons ./translations/ui-erm-comparisons/compiled"
   },
   "stripes": {
