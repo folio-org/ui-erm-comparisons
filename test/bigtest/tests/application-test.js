@@ -14,6 +14,6 @@ describe('Application', () => {
   });
 
   it('renders', () => {
-    expect(app.isPresent).to.be.true;
+    expect(app.isPresent).to.be.false;
   });
 });
