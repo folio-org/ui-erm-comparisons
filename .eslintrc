@@ -4,9 +4,19 @@
   "parser": "babel-eslint",
   "rules": {
     "react/jsx-sort-props": "error",
-
+    "testing-library/await-async-query": "error",
+    "testing-library/no-await-sync-query": "error",
+    "testing-library/no-debug": "warn",
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error",
      // TODO: Remove when https://issues.folio.org/browse/STRIPES-742 to reinstate these rules. 
      "template-curly-spacing" : "off",
      "indent" : "off"
-  }
+  },
+  "env": {
+    "jest": true
+  },
+  "plugins": ["testing-library", "jest-dom"]
 }
