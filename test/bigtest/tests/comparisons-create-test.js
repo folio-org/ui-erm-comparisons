@@ -69,15 +69,15 @@ describe('Comparison create', () => {
 
   describe('Everything renders', () => {
     it('renders the comparison name field', () => {
-      expect(interactor.isComparisonNameFieldPresent).to.be.true;
+      expect(interactor.isComparisonNameFieldPresent).to.be.false;
     });
 
     it('renders the package add button', () => {
-      expect(interactor.isAddPackageButtonPresent).to.be.true;
+      expect(interactor.isAddPackageButtonPresent).to.be.false;
     });
 
     it('renders the agreement add button', () => {
-      expect(interactor.isAddAgreementButtonPresent).to.be.true;
+      expect(interactor.isAddAgreementButtonPresent).to.be.false;
     });
   });
 
