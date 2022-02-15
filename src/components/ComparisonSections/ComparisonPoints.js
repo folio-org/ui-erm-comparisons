@@ -35,7 +35,7 @@ export default class ComparisonPoints extends React.Component {
         >
           {comparisonPoints?.map((cp, index) => {
             let resourceType = 'agreement';
-            if (cp.titleList.class.toLowerCase() === 'org.olf.kb.pkg') {
+            if (cp.titleList?.class?.toLowerCase() === 'org.olf.kb.pkg') {
               resourceType = 'ermPackage';
             }
             const resourceLink = Registry.getResource(resourceType)?.getViewResource();
