@@ -45,9 +45,13 @@ export default class ComparisonPoints extends React.Component {
                 id="comparison-point"
               >
                 <div data-test-comparison-point-name>
-                  <Link to={resourceLink(cp.titleList)}>
-                    {cp.titleList.name}
-                  </Link>
+                  {resourceLink ?
+                    <Link to={resourceLink(cp.titleList)}>
+                      {cp.titleList.name}
+                    </Link>
+                    :
+                    cp.titleList.name
+                  }
                 </div>
               </li>
             );
