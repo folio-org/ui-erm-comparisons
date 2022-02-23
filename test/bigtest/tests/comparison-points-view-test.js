@@ -20,6 +20,7 @@ const comparison = {
       date: '2017-05-13',
       id: 'comparison-point-1',
       titleList: {
+        class: 'org.olf.erm.SubscriptionAgreement',
         id: 'titleList1',
         name: 'Some agreement'
       }
@@ -28,6 +29,7 @@ const comparison = {
       date: '2004-11-08',
       id: 'comparison-point-2',
       titleList: {
+        class: 'org.olf.kb.Pkg',
         id: 'titleList2',
         name: 'Some package'
       }

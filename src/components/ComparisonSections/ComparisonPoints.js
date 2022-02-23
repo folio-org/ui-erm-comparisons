@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   Accordion,
   Badge,
 } from '@folio/stripes/components';
-
+import { Registry } from '@folio/handler-stripes-registry';
 import { FormattedMessage } from 'react-intl';
 
 export default class ComparisonPoints extends React.Component {
@@ -32,16 +33,29 @@ export default class ComparisonPoints extends React.Component {
         <ul
           data-test-comparison-points-list
         >
-          {comparisonPoints?.map((cp, index) => (
-            <li
-              key={`comparison-point${index}`}
-              id="comparison-point"
-            >
-              <div data-test-comparison-point-name>
-                {cp.titleList.name}
-              </div>
-            </li>
-          ))}
+          {comparisonPoints?.map((cp, index) => {
+            let resourceType = 'agreement';
+            if (cp.titleList?.class?.toLowerCase() === 'org.olf.kb.pkg') {
+              resourceType = 'ermPackage';
+            }
+            const resourceLink = Registry.getResource(resourceType)?.getViewResource();
+            return (
+              <li
+                key={`comparison-point${index}`}
+                id="comparison-point"
+              >
+                <div data-test-comparison-point-name>
+                  {resourceLink ?
+                    <Link to={resourceLink(cp.titleList)}>
+                      {cp.titleList.name}
+                    </Link>
+                    :
+                    cp.titleList.name
+                  }
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </Accordion>
     );
