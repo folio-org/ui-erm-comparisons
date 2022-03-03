@@ -1,8 +1,11 @@
 # Change history for ui-erm-comparisons
 
-## 4.1.0 IN PROGRESS
-
-* Upgrade `@folio/react-intl-safe-html` for compatibility with `@folio/stripes` `v7`. ERM-1895.
+## 4.1.0 2022-03-03
+* ERM-1993 Prepare ERM Comparisons for RTL development
+* ERM-1990 Add hyperlink to ERM Comparison comparison points
+* ERM-1980 Non-scrolling column headings in ERM Comparisons report view
+* ERM-1895 Upgrade `@folio/react-intl-safe-html` for compatibility with `@folio/stripes` `v7`.
+* ERM-1759 Apply keyboard shortcuts modal guidelines
 
 ## 4.0.0 2021-10-07
 * Upgrade to stripes v7
