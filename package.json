@@ -1,6 +1,6 @@
 {
   "name": "@folio/erm-comparisons",
-  "version": "4.1.0",
+  "version": "4.1.2",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
   "repository": "folio-org/ui-erm-comparisons",
@@ -102,10 +102,10 @@
     "@bigtest/interactor": "^0.9.2",
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
-    "@folio/eslint-config-stripes": "^6.0.0",
-    "@folio/stripes": "^7.0.0",
-    "@folio/stripes-cli": "^2.3.0",
-    "@folio/stripes-testing": "^4.0.0",
+    "@folio/eslint-config-stripes": "^6.1.0",
+    "@folio/stripes": "^7.1.0",
+    "@folio/stripes-cli": "^2.5.0",
+    "@folio/stripes-testing": "^4.2.0",
     "@testing-library/dom": "^7.26.6",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/user-event": "^12.2.2",
@@ -137,10 +137,10 @@
     "react-query": "^3.6.0"
   },
   "dependencies": {
-    "@folio/handler-stripes-registry": "^1.0.0",
+    "@folio/handler-stripes-registry": "^1.1.0",
     "@folio/react-intl-safe-html": "^3.1.0",
-    "@folio/stripes-erm-components": "^6.0.0",
-    "@folio/stripes-testing": "^4.0.0",
+    "@folio/stripes-erm-components": "^6.1.0",
+    "@folio/stripes-testing": "^4.2.0",
     "@testing-library/react": "^12.1.2",
     "compose-function": "^3.0.3",
     "final-form": "^4.18.5",
@@ -152,7 +152,7 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "@folio/stripes": "^7.0.0",
+    "@folio/stripes": "^7.1.0",
     "moment": "^2.22.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
