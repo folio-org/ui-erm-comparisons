@@ -100,7 +100,7 @@
     "comparison.created.error.noComparisonLinked": "Error creating <strong>comparison</strong>: One or more comparisons were not linked",
     "comparison.created.error": "Error creating <strong>comparison</strong>: {err}",
     "comparison.created.error.unknownError": "Error creating <strong>comparison</strong>",
-    "newComparison.packageAgreements": "Agreements for this package",
+    "newComparison.packageAgreements": "Contratti collegati a questo pacchetto",
     "comparison.export": "Esporta rapporto di confronto come JSON",
     "comparisonReport.buildingReport": "Building report for display...",
     "comparisonReport.loadAll": "Load all",
@@ -111,5 +111,5 @@
     "permission.jobs.view": "ERM comparisons: View jobs",
     "permission.jobs.edit": "ERM Comparisons: Create jobs",
     "permission.jobs.delete": "ERM Comparisons: Delete jobs",
-    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
+    "appMenu.keyboardShortcuts": "Scorciatoie da tastiera"
 }
