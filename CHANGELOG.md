@@ -1,5 +1,6 @@
 # Change history for ui-erm-comparisons
 ## 4.2.0 In progress
+* ERM-2098 Replace babel-eslint with @babel/eslint-parser
 ## 4.1.2 2022-03-03
 * ERM-1993 Prepare ERM Comparisons for RTL development
 * ERM-1990 Add hyperlink to ERM Comparison comparison points
