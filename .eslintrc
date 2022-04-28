@@ -9,10 +9,7 @@
     "jest-dom/prefer-checked": "error",
     "jest-dom/prefer-enabled-disabled": "error",
     "jest-dom/prefer-required": "error",
-    "jest-dom/prefer-to-have-attribute": "error",
-    // TODO: Remove when https://issues.folio.org/browse/STRIPES-742 to reinstate these rules.
-    "template-curly-spacing": "off",
-    "indent": "off"
+    "jest-dom/prefer-to-have-attribute": "error"
   },
   "env": {
     "jest": true
