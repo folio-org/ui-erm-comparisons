@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -69,7 +68,7 @@ class ComparisonViewRoute extends React.Component {
             search: this.props.location.search,
           }
         );
-        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.deleted.success" values={{ name }} /> });
+        this.context.sendCallout({ message: <FormattedMessage id="ui-erm-comparisons.comparison.deleted.success" values={{ name }} /> });
       });
   };
 
@@ -128,7 +127,7 @@ class ComparisonViewRoute extends React.Component {
             confirmLabel={<FormattedMessage id="ui-erm-comparisons.comparison.delete.confirmLabel" />}
             heading={<FormattedMessage id={deleteHeadingId} />}
             id="delete-comparison-confirmation"
-            message={<SafeHTMLMessage id={deleteMessageId} values={{ name }} />}
+            message={<FormattedMessage id={deleteMessageId} values={{ name }} />}
             onCancel={this.hideDeleteConfirmationModal}
             onConfirm={this.handleDelete}
             open

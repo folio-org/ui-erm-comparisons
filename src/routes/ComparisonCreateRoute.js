@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 
-import SafeHTMLMessage from '@folio/react-intl-safe-html';
+import { FormattedMessage } from 'react-intl';
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
 import View from '../components/views/ComparisonForm';
 
@@ -168,7 +168,7 @@ class ComparisonCreateRoute extends React.Component {
     }
     this.context.sendCallout({
       type: outcome,
-      message: <SafeHTMLMessage id={messageId} values={{ err: errorMessage }} />,
+      message: <FormattedMessage id={messageId} values={{ err: errorMessage }} />,
       timeout: (errorMessage || specificError) ? 0 : undefined, // Don't autohide callouts with a specified error message.
     });
   }
@@ -184,7 +184,7 @@ class ComparisonCreateRoute extends React.Component {
       })
       .then(({ id }) => {
         history.push(`/comparisons-erm/${id}${location.search}`);
-        this.context.sendCallout({ message: <SafeHTMLMessage id="ui-erm-comparisons.comparison.created.success" values={{ name }} /> });
+        this.context.sendCallout({ message: <FormattedMessage id="ui-erm-comparisons.comparison.created.success" values={{ name }} /> });
       })
       .catch(response => {
         response.json()

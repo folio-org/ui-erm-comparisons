@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import SafeHTMLMessage from '@folio/react-intl-safe-html';
 import {
   FormattedUTCDate,
   Icon,
@@ -29,7 +28,7 @@ const getResourceColumnHeader = (resource) => {
   const { date, name, type } = getResourceProperties(resource);
 
   return (
-    <SafeHTMLMessage
+    <FormattedMessage
       id="ui-erm-comparisons.comparisonReport.type"
       tagName="div"
       values={{ date: <FormattedUTCDate value={date} />, name, type }}

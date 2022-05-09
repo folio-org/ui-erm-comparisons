@@ -15,7 +15,7 @@
     "start": "stripes serve",
     "build": "stripes build --output ./output",
     "test": "yarn run test:bigtest",
-    "test:bigtest": "stripes test karma --bundle --karma.singleRun --karma.browsers ChromeDocker --karma.reporters mocha junit --coverage",
+    "test:bigtest": "stripes test karma --bundle",
     "test:jest": "jest --ci --coverage",
     "lint": "eslint .",
     "test-bigtest-once": "stripes test karma --karma.singleRun",
@@ -138,7 +138,6 @@
     "@folio/handler-stripes-registry": "^1.1.0"
   },
   "dependencies": {
-    "@folio/react-intl-safe-html": "^3.1.0",
     "@folio/stripes-erm-components": "^6.1.0",
     "@folio/stripes-testing": "^4.2.0",
     "@testing-library/react": "^12.1.2",
