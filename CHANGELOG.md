@@ -1,5 +1,6 @@
 # Change history for ui-erm-comparisons
-
+## 4.1.3 2022-05-11
+* ERM-2073. Agreement/license links missing in Dashboard widgets.
 ## 4.1.2 2022-03-03
 * ERM-1993 Prepare ERM Comparisons for RTL development
 * ERM-1990 Add hyperlink to ERM Comparison comparison points
