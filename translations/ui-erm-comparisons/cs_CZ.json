@@ -96,7 +96,7 @@
     "report.close": "Close comparison report screen",
     "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Link package",
-    "linkAgreement": "Link agreement",
+    "linkAgreement": "Propojit smlouvu",
     "comparison.created.error.noComparisonLinked": "Error creating <strong>comparison</strong>: One or more comparisons were not linked",
     "comparison.created.error": "Error creating <strong>comparison</strong>: {err}",
     "comparison.created.error.unknownError": "Error creating <strong>comparison</strong>",
