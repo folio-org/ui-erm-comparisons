@@ -74,7 +74,7 @@
     "newComparison.noAgreementPlugin": "Není nainstalován žádný plugin \"najít-smlouvu\"",
     "newComparison.replaceAgreement": "Replace agreement",
     "newComparison.replaceAgreementSpecific": "Nahradit smlouvu {agreement}",
-    "newComparison.onDate": "On date",
+    "newComparison.onDate": "K datu",
     "newComparison.startDate": "Start date",
     "newComparison.endDate": "End date",
     "newComparison.status": "Status",
