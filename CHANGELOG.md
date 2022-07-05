@@ -1,7 +1,9 @@
 # Change history for ui-erm-comparisons
-## 4.2.0 In progress
-* ERM-2098 Replace babel-eslint with @babel/eslint-parser
+## 4.2.0 2022-07-05
 * ERM-2108 / ERM-2085 Refactor away from react-intl-safe-html
+* ERM-2098 Replace babel-eslint with @babel/eslint-parser
+* ERM-2073 Agreement/license links missing in Dashboard widgets.
+* ERM-1971 Bump eslint-config stripes version
 
 ## 4.1.2 2022-03-03
 * ERM-1993 Prepare ERM Comparisons for RTL development
