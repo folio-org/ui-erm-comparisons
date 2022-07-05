@@ -1,6 +1,6 @@
 {
   "name": "@folio/erm-comparisons",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "ERM app for comparison of Agreement and Package objects",
   "main": "src/index.js",
   "repository": "folio-org/ui-erm-comparisons",
