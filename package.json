@@ -19,6 +19,7 @@
     "test:jest": "jest --ci --coverage",
     "lint": "eslint .",
     "test-bigtest-once": "stripes test karma --karma.singleRun",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-erm-comparisons ./translations/ui-erm-comparisons/compiled"
   },
   "stripes": {
