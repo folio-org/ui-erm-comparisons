@@ -4,61 +4,26 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Button, Col, Datepicker, Row } from '@folio/stripes/components';
+import { useKiwtFieldArray } from '@k-int/stripes-kint-components';
 
-import { EditCard, requiredValidator, withKiwtFieldArray } from '@folio/stripes-erm-components';
+import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
 
-class ComparisonPointFieldArray extends React.Component {
-  static propTypes = {
-    addButtonId: PropTypes.string,
-    addLabelId: PropTypes.string,
-    comparisonPoint: PropTypes.string,
-    data: PropTypes.shape({
-      entitlements: PropTypes.object
-    }),
-    deleteButtonTooltipId: PropTypes.string,
-    disableAddNew: PropTypes.bool,
-    handlers: PropTypes.shape({
-      onEResourceAdded: PropTypes.func.isRequired,
-      onEResourceRemoved: PropTypes.func.isRequired
-    }),
-    headerId: PropTypes.string,
-    id: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.object),
-    name: PropTypes.string.isRequired,
-    onAddField: PropTypes.func.isRequired,
-    onDeleteField: PropTypes.func.isRequired,
-    onUpdateField: PropTypes.func.isRequired,
-  }
+const ComparisonPointFieldArray = ({
+  addButtonId,
+  addLabelId,
+  comparisonPoint,
+  data,
+  deleteButtonTooltipId,
+  disableAddNew,
+  handlers,
+  headerId,
+  id,
+  name
+}) => {
+  const { items, onAddField, onDeleteField, onUpdateField } = useKiwtFieldArray(name, true);
 
-  handleComparisonPointSelected = (index, comparisonPoint, comparisonType) => {
-    if (comparisonType === 'agreement') {
-      this.handleUpdateField(index, {
-        'comparisonPoint': {
-          id: comparisonPoint.id,
-          name: comparisonPoint.name,
-          reasonForClosure: comparisonPoint.reasonForClosure?.label,
-          startDate: comparisonPoint.startDate,
-          status: comparisonPoint.agreementStatus?.label,
-          endDate: comparisonPoint.endDate
-        }
-      });
-    } else if (comparisonType === 'package') {
-      this.props.handlers.onEResourceAdded(comparisonPoint.id);
-      this.handleUpdateField(index, {
-        'comparisonPoint': {
-          id: comparisonPoint.id,
-          name: comparisonPoint.name,
-          count: comparisonPoint._object?.resourceCount,
-          provider: comparisonPoint._object?.vendor?.name
-        }
-      }, true);
-    }
-  }
-
-  handleUpdateField = (index, field, updateEntitlementQuery = false) => {
-    const { handlers, items, onUpdateField } = this.props;
-
+  const handleUpdateField = (index, field, updateEntitlementQuery = false) => {
     if (updateEntitlementQuery) {
       // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
       const removedId = items?.[index]?.comparisonPoint?.id;
@@ -70,12 +35,36 @@ class ComparisonPointFieldArray extends React.Component {
     }
 
     onUpdateField(index, field);
-  }
+  };
 
-  renderComparisonPoints = () => {
-    const { comparisonPoint: comparisonType, data, deleteButtonTooltipId, headerId } = this.props;
-    const { name } = this.props;
-    return this.props.items.map((comparisonPoint, index) => {
+  const handleComparisonPointSelected = (index, compPoint, comparisonType) => {
+    if (comparisonType === 'agreement') {
+      handleUpdateField(index, {
+        'comparisonPoint': {
+          id: compPoint.id,
+          name: compPoint.name,
+          reasonForClosure: compPoint.reasonForClosure?.label,
+          startDate: compPoint.startDate,
+          status: compPoint.agreementStatus?.label,
+          endDate: compPoint.endDate
+        }
+      });
+    } else if (comparisonType === 'package') {
+      handlers.onEResourceAdded(compPoint.id);
+      handleUpdateField(index, {
+        'comparisonPoint': {
+          id: compPoint.id,
+          name: compPoint.name,
+          count: compPoint._object?.resourceCount,
+          provider: compPoint._object?.vendor?.name
+        }
+      }, true);
+    }
+  };
+
+  const renderComparisonPoints = () => {
+    const comparisonType = comparisonPoint;
+    return items.map((compPoint, index) => {
       return (
         <EditCard
           key={`${comparisonType} ${index}`}
@@ -86,7 +75,7 @@ class ComparisonPointFieldArray extends React.Component {
           deleteButtonTooltipText={<FormattedMessage id={deleteButtonTooltipId} values={{ index: index + 1 }} />}
           header={<FormattedMessage id={headerId} values={{ number: index + 1 }} />}
           id={`data-test-comparison-point-${comparisonType}`}
-          onDelete={() => this.props.onDeleteField(index, comparisonPoint)}
+          onDelete={() => onDeleteField(index, compPoint)}
         >
           <Field
             comparisonType={comparisonType}
@@ -95,7 +84,7 @@ class ComparisonPointFieldArray extends React.Component {
             id={`data-test-field-comparison-point-${comparisonType}`}
             index={index}
             name={`${name}[${index}].comparisonPoint`}
-            onComparisonPointSelected={selectedComparisonPoint => this.handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
+            onComparisonPointSelected={selectedComparisonPoint => handleComparisonPointSelected(index, selectedComparisonPoint, comparisonType)}
             required
             validate={requiredValidator}
           />
@@ -118,33 +107,42 @@ class ComparisonPointFieldArray extends React.Component {
         </EditCard>
       );
     });
-  }
+  };
 
-  renderAddNewButton() {
-    const { addButtonId, addLabelId, disableAddNew } = this.props;
+  const renderAddNewButton = () => {
     return (
       <Button
         disabled={disableAddNew}
         id={addButtonId}
         marginBottom0
-        onClick={() => this.props.onAddField()}
+        onClick={() => onAddField()}
       >
         <FormattedMessage id={addLabelId} />
       </Button>
     );
-  }
+  };
 
-  render = () => {
-    const { id } = this.props;
-    return (
-      <div>
-        <div id={id}>
-          {this.renderComparisonPoints()}
-        </div>
-        {this.renderAddNewButton()}
+  return (
+    <div>
+      <div id={id}>
+        {renderComparisonPoints()}
       </div>
-    );
-  }
-}
+      {renderAddNewButton()}
+    </div>
+  );
+};
 
-export default withKiwtFieldArray(ComparisonPointFieldArray);
+ComparisonPointFieldArray.propTypes = {
+  addButtonId: PropTypes.string,
+  addLabelId: PropTypes.string,
+  comparisonPoint: PropTypes.string,
+  data: PropTypes.object,
+  deleteButtonTooltipId: PropTypes.string,
+  disableAddNew: PropTypes.bool,
+  handlers: PropTypes.object,
+  headerId: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string.isRequired,
+};
+
+export default ComparisonPointFieldArray;
