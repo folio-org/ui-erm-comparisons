@@ -70,7 +70,7 @@
     "newComparison.agreementTitle": "Agreement {number}",
     "newComparison.linkAgreement": "Link agreement",
     "newComparison.noAgreementLinked": "No agreement linked",
-    "newComparison.linkAgreementToStart": "Link an agreement to get started",
+    "newComparison.linkAgreementToStart": "Začněte propojením smlouvy",
     "newComparison.noAgreementPlugin": "Není nainstalován žádný plugin \"najít-smlouvu\"",
     "newComparison.replaceAgreement": "Replace agreement",
     "newComparison.replaceAgreementSpecific": "Nahradit smlouvu {agreement}",
