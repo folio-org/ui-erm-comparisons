@@ -141,6 +141,7 @@
   },
   "dependencies": {
     "@folio/stripes-erm-components": "^6.2.0",
+    "@k-int/stripes-kint-components": "^2.5.0",
     "@folio/stripes-testing": "^4.2.0",
     "@testing-library/react": "^12.1.2",
     "compose-function": "^3.0.3",
