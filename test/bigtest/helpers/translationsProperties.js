@@ -1,9 +1,14 @@
 import translations from '../../../translations/ui-erm-comparisons/en';
+import { translationsProperties as ermComponentsTranslations } from '@folio/stripes-erm-components';
 
 const translationsProperties = [
   {
     prefix: 'ui-erm-comparisons',
     translations,
+  },
+  {
+    prefix: 'stripes-erm-components',
+    translations: ermComponentsTranslations
   },
   {
     prefix: 'stripes-core',
@@ -19,7 +24,8 @@ const translationsProperties = [
       'cancel': 'Cancel',
       'paneMenuActionsToggleLabel': 'Actions',
       'collapseAll': 'Collapse all',
-      'button.edit': 'Edit'
+      'button.edit': 'Edit',
+      'endOfList': 'End of list'
     },
   },
   {
