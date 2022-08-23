@@ -116,6 +116,7 @@
     "@folio/handler-stripes-registry": "^1.2.0",
     "@folio/stripes": "^7.2.0",
     "@folio/stripes-cli": "^2.6.0",
+    "@folio/stripes-erm-components": "^6.2.0",
     "@folio/stripes-testing": "^4.2.0",
     "@formatjs/cli": "^4.2.31",
     "@testing-library/dom": "^8.16.0",
@@ -156,7 +157,6 @@
     "sinon": "^9.0.2"
   },
   "dependencies": {
-    "@folio/stripes-erm-components": "^6.2.0",
     "@folio/stripes-testing": "^4.2.0",
     "@k-int/stripes-kint-components": "^2.5.0",
     "compose-function": "^3.0.3",
@@ -172,6 +172,7 @@
   "peerDependencies": {
     "@folio/handler-stripes-registry": "^1.2.0",
     "@folio/stripes": "^7.2.0",
+    "@folio/stripes-erm-components": "^6.2.0",
     "favicons": "^3.0.0",
     "moment": "^2.22.2",
     "react": "^17.0.2",
