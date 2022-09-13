@@ -1,5 +1,5 @@
-import translations from '../../../translations/ui-erm-comparisons/en';
 import { translationsProperties as ermComponentsTranslations } from '@folio/stripes-erm-components';
+import translations from '../../../translations/ui-erm-comparisons/en';
 
 const translationsProperties = [
   {

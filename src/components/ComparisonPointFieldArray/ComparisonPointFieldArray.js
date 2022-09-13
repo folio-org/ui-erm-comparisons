@@ -16,10 +16,10 @@ const ComparisonPointFieldArray = ({
   data,
   deleteButtonTooltipId,
   disableAddNew,
+  fields: { name },
   handlers,
   headerId,
-  id,
-  name
+  id
 }) => {
   const { items, onAddField, onDeleteField, onUpdateField } = useKiwtFieldArray(name, true);
 
@@ -139,10 +139,12 @@ ComparisonPointFieldArray.propTypes = {
   data: PropTypes.object,
   deleteButtonTooltipId: PropTypes.string,
   disableAddNew: PropTypes.bool,
+  fields: PropTypes.shape({
+    name: PropTypes.string,
+  }),
   handlers: PropTypes.object,
   headerId: PropTypes.string,
   id: PropTypes.string,
-  name: PropTypes.string.isRequired,
 };
 
 export default ComparisonPointFieldArray;
