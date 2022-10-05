@@ -157,7 +157,6 @@
     "sinon": "^9.0.2"
   },
   "dependencies": {
-    "@folio/stripes-testing": "^4.2.0",
     "@k-int/stripes-kint-components": "^2.5.0",
     "compose-function": "^3.0.3",
     "final-form": "^4.18.5",
