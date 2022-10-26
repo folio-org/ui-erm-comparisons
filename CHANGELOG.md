@@ -1,5 +1,7 @@
 # Change history for ui-erm-comparisons
 ## 4.3.0 In progress
+* Bump to stripes-erm-components ^7.0.0
+
 
 ## 4.2.1 2022-07-05
 * ERM-2108 / ERM-2085 Refactor away from react-intl-safe-html
