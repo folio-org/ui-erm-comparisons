@@ -24,8 +24,7 @@
   },
   "stripes": {
     "actsAs": [
-      "app",
-      "settings"
+      "app"
     ],
     "displayName": "ui-erm-comparisons.meta.title",
     "route": "/comparisons-erm",
