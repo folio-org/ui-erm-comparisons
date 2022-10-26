@@ -20,12 +20,9 @@ import ComparisonsRoute from './routes/ComparisonsRoute';
 import ComparisonViewRoute from './routes/ComparisonViewRoute';
 import ComparisonReportViewRoute from './routes/ComparisonReportViewRoute';
 
-import Settings from './settings';
-
 const appSpecificShortcuts = importShortcuts(['new', 'save', 'expandAllSections', 'collapseAllSections', 'expandOrCollapseAccordion', 'openShortcutModal', 'search']);
 export default class App extends React.Component {
   static propTypes = {
-    actAs: PropTypes.string.isRequired,
     history: PropTypes.object,
     location: PropTypes.object,
     match: PropTypes.object.isRequired,
