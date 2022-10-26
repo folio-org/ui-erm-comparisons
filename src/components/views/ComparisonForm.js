@@ -92,7 +92,7 @@ class ComparisonForm extends React.Component {
         <FormattedMessage id="ui-erm-comparisons.comparison.close">
           {ariaLabel => (
             <IconButton
-              aria-label={ariaLabel}
+              aria-label={ariaLabel?.[0]}
               icon="times"
               id="close-comparison-form-button"
               onClick={this.props.handlers.onClose}
@@ -138,7 +138,7 @@ class ComparisonForm extends React.Component {
                     <FormattedMessage id="ui-erm-comparisons.newComparison.info" />
                   </MessageBanner>
                 </Layout>
-                <TitleManager record={create}>
+                <TitleManager record={create?.[0]}>
                   <form>
                     <Layout className="padding-top-gutter">
                       <Field
