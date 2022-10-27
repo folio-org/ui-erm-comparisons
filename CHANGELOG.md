@@ -1,7 +1,12 @@
 # Change history for ui-erm-comparisons
-## 4.3.0 In progress
+## 4.3.0 2022-10-27
+* ERM-2380 favicons is incorrectly listed as a peer-dependency
+* ERM-2373 @folio/stripes-testing is incorrectly listed as a direct dependency
+* ERM-2337 Error on attempting to create new ERM comparison
+* ERM-2320 stripes-erm-components should be a peer
+* ERM-2277 Karma tests fail on Github Actions CI with Node v14 and v16 LTS
+* ERM-2234 Replace withKiwtFieldArray with useKiwtFieldArray
 * Bump to stripes-erm-components ^7.0.0
-
 
 ## 4.2.1 2022-07-05
 * ERM-2108 / ERM-2085 Refactor away from react-intl-safe-html
