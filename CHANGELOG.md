@@ -1,4 +1,6 @@
 # Change history for ui-erm-comparisons
+## 4.4.0 In progress
+
 ## 4.3.0 2022-10-27
 * ERM-2380 favicons is incorrectly listed as a peer-dependency
 * ERM-2373 @folio/stripes-testing is incorrectly listed as a direct dependency
