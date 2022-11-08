@@ -139,6 +139,7 @@
     "inflected": "^2.0.4",
     "jest": "^28.1.3",
     "jest-css-modules": "^2.1.0",
+    "jest-environment-jsdom": "^28.1.2",
     "jest-junit": "^14.0.0",
     "miragejs": "^0.1.40",
     "mocha": "^8.0.1",
