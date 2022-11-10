@@ -14,7 +14,7 @@
   "scripts": {
     "start": "stripes serve",
     "build": "stripes build --output ./output",
-    "test": "yarn run test:bigtest",
+    "test": "yarn run test:jest && yarn run test:bigtest",
     "test:bigtest": "stripes test karma",
     "test:jest": "jest --ci --coverage",
     "lint": "eslint .",
@@ -139,6 +139,7 @@
     "inflected": "^2.0.4",
     "jest": "^28.1.3",
     "jest-css-modules": "^2.1.0",
+    "jest-environment-jsdom": "^28.1.2",
     "jest-junit": "^14.0.0",
     "miragejs": "^0.1.40",
     "mocha": "^8.0.1",
