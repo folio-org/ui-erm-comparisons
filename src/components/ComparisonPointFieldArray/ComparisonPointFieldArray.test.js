@@ -1,16 +1,11 @@
 import React from 'react';
-import { renderWithIntl, TestForm, mockKintComponents } from '@folio/stripes-erm-testing';
+import { renderWithIntl, TestForm } from '@folio/stripes-erm-testing';
 import { StaticRouter as Router } from 'react-router-dom';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import { comparisonPointFieldArrayPackage, comparisonPointFieldArrayAgreement } from './testResources';
 import ComparisonPointFieldArray from './ComparisonPointFieldArray';
 
 jest.mock('./ComparisonPointField', () => () => <div>ComparisonPointField</div>);
-
-jest.mock('@k-int/stripes-kint-components', () => ({
-  ...jest.requireActual('@k-int/stripes-kint-components'),
-  ...mockKintComponents
-}));
 
 const onSubmit = jest.fn();
 
