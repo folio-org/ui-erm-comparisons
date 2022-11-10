@@ -1,9 +1,8 @@
 import React from 'react';
-import '@folio/stripes-erm-components/test/jest/__mock__';
-import { renderWithIntl, TestForm } from '@folio/stripes-erm-components/test/jest/helpers';
+import { renderWithIntl, TestForm } from '@folio/stripes-erm-testing';
 import { KeyValue, Button } from '@folio/stripes-testing';
 import { StaticRouter as Router } from 'react-router-dom';
-import translationsProperties from '../../../test/bigtest/helpers/translationsProperties';
+import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import { agreementFieldData, emptyAgreementField, agreementFieldError } from './testResources';
 import AgreementField from './AgreementField';
 

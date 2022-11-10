@@ -1,8 +1,7 @@
 import React from 'react';
-import '@folio/stripes-erm-components/test/jest/__mock__';
-import { renderWithIntl, TestForm, mockKintComponents } from '@folio/stripes-erm-components/test/jest/helpers';
+import { renderWithIntl, TestForm, mockKintComponents } from '@folio/stripes-erm-testing';
 import { StaticRouter as Router } from 'react-router-dom';
-import translationsProperties from '../../../test/bigtest/helpers/translationsProperties';
+import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import { comparisonPointFieldArrayPackage, comparisonPointFieldArrayAgreement } from './testResources';
 import ComparisonPointFieldArray from './ComparisonPointFieldArray';
 
