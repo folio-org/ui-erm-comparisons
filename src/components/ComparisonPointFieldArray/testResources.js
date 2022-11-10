@@ -95,7 +95,7 @@ const agreementFieldError = {
   'required': true
 };
 
-const ComparisonPointFieldPackage = {
+const comparisonPointFieldPackage = {
   'input': {
     'name': 'packages[0].comparisonPoint',
     'value': {
@@ -129,7 +129,7 @@ const ComparisonPointFieldPackage = {
   'required': true
 };
 
-const ComparisonPointFieldAgreement = {
+const comparisonPointFieldAgreement = {
   'input': {
     'name': 'agreements[0].comparisonPoint',
     'value': {
@@ -147,10 +147,144 @@ const ComparisonPointFieldAgreement = {
   'required': true
 };
 
+const comparisonPointFieldArrayPackage = {
+  'fields': {
+    'name': 'packages',
+    'forEach': 'ƒ forEach() {}',
+    'length': 1,
+    'map': 'ƒ map() {}',
+    'insert': 'ƒ () {}',
+    'concat': 'ƒ () {}',
+    'move': 'ƒ () {}',
+    'pop': 'ƒ () {}',
+    'push': 'ƒ () {}',
+    'remove': 'ƒ () {}',
+    'removeBatch': 'ƒ () {}',
+    'shift': 'ƒ () {}',
+    'swap': 'ƒ () {}',
+    'unshift': 'ƒ () {}',
+    'update': 'ƒ () {}',
+    'value': [
+      {
+        '_delete': false,
+        'onDate': '2022-11-10T00:00:00.000Z',
+        'comparisonPoint': {
+          'id': '810dfe8a-df91-4a7f-9200-00655620828a',
+          'name': 'ACM Digtal Library',
+          'count': 10650,
+          'provider': 'Association for Computing Machinery'
+        }
+      }
+    ]
+  },
+  'meta': {
+    'active': false,
+    'data': '{}',
+    'dirty': true,
+    'dirtySinceLastSubmit': false,
+    'invalid': false,
+    'modified': false,
+    'modifiedSinceLastSubmit': false,
+    'pristine': false,
+    'submitFailed': false,
+    'submitSucceeded': false,
+    'submitting': false,
+    'touched': false,
+    'valid': true,
+    'validating': false,
+    'visited': false,
+    '__versions': {
+      'final-form': '4.20.7',
+      'react-final-form': '6.5.8',
+      'react-final-form-arrays': '3.1.3'
+    }
+  },
+  'addButtonId': 'data-test-add-package-button',
+  'addLabelId': 'ui-erm-comparisons.newComparison.addPackage',
+  'comparisonPoint': 'package',
+  'data': {
+    'entitlements': '{}'
+  },
+  'data-test-field-array-packages': true,
+  'deleteButtonTooltipId': 'ui-erm-comparisons.newComparison.removePackage',
+  'disableAddNew': true,
+  'handlers': {
+    'onEResourceAdded': 'ƒ onEResourceAdded() {}',
+    'onEResourceRemoved': 'ƒ onEResourceRemoved() {}'
+  },
+  'headerId': 'ui-erm-comparisons.newComparison.packageTitle',
+  'id': 'comparison-point-form-packages'
+};
+
+const comparisonPointFieldArrayAgreement = {
+  'fields': {
+    'name': 'agreements',
+    'forEach': 'ƒ forEach() {}',
+    'length': 1,
+    'map': 'ƒ map() {}',
+    'insert': 'ƒ () {}',
+    'concat': 'ƒ () {}',
+    'move': 'ƒ () {}',
+    'pop': 'ƒ () {}',
+    'push': 'ƒ () {}',
+    'remove': 'ƒ () {}',
+    'removeBatch': 'ƒ () {}',
+    'shift': 'ƒ () {}',
+    'swap': 'ƒ () {}',
+    'unshift': 'ƒ () {}',
+    'update': 'ƒ () {}',
+    'value': [
+      {
+        '_delete': false,
+        'onDate': '2022-11-10T00:00:00.000Z',
+        'comparisonPoint': {
+          'id': 'd4f602ec-4ec4-4a22-be94-07e2c04f733b',
+          'name': 'MR Test',
+          'startDate': '2022-11-03',
+          'status': 'Active',
+          'endDate': '2022-11-25'
+        }
+      }
+    ]
+  },
+  'meta': {
+    'active': false,
+    'data': '{}',
+    'dirty': true,
+    'dirtySinceLastSubmit': false,
+    'invalid': false,
+    'modified': false,
+    'modifiedSinceLastSubmit': false,
+    'pristine': false,
+    'submitFailed': false,
+    'submitSucceeded': false,
+    'submitting': false,
+    'touched': false,
+    'valid': true,
+    'validating': false,
+    'visited': false,
+    '__versions': {
+      'final-form': '4.20.7',
+      'react-final-form': '6.5.8',
+      'react-final-form-arrays': '3.1.3'
+    }
+  },
+  'addButtonId': 'data-test-add-agreement-button',
+  'addLabelId': 'ui-erm-comparisons.newComparison.addAgreement',
+  'comparisonPoint': 'agreement',
+  'data-test-field-array-agreements': true,
+  'deleteButtonTooltipId': 'ui-erm-comparisons.newComparison.removeAgreement',
+  'disableAddNew': true,
+  'headerId': 'ui-erm-comparisons.newComparison.agreementTitle',
+  'id': 'comparison-point-form-agreements'
+};
+
 export {
   agreementFieldData,
   emptyAgreementField,
   agreementFieldError,
-  ComparisonPointFieldPackage,
-  ComparisonPointFieldAgreement,
+  comparisonPointFieldPackage,
+  comparisonPointFieldAgreement,
+  comparisonPointFieldArrayPackage,
+  comparisonPointFieldArrayAgreement
 };

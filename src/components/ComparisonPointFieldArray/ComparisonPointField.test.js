@@ -3,7 +3,7 @@ import '@folio/stripes-erm-components/test/jest/__mock__';
 import { renderWithIntl, TestForm } from '@folio/stripes-erm-components/test/jest/helpers';
 import { StaticRouter as Router } from 'react-router-dom';
 import translationsProperties from '../../../test/bigtest/helpers/translationsProperties';
-import { ComparisonPointFieldPackage, ComparisonPointFieldAgreement } from './testResources';
+import { comparisonPointFieldPackage, comparisonPointFieldAgreement } from './testResources';
 import ComparisonPointField from './ComparisonPointField';
 
 jest.mock('./AgreementField', () => () => <div>AgreementField</div>);
@@ -20,7 +20,7 @@ describe('ComparisonPointField', () => {
         <Router>
           <TestForm onSubmit={onSubmit}>
             <ComparisonPointField
-              {...ComparisonPointFieldPackage}
+              {...comparisonPointFieldPackage}
               onComparisonPointSelected={onComparisonPointSelectedMock}
             />
           </TestForm>
@@ -40,7 +40,7 @@ describe('ComparisonPointField', () => {
         <Router>
           <TestForm onSubmit={onSubmit}>
             <ComparisonPointField
-              {...ComparisonPointFieldAgreement}
+              {...comparisonPointFieldAgreement}
               onComparisonPointSelected={onComparisonPointSelectedMock}
             />
           </TestForm>
