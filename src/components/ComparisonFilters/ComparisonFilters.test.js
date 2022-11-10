@@ -1,10 +1,9 @@
 import React from 'react';
-import '@folio/stripes-erm-components/test/jest/__mock__';
 import { waitFor } from '@testing-library/dom';
-import { renderWithIntl } from '@folio/stripes-erm-components/test/jest/helpers';
+import { renderWithIntl } from '@folio/stripes-erm-testing';
 import { Accordion, Checkbox } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
-import translationsProperties from '../../../test/bigtest/helpers/translationsProperties';
+import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonFilters from './ComparisonFilters';
 
 jest.mock('./ComparisonPointFilter', () => () => <div>ComparisonPointFilter</div>);
