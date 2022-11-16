@@ -1,12 +1,11 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-erm-testing';
+import { renderWithIntl, FormattedDateTimeInteractor } from '@folio/stripes-erm-testing';
 import { KeyValue, Heading, Button } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import comparison from './testResources';
 import ComparisonInfo from './ComparisonInfo';
 
-jest.mock('../FormattedDateTime', () => () => <div>FormattedDateTime</div>);
 const onViewReportMock = jest.fn();
 
 describe('ComparisonInfo', () => {
@@ -34,12 +33,14 @@ describe('ComparisonInfo', () => {
     await KeyValue('Outcome').has({ value: 'Success' });
   });
 
-  test('renders the expcected Started date', async () => {
-    await KeyValue('Started').has({ value: 'FormattedDateTime' });
+  test('renders the expcected Started date and time', async () => {
+    await FormattedDateTimeInteractor({ id: 'started-datetime' }).has({ date: '11/14/2022' });
+    await FormattedDateTimeInteractor({ id: 'started-datetime' }).has({ time: '9:30 AM' });
   });
 
-  test('renders the expcected Ended date', async () => {
-    await KeyValue('Ended').has({ value: 'FormattedDateTime' });
+  test('renders the expcected Ended date and time', async () => {
+    await FormattedDateTimeInteractor({ id: 'ended-datetime' }).has({ date: '11/14/2022' });
+    await FormattedDateTimeInteractor({ id: 'ended-datetime' }).has({ time: '9:30 AM' });
   });
 
   test('renders the expcected Errors value', async () => {

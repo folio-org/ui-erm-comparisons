@@ -66,14 +66,14 @@ export default class ComparisonInfo extends React.Component {
                 <Col xs={3}>
                   <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.started" />}>
                     <div data-test-comparison-started>
-                      {comparison.started ? <FormattedDateTime date={comparison.started} /> : <NoValue />}
+                      {comparison.started ? <FormattedDateTime date={comparison.started} id="started-datetime" /> : <NoValue />}
                     </div>
                   </KeyValue>
                 </Col>
                 <Col xs={3}>
                   <KeyValue label={<FormattedMessage id="ui-erm-comparisons.prop.ended" />}>
                     <div data-test-comparison-ended>
-                      {comparison.ended ? <FormattedDateTime date={comparison.ended} /> : <NoValue />}
+                      {comparison.ended ? <FormattedDateTime date={comparison.ended} id="ended-datetime" /> : <NoValue />}
                     </div>
                   </KeyValue>
                 </Col>
