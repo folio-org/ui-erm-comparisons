@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { waitFor } from '@testing-library/dom';
+// import { renderWithIntl } from '@folio/stripes-erm-components/test/jest/helpers';
 import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Accordion, KeyValue, Button } from '@folio/stripes-testing';
+import { Accordion, Checkbox } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
 import translationsProperties from '../../../test/bigtest/helpers/translationsProperties';
 import ComparisonView from './ComparisonView';
-import { screen } from '@testing-library/react';
 
 jest.mock('./ComparisonView', () => () => <div>ComparisonView</div>);
 
@@ -90,7 +90,7 @@ const data = {
   ]
 };
 
-const stateMock = jest.fn();
+// const stateMock = jest.fn();
 
 describe('ComparisonView', () => {
   let renderComponent;
@@ -106,7 +106,7 @@ describe('ComparisonView', () => {
       );
     });
 
-    screen.debug()
+    // screen.debug()
     test('renders the Comparison points Accordion', async () => {
       await Accordion('Comparison points').exists();
     });
