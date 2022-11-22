@@ -11,7 +11,7 @@ import {
 } from '@folio/stripes/components';
 
 import { FormattedMessage } from 'react-intl';
-import FormattedDateTime from '../FormattedDateTime';
+import { FormattedDateTime } from '@folio/stripes-erm-components';
 
 export default class ComparisonInfo extends React.Component {
   static propTypes = {
