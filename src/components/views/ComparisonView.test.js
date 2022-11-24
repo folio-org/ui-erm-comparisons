@@ -1,105 +1,123 @@
 import React from 'react';
-import { waitFor } from '@testing-library/dom';
-// import { renderWithIntl } from '@folio/stripes-erm-components/test/jest/helpers';
 import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Accordion, Checkbox } from '@folio/stripes-testing';
+import { Accordion, KeyValue, Button } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
-import translationsProperties from '../../../test/bigtest/helpers/translationsProperties';
+import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonView from './ComparisonView';
 
-jest.mock('./ComparisonView', () => () => <div>ComparisonView</div>);
-
 const data = {
-  'comparisons': [{
-    'id': 'e5c0ef54-fc95-4333-b539-96c7b0bd8630',
-    'dateCreated': 1667815696497,
-    'name': 'test 1',
-    'runnerId': '8d8ee494-a603-42b3-8e47-617bce1acd15',
-    'comparisonPoints': [{
-      'id': '06f886e1-d924-41d4-906c-59ce69f2a7a3',
-      'date': '2022-11-02',
-      'job': {
-        'id': 'e5c0ef54-fc95-4333-b539-96c7b0bd8630'
-      },
-      'titleList': {
-        'id': '8a029ec3-f55d-46ea-9d04-5cdf2fd4a3ed',
-        'name': 'MR Agreement',
-        'class': 'org.olf.erm.SubscriptionAgreement'
-      }
+  comparison: {
+    'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93',
+    'dateCreated': 1669029911015,
+    'ended': 1669029924579,
+    'result': {
+      'id': '2c91809c8497de11018497e5d39a003f',
+      'value': 'success',
+      'label': 'Success'
     },
+    'name': 'Comparison Title',
+    'runnerId': 'ea7c7dbd-fce2-428c-9162-1e901b3b992b',
+    'comparisonPoints': [
       {
-        'id': 'eccdaf8f-2d4f-4906-90c9-2a61fd8cf4aa',
-        'date': '2022-11-07',
+        'id': '7af6f92a-a7e7-4e6c-873d-0ad823a9854b',
+        'date': '2022-11-21',
         'job': {
-          'id': 'e5c0ef54-fc95-4333-b539-96c7b0bd8630'
+          'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93'
         },
         'titleList': {
-          'id': 'fb1be09a-e304-465d-8c40-33a2449bcdb4',
-          'name': 'ACM Digtal Library',
+          'id': '616704cb-7833-473e-af74-387571f4f8b9',
+          'name': 'AVA VOD Library',
+          'class': 'org.olf.kb.Pkg'
+        }
+      },
+      {
+        'id': '60e8d797-102c-47b2-9214-a32b5a9d6572',
+        'date': '2022-11-21',
+        'job': {
+          'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93'
+        },
+        'titleList': {
+          'id': '30b2ea26-6e15-461c-a29c-8408c93484e2',
+          'name': 'ACS in Focus Test',
           'class': 'org.olf.kb.Pkg'
         }
       }
     ],
-    'started': 1667815718438,
+    'started': 1669029924416,
     'status': {
-      'id': '2c91809c844d2d8c01844d3592c20047',
-      'value': 'in_progress',
-      'label': 'In progress'
+      'id': '2c91809c8497de11018497e5d3c50046',
+      'value': 'ended',
+      'label': 'Ended'
     },
     'class': 'org.olf.general.jobs.ComparisonJob',
     'fullLogCount': 0,
     'errorLogCount': 0,
     'infoLogCount': 0
-  }],
-  'resultValues': [{
-    'id': '2c91809c844d2d8c01844d3592ae0041',
-    'value': 'success',
-    'label': 'Success'
-  },
-    {
-      'id': '2c91809c844d2d8c01844d3592b20042',
-      'value': 'partial_success',
-      'label': 'Partial success'
-    },
-    {
-      'id': '2c91809c844d2d8c01844d3592b60043',
-      'value': 'failure',
-      'label': 'Failure'
-    },
-    {
-      'id': '2c91809c844d2d8c01844d3592ba0044',
-      'value': 'interrupted',
-      'label': 'Interrupted'
-    }
-  ],
-  'statusValues': [{
-    'id': '2c91809c843dbb2701843dc312f50034',
-    'value': 'queued',
-    'label': 'Queued'
-  },
-    {
-      'id': '2c91809c843dbb2701843dc312f80035',
-      'value': 'in_progress',
-      'label': 'In progress'
-    },
-    {
-      'id': '2c91809c843dbb2701843dc312fc0036',
-      'value': 'ended',
-      'label': 'Ended'
-    }
-  ]
+  }
 };
 
-// const stateMock = jest.fn();
+const data2 = {
+  comparison: {
+    'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd',
+    'dateCreated': 1669302524479,
+    'name': 'test1',
+    'comparisonPoints': [
+      {
+        'id': '669bcf70-8058-4a0a-84c9-c1d94b77a87e',
+        'date': '2022-11-24',
+        'job': {
+          'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd'
+        },
+        'titleList': {
+          'id': 'ac4c2dcd-4ca1-4fbb-ad30-60bf2c851672',
+          'name': 'American Psychiatry Association : Psychiatry Legacy Collection : NL',
+          'class': 'org.olf.kb.Pkg'
+        }
+      },
+      {
+        'id': '511b9120-a06f-46d3-abbb-77c775fad2b6',
+        'date': '2022-11-24',
+        'job': {
+          'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd'
+        },
+        'titleList': {
+          'id': '068847b1-8d37-4b9e-b9b0-31204cfd5102',
+          'name': 'American Vacuum Society : Journals',
+          'class': 'org.olf.kb.Pkg'
+        }
+      }
+    ],
+    'status': {
+      'id': '2c91809c84a9e1ca0184a9e974a50011',
+      'value': 'queued',
+      'label': 'Queued'
+    },
+    'class': 'org.olf.general.jobs.ComparisonJob',
+    'fullLogCount': 0,
+    'errorLogCount': 0,
+    'infoLogCount': 0
+  }
+};
+
+const onViewReport = () => {
+  const { history, location } = this.props;
+  history.push(`${location.pathname}/report${location.search}`);
+};
+
+const onClose = () => {
+  this.props.history.push(`/comparisons-erm${this.props.location.search}`);
+};
 
 describe('ComparisonView', () => {
   let renderComponent;
-  describe('render expected components', () => {
+  describe('render expected components (completed comparison)', () => {
     beforeEach(() => {
       renderComponent = renderWithIntl(
         <MemoryRouter>
           <ComparisonView
             data={data}
+            onClose={onClose}
+            onViewReport={onViewReport}
           />
         </MemoryRouter>,
         translationsProperties
@@ -107,30 +125,89 @@ describe('ComparisonView', () => {
     });
 
     // screen.debug()
+
+    it('renders the Heading', () => {
+      const { queryAllByText } = renderComponent;
+      expect(queryAllByText('Comparison Title')).toHaveLength(2);
+    });
+
     test('renders the Comparison points Accordion', async () => {
       await Accordion('Comparison points').exists();
     });
 
-    it('renders the AmendmentInfo component', () => {
-      const { getByText } = renderComponent;
-      expect(getByText('c1')).toBeInTheDocument();
+    test('renders the Error log Accordion', async () => {
+      await Accordion('Error log').exists();
     });
 
-    test('renders the expected License status', async () => {
+    test('renders the Info log Accordion', async () => {
+      await Accordion('Info log').exists();
+    });
+
+    test('renders the Comparison points list', async () => {
+      const { getByText } = renderComponent;
+      expect(getByText('AVA VOD Library')).toBeInTheDocument();
+      expect(getByText('ACS in Focus Test')).toBeInTheDocument();
+    });
+
+    test('renders the expected running status', async () => {
       await KeyValue('Running status').has({ value: 'Ended' });
     });
 
-    test('clicking and calling the delete button under the Actions dropdown', async () => {
-      await Button('Actions').click();
-      await Button('Delete').click();
-      expect(handlers.onDelete).toHaveBeenCalled();
+    test('renders the expected Outcome', async () => {
+      await KeyValue('Outcome').has({ value: 'Success' });
     });
 
-    // test('clicking the edit/duplicate/delete buttons under the Actions dropdown', async () => {
-    //   await Button('Actions').click();
-    //   await Button('Edit').click();
-    //   await Button('Duplicate').click();
-    //   await Button('Delete').click();
-    // });
+    test('renders the Actions button', async () => {
+      await Button('Actions').exists();
+    });
+
+    test('renders the delete and export button under the Actions dropdown', async () => {
+      await Button('Actions').click();
+      await Button('Delete').exists();
+      await Button('Export comparison report as JSON').exists();
+    });
+  });
+
+
+  describe('render expected components (queued comparison)', () => {
+    beforeEach(() => {
+      renderComponent = renderWithIntl(
+        <MemoryRouter>
+          <ComparisonView
+            data={data2}
+            onClose={onClose}
+            onViewReport={onViewReport}
+          />
+        </MemoryRouter>,
+        translationsProperties
+      );
+    });
+
+    test('renders the expected running status', async () => {
+      await KeyValue('Running status').has({ value: 'Queued' });
+    });
+
+    test('renders the Comparison points list', async () => {
+      const { getByText } = renderComponent;
+      expect(getByText('American Psychiatry Association : Psychiatry Legacy Collection : NL')).toBeInTheDocument();
+      expect(getByText('American Vacuum Society : Journals')).toBeInTheDocument();
+    });
+
+    test('renders the Reload Page tooltip ', async () => {
+      const { getByRole } = renderComponent;
+      expect(getByRole('tooltip', { name: /Reload page to refresh button once job has ended/i })).toBeInTheDocument();
+    });
+
+    test('renders the Comparison points Accordion', async () => {
+      await Accordion('Comparison points').exists();
+    });
+
+    test('does not render the Error log Accordion', async () => {
+      await Accordion('Error log').absent();
+    });
+
+    test('does not render the Info log Accordion', async () => {
+      await Accordion('Info log').absent();
+    });
   });
 });
