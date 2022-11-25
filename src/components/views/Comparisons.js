@@ -24,8 +24,8 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
+import { FormattedDateTime } from '@folio/stripes-erm-components';
 import { ComparisonFilters } from '../ComparisonFilters';
-import FormattedDateTime from '../FormattedDateTime';
 import css from './Comparisons.css';
 
 export default class Comparisons extends React.Component {
