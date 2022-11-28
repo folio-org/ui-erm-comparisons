@@ -99,14 +99,10 @@ const data2 = {
   }
 };
 
-const onViewReport = () => {
-  const { history, location } = this.props;
-  history.push(`${location.pathname}/report${location.search}`);
-};
+const onViewReport = jest.fn();
 
-const onClose = () => {
-  this.props.history.push(`/comparisons-erm${this.props.location.search}`);
-};
+const onClose = jest.fn();
+
 
 describe('ComparisonView', () => {
   let renderComponent;

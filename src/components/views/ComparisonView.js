@@ -87,6 +87,7 @@ class ComparisonView extends React.Component {
     if (stripes.hasPerm('ui-erm-comparisons.jobs.delete')) {
       buttons.push(
         <Button
+          key="clickable-dropdown-delete-comparison"
           buttonStyle="dropdownItem"
           disabled={!isComparisonNotInProgress}
           id="clickable-dropdown-delete-comparison"
@@ -105,6 +106,7 @@ class ComparisonView extends React.Component {
     if (stripes.hasPerm('ui-erm-comparisons.jobs.view')) {
       buttons.push(
         <Button
+          key="clickable-dropdown-export-comparison-report"
           buttonStyle="dropdownItem"
           id="clickable-dropdown-export-comparison-report"
           onClick={() => {
