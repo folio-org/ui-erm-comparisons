@@ -188,7 +188,7 @@ class PackageField extends React.Component {
                 (
                   <Link
                     data-test-package-name-link
-                    to={`/erm/eresources/${value.id}`}
+                    to={`/erm/packages/${value.id}`}
                   >
                     {value.name}
                   </Link>
