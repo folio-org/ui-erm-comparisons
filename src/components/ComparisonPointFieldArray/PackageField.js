@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Link } from 'react-router-dom';
+import { Registry } from '@folio/handler-stripes-registry';
 import { FormattedMessage } from 'react-intl';
 import {
   Button,
@@ -39,6 +40,12 @@ class PackageField extends React.Component {
       this.triggerButton.current.focus();
     }
   }
+
+  getResourceLink = (inputValue) => {
+    const resourceType = 'ermPackage';
+    const resourceLink = Registry.getResource(resourceType)?.getViewResource();
+    return resourceLink ? resourceLink(inputValue) : undefined;
+  };
 
   renderLinkPackageButton = value => {
     const {
@@ -188,7 +195,7 @@ class PackageField extends React.Component {
                 (
                   <Link
                     data-test-package-name-link
-                    to={`/erm/eresources/${value.id}`}
+                    to={this.getResourceLink(value)}
                   >
                     {value.name}
                   </Link>
