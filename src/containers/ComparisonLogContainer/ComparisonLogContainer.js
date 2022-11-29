@@ -30,18 +30,8 @@ export default class ComparisonLogContainer extends React.Component {
     comparison: PropTypes.shape({
       id: PropTypes.string,
     }),
-    mutator: PropTypes.shape({
-      resultOffset: PropTypes.shape({
-        replace: PropTypes.func.isRequired,
-      }),
-      resultCount: PropTypes.shape({
-        replace: PropTypes.func.isRequired,
-      }),
-    }).isRequired,
-    resources: PropTypes.shape({
-      logs: PropTypes.object,
-      resultCount: PropTypes.number,
-    }),
+    mutator: PropTypes.object.isRequired,
+    resources: PropTypes.object,
     // eslint-disable-next-line react/no-unused-prop-types
     type: PropTypes.string, // used in `logs` manifest
   };
