@@ -17,31 +17,30 @@ const data = {
     },
     'name': 'Comparison Title',
     'runnerId': 'ea7c7dbd-fce2-428c-9162-1e901b3b992b',
-    'comparisonPoints': [
-      {
-        'id': '7af6f92a-a7e7-4e6c-873d-0ad823a9854b',
-        'date': '2022-11-21',
-        'job': {
-          'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93'
-        },
-        'titleList': {
-          'id': '616704cb-7833-473e-af74-387571f4f8b9',
-          'name': 'AVA VOD Library',
-          'class': 'org.olf.kb.Pkg'
-        }
+    'comparisonPoints': [{
+      'id': '7af6f92a-a7e7-4e6c-873d-0ad823a9854b',
+      'date': '2022-11-21',
+      'job': {
+        'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93'
       },
-      {
-        'id': '60e8d797-102c-47b2-9214-a32b5a9d6572',
-        'date': '2022-11-21',
-        'job': {
-          'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93'
-        },
-        'titleList': {
-          'id': '30b2ea26-6e15-461c-a29c-8408c93484e2',
-          'name': 'ACS in Focus Test',
-          'class': 'org.olf.kb.Pkg'
-        }
+      'titleList': {
+        'id': '616704cb-7833-473e-af74-387571f4f8b9',
+        'name': 'AVA VOD Library',
+        'class': 'org.olf.kb.Pkg'
       }
+    },
+    {
+      'id': '60e8d797-102c-47b2-9214-a32b5a9d6572',
+      'date': '2022-11-21',
+      'job': {
+        'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93'
+      },
+      'titleList': {
+        'id': '30b2ea26-6e15-461c-a29c-8408c93484e2',
+        'name': 'ACS in Focus Test',
+        'class': 'org.olf.kb.Pkg'
+      }
+    }
     ],
     'started': 1669029924416,
     'status': {
@@ -61,31 +60,30 @@ const data2 = {
     'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd',
     'dateCreated': 1669302524479,
     'name': 'test1',
-    'comparisonPoints': [
-      {
-        'id': '669bcf70-8058-4a0a-84c9-c1d94b77a87e',
-        'date': '2022-11-24',
-        'job': {
-          'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd'
-        },
-        'titleList': {
-          'id': 'ac4c2dcd-4ca1-4fbb-ad30-60bf2c851672',
-          'name': 'American Psychiatry Association : Psychiatry Legacy Collection : NL',
-          'class': 'org.olf.kb.Pkg'
-        }
+    'comparisonPoints': [{
+      'id': '669bcf70-8058-4a0a-84c9-c1d94b77a87e',
+      'date': '2022-11-24',
+      'job': {
+        'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd'
       },
-      {
-        'id': '511b9120-a06f-46d3-abbb-77c775fad2b6',
-        'date': '2022-11-24',
-        'job': {
-          'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd'
-        },
-        'titleList': {
-          'id': '068847b1-8d37-4b9e-b9b0-31204cfd5102',
-          'name': 'American Vacuum Society : Journals',
-          'class': 'org.olf.kb.Pkg'
-        }
+      'titleList': {
+        'id': 'ac4c2dcd-4ca1-4fbb-ad30-60bf2c851672',
+        'name': 'American Psychiatry Association : Psychiatry Legacy Collection : NL',
+        'class': 'org.olf.kb.Pkg'
       }
+    },
+    {
+      'id': '511b9120-a06f-46d3-abbb-77c775fad2b6',
+      'date': '2022-11-24',
+      'job': {
+        'id': '3d466140-0d86-4b12-a73b-ffd914e6a0dd'
+      },
+      'titleList': {
+        'id': '068847b1-8d37-4b9e-b9b0-31204cfd5102',
+        'name': 'American Vacuum Society : Journals',
+        'class': 'org.olf.kb.Pkg'
+      }
+    }
     ],
     'status': {
       'id': '2c91809c84a9e1ca0184a9e974a50011',
@@ -100,9 +98,7 @@ const data2 = {
 };
 
 const onViewReport = jest.fn();
-
 const onClose = jest.fn();
-
 
 describe('ComparisonView', () => {
   let renderComponent;
@@ -119,8 +115,6 @@ describe('ComparisonView', () => {
         translationsProperties
       );
     });
-
-    // screen.debug()
 
     it('renders the Heading', () => {
       const { queryAllByText } = renderComponent;
@@ -163,7 +157,6 @@ describe('ComparisonView', () => {
       await Button('Export comparison report as JSON').exists();
     });
   });
-
 
   describe('render expected components (queued comparison)', () => {
     beforeEach(() => {
