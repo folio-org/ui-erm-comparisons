@@ -1,13 +1,23 @@
-import React from 'react';
+import { Field } from 'react-final-form';
+import { StaticRouter as Router } from 'react-router-dom';
+
+import { requiredValidator } from '@folio/stripes-erm-components';
 import { renderWithIntl, TestForm } from '@folio/stripes-erm-testing';
 import { KeyValue } from '@folio/stripes-testing';
-import { StaticRouter as Router } from 'react-router-dom';
+
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
-import { packageFieldData, emptyPackageField, packageFieldError } from './testResources';
+import { packageFieldData } from './testResources';
+
 import PackageField from './PackageField';
 
-const onComparisonPointSelected = jest.fn();
 const onSubmit = jest.fn();
+
+// EXAMPLE this is a quick and dirty way to mock the Registry, we may need to implement this into __mocks__ folder at some point
+jest.mock('@folio/handler-stripes-registry', () => ({
+  Registry: {
+    getResource: () => ({ getViewResource: () => () => 'some-link-value' })
+  }
+}));
 
 let renderComponent;
 describe('PackageField', () => {
@@ -15,10 +25,24 @@ describe('PackageField', () => {
     beforeEach(() => {
       renderComponent = renderWithIntl(
         <Router>
-          <TestForm onSubmit={onSubmit}>
-            <PackageField
+          <TestForm
+            initialValues={{
+              packages: [{
+                comparisonPoint: {
+                  'id': '810dfe8a-df91-4a7f-9200-00655620828a',
+                  'name': 'ACM Digtal Library',
+                  'count': 10650,
+                  'provider': 'Association for Computing Machinery'
+                }
+              }]
+            }}
+            onSubmit={onSubmit}
+          >
+            <Field
+              component={PackageField}
+              name="packages[0].comparisonPoint"
+              validate={requiredValidator}
               {...packageFieldData}
-              onPackageSelected={onComparisonPointSelected}
             />
           </TestForm>
         </Router>, translationsProperties
@@ -57,10 +81,19 @@ describe('PackageField', () => {
     beforeEach(() => {
       renderComponent = renderWithIntl(
         <Router>
-          <TestForm onSubmit={onSubmit}>
-            <PackageField
-              {...emptyPackageField}
-              onPackageSelected={onComparisonPointSelected}
+          <TestForm
+            initialValues={{
+              packages: [{
+                comparisonPoint: null
+              }]
+            }}
+            onSubmit={onSubmit}
+          >
+            <Field
+              component={PackageField}
+              name="packages[0].comparisonPoint"
+              validate={requiredValidator}
+              {...packageFieldData}
             />
           </TestForm>
         </Router>, translationsProperties
@@ -81,23 +114,8 @@ describe('PackageField', () => {
       const { getByText } = renderComponent;
       expect(getByText('Link a package to get started')).toBeInTheDocument();
     });
-  });
 
-  describe('PackageField with error', () => {
-    beforeEach(() => {
-      renderComponent = renderWithIntl(
-        <Router>
-          <TestForm onSubmit={onSubmit}>
-            <PackageField
-              {...packageFieldError}
-              onPackageSelected={onComparisonPointSelected}
-            />
-          </TestForm>
-        </Router>, translationsProperties
-      );
-    });
-
-    test('renders error message', () => {
+    it('displays an error', async () => {
       const { getByText } = renderComponent;
       expect(getByText('Please fill this in to continue')).toBeInTheDocument();
     });

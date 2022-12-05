@@ -1,12 +1,15 @@
-import React from 'react';
-import { renderWithIntl, TestForm } from '@folio/stripes-erm-testing';
-import { KeyValue, Button } from '@folio/stripes-testing';
+import { Field } from 'react-final-form';
 import { StaticRouter as Router } from 'react-router-dom';
+
+import { requiredValidator } from '@folio/stripes-erm-components';
+import { renderWithIntl, TestForm } from '@folio/stripes-erm-testing';
+import { KeyValue } from '@folio/stripes-testing';
+
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
-import { agreementFieldData, emptyAgreementField, agreementFieldError } from './testResources';
+import { agreementFieldData } from './testResources';
+
 import AgreementField from './AgreementField';
 
-const onComparisonPointSelectedMock = jest.fn();
 const onSubmit = jest.fn();
 
 let renderComponent;
@@ -15,10 +18,27 @@ describe('AgreementField', () => {
     beforeEach(() => {
       renderComponent = renderWithIntl(
         <Router>
-          <TestForm onSubmit={onSubmit}>
-            <AgreementField
+          <TestForm
+            initialValues={{
+              agreements: [
+                {
+                  comparisonPoint: {
+                    'id': 'c2ef50e0-c64f-437b-b3b8-82909505f2a3',
+                    'name': 'MR Test Agreement',
+                    'startDate': '2022-11-10',
+                    'status': 'Active',
+                    'endDate': '2022-11-30'
+                  }
+                }
+              ]
+            }}
+            onSubmit={onSubmit}
+          >
+            <Field
+              component={AgreementField}
+              name="agreements[0].comparisonPoint"
+              validate={requiredValidator}
               {...agreementFieldData}
-              onAgreementSelected={onComparisonPointSelectedMock}
             />
           </TestForm>
         </Router>, translationsProperties
@@ -57,10 +77,19 @@ describe('AgreementField', () => {
     beforeEach(() => {
       renderComponent = renderWithIntl(
         <Router>
-          <TestForm onSubmit={onSubmit}>
-            <AgreementField
-              {...emptyAgreementField}
-              onAgreementSelected={onComparisonPointSelectedMock}
+          <TestForm
+            initialValues={{
+              agreements: [{
+                comparisonPoint: null
+              }]
+            }}
+            onSubmit={onSubmit}
+          >
+            <Field
+              component={AgreementField}
+              name="agreements[0].comparisonPoint"
+              validate={requiredValidator}
+              {...agreementFieldData}
             />
           </TestForm>
         </Router>, translationsProperties
@@ -82,26 +111,7 @@ describe('AgreementField', () => {
       expect(getByText('Link an agreement to get started')).toBeInTheDocument();
     });
 
-    test('renders the submit button', async () => {
-      await Button('Submit').exists();
-    });
-  });
-
-  describe('AgreementField with error', () => {
-    beforeEach(() => {
-      renderComponent = renderWithIntl(
-        <Router>
-          <TestForm onSubmit={onSubmit}>
-            <AgreementField
-              {...agreementFieldError}
-              onAgreementSelected={onComparisonPointSelectedMock}
-            />
-          </TestForm>
-        </Router>, translationsProperties
-      );
-    });
-
-    test('renders error message', () => {
+    it('displays an error', async () => {
       const { getByText } = renderComponent;
       expect(getByText('Please fill this in to continue')).toBeInTheDocument();
     });
