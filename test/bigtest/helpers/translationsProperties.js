@@ -1,4 +1,4 @@
-import { translationsProperties as ermComponentsTranslations } from '@folio/stripes-erm-components';
+import ermComponentsTranslations from '@folio/stripes-erm-components/translations/stripes-erm-components/en';
 import translations from '../../../translations/ui-erm-comparisons/en';
 
 const translationsProperties = [

@@ -174,7 +174,7 @@ class AgreementField extends React.Component {
     const {
       id,
       input: { value },
-      meta: { error }
+      meta: { error, touched }
     } = this.props;
 
     return (
@@ -200,7 +200,7 @@ class AgreementField extends React.Component {
         roundedBorder
       >
         {value ? this.renderAgreement() : this.renderEmpty()}
-        {error ? this.renderError() : null}
+        {touched && error ? this.renderError() : null}
       </Card>
     );
   }

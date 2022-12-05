@@ -182,7 +182,7 @@ class PackageField extends React.Component {
   render() {
     const {
       id,
-      meta: { error },
+      meta: { error, touched },
       input: { value },
     } = this.props;
 
@@ -210,7 +210,7 @@ class PackageField extends React.Component {
         roundedBorder
       >
         {value ? this.renderPackage() : this.renderEmpty()}
-        {error ? this.renderError() : null}
+        {touched && error ? this.renderError() : null}
       </Card>
     );
   }
