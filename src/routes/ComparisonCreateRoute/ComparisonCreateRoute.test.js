@@ -1,8 +1,5 @@
 import PropTypes from 'prop-types';
 
-
-import { useStripes } from '@folio/stripes/core';
-
 import { renderWithIntl } from '@folio/stripes-erm-testing';
 import { MemoryRouter } from 'react-router-dom';
 import { Button } from '@folio/stripes/components';
@@ -44,6 +41,10 @@ const data = {
   mutator: {
     comparisons: {
       POST: jest.fn(),
+    },
+    entitlementQueryParams: {
+      replace: jest.fn(),
+      update: jest.fn()
     }
   },
   resources: {
@@ -72,7 +73,7 @@ const data = {
 };
 
 describe('ComparisonCreateRoute', () => {
-  describe('rendering the route with permissions', () => {
+  describe('rendering the route', () => {
     let renderComponent;
     beforeEach(() => {
       renderComponent = renderWithIntl(
@@ -92,27 +93,6 @@ describe('ComparisonCreateRoute', () => {
     test('calls the CloseButton', async () => {
       await ButtonInteractor('CloseButton').click();
       expect(historyPushMock).toHaveBeenCalled();
-    });
-  });
-
-  describe('rendering with no permissions', () => {
-    let renderComponent;
-    beforeEach(() => {
-      const { hasPerm } = useStripes();
-      hasPerm.mockImplementation(() => false);
-      renderComponent = renderWithIntl(
-        <MemoryRouter>
-          <ComparisonCreateRoute
-            {...data}
-          />
-        </MemoryRouter>,
-        translationsProperties
-      );
-    });
-
-    test('displays the permission error', () => {
-      const { getByText } = renderComponent;
-      expect(getByText('Sorry - your permissions do not allow access to this page.')).toBeInTheDocument();
     });
   });
 });
