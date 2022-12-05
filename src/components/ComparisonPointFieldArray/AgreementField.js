@@ -22,7 +22,10 @@ class AgreementField extends React.Component {
     id: PropTypes.string,
     input: PropTypes.shape({
       name: PropTypes.string,
-      value: PropTypes.object
+      value: PropTypes.oneOfType([
+        PropTypes.string, // Final-form passes null as '' by default
+        PropTypes.object
+      ])
     }).isRequired,
     meta: PropTypes.shape({
       error: PropTypes.object,
