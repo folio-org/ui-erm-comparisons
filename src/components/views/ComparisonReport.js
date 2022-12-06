@@ -22,7 +22,7 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
       <div data-testid="comparisonReport">
         <PaneMenu>
           <FormattedMessage id="ui-erm-comparisons.report.close">
-            {ariaLabel => (
+            {([ariaLabel]) => (
               <IconButton
                 aria-label={ariaLabel}
                 icon="times"

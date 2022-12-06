@@ -47,39 +47,19 @@ const data = {
       'successfulMutations': [],
       'failedMutations': [],
       'pendingMutations': [],
-      'loadedAt': 'Tue Dec 06 2022 09:35:31 GMT+0000 (Greenwich Mean Time)',
-      'url': 'https://folio-snapshot-2-okapi.dev.folio.org/erm/jobs/85f1c1f4-d619-4c07-a2f8-8163c3579bf9/downloadFileObject',
-      'headers': 'Headers(undefined) {"content-type" => "text/json;charset=utf-8"}',
-      'httpStatus': 200,
-      'other': {
-        'totalRecords': null
-      },
-      'resource': 'report',
-      'module': '@folio/erm-comparisons',
-      'throwErrors': true
-    },
-    'comparison': {
-      'hasLoaded': true,
-      'isPending': false,
-      'failed': false,
-      'records': [
-        '{class: "org.olf.general.jobs.ComparisonJob", compa…}'
-      ],
-      'successfulMutations': [],
-      'failedMutations': [],
-      'pendingMutations': [],
-      'loadedAt': 'Tue Dec 06 2022 09:35:30 GMT+0000 (Greenwich Mean Time)',
-      'url': 'http://folio-snapshot-2-okapi.dev.folio.org/erm/jobs/85f1c1f4-d619-4c07-a2f8-8163c3579bf9',
-      'headers': 'Headers(undefined) {"content-type" => "application/json;charset=UTF-8"}',
-      'httpStatus': 200,
-      'other': {
-        'totalRecords': null
-      },
-      'resource': 'comparison',
-      'module': '@folio/erm-comparisons',
-      'throwErrors': true
     }
-  }
+  },
+  'comparison': {
+    'hasLoaded': true,
+    'isPending': false,
+    'failed': false,
+    'records': [
+      '{class: "org.olf.general.jobs.ComparisonJob", compa…}'
+    ],
+    'successfulMutations': [],
+    'failedMutations': [],
+    'pendingMutations': [],
+  },
 };
 
 describe('ComparisonReportViewRoute', () => {
