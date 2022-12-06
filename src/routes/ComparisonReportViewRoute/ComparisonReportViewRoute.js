@@ -3,8 +3,8 @@ import { useQuery } from 'react-query';
 import PropTypes from 'prop-types';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import View from '../components/views/ComparisonReport';
-import { COMPARISON_DOWNLOAD_FILE_OBJECT_ENDPOINT, COMPARISON_ENDPOINT } from '../constants';
+import View from '../../components/views/ComparisonReport';
+import { COMPARISON_DOWNLOAD_FILE_OBJECT_ENDPOINT, COMPARISON_ENDPOINT } from '../../constants';
 
 const ComparisonReportViewRoute = ({
   history,
@@ -20,12 +20,12 @@ const ComparisonReportViewRoute = ({
     history.push(location?.pathname?.replace('/report', ''));
   };
 
-  const { data: comparison, isLoading: isComparisonLoading } = useQuery(
+  const { data: comparison = {}, isLoading: isComparisonLoading } = useQuery(
     ['ERM', 'Comparison', comparisonId, comparisonPath],
     () => ky.get(comparisonPath).json()
   );
 
-  const { data: comparisonReport, isLoading: isComparisonReportLoading } = useQuery(
+  const { data: comparisonReport = [], isLoading: isComparisonReportLoading } = useQuery(
     ['ERM', 'Comparison', comparisonId, 'report', comparisonReportPath],
     () => ky.get(comparisonReportPath).json()
   );

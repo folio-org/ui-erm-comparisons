@@ -223,7 +223,7 @@ export default class Comparisons extends React.Component {
         isWithinScope={checkScope}
         scope={document.body}
       >
-        <div ref={contentRef} data-test-ermcomparisons>
+        <div ref={contentRef} data-test-ermcomparisons data-testid="comparisons">
           <SearchAndSortQuery
             initialFilterState={{ }}
             initialSearchState={{ query: '' }}
