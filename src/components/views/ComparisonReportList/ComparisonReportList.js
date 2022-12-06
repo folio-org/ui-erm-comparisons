@@ -65,13 +65,13 @@ const ComparisonReportList = (
     return true;
   };
 
-  const getCoverage = (statements, embargo) => {
+  const getCoverage = (statements, embargo, index) => {
     if (!statements.length && !embargo) return '';
     return (
-      <Layout className="full" data-test-coverage>
-        <SerialCoverage statements={statements} />
+      <Layout key={`coverage-layout-${index}`} className="full" data-test-coverage>
+        <SerialCoverage key={`serial-coverage-${index}`} statements={statements} />
         {embargo &&
-          <Layout className="padding-top-gutter">
+          <Layout key={`embargo-layout-${index}`} className="padding-top-gutter">
             <Embargo embargo={embargo} />
           </Layout>
         }
@@ -130,7 +130,7 @@ const ComparisonReportList = (
                 const { coverage } = availability;
                 return Object.values(coverage).map(cov => {
                   const { statements, embargo } = cov;
-                  return getCoverage(statements, embargo);
+                  return getCoverage(statements, embargo, uniqueId('getCoverage'));
                 });
               })
               }
@@ -293,7 +293,7 @@ const ComparisonReportList = (
                               formatter={{
                                 coverage: (r) => {
                                   const { statements, embargo } = r;
-                                  return getCoverage(statements, embargo);
+                                  return getCoverage(statements, embargo, uniqueId('getCoverage'));
                                 },
                                 resourceA: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceA)),
                                 resourceB: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceB))
