@@ -1,142 +1,124 @@
-import React from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { getSASParams } from '@folio/stripes-erm-components';
-import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+
+import { generateKiwtQueryParams, useKiwtSASQuery } from '@k-int/stripes-kint-components';
+
+import { getRefdataValuesByDesc, useInfiniteFetch } from '@folio/stripes-erm-components';
+import { useOkapiKy } from '@folio/stripes/core';
 import View from '../components/views/Comparisons';
+import { RESULT_COUNT_INCREMENT } from '../constants';
+import useErmComparisonsRefdata from '../hooks/useErmComparisonsRefdata';
 
-const INITIAL_RESULT_COUNT = 100;
-const RESULT_COUNT_INCREMENT = 100;
+const [
+  RESULT,
+  STATUS,
+] = [
+  'PersistentJob.Result',
+  'PersistentJob.Status',
+];
 
-class ComparisonsRoute extends React.Component {
-  static manifest = Object.freeze({
-    comparisons: {
-      type: 'okapi',
-      recordsRequired: '%{resultCount}',
-      records: 'results',
-      perRequest: RESULT_COUNT_INCREMENT,
-      limitParam: 'perPage',
-      path: 'erm/jobs/type/comparison',
-      params: getSASParams({
-        searchKey: 'name',
-        filterKeys: {
-          status: 'status.value',
-          result: 'result.value',
-          'comparisonPointOne': 'comparisonPoints.titleList.id',
-          'comparisonPointTwo': 'comparisonPoints.titleList.id',
-        }
-      })
-    },
-    resultValues: {
-      type: 'okapi',
-      path: 'erm/refdata/persistentJob/result',
-      shouldRefresh: () => false,
-    },
-    statusValues: {
-      type: 'okapi',
-      path: 'erm/refdata/persistentJob/status',
-      shouldRefresh: () => false,
-    },
-    query: { initialValue: {} },
-    resultCount: { initialValue: INITIAL_RESULT_COUNT },
+const COMPARISONS_ENDPOINT = 'erm/jobs/type/comparison';
+
+const ComparisonsRoute = ({
+  children,
+  history,
+  location,
+  match,
+}) => {
+  const ky = useOkapiKy();
+  const searchField = useRef();
+
+  useEffect(() => {
+    if (searchField.current) {
+      searchField.current.focus();
+    }
+  }, []); // This isn't particularly great, but in the interests of saving time migrating, it will have to do
+
+  const refdata = useErmComparisonsRefdata({
+    desc: [
+      RESULT,
+      STATUS,
+    ]
   });
 
-  static propTypes = {
-    children: PropTypes.node,
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-    }).isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string,
-      }),
+  const { query, querySetter, queryGetter } = useKiwtSASQuery();
+
+  const comparisonsQueryParams = useMemo(() => (
+    generateKiwtQueryParams({
+      searchKey: 'name',
+      filterKeys: {
+        status: 'status.value',
+        result: 'result.value',
+        'comparisonPointOne': 'comparisonPoints.titleList.id',
+        'comparisonPointTwo': 'comparisonPoints.titleList.id',
+      },
+      perPage: RESULT_COUNT_INCREMENT
+    }, (query ?? {}))
+  ), [query]);
+
+  const {
+    infiniteQueryObject: {
+      error: comparisonsError,
+      fetchNextPage: fetchNextComparisonsPage,
+      isLoading: areComparisonsLoading,
+      isIdle: isComparisonsIdle,
+      isError: isComparisonsError
+    },
+    results: comparisons = [],
+    total: comparisonsCount = 0
+  } = useInfiniteFetch(
+    ['ERM', 'Comparisons', comparisonsQueryParams, COMPARISONS_ENDPOINT],
+    ({ pageParam = 0 }) => {
+      const params = [...comparisonsQueryParams, `offset=${pageParam}`];
+      return ky.get(`${COMPARISONS_ENDPOINT}?${params?.join('&')}`).json();
+    }
+  );
+
+  useEffect(() => {
+    if (comparisonsCount === 1) {
+      history.push(`/comparisons-erm/${comparisons[0].id}${location.search}`);
+    }
+  }, [comparisons, comparisonsCount, history, location.search]);
+
+  return (
+    <View
+      data={{
+        comparisons,
+        resultValues: getRefdataValuesByDesc(refdata, RESULT),
+        statusValues: getRefdataValuesByDesc(refdata, STATUS),
+      }}
+      onNeedMoreData={(_askAmount, index) => fetchNextComparisonsPage({ pageParam: index })}
+      queryGetter={queryGetter}
+      querySetter={querySetter}
+      searchString={location.search}
+      selectedRecordId={match.params.id}
+      source={{ // Fake source from useQuery return values;
+        totalCount: () => comparisonsCount,
+        loaded: () => !isComparisonsIdle,
+        pending: () => areComparisonsLoading,
+        failure: () => isComparisonsError,
+        failureMessage: () => comparisonsError.message
+      }}
+    >
+      {children}
+    </View>
+  );
+};
+
+ComparisonsRoute.propTypes = {
+  children: PropTypes.node,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
     }),
-    mutator: PropTypes.object,
-    resources: PropTypes.object,
-    stripes: PropTypes.shape({
-      logger: PropTypes.object,
-    }),
-  }
+  }),
+};
 
-  constructor(props) {
-    super(props);
-
-    this.logger = props.stripes.logger;
-    this.searchField = React.createRef();
-  }
-
-  componentDidMount() {
-    this.source = new StripesConnectedSource(this.props, this.logger, 'comparisons');
-
-    if (this.searchField.current) {
-      this.searchField.current.focus();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const newCount = this.source.totalCount();
-    const newRecords = this.source.records();
-
-    if (newCount === 1) {
-      const { history, location } = this.props;
-
-      const prevSource = new StripesConnectedSource(prevProps, this.logger, 'comparisons');
-      const oldCount = prevSource.totalCount();
-      const oldRecords = prevSource.records();
-
-      if (oldCount !== 1 || (oldCount === 1 && oldRecords[0].id !== newRecords[0].id)) {
-        const record = newRecords[0];
-        history.push(`/comparisons-erm/${record.id}${location.search}`);
-      }
-    }
-  }
-
-  querySetter = ({ nsValues, state }) => {
-    const defaults = {
-      filters: null,
-      query: null,
-      sort: null,
-    };
-
-    if (/reset/.test(state.changeType)) {
-      this.props.mutator.query.update({ ...defaults, ...nsValues });
-    } else {
-      this.props.mutator.query.update(nsValues);
-    }
-  }
-
-  queryGetter = () => {
-    return this.props?.resources?.query ?? {};
-  }
-
-  render() {
-    const { children, history, location, match, resources } = this.props;
-    if (this.source) {
-      this.source.update(this.props, 'comparisons');
-    }
-
-    return (
-      <View
-        data={{
-          comparisons: resources?.comparisons?.records ?? [],
-          resultValues: resources?.resultValues?.records ?? [],
-          statusValues: resources?.statusValues?.records ?? [],
-        }}
-        history={history}
-        queryGetter={this.queryGetter}
-        querySetter={this.querySetter}
-        searchString={location.search}
-        selectedRecordId={match.params.id}
-        source={this.source}
-      >
-        {children}
-      </View>
-    );
-  }
-}
-
-export default stripesConnect(ComparisonsRoute);
+export default ComparisonsRoute;
