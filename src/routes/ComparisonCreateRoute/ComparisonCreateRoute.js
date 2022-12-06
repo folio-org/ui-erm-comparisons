@@ -216,6 +216,6 @@ ComparisonCreateRoute.propTypes = {
       entitlementsCount: PropTypes.number,
     })
   }).isRequired,
-};;
+};
 
 export default ComparisonCreateRoute;

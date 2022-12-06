@@ -6,8 +6,10 @@ import { generateKiwtQueryParams, useKiwtSASQuery } from '@k-int/stripes-kint-co
 import { getRefdataValuesByDesc, useInfiniteFetch } from '@folio/stripes-erm-components';
 import { useOkapiKy } from '@folio/stripes/core';
 import View from '../components/views/Comparisons';
-import { COMPARISONS_ENDPOINT, RESULT_COUNT_INCREMENT } from '../constants';
+import { COMPARISONS_ENDPOINT, resultCount } from '../constants';
 import useErmComparisonsRefdata from '../hooks/useErmComparisonsRefdata';
+
+const { RESULT_COUNT_INCREMENT } = resultCount;
 
 const [
   RESULT,
