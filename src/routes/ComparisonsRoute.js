@@ -6,7 +6,7 @@ import { generateKiwtQueryParams, useKiwtSASQuery } from '@k-int/stripes-kint-co
 import { getRefdataValuesByDesc, useInfiniteFetch } from '@folio/stripes-erm-components';
 import { useOkapiKy } from '@folio/stripes/core';
 import View from '../components/views/Comparisons';
-import { RESULT_COUNT_INCREMENT } from '../constants';
+import { COMPARISONS_ENDPOINT, RESULT_COUNT_INCREMENT } from '../constants';
 import useErmComparisonsRefdata from '../hooks/useErmComparisonsRefdata';
 
 const [
@@ -16,8 +16,6 @@ const [
   'PersistentJob.Result',
   'PersistentJob.Status',
 ];
-
-const COMPARISONS_ENDPOINT = 'erm/jobs/type/comparison';
 
 const ComparisonsRoute = ({
   children,
