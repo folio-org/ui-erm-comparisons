@@ -1,7 +1,6 @@
 
 import { renderWithIntl } from '@folio/stripes-erm-testing';
 import { MultiColumnList } from '@folio/stripes-testing';
-// import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import translationsProperties from '../../../../test/jest/helpers/translationsProperties';
 import ComparisonReportList from './ComparisonReportList';
@@ -17,7 +16,6 @@ describe('ComparisonReportList', () => {
       </MemoryRouter>,
       translationsProperties
     );
-    // screen.debug();
   });
 
   test('renders the comparison report MCL', async () => {
