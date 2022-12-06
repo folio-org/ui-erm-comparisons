@@ -14,28 +14,37 @@ import { AppIcon } from '@folio/stripes/core';
 import ComparisonReportList from '../ComparisonReportList';
 
 const resourceCount = 200;
-const ComparisonReport = ({ data, isLoading, onClose }) => {
+const ComparisonReport = ({
+  data: {
+    comparisonPointData = {},
+    report = []
+  },
+  isLoading,
+  onClose
+}) => {
   const [currentIndex, setCurrentIndex] = useState(resourceCount);
 
   const renderFirstMenu = () => {
     return (
-      <PaneMenu>
-        <FormattedMessage id="ui-erm-comparisons.report.close">
-          {([ariaLabel]) => (
-            <IconButton
-              aria-label={ariaLabel}
-              icon="times"
-              id="close-report-button"
-              onClick={onClose}
-            />
-          )}
-        </FormattedMessage>
-      </PaneMenu>
+      <div data-testid="comparisonReport">
+        <PaneMenu>
+          <FormattedMessage id="ui-erm-comparisons.report.close">
+            {([ariaLabel]) => (
+              <IconButton
+                aria-label={ariaLabel}
+                icon="times"
+                id="close-report-button"
+                onClick={onClose}
+              />
+            )}
+          </FormattedMessage>
+        </PaneMenu>
+      </div>
     );
   };
 
   const handleNeedMoreData = () => {
-    setCurrentIndex(data?.report?.length ?? 0);
+    setCurrentIndex(report?.length ?? 0);
   };
 
   const paneProps = {
@@ -45,9 +54,8 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
     onClose,
   };
 
-  const { comparisonPointData } = data;
-  const currentResources = data?.report?.slice(0, currentIndex);
-  const totalCount = data?.report?.length ?? 0;
+  const currentResources = report?.slice(0, currentIndex);
+  const totalCount = report?.length ?? 0;
 
   return (
     <Paneset>
