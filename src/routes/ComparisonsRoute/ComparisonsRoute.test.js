@@ -19,13 +19,6 @@ const data = {
   match: {
     params: { id: '85f1c1f4-d619-4c07-a2f8-8163c3579bf9' }
   },
-  mutator: {
-    query: {
-      replace: jest.fn(),
-      update: jest.fn()
-    },
-  },
-  resources: {},
 };
 
 describe('ComparisonsRoute', () => {
