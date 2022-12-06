@@ -124,18 +124,6 @@ ComparisonViewRoute.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired
   }).isRequired,
-  mutator: PropTypes.shape({
-    comparison: PropTypes.object,
-    titleListQueryParams: PropTypes.shape({
-      update: PropTypes.func.isRequired,
-    })
-  }).isRequired,
-  resources: PropTypes.shape({
-    comparison: PropTypes.object,
-  }).isRequired,
-  stripes: PropTypes.shape({
-    okapi: PropTypes.object.isRequired,
-  }).isRequired,
 };
 
 export default ComparisonViewRoute;
