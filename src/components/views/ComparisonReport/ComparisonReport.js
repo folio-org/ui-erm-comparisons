@@ -11,7 +11,7 @@ import {
 
 import { AppIcon } from '@folio/stripes/core';
 
-import ComparisonReportList from './ComparisonReportList';
+import ComparisonReportList from '../ComparisonReportList';
 
 const resourceCount = 200;
 const ComparisonReport = ({ data, isLoading, onClose }) => {
@@ -21,7 +21,7 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
     return (
       <PaneMenu>
         <FormattedMessage id="ui-erm-comparisons.report.close">
-          {ariaLabel => (
+          {([ariaLabel]) => (
             <IconButton
               aria-label={ariaLabel}
               icon="times"
