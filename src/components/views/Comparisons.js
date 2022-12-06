@@ -26,7 +26,7 @@ import {
 
 import { FormattedDateTime } from '@folio/stripes-erm-components';
 import { ComparisonFilters } from '../ComparisonFilters';
-import css from './Comparisons.css';
+import css from './Comparisons/Comparisons.css';
 
 export default class Comparisons extends React.Component {
   static propTypes = {
