@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash';
 
 import { FormattedMessage } from 'react-intl';
 import { CalloutContext, stripesConnect } from '@folio/stripes/core';
-import View from '../components/views/ComparisonForm';
+import View from '../../components/views/ComparisonForm';
 
 class ComparisonCreateRoute extends React.Component {
   static manifest = Object.freeze({
