@@ -19,18 +19,20 @@ const ComparisonReport = ({ data, isLoading, onClose }) => {
 
   const renderFirstMenu = () => {
     return (
-      <PaneMenu>
-        <FormattedMessage id="ui-erm-comparisons.report.close">
-          {ariaLabel => (
-            <IconButton
-              aria-label={ariaLabel}
-              icon="times"
-              id="close-report-button"
-              onClick={onClose}
-            />
-          )}
-        </FormattedMessage>
-      </PaneMenu>
+      <div data-testid="comparisonReport">
+        <PaneMenu>
+          <FormattedMessage id="ui-erm-comparisons.report.close">
+            {ariaLabel => (
+              <IconButton
+                aria-label={ariaLabel}
+                icon="times"
+                id="close-report-button"
+                onClick={onClose}
+              />
+            )}
+          </FormattedMessage>
+        </PaneMenu>
+      </div>
     );
   };
 

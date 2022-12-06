@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 
-import View from '../components/views/ComparisonReport';
+import View from '../../components/views/ComparisonReport';
 
 class ComparisonReportViewRoute extends React.Component {
   static manifest = Object.freeze({
