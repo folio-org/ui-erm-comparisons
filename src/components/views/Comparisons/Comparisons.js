@@ -25,8 +25,8 @@ import {
 } from '@folio/stripes/smart-components';
 
 import { FormattedDateTime } from '@folio/stripes-erm-components';
-import { ComparisonFilters } from '../ComparisonFilters';
-import css from './Comparisons/Comparisons.css';
+import { ComparisonFilters } from '../../ComparisonFilters';
+import css from './Comparisons.css';
 
 export default class Comparisons extends React.Component {
   static propTypes = {
@@ -223,7 +223,7 @@ export default class Comparisons extends React.Component {
         isWithinScope={checkScope}
         scope={document.body}
       >
-        <div ref={contentRef} data-test-ermcomparisons data-testid="comparisons">
+        <div ref={contentRef} data-test-ermcomparisons>
           <SearchAndSortQuery
             initialFilterState={{ }}
             initialSearchState={{ query: '' }}
