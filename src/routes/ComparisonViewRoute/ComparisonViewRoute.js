@@ -1,141 +1,129 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { CalloutContext, stripesConnect } from '@folio/stripes/core';
+import { useCallout, useOkapiKy } from '@folio/stripes/core';
 import { ConfirmationModal } from '@folio/stripes/components';
 
 import View from '../../components/views/ComparisonView';
+import { COMPARISON_ENDPOINT } from '../../constants';
 
-class ComparisonViewRoute extends React.Component {
-  static manifest = Object.freeze({
-    comparison: {
-      type: 'okapi',
-      path: 'erm/jobs/:{id}',
-      shouldRefresh: () => false,
-    }
-  });
+const ComparisonViewRoute = ({
+  history,
+  location,
+  match: { params: { id: comparisonId } = {} } = {},
+}) => {
+  const ky = useOkapiKy();
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const callout = useCallout();
+  const queryClient = useQueryClient();
 
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-    mutator: PropTypes.shape({
-      comparison: PropTypes.object,
-      titleListQueryParams: PropTypes.shape({
-        update: PropTypes.func.isRequired,
-      })
-    }).isRequired,
-    resources: PropTypes.shape({
-      comparison: PropTypes.object,
-    }).isRequired,
-    stripes: PropTypes.shape({
-      okapi: PropTypes.object.isRequired,
-    }).isRequired,
-  };
+  const comparisonPath = COMPARISON_ENDPOINT(comparisonId);
 
-  static contextType = CalloutContext;
+  const { data: comparison, isLoading: isComparisonLoading } = useQuery(
+    ['ERM', 'Comparison', comparisonId, comparisonPath],
+    () => ky.get(comparisonPath).json()
+  );
 
-  state = { showConfirmDelete: false };
+  const name = comparison?.name ?? '';
 
-  downloadBlob = (name) => (
+  const { mutateAsync: deleteComparison } = useMutation(
+    ['ERM', 'Comparison', comparisonId, comparisonPath, 'delete'],
+    () => ky.delete(comparisonPath).then(() => {
+      queryClient.invalidateQueries(['ERM', 'Comparisons']);
+      callout.sendCallout({
+        message: <FormattedMessage
+          id="ui-erm-comparisons.comparison.deleted.success"
+          values={{ name }}
+        />
+      });
+    })
+  );
+
+  const downloadBlob = (downloadName) => (
     blob => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = name;
+      a.download = downloadName;
       document.body.appendChild(a);
       a.click();
       a.remove();
     }
-  )
+  );
 
-  handleDelete = () => {
-    const { resources } = this.props;
-    const comparison = resources?.comparison?.records?.[0] ?? {};
-    const name = comparison?.name ?? '';
-    this.props.mutator.comparison
-      .DELETE(comparison)
-      .then(() => {
-        this.props.history.replace(
-          {
-            pathname: '/comparisons-erm',
-            search: this.props.location.search,
-          }
-        );
-        this.context.sendCallout({ message: <FormattedMessage id="ui-erm-comparisons.comparison.deleted.success" values={{ name }} /> });
-      });
+  const handleClose = () => {
+    history.push(`/comparisons-erm${location.search}`);
   };
 
-  handleClose = () => {
-    this.props.history.push(`/comparisons-erm${this.props.location.search}`);
-  };
+  const { refetch: exportReportAsJSON } = useQuery(
+    ['ERM', 'Comparison', comparisonId, comparisonPath, 'exportReport'],
+    () => ky.get(`erm/jobs/${comparisonId}/downloadFileObject`).blob().then(downloadBlob(name)),
+    {
+      enabled: false
+    }
+  );
 
-  handleExportReportAsJSON = () => {
-    const { resources, stripes: { okapi } } = this.props;
-    const { id, name } = resources?.comparison?.records?.[0] ?? {};
-
-    return fetch(`${okapi.url}/erm/jobs/${id}/downloadFileObject`, {
-      headers: {
-        'X-Okapi-Tenant': okapi.tenant,
-        'X-Okapi-Token': okapi.token,
-      },
-    }).then(response => response.blob())
-      .then(this.downloadBlob(name));
-  }
-
-  handleViewReport = () => {
-    const { history, location } = this.props;
+  const handleViewReport = () => {
     history.push(`${location.pathname}/report${location.search}`);
-  }
+  };
 
-  showDeleteConfirmationModal = () => this.setState({ showConfirmDelete: true });
+  const deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
+  const deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
 
-  hideDeleteConfirmationModal = () => this.setState({ showConfirmDelete: false });
-
-  render() {
-    const { resources } = this.props;
-    const comparison = resources?.comparison?.records?.[0] ?? {};
-    const name = comparison?.name ?? '';
-
-
-    const deleteMessageId = 'ui-erm-comparisons.comparison.delete.message';
-    const deleteHeadingId = 'ui-erm-comparisons.comparison.delete.heading';
-
+  const isPaneLoading = () => {
     return (
-      <>
-        <View
-          data={{
-            comparison
-          }}
-          handlers={{
-            onExportReportAsJSON: this.handleExportReportAsJSON,
-          }}
-          isLoading={resources?.comparison?.isPending ?? true}
-          onClose={this.handleClose}
-          onDelete={this.showDeleteConfirmationModal}
-          onViewReport={this.handleViewReport}
-        />
-        {this.state.showConfirmDelete && (
-          <ConfirmationModal
-            buttonStyle="danger"
-            confirmLabel={<FormattedMessage id="ui-erm-comparisons.comparison.delete.confirmLabel" />}
-            heading={<FormattedMessage id={deleteHeadingId} />}
-            id="delete-comparison-confirmation"
-            message={<FormattedMessage id={deleteMessageId} values={{ name }} />}
-            onCancel={this.hideDeleteConfirmationModal}
-            onConfirm={this.handleDelete}
-            open
-          />
-        )}
-      </>
+      comparisonId !== comparison?.id &&
+      isComparisonLoading
     );
-  }
-}
+  };
 
-export default stripesConnect(ComparisonViewRoute);
+  return (
+    <>
+      <View
+        data={{
+          comparison
+        }}
+        handlers={{
+          onExportReportAsJSON: exportReportAsJSON,
+        }}
+        isLoading={isPaneLoading()}
+        onClose={handleClose}
+        onDelete={() => setShowConfirmDelete(true)}
+        onViewReport={handleViewReport}
+      />
+      <ConfirmationModal
+        buttonStyle="danger"
+        confirmLabel={<FormattedMessage id="ui-erm-comparisons.comparison.delete.confirmLabel" />}
+        heading={<FormattedMessage id={deleteHeadingId} />}
+        id="delete-comparison-confirmation"
+        message={<FormattedMessage id={deleteMessageId} values={{ name }} />}
+        onCancel={() => setShowConfirmDelete(false)}
+        onConfirm={() => {
+          deleteComparison();
+          setShowConfirmDelete(false);
+        }}
+        open={showConfirmDelete}
+      />
+    </>
+  );
+};
+
+ComparisonViewRoute.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  }).isRequired,
+};
+
+export default ComparisonViewRoute;
