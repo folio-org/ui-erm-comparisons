@@ -65,13 +65,13 @@ const ComparisonReportList = (
     return true;
   };
 
-  const getCoverage = (statements, embargo, index) => {
+  const getCoverage = (statements, embargo, uniqueKey = 'getCoverage') => {
     if (!statements.length && !embargo) return '';
     return (
-      <Layout key={`coverage-layout-${index}`} className="full" data-test-coverage>
-        <SerialCoverage key={`serial-coverage-${index}`} statements={statements} />
+      <Layout key={`coverage-layout-${uniqueKey}`} className="full" data-test-coverage>
+        <SerialCoverage key={`serial-coverage-${uniqueKey}`} statements={statements} />
         {embargo &&
-          <Layout key={`embargo-layout-${index}`} className="padding-top-gutter">
+          <Layout key={`embargo-layout-${uniqueKey}`} className="padding-top-gutter">
             <Embargo embargo={embargo} />
           </Layout>
         }
@@ -126,11 +126,11 @@ const ComparisonReportList = (
         coverage: rowData => {
           return !shouldNestMCL(rowData) ? (
             <Layout className="display-flex flex-direction-column full">
-              {Object.values(rowData.availability).map(availability => {
+              {Object.values(rowData.availability).map((availability, i) => {
                 const { coverage } = availability;
-                return Object.values(coverage).map(cov => {
+                return Object.values(coverage).map((cov, j) => {
                   const { statements, embargo } = cov;
-                  return getCoverage(statements, embargo, uniqueId('getCoverage'));
+                  return getCoverage(statements, embargo, `${i}-${j}`);
                 });
               })
               }
@@ -175,7 +175,11 @@ const ComparisonReportList = (
                 contentClass={css.titleInfoPopoverContent}
               />
               &nbsp;
-              <div data-test-title><strong>{rowData.longName}</strong></div>
+              <div data-test-title>
+                <strong>
+                  {rowData.longName}
+                </strong>
+              </div>
             </Layout>
           );
         },
@@ -293,7 +297,7 @@ const ComparisonReportList = (
                               formatter={{
                                 coverage: (r) => {
                                   const { statements, embargo } = r;
-                                  return getCoverage(statements, embargo, uniqueId('getCoverage'));
+                                  return getCoverage(statements, embargo);
                                 },
                                 resourceA: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceA)),
                                 resourceB: r => getResourceOccurrence(r, getResourceProperties(comparisonResourceB))
