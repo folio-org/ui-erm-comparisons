@@ -79,7 +79,7 @@ const sourceData = {
             }
           },
           'platform': 'Bentham Science',
-          'url': 'http://benthamscience.com/journal/index.php?journalID=ccand',
+          'url': 'https://benthamscience.com/journal/index.php?journalID=ccand',
           'name': "'Clinical Cancer Drugs' on Platform 'Bentham Science'",
           'longName': "'Clinical Cancer Drugs' on Platform 'Bentham Science'"
         }
