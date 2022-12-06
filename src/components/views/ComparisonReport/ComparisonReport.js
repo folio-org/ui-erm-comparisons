@@ -11,7 +11,7 @@ import {
 
 import { AppIcon } from '@folio/stripes/core';
 
-import ComparisonReportList from './ComparisonReportList';
+import ComparisonReportList from '../ComparisonReportList';
 
 const resourceCount = 200;
 const ComparisonReport = ({
