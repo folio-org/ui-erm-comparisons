@@ -67,36 +67,10 @@ const data = {
     pathname: '/comparisons-erm/85f1c1f4-d619-4c07-a2f8-8163c3579bf9',
     search: ''
   },
-  mutator: {
-    comparisons: {
-      DELETE: jest.fn(),
-      PUT: jest.fn(),
-      POST: jest.fn(),
-      cancel: jest.fn()
-    }
-  },
-  resources: {
-    'comparison': {
-      'hasLoaded': true,
-      'isPending': false,
-      'failed': false,
-      'records': [
-        '{class: "org.olf.general.jobs.ComparisonJob", compa…}'
-      ],
-      'successfulMutations': [],
-      'failedMutations': [],
-      'pendingMutations': [],
-      'loadedAt': 'Tue Dec 06 2022 11:14:49 GMT+0000 (Greenwich Mean Time)',
-      'url': 'http://folio-snapshot-2-okapi.dev.folio.org/erm/jobs/85f1c1f4-d619-4c07-a2f8-8163c3579bf9',
-      'headers': 'Headers(undefined) {"content-type" => "application/json;charset=UTF-8"}',
-      'httpStatus': 200,
-      'other': {
-        'totalRecords': null
-      },
-      'resource': 'comparison',
-      'module': '@folio/erm-comparisons',
-      'throwErrors': true
-    }
+  match: {
+    params: {
+      id: '85f1c1f4-d619-4c07-a2f8-8163c3579bf9'
+    },
   }
 };
 
