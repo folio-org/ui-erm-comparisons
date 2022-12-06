@@ -16,13 +16,13 @@ import {
   TitleOnPlatformLink
 } from '@folio/stripes-erm-components';
 
-import TitleInfoPopover from '../TitleInfoPopover';
+import TitleInfoPopover from '../../TitleInfoPopover';
 
 import {
   getResourceProperties,
   getResourceColumnHeader,
   getResourceOccurrence
-} from '../utilities';
+} from '../../utilities';
 import css from './ComparisonReportList.css';
 
 const ComparisonReportList = (
@@ -111,6 +111,7 @@ const ComparisonReportList = (
                 const { longName, platform, url } = value;
                 return (
                   <TitleOnPlatformLink
+                    key={id}
                     id={id}
                     name={longName}
                     platform={platform}
