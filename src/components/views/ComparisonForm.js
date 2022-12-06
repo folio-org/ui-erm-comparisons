@@ -162,8 +162,8 @@ class ComparisonForm extends React.Component {
                         deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                         disableAddNew={disableAddNew}
                         handlers={{
-                          onEResourceAdded: (id) => this.props.handlers.onEResourceAdded(id),
-                          onEResourceRemoved: (id) => this.props.handlers.onEResourceRemoved(id)
+                          onEResourceAdded: this.props.handlers.onEResourceAdded,
+                          onEResourceRemoved: this.props.handlers.onEResourceRemoved
                         }}
                         headerId="ui-erm-comparisons.newComparison.packageTitle"
                         id="comparison-point-form-packages"

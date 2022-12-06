@@ -29,9 +29,9 @@ const ComparisonPointFieldArray = ({
       const removedId = items?.[index]?.comparisonPoint?.id;
       const addedId = field?.comparisonPoint?.id;
       if (removedId) {
-        handlers.onEResourceRemoved(removedId);
+        handlers.onEResourceRemoved(removedId, index === 0 ? 'FIRST' : 'SECOND');
       }
-      handlers.onEResourceAdded(addedId);
+      handlers.onEResourceAdded(addedId, index === 0 ? 'FIRST' : 'SECOND');
     }
 
     onUpdateField(index, field);
@@ -50,7 +50,7 @@ const ComparisonPointFieldArray = ({
         }
       });
     } else if (comparisonType === 'package') {
-      handlers.onEResourceAdded(compPoint.id);
+      handlers.onEResourceAdded(compPoint.id, index === 0 ? 'FIRST' : 'SECOND');
       handleUpdateField(index, {
         'comparisonPoint': {
           id: compPoint.id,

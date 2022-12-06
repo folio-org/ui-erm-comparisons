@@ -6,7 +6,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 import View from '../components/views/ComparisonReport';
 import { COMPARISON_DOWNLOAD_FILE_OBJECT_ENDPOINT, COMPARISON_ENDPOINT } from '../constants';
 
-
 const ComparisonReportViewRoute = ({
   history,
   location,
