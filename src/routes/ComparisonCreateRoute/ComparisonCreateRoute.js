@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
 import PropTypes from 'prop-types';
-import { cloneDeep, isEqual } from 'lodash';
 
 import { FormattedMessage } from 'react-intl';
 import { useCallout, useOkapiKy } from '@folio/stripes/core';
-import { useBatchedFetch } from '@folio/stripes-erm-components';
-
-import { RESOURCE_ENTITLEMENTS_ENDPOINT } from '../../constants/endpoints';
 
 import View from '../../components/views/ComparisonForm';
 
@@ -20,86 +15,12 @@ const ComparisonCreateRoute = ({
   const callout = useCallout();
   const ky = useOkapiKy();
   const queryClient = useQueryClient();
-  /*
-    We save in state an object with keys of the ids of eResources, and the values of their entitlement information,
-    gleaned from a secondary API call made asyncronously.
-  */
-  const [entitlementsWithIds, setEntitlementsWithIds] = useState({});
-
-  /* With state and react-query we track first/second Eresource as they're added,
-   * then batch fetch all their entitlements
-   * and store them against the correct id in state
-   */
-  const [firstEResourceId, setFirstEresourceId] = useState();
-  const [secondEResourceId, setSecondEresourceId] = useState();
 
   // MUTATION FOR POSTing ComparisonJob
   const { mutateAsync: postComparison } = useMutation(
     ['ERM', 'Comparisons', 'POST', 'erm/jobs/comparison'],
     (payload) => ky.post('erm/jobs/comparison', { json: { ...payload } }).json()
   );
-
-  // BATCHED FETCH 1
-  const {
-    results: firstEresourceEntitlements,
-    total: firstEresourceEntitlementCount,
-    isLoading: areFirstEresourceEntitlementsLoading
-  } = useBatchedFetch({
-    nsArray: ['ERM', 'Eresource', firstEResourceId, 'Entitlements', RESOURCE_ENTITLEMENTS_ENDPOINT(firstEResourceId)],
-    path: RESOURCE_ENTITLEMENTS_ENDPOINT(firstEResourceId),
-    queryParams: {
-      enabled: !!firstEResourceId
-    }
-  });
-
-  // BATCHED FETCH 2
-  const {
-    results: secondEresourceEntitlements,
-    total: secondEresourceEntitlementCount,
-    isLoading: areSecondEresourceEntitlementsLoading
-  } = useBatchedFetch({
-    nsArray: ['ERM', 'Eresource', secondEResourceId, 'Entitlements', RESOURCE_ENTITLEMENTS_ENDPOINT(secondEResourceId)],
-    path: RESOURCE_ENTITLEMENTS_ENDPOINT(secondEResourceId),
-    queryParams: {
-      enabled: !!secondEResourceId
-    }
-  });
-
-  useEffect(() => {
-    // If we have fetched all first resource entitlements, add them to the state
-    if (
-      firstEResourceId &&
-      !areFirstEresourceEntitlementsLoading &&
-      firstEresourceEntitlements?.length === firstEresourceEntitlementCount &&
-      !isEqual(entitlementsWithIds[firstEResourceId], firstEresourceEntitlements)) {
-      setEntitlementsWithIds({
-        ...entitlementsWithIds,
-        [firstEResourceId]: firstEresourceEntitlements
-      });
-    }
-
-    // If we have fetched all second resource entitlements, add them to the state
-    if (
-      secondEResourceId &&
-      !areSecondEresourceEntitlementsLoading &&
-      secondEresourceEntitlements?.length === secondEresourceEntitlementCount &&
-      !isEqual(entitlementsWithIds[secondEResourceId], secondEresourceEntitlements)) {
-      setEntitlementsWithIds({
-        ...entitlementsWithIds,
-        [secondEResourceId]: secondEresourceEntitlements
-      });
-    }
-  }, [
-    areFirstEresourceEntitlementsLoading,
-    firstEresourceEntitlements,
-    firstEresourceEntitlementCount,
-    entitlementsWithIds,
-    firstEResourceId,
-    areSecondEresourceEntitlementsLoading,
-    secondEresourceEntitlements,
-    secondEresourceEntitlementCount,
-    secondEResourceId
-  ]);
 
   const getComparisonPointsData = ({ agreements = [], packages = [] }) => {
     return [
@@ -114,28 +35,6 @@ const ComparisonCreateRoute = ({
           date: pkg.onDate
         }))
     ];
-  };
-
-  // Store the new eresource either in firstEresourceId or secondEresourceId
-  const handleEResourceAdded = (eResourceId, cardinality) => {
-    if (cardinality === 'FIRST' && firstEResourceId !== eResourceId) {
-      setFirstEresourceId(eResourceId);
-    } else if (cardinality === 'SECOND' && secondEResourceId !== eResourceId) {
-      setSecondEresourceId(eResourceId);
-    }
-  };
-
-  // When removing an eresource from the comparison form,
-  // we want it to be removed from the saved list of entitlements with ids as well
-  const handleEResourceRemoved = (eResourceId, cardinality) => {
-    const newState = cloneDeep(entitlementsWithIds);
-    delete newState[eResourceId];
-    setEntitlementsWithIds(newState);
-    if (cardinality === 'FIRST') {
-      setFirstEresourceId();
-    } else if (cardinality === 'SECOND') {
-      setSecondEresourceId();
-    }
   };
 
   const handleClose = () => {
@@ -179,14 +78,9 @@ const ComparisonCreateRoute = ({
 
   return (
     <View
-      data={{
-        entitlements: entitlementsWithIds
-      }}
       handlers={{
         ...handlers,
         onClose: handleClose,
-        onEResourceAdded: handleEResourceAdded,
-        onEResourceRemoved: handleEResourceRemoved
       }}
       onSubmit={handleSubmit}
     />
@@ -201,20 +95,6 @@ ComparisonCreateRoute.propTypes = {
   }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,
-  }).isRequired,
-  mutator: PropTypes.shape({
-    comparisons: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
-    }).isRequired,
-    entitlementQueryParams: PropTypes.shape({
-      update: PropTypes.func,
-    }).isRequired,
-  }).isRequired,
-  resources: PropTypes.shape({
-    entitlements: PropTypes.object,
-    entitlementQueryParams: PropTypes.shape({
-      entitlementsCount: PropTypes.number,
-    })
   }).isRequired,
 };
 

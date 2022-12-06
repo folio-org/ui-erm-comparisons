@@ -26,14 +26,9 @@ import ComparisonPointFieldArray from '../ComparisonPointFieldArray';
 
 class ComparisonForm extends React.Component {
   static propTypes = {
-    data: PropTypes.shape({
-      entitlements: PropTypes.object
-    }),
     handleSubmit: PropTypes.func.isRequired,
     handlers: PropTypes.shape({
       onClose: PropTypes.func.isRequired,
-      onEResourceAdded: PropTypes.func.isRequired,
-      onEResourceRemoved: PropTypes.func.isRequired
     }),
     invalid: PropTypes.bool,
     pristine: PropTypes.bool,
@@ -111,7 +106,7 @@ class ComparisonForm extends React.Component {
   ];
 
   render() {
-    const { data: { entitlements }, values } = this.props;
+    const { values } = this.props;
     const comparisonLimit = 2;
     const disableAddNew = this.shouldDisableAddNew(values, comparisonLimit);
 
@@ -157,14 +152,9 @@ class ComparisonForm extends React.Component {
                         addLabelId="ui-erm-comparisons.newComparison.addPackage"
                         comparisonPoint="package"
                         component={ComparisonPointFieldArray}
-                        data={{ entitlements }}
                         data-test-field-array-packages
                         deleteButtonTooltipId="ui-erm-comparisons.newComparison.removePackage"
                         disableAddNew={disableAddNew}
-                        handlers={{
-                          onEResourceAdded: this.props.handlers.onEResourceAdded,
-                          onEResourceRemoved: this.props.handlers.onEResourceRemoved
-                        }}
                         headerId="ui-erm-comparisons.newComparison.packageTitle"
                         id="comparison-point-form-packages"
                         name="packages"
