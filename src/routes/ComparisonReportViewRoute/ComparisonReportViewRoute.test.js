@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { renderWithIntl } from '@folio/stripes-erm-testing';
+import { mockReactQuery as reactQueryMocks, renderWithIntl } from '@folio/stripes-erm-testing';
 import { MemoryRouter } from 'react-router-dom';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonReportViewRoute from './ComparisonReportViewRoute';
@@ -17,50 +15,27 @@ const data = {
     search: '',
     pathname: '/comparisons-erm/85f1c1f4-d619-4c07-a2f8-8163c3579bf9/report'
   },
-  mutator: {
-    comparisons: {
-      POST: jest.fn(),
+  match: {
+    params: {
+      id: '85f1c1f4-d619-4c07-a2f8-8163c3579bf9'
     },
-    entitlementQueryParams: {
-      replace: jest.fn(),
-      update: jest.fn()
-    },
-    report: {
-      DELETE: jest.fn(),
-      PUT: jest.fn(),
-      POST: jest.fn(),
-      cancel: jest.fn(),
-    },
-    comparison: {
-      DELETE: jest.fn(),
-      PUT: jest.fn(),
-      POST: jest.fn(),
-      cancel: jest.fn(),
-    }
-  },
-  resources: {
-    'report': {
-      'hasLoaded': true,
-      'isPending': false,
-      'failed': false,
-      'records': [],
-      'successfulMutations': [],
-      'failedMutations': [],
-      'pendingMutations': [],
-    }
-  },
-  'comparison': {
-    'hasLoaded': true,
-    'isPending': false,
-    'failed': false,
-    'records': [
-      '{class: "org.olf.general.jobs.ComparisonJob", compa…}'
-    ],
-    'successfulMutations': [],
-    'failedMutations': [],
-    'pendingMutations': [],
-  },
+  }
 };
+
+/* EXAMPLE Mocking using an import from stripes-erm-testing
+ * For whatever reason,m we can't directly spread the import into the mock.
+ * Instead we import, set to some variable, and then use that in the mock.
+ *
+ * In this component we expect useQuery to return an object in one instance and an array in the other
+ * Our mock only returns an object, so re-mock that here
+ */
+const mockReactQuery = reactQueryMocks;
+jest.unmock('react-query');
+jest.mock('react-query', () => ({
+  ...jest.requireActual('react-query'),
+  ...mockReactQuery,
+  useQuery: jest.fn(() => ({ data: null, refetch: jest.fn(), isLoading: false }))
+}));
 
 describe('ComparisonReportViewRoute', () => {
   describe('renders the ComparisonReportViewRoute', () => {
