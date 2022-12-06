@@ -1,72 +1,61 @@
-import React from 'react';
+import { useQuery } from 'react-query';
+
 import PropTypes from 'prop-types';
-import { stripesConnect } from '@folio/stripes/core';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import View from '../components/views/ComparisonReport';
+import { COMPARISON_DOWNLOAD_FILE_OBJECT_ENDPOINT, COMPARISON_ENDPOINT } from '../constants';
 
-class ComparisonReportViewRoute extends React.Component {
-  static manifest = Object.freeze({
-    report: {
-      type: 'okapi',
-      path: 'erm/jobs/:{id}/downloadFileObject',
-      shouldRefresh: () => false,
-    },
-    comparison: {
-      type: 'okapi',
-      path: 'erm/jobs/:{id}',
-      shouldRefresh: () => false,
-    },
-  });
+const ComparisonReportViewRoute = ({
+  history,
+  location,
+  match: { params: { id: comparisonId } = {} } = {},
+}) => {
+  const comparisonPath = COMPARISON_ENDPOINT(comparisonId);
+  const comparisonReportPath = COMPARISON_DOWNLOAD_FILE_OBJECT_ENDPOINT(comparisonId);
 
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-    mutator: PropTypes.shape({
-      comparison: PropTypes.object,
-      titleListQueryParams: PropTypes.shape({
-        update: PropTypes.func.isRequired,
-      })
-    }).isRequired,
-    resources: PropTypes.shape({
-      comparison: PropTypes.object,
-      report: PropTypes.object
-    }).isRequired,
-    stripes: PropTypes.shape({
-      okapi: PropTypes.object.isRequired,
-    }).isRequired,
-  };
+  const ky = useOkapiKy();
 
-  handleClose = () => {
-    const { history, location } = this.props;
+  const handleClose = () => {
     history.push(location?.pathname?.replace('/report', ''));
   };
 
-  isLoading = () => {
-    const { resources } = this.props;
+  const { data: comparison, isLoading: isComparisonLoading } = useQuery(
+    ['ERM', 'Comparison', comparisonId, comparisonPath],
+    () => ky.get(comparisonPath).json()
+  );
 
-    return resources?.report?.isPending;
-  }
+  const { data: comparisonReport, isLoading: isComparisonReportLoading } = useQuery(
+    ['ERM', 'Comparison', comparisonId, 'report', comparisonReportPath],
+    () => ky.get(comparisonReportPath).json()
+  );
 
-  render() {
-    const { resources } = this.props;
+  return (
+    <View
+      data={{
+        comparisonPointData: comparison ?? {},
+        report: comparisonReport ?? []
+      }}
+      isLoading={isComparisonLoading || isComparisonReportLoading}
+      onClose={handleClose}
+    />
+  );
+};
 
-    return (
-      <View
-        data={{
-          comparisonPointData: resources?.comparison?.records?.[0] ?? {},
-          report: resources?.report?.records ?? []
-        }}
-        isLoading={this.isLoading()}
-        onClose={this.handleClose}
-      />
-    );
-  }
-}
+ComparisonReportViewRoute.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  }).isRequired,
+};
 
-export default stripesConnect(ComparisonReportViewRoute);
+export default ComparisonReportViewRoute;

@@ -7,14 +7,12 @@ import PackageField from './PackageField';
 class ComparisonPointField extends React.Component {
   static propTypes = {
     comparisonType: PropTypes.string,
-    entitlements: PropTypes.object,
     onComparisonPointSelected: PropTypes.func.isRequired
   }
 
   render() {
     const {
       comparisonType,
-      entitlements,
       onComparisonPointSelected,
       ...rest
     } = this.props;
@@ -26,7 +24,6 @@ class ComparisonPointField extends React.Component {
       />
     ) : (
       <PackageField
-        entitlements={entitlements}
         onPackageSelected={onComparisonPointSelected}
         {...rest}
       />

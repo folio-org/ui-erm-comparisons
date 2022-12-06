@@ -13,33 +13,17 @@ const ComparisonPointFieldArray = ({
   addButtonId,
   addLabelId,
   comparisonPoint,
-  data,
   deleteButtonTooltipId,
   disableAddNew,
   fields: { name },
-  handlers,
   headerId,
   id
 }) => {
   const { items, onAddField, onDeleteField, onUpdateField } = useKiwtFieldArray(name, true);
 
-  const handleUpdateField = (index, field, updateEntitlementQuery = false) => {
-    if (updateEntitlementQuery) {
-      // add new entitlements, remove old ones (if they exist, this method is used for adding as well as updating)
-      const removedId = items?.[index]?.comparisonPoint?.id;
-      const addedId = field?.comparisonPoint?.id;
-      if (removedId) {
-        handlers.onEResourceRemoved(removedId);
-      }
-      handlers.onEResourceAdded(addedId);
-    }
-
-    onUpdateField(index, field);
-  };
-
   const handleComparisonPointSelected = (index, compPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
-      handleUpdateField(index, {
+      onUpdateField(index, {
         'comparisonPoint': {
           id: compPoint.id,
           name: compPoint.name,
@@ -50,8 +34,7 @@ const ComparisonPointFieldArray = ({
         }
       });
     } else if (comparisonType === 'package') {
-      handlers.onEResourceAdded(compPoint.id);
-      handleUpdateField(index, {
+      onUpdateField(index, {
         'comparisonPoint': {
           id: compPoint.id,
           name: compPoint.name,
@@ -80,7 +63,6 @@ const ComparisonPointFieldArray = ({
           <Field
             comparisonType={comparisonType}
             component={ComparisonPointField}
-            entitlements={data?.entitlements}
             id={`data-test-field-comparison-point-${comparisonType}`}
             index={index}
             name={`${name}[${index}].comparisonPoint`}
@@ -136,13 +118,11 @@ ComparisonPointFieldArray.propTypes = {
   addButtonId: PropTypes.string,
   addLabelId: PropTypes.string,
   comparisonPoint: PropTypes.string,
-  data: PropTypes.object,
   deleteButtonTooltipId: PropTypes.string,
   disableAddNew: PropTypes.bool,
   fields: PropTypes.shape({
     name: PropTypes.string,
   }),
-  handlers: PropTypes.object,
   headerId: PropTypes.string,
   id: PropTypes.string,
 };
