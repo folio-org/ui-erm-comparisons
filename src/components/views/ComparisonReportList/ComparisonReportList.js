@@ -16,13 +16,13 @@ import {
   TitleOnPlatformLink
 } from '@folio/stripes-erm-components';
 
-import TitleInfoPopover from '../TitleInfoPopover';
+import TitleInfoPopover from '../../TitleInfoPopover';
 
 import {
   getResourceProperties,
   getResourceColumnHeader,
   getResourceOccurrence
-} from '../utilities';
+} from '../../utilities';
 import css from './ComparisonReportList.css';
 
 const ComparisonReportList = (
@@ -65,13 +65,13 @@ const ComparisonReportList = (
     return true;
   };
 
-  const getCoverage = (statements, embargo) => {
+  const getCoverage = (statements, embargo, uniqueKey = 'getCoverage') => {
     if (!statements.length && !embargo) return '';
     return (
-      <Layout className="full" data-test-coverage>
-        <SerialCoverage statements={statements} />
+      <Layout key={`coverage-layout-${uniqueKey}`} className="full" data-test-coverage>
+        <SerialCoverage key={`serial-coverage-${uniqueKey}`} statements={statements} />
         {embargo &&
-          <Layout className="padding-top-gutter">
+          <Layout key={`embargo-layout-${uniqueKey}`} className="padding-top-gutter">
             <Embargo embargo={embargo} />
           </Layout>
         }
@@ -111,6 +111,7 @@ const ComparisonReportList = (
                 const { longName, platform, url } = value;
                 return (
                   <TitleOnPlatformLink
+                    key={id}
                     id={id}
                     name={longName}
                     platform={platform}
@@ -125,11 +126,11 @@ const ComparisonReportList = (
         coverage: rowData => {
           return !shouldNestMCL(rowData) ? (
             <Layout className="display-flex flex-direction-column full">
-              {Object.values(rowData.availability).map(availability => {
+              {Object.values(rowData.availability).map((availability, i) => {
                 const { coverage } = availability;
-                return Object.values(coverage).map(cov => {
+                return Object.values(coverage).map((cov, j) => {
                   const { statements, embargo } = cov;
-                  return getCoverage(statements, embargo);
+                  return getCoverage(statements, embargo, `${i}-${j}`);
                 });
               })
               }
@@ -174,7 +175,11 @@ const ComparisonReportList = (
                 contentClass={css.titleInfoPopoverContent}
               />
               &nbsp;
-              <div data-test-title><strong>{rowData.longName}</strong></div>
+              <div data-test-title>
+                <strong>
+                  {rowData.longName}
+                </strong>
+              </div>
             </Layout>
           );
         },
