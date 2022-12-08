@@ -53,6 +53,7 @@ const getResourceOccurrence = (coverage, resource) => {
 
   return (
     <Tooltip
+      key={`tooltip-${resourceId}`}
       id={toolTipId}
       text={<FormattedMessage
         id={`ui-erm-comparisons.comparisonReport.${translationKey}`}
