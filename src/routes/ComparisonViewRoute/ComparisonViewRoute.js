@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { useCallout, useOkapiKy } from '@folio/stripes/core';
 import { ConfirmationModal } from '@folio/stripes/components';
+import { downloadBlob } from '@folio/stripes-erm-components';
 
 import View from '../../components/views/ComparisonView';
 import { COMPARISON_ENDPOINT } from '../../constants';
@@ -41,25 +42,13 @@ const ComparisonViewRoute = ({
     })
   );
 
-  const downloadBlob = (downloadName) => (
-    blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = downloadName;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-  );
-
   const handleClose = () => {
     history.push(`/comparisons-erm${location.search}`);
   };
 
   const { refetch: exportReportAsJSON } = useQuery(
     ['ERM', 'Comparison', comparisonId, comparisonPath, 'exportReport'],
-    () => ky.get(`erm/jobs/${comparisonId}/downloadFileObject`).blob().then(downloadBlob(name)),
+    () => ky.get(`erm/jobs/${comparisonId}/downloadFileObject`).blob().then(downloadBlob(name, { fileExt: 'json' })),
     {
       enabled: false
     }
