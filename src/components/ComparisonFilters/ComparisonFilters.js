@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Accordion, AccordionSet, FilterAccordionHeader, Layout, Row } from '@folio/stripes/components';
@@ -6,54 +6,43 @@ import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
 
+const propTypes = {
+  activeFilters: PropTypes.object,
+  data: PropTypes.object.isRequired,
+  filterHandlers: PropTypes.object,
+};
+
 const FILTERS = [
   'status',
   'result'
 ];
 
-export default class ComparisonFilters extends React.Component {
-  static propTypes = {
-    activeFilters: PropTypes.object,
-    data: PropTypes.object.isRequired,
-    filterHandlers: PropTypes.object,
-  };
-
-  static defaultProps = {
-    activeFilters: {
-      status: [],
-      result: [],
-      comparisonPointOne: [],
-      comparisonPointTwo: [],
-    }
-  };
-
-  state = {
+export default function ComparisonFilters({ activeFilters, data, filterHandlers }) {
+  const [filterState, setFilterState] = useState({
     status: [],
     result: [],
     comparisonPointOne: [],
     comparisonPointTwo: [],
     comparisonPointOneValue: '',
-    comparisonPointTwoValue: '',
-  }
+    comparisonPointTwoValue: ''
+  });
 
-  static getDerivedStateFromProps(props, state) {
+  useEffect(() => {
     const newState = {};
-
     FILTERS.forEach(filter => {
-      const values = props.data[`${filter}Values`];
-      if (values.length !== state[filter].length) {
+      const values = data[`${filter}Values`];
+      if (values.length !== filterState[filter]?.length) {
         newState[filter] = values;
       }
     });
 
-    if (Object.keys(newState).length) return newState;
+    if (Object.keys(newState).length) {
+      setFilterState(prevState => ({ ...prevState, ...newState }));
+    }
+  }, [data, filterState]);
 
-    return null;
-  }
 
-
-  renderCheckboxFilter = (name, props) => {
-    const { activeFilters } = this.props;
+  const renderCheckboxFilter = (name, prps) => {
     const groupFilters = activeFilters[name] || [];
     return (
       <Accordion
@@ -61,26 +50,30 @@ export default class ComparisonFilters extends React.Component {
         header={FilterAccordionHeader}
         id={`filter-accordion-${name}`}
         label={<FormattedMessage id={`ui-erm-comparisons.prop.${name}`} />}
-        onClearFilter={() => { this.props.filterHandlers.clearGroup(name); }}
+        onClearFilter={() => { filterHandlers.clearGroup(name); }}
         separator={false}
-        {...props}
+        {...prps}
       >
         <CheckboxFilter
-          dataOptions={this.state[name]}
+          dataOptions={filterState[name] || []}
           name={name}
-          onChange={(group) => { this.props.filterHandlers.state({ ...activeFilters, [group.name]: group.values }); }}
+          onChange={(group) => {
+            filterHandlers.state({
+              ...activeFilters,
+              [group.name]: group.values
+            });
+          }}
           selectedValues={groupFilters}
         />
       </Accordion>
     );
-  }
+  };
 
-  renderComparisonPointFilter = (name, props) => {
-    const { activeFilters } = this.props;
+  const renderComparisonPointFilter = (name, prps) => {
     const groupFilters = activeFilters[name] || [];
 
     let disabled = false;
-    if (this.state[`${name}Value`]) {
+    if (filterState[`${name}Value`]) {
       disabled = true;
     }
 
@@ -92,15 +85,15 @@ export default class ComparisonFilters extends React.Component {
         label={<FormattedMessage id={`ui-erm-comparisons.prop.${name}`} />}
         name={name}
         onClearFilter={() => {
-          this.props.filterHandlers.clearGroup(name);
-          this.setState({ [`${name}Value`]: '' });
+          filterHandlers.clearGroup(name);
+          setFilterState({ [`${name}Value`]: '' });
         }}
         separator={false}
-        {...props}
+        {...prps}
       >
-        {this.state[`${name}Value`] ?
+        {filterState[`${name}Value`] ?
           <Layout className="padding-bottom-gutter">
-            {this.state[`${name}Value`]}
+            {filterState[`${name}Value`]}
           </Layout> : null
         }
         <Row>
@@ -108,29 +101,32 @@ export default class ComparisonFilters extends React.Component {
             disabled={disabled}
             name={name}
             onAgreementSelected={(agreement) => {
-              this.props.filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
-              this.setState({ [`${name}Value`] : agreement.name });
+              filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
+              setFilterState({ [`${name}Value`] : agreement.name });
             }}
             onPackageSelected={(pkg) => {
-              this.props.filterHandlers.state({ ...activeFilters, [name]: [pkg.id] });
-              this.setState({ [`${name}Value`]: pkg.name });
+              filterHandlers.state({ ...activeFilters, [name]: [pkg.id] });
+              setFilterState({ [`${name}Value`]: pkg.name });
             }}
           />
         </Row>
       </Accordion>
     );
-  }
+  };
 
-  render() {
-    return (
-      <div data-test-checkboxfilters>
-        <AccordionSet>
-          {this.renderCheckboxFilter('status')}
-          {this.renderCheckboxFilter('result')}
-          {this.renderComparisonPointFilter('comparisonPointOne')}
-          {this.renderComparisonPointFilter('comparisonPointTwo')}
-        </AccordionSet>
-      </div>
-    );
-  }
+  return (
+    <div data-test-checkboxfilters>
+      <AccordionSet>
+        {renderCheckboxFilter('status')}
+        {renderCheckboxFilter('result')}
+        {renderComparisonPointFilter('comparisonPointOne')}
+        {renderComparisonPointFilter('comparisonPointTwo')}
+      </AccordionSet>
+    </div>
+  );
 }
+
+ComparisonFilters.propTypes = propTypes;
+ComparisonFilters.defaultProps = {
+  activeFilters: {}
+};
