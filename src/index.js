@@ -20,7 +20,6 @@ import ComparisonsRoute from './routes/ComparisonsRoute';
 import ComparisonViewRoute from './routes/ComparisonViewRoute';
 import ComparisonReportViewRoute from './routes/ComparisonReportViewRoute';
 
-const appSpecificShortcuts = importShortcuts(['new', 'save', 'expandAllSections', 'collapseAllSections', 'expandOrCollapseAccordion', 'openShortcutModal', 'search']);
 export default class App extends React.Component {
   static propTypes = {
     history: PropTypes.object,
@@ -71,6 +70,7 @@ export default class App extends React.Component {
 
   render() {
     const { match: { path } } = this.props;
+    const appSpecificShortcuts = importShortcuts(['new', 'save', 'expandAllSections', 'collapseAllSections', 'expandOrCollapseAccordion', 'openShortcutModal', 'search']);
 
     return (
       <>
