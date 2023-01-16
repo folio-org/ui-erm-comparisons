@@ -87,6 +87,7 @@ const ComparisonsRoute = ({
         resultValues: getRefdataValuesByDesc(refdata, RESULT),
         statusValues: getRefdataValuesByDesc(refdata, STATUS),
       }}
+      history={history}
       onNeedMoreData={(_askAmount, index) => fetchNextComparisonsPage({ pageParam: index })}
       queryGetter={queryGetter}
       querySetter={querySetter}
