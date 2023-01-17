@@ -27,6 +27,11 @@ export default function ComparisonFilters({ activeFilters, data, filterHandlers 
     comparisonPointTwoValue: ''
   });
 
+  const comparisonPointOneName = filterState?.comparisonPointOneValue?.[0];
+  const comparisonPointTwoName = filterState?.comparisonPointTwoValue?.[0];
+  const comparisonPointOneId = activeFilters?.comparisonPointOne?.[0];
+  const comparisonPointTwoId = activeFilters?.comparisonPointTwo?.[0];
+
   useEffect(() => {
     const newState = {};
     FILTERS.forEach(filter => {
@@ -39,7 +44,15 @@ export default function ComparisonFilters({ activeFilters, data, filterHandlers 
     if (Object.keys(newState).length) {
       setFilterState(prevState => ({ ...prevState, ...newState }));
     }
-  }, [data, filterState]);
+
+    if (!comparisonPointOneId && comparisonPointOneName) {
+      setFilterState([]);
+    }
+
+    if (!comparisonPointTwoId && comparisonPointTwoName) {
+      setFilterState([]);
+    }
+  }, [comparisonPointTwoName, comparisonPointTwoId, comparisonPointOneName, comparisonPointOneId, data, filterState]);
 
 
   const renderCheckboxFilter = (name, prps) => {
