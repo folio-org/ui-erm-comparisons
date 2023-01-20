@@ -171,7 +171,7 @@ const ComparisonFilters = ({
       </AccordionSet>
     </div>
   );
-}
+};
 
 export default ComparisonFilters;
 
