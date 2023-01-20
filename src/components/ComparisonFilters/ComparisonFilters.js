@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
+import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 
-import { FormattedMessage } from 'react-intl';
 import { Accordion, AccordionSet, FilterAccordionHeader, Layout, Row } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
+import useComparisonPointLookup from './useComparisonPointLookup';
 
 const FILTERS = [
   'status',
@@ -26,7 +27,10 @@ const ComparisonFilters = ({
     comparisonPointTwo: {}
   });
 
+  const { fetchedResources } = useComparisonPointLookup(filterState);
+
   useEffect(() => {
+    // Set up refdata value options
     const newState = {};
     FILTERS.forEach(filter => {
       const values = data[`${filter}Values`];
@@ -39,17 +43,54 @@ const ComparisonFilters = ({
       setFilterState(prevState => ({ ...prevState, ...newState }));
     }
 
-    if (activeFilters.comparisonPointOne && isEmpty(filterState.comparisonPointOne)) {
-      setFilterState({ ...filterState, comparisonPointOne: { id: activeFilters.comparisonPointOne } });
+    // Set comparison points from activeFilters if no filterState
+    if (
+      activeFilters.comparisonPointOne?.[0] &&
+      isEmpty(filterState.comparisonPointOne)
+    ) {
+      setFilterState({ ...filterState, comparisonPointOne: { id: activeFilters.comparisonPointOne?.[0] } });
     }
 
-    if (activeFilters.comparisonPointTwo && isEmpty(filterState.comparisonPointTwo)) {
-      setFilterState({ ...filterState, comparisonPointTwo: { id: activeFilters.comparisonPointTwo } });
+    if (
+      activeFilters.comparisonPointTwo?.[0] &&
+      isEmpty(filterState.comparisonPointTwo)
+    ) {
+      setFilterState({ ...filterState, comparisonPointTwo: { id: activeFilters.comparisonPointTwo?.[0] } });
+    }
+
+    // If a lookup has happened and we find a resource for some id, insert name for pretty rendering
+    if (
+      !!filterState.comparisonPointOne?.id &&
+      !filterState.comparisonPointOne.name &&
+      !!fetchedResources[filterState.comparisonPointOne?.id]
+    ) {
+      setFilterState({
+        ...filterState,
+        comparisonPointOne: {
+          ...filterState.comparisonPointOne,
+          name: fetchedResources[filterState.comparisonPointOne?.id].name // Same access for Agreement and Package
+        }
+      });
+    }
+
+    if (
+      !!filterState.comparisonPointTwo?.id &&
+      !filterState.comparisonPointTwo.name &&
+      !!fetchedResources[filterState.comparisonPointTwo?.id]
+    ) {
+      setFilterState({
+        ...filterState,
+        comparisonPointTwo: {
+          ...filterState.comparisonPointTwo,
+          name: fetchedResources[filterState.comparisonPointTwo?.id].name // Same access for Agreement and Package
+        }
+      });
     }
   }, [
     activeFilters.comparisonPointOne,
     activeFilters.comparisonPointTwo,
     data,
+    fetchedResources,
     filterState
   ]);
 
