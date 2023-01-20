@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import isEmpty from 'lodash/isEmpty';
+
 import { FormattedMessage } from 'react-intl';
 import { Accordion, AccordionSet, FilterAccordionHeader, Layout, Row } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
 import ComparisonPointFilter from './ComparisonPointFilter';
 
-const propTypes = {
-  activeFilters: PropTypes.object,
-  data: PropTypes.object.isRequired,
-  filterHandlers: PropTypes.object,
-};
-
 const FILTERS = [
   'status',
   'result'
 ];
 
-export default function ComparisonFilters({ activeFilters, data, filterHandlers }) {
+const ComparisonFilters = ({
+  activeFilters = {},
+  data,
+  filterHandlers
+}) => {
   const [filterState, setFilterState] = useState({
     status: [],
     result: [],
-    comparisonPointOne: [],
-    comparisonPointTwo: [],
-    comparisonPointOneValue: '',
-    comparisonPointTwoValue: ''
+    comparisonPointOne: {},
+    comparisonPointTwo: {}
   });
-
-  const comparisonPointOneName = filterState?.comparisonPointOneValue?.[0];
-  const comparisonPointTwoName = filterState?.comparisonPointTwoValue?.[0];
-  const comparisonPointOneId = activeFilters?.comparisonPointOne?.[0];
-  const comparisonPointTwoId = activeFilters?.comparisonPointTwo?.[0];
 
   useEffect(() => {
     const newState = {};
@@ -45,15 +39,19 @@ export default function ComparisonFilters({ activeFilters, data, filterHandlers 
       setFilterState(prevState => ({ ...prevState, ...newState }));
     }
 
-    if (!comparisonPointOneId && comparisonPointOneName) {
-      setFilterState([]);
+    if (activeFilters.comparisonPointOne && isEmpty(filterState.comparisonPointOne)) {
+      setFilterState({ ...filterState, comparisonPointOne: { id: activeFilters.comparisonPointOne } });
     }
 
-    if (!comparisonPointTwoId && comparisonPointTwoName) {
-      setFilterState([]);
+    if (activeFilters.comparisonPointTwo && isEmpty(filterState.comparisonPointTwo)) {
+      setFilterState({ ...filterState, comparisonPointTwo: { id: activeFilters.comparisonPointTwo } });
     }
-  }, [comparisonPointTwoName, comparisonPointTwoId, comparisonPointOneName, comparisonPointOneId, data, filterState]);
-
+  }, [
+    activeFilters.comparisonPointOne,
+    activeFilters.comparisonPointTwo,
+    data,
+    filterState
+  ]);
 
   const renderCheckboxFilter = (name, prps) => {
     const groupFilters = activeFilters[name] || [];
@@ -85,11 +83,6 @@ export default function ComparisonFilters({ activeFilters, data, filterHandlers 
   const renderComparisonPointFilter = (name, prps) => {
     const groupFilters = activeFilters[name] || [];
 
-    let disabled = false;
-    if (filterState[`${name}Value`]) {
-      disabled = true;
-    }
-
     return (
       <Accordion
         displayClearButton={groupFilters.length > 0}
@@ -99,27 +92,27 @@ export default function ComparisonFilters({ activeFilters, data, filterHandlers 
         name={name}
         onClearFilter={() => {
           filterHandlers.clearGroup(name);
-          setFilterState({ [`${name}Value`]: '' });
+          setFilterState({ ...filterState, [name]: {} });
         }}
         separator={false}
         {...prps}
       >
-        {filterState[`${name}Value`] ?
+        {!isEmpty(filterState[name]) ?
           <Layout className="padding-bottom-gutter">
-            {filterState[`${name}Value`]}
+            {filterState[name]?.name ?? filterState[name]?.id}
           </Layout> : null
         }
         <Row>
           <ComparisonPointFilter
-            disabled={disabled}
+            disabled={!isEmpty(filterState[name])}
             name={name}
             onAgreementSelected={(agreement) => {
               filterHandlers.state({ ...activeFilters, [name]: [agreement.id] });
-              setFilterState({ [`${name}Value`] : agreement.name });
+              setFilterState({ ...filterState, [name] : { id: agreement.id, name: agreement.name } });
             }}
             onPackageSelected={(pkg) => {
               filterHandlers.state({ ...activeFilters, [name]: [pkg.id] });
-              setFilterState({ [`${name}Value`]: pkg.name });
+              setFilterState({ ...filterState, [name] : { id: pkg.id, name: pkg.name } });
             }}
           />
         </Row>
@@ -139,7 +132,10 @@ export default function ComparisonFilters({ activeFilters, data, filterHandlers 
   );
 }
 
-ComparisonFilters.propTypes = propTypes;
-ComparisonFilters.defaultProps = {
-  activeFilters: {}
+export default ComparisonFilters;
+
+ComparisonFilters.propTypes = {
+  activeFilters: PropTypes.object,
+  data: PropTypes.object.isRequired,
+  filterHandlers: PropTypes.object,
 };
