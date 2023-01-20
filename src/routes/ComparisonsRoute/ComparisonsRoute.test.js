@@ -8,6 +8,8 @@ import ComparisonsRoute from './ComparisonsRoute';
 
 const historyPushMock = jest.fn();
 
+jest.mock('../../components/ComparisonFilters/ComparisonFilters', () => () => <div>ComparisonFilters</div>);
+
 const data = {
   history: {
     push: historyPushMock,

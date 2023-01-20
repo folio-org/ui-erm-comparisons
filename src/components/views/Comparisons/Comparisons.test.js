@@ -11,6 +11,8 @@ const onNeedMoreData = jest.fn();
 const queryGetter = jest.fn();
 const querySetter = jest.fn();
 
+jest.mock('../../ComparisonFilters/ComparisonFilters', () => () => <div>ComparisonFilters</div>);
+
 describe('Comparisons', () => {
   let renderComponent;
   beforeEach(() => {
