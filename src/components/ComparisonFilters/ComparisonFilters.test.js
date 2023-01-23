@@ -1,8 +1,10 @@
-import React from 'react';
+import { useQuery } from 'react-query';
+import { MemoryRouter } from 'react-router-dom';
 import { waitFor } from '@testing-library/dom';
+
 import { renderWithIntl } from '@folio/stripes-erm-testing';
 import { Accordion, Checkbox } from '@folio/stripes-testing';
-import { MemoryRouter } from 'react-router-dom';
+
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonFilters from './ComparisonFilters';
 
@@ -106,6 +108,12 @@ const filterHandlers = {
 describe('ComparisonFilters', () => {
   let renderComponent;
   beforeEach(() => {
+    // EXAMPLE overriding react-query useQuery data for a single test
+    // These work because our manual mocks have set up a jest.fn we can override here already
+    useQuery.mockImplementation(() => ({
+      data: []
+    }));
+
     renderComponent = renderWithIntl(
       <MemoryRouter>
         <ComparisonFilters
