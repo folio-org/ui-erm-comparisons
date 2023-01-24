@@ -59,11 +59,11 @@ const ComparisonFilters = ({
     }
 
     if (!activeFilters.comparisonPointOne && filterState.comparisonPointOne?.name) {
-      setFilterState({});
+      setFilterState({ ...filterState, comparisonPointOne: {} });
     }
 
     if (!activeFilters.comparisonPointTwo && filterState.comparisonPointTwo?.name) {
-      setFilterState({});
+      setFilterState({ ...filterState, comparisonPointTwo: {} });
     }
 
     // If a lookup has happened and we find a resource for some id, insert name for pretty rendering
