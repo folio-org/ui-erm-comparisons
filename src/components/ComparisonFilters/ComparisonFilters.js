@@ -58,6 +58,14 @@ const ComparisonFilters = ({
       setFilterState({ ...filterState, comparisonPointTwo: { id: activeFilters.comparisonPointTwo?.[0] } });
     }
 
+    if (!activeFilters.comparisonPointOne && filterState.comparisonPointOne?.name) {
+      setFilterState({ ...filterState, comparisonPointOne: {} });
+    }
+
+    if (!activeFilters.comparisonPointTwo && filterState.comparisonPointTwo?.name) {
+      setFilterState({ ...filterState, comparisonPointTwo: {} });
+    }
+
     // If a lookup has happened and we find a resource for some id, insert name for pretty rendering
     if (
       !!filterState.comparisonPointOne?.id &&
@@ -91,7 +99,9 @@ const ComparisonFilters = ({
     activeFilters.comparisonPointTwo,
     data,
     fetchedResources,
-    filterState
+    filterState,
+    filterState.comparisonPointOne,
+    filterState.comparisonPointTwo,
   ]);
 
   const renderCheckboxFilter = (name, prps) => {
