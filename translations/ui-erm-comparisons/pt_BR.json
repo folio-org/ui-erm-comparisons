@@ -107,9 +107,9 @@
     "comparisonReport.info.issn": "ISSN",
     "comparisonReport.info.isbn": "ISBN",
     "comparisonReport.info.eisbn": "ISBN (Online)",
-    "prop.viewReportReload": "Recarregue a página para atualizar o botão assim que o job terminar",
-    "permission.jobs.view": "Comparações de ERM: Ver jobs",
-    "permission.jobs.edit": "Comparações ERM: Criar jobs",
-    "permission.jobs.delete": "Comparações de ERM: Excluir jobs",
+    "prop.viewReportReload": "Recarregue a página para atualizar o botão assim que o trabalho terminar",
+    "permission.jobs.view": "Comparações de ERM: Ver trabalhos",
+    "permission.jobs.edit": "Comparações ERM: Criar trabalhos",
+    "permission.jobs.delete": "Comparações de ERM: Excluir trabalhos",
     "appMenu.keyboardShortcuts": "Atalhos do teclado"
 }
