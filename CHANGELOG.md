@@ -1,5 +1,42 @@
 # Change history for ui-erm-comparisons
-## 4.4.0 In progress
+## 5.0.0 2023-02-22
+* ERM-2620 move typescript to dev-deps
+* ERM-2564 Increment ui-erm-comparisons to Stripes v8
+* ERM-2555 Clicking "Reset all" in ERM Comparison search does not clear comparison point names
+* ERM-2554 Option+N keyboard shortcut fails in ERM Comparisons
+* ERM-2515 Refactor erm-comparison routes
+* ERM-2484 Refactor Log Containers to react-query in erm-comparisons
+* ERM-2483 use registry for creating package link
+* ERM-2467 use registry for creating package link
+* ERM-2456 Bump ui-erm-comparisons erm-components dep
+* ERM-2416 Separate title search and package search in local KB e-resource searching
+* ERM-2296 Remove BigTest/Nightmare dependencies and tests (ui-erm-comparisons)
+* FAT-142 ui-erm-comparisons: UI tests replacement with RTL/Jest
+  * ERM-2430 Add test coverage for ui-erm-comparisons view <ComparisonView>
+  * ERM-2429 Add test coverage for ui-erm-comparisons view <ComparisonView>
+  * ERM-2428 Add test coverage for ui-erm-comparisons view <Comparisons>
+  * ERM-2427 Add test coverage for ui-erm-comparisons views <ComparisonReportList>
+  * ERM-2426 Add test coverage for ui-erm-comparisons views <ComparisonReport>
+  * ERM-2425 Add test coverage for ui-erm-comparisons views <ComparisonReport>
+  * ERM-1525 Add test coverage for ui-erm-comparisons <ComparisonRoutes>
+  * ERM-1524 Add test coverage for ui-erm-comparisons <ComparisonViewRoute>
+  * ERM-1523 Add test coverage for ui-erm-comparisons <ComparisonReportViewRoute>
+  * ERM-1522 Add test coverage for ui-erm-comparisons <ComparisonCreateRoute>
+  * ERM-1312 Add test coverage for ui-erm-comparisons <TitleInfoPopover>
+  * ERM-1311 Add test coverage for ui-erm-comparisons <Logs>
+  * ERM-1310 Add test coverage for ui-erm-comparisons <EntitlementAgreementsList>
+  * ERM-1309 Add test coverage for ui-erm-comparisons <ComparisonSections>
+    * ERM-1447 Add test coverage for <ComparisonPoints.js>
+    * ERM-1446 Add test coverage for <ComparisonInfo.js>
+  * ERM-1308 Add test coverage for ui-erm-comparisons <ComparisonPointFieldArray>
+    * ERM-1445 Add test coverage for <PackageField.js>
+    * ERM-1444 Add test coverage for <ComparisonPointFieldArray.js>
+    * ERM-1443 Add test coverage for <ComparisonPointField.js>
+    * ERM-1442 Add test coverage for <AgreementField.js>
+  * ERM-1307 Add test coverage for ui-erm-comparisons <ComparisonFilters>
+    * ERM-1441 Add test coverage for <ComparisonPointFilter.js>
+    * ERM-1440 Add test coverage for <ComparisonFilters.js>
+
 
 ## 4.3.0 2022-10-27
 * ERM-2380 favicons is incorrectly listed as a peer-dependency
