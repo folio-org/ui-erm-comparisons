@@ -189,8 +189,7 @@ const ComparisonReportList = (
             <Layout className="centered" data-test-overlap>
               <strong>
                 <FormattedMessage
-                  id="ui-erm-comparisons.comparisonReport.overlapType"
-                  values={{ overlap }}
+                  id={`ui-erm-comparisons.comparisonReport.overlap.${overlap}`}
                 />
               </strong>
             </Layout>

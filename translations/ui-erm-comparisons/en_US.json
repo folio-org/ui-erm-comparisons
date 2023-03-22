@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Period end",
     "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource",
     "report.close": "Close comparison report screen",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Link package",
     "linkAgreement": "Link agreement",
     "comparison.created.error.noComparisonLinked": "Error creating <strong>comparison</strong>: One or more comparisons were not linked",
