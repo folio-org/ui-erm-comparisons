@@ -1,6 +1,7 @@
 # Change history for ui-erm-comparisons
 
 ## 5.1.0 In progress
+* ERM-1026 Capitalise Full, Partial and None
 
 ## 5.0.0 2023-02-22
 * ERM-2620 move typescript to dev-deps
