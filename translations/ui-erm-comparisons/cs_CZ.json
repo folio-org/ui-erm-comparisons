@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Konec období",
     "emptyAccordion.noAgreementsEresource": "Žádné smlouvy pro tento e-zdroj",
     "report.close": "Zavřít obrazovku výstupu porovnání",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Propojit balíček",
     "linkAgreement": "Propojit smlouvu",
     "comparison.created.error.noComparisonLinked": "Chyba při vytváření <strong>srovnání</strong>: Jedno nebo více porovnání nebylo propojeno",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "Porovnání ERM: Zobrazení úloh",
     "permission.jobs.edit": "Srovnání ERM: Vytváření úloh",
     "permission.jobs.delete": "Porovnání ERM: Smazání úloh",
-    "appMenu.keyboardShortcuts": "Klávesové zkratky"
+    "appMenu.keyboardShortcuts": "Klávesové zkratky",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }

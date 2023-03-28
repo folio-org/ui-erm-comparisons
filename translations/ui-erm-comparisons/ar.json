@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "انتهاء الفترة",
     "emptyAccordion.noAgreementsEresource": "لا توجد اتفاقيات لهذا المورد الإلكتروني",
     "report.close": "إغلاق شاشة تقرير المقارنة",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "ربط الحزمة",
     "linkAgreement": "ربط الاتفاقية",
     "comparison.created.error.noComparisonLinked": "خطأ في إنشاء <strong>المقارنة</strong>: لم يتم ربط إحدى المقارنات أو أكثر",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "مقارنات إدارة الموارد الإلكترونية: اعرض المهام",
     "permission.jobs.edit": "مقارنات إدارة الموارد الإلكترونية: أنشئ مهام",
     "permission.jobs.delete": "مقارنات إدارة الموارد الإلكترونية: احذف المهام",
-    "appMenu.keyboardShortcuts": "اختصارات لوحة المفاتيح"
+    "appMenu.keyboardShortcuts": "اختصارات لوحة المفاتيح",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }
