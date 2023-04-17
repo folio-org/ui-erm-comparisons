@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "기간 종료",
     "emptyAccordion.noAgreementsEresource": "이 전자자원에 대한 계약이 없습니다.",
     "report.close": "비교 보고서 화면 닫기",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "패키지 링크",
     "linkAgreement": "계약 링크",
     "comparison.created.error.noComparisonLinked": "<strong> 비교 </strong> 생성 오류 : 하나 이상의 비교가 연결되지 않았습니다.",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "ERM 비교 : 보기",
     "permission.jobs.edit": "ERM 비교 : 만들기",
     "permission.jobs.delete": "ERM 비교 :  삭제",
-    "appMenu.keyboardShortcuts": "키보드 단축키"
+    "appMenu.keyboardShortcuts": "키보드 단축키",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }

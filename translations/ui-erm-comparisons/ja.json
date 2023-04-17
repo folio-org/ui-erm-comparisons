@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Period end",
     "emptyAccordion.noAgreementsEresource": "この電子リソースの契約はありません",
     "report.close": "Close comparison report screen",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Link package",
     "linkAgreement": "契約をリンク",
     "comparison.created.error.noComparisonLinked": "Error creating <strong>comparison</strong>: One or more comparisons were not linked",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "ERM比較: ジョブの表示",
     "permission.jobs.edit": "ERM比較: ジョブの作成",
     "permission.jobs.delete": "ERM比較: ジョブの削除",
-    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "なし",
+    "comparisonReport.overlap.partial": "Partial"
 }
