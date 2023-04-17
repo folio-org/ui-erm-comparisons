@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "期限结束",
     "emptyAccordion.noAgreementsEresource": "此电子资源没有协议",
     "report.close": "关闭比较报告屏幕",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "链接资源包",
     "linkAgreement": "链接协议",
     "comparison.created.error.noComparisonLinked": "创建<strong>比较</strong>出错：未链接一个或多个比较",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "ERM比较：查看任务",
     "permission.jobs.edit": "ERM比较：创建任务",
     "permission.jobs.delete": "ERM比较：删除任务",
-    "appMenu.keyboardShortcuts": "键盘快捷键"
+    "appMenu.keyboardShortcuts": "键盘快捷键",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }

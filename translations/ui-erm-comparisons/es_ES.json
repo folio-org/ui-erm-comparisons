@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Period end",
     "emptyAccordion.noAgreementsEresource": "No agreements for this e-resource",
     "report.close": "Close comparison report screen",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Link package",
     "linkAgreement": "Link agreement",
     "comparison.created.error.noComparisonLinked": "Error al crear <strong>comparación</strong> : una o más comparaciones no estaban vinculadas",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "ERM comparisons: View jobs",
     "permission.jobs.edit": "ERM Comparisons: Create jobs",
     "permission.jobs.delete": "ERM Comparisons: Delete jobs",
-    "appMenu.keyboardShortcuts": "Atajos de teclado"
+    "appMenu.keyboardShortcuts": "Atajos de teclado",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }

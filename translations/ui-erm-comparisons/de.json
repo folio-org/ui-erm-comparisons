@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Ende des Zeitraums",
     "emptyAccordion.noAgreementsEresource": "Keine Vereinbarungen für diese E-Ressource",
     "report.close": "Vergleichsberichts-Bildschirm schließen",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Paket verknüpfen",
     "linkAgreement": "Vereinbarung verknüpfen",
     "comparison.created.error.noComparisonLinked": "Fehler beim Erstellen des <strong>Vergleichs</strong>: Ein oder mehrere Vergleich wurden nicht verknüpft",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "eVergleich: Jobs anzeigen",
     "permission.jobs.edit": "eVergleich: Jobs erstellen",
     "permission.jobs.delete": "eVergleich: Jobs löschen",
-    "appMenu.keyboardShortcuts": "Tastenkürzel"
+    "appMenu.keyboardShortcuts": "Tastenkürzel",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }
