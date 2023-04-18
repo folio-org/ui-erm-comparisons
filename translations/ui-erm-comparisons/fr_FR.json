@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Fin de période",
     "emptyAccordion.noAgreementsEresource": "Aucun accord pour cette ressource électronique",
     "report.close": "Fermer l'écran du rapport de comparaison",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Lier le bouquet",
     "linkAgreement": "Lier un accord",
     "comparison.created.error.noComparisonLinked": "Erreur lors de la création de la <strong> comparaison </strong> : une ou plusieurs comparaisons n'ont pas été liées",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "Comparaisons ERM: voir les tâches",
     "permission.jobs.edit": "Comparaisons ERM: créer des tâches",
     "permission.jobs.delete": "Comparaisons ERM: supprimer des tâches",
-    "appMenu.keyboardShortcuts": "Raccourcis clavier"
+    "appMenu.keyboardShortcuts": "Raccourcis clavier",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }

@@ -94,7 +94,6 @@
     "agreementPeriods.periodEnd": "Koniec okresu",
     "emptyAccordion.noAgreementsEresource": "Brak umów dla tego e-zasobu",
     "report.close": "Zamknij ekran raportu porównawczego",
-    "comparisonReport.overlapType": "{overlap}",
     "linkPackage": "Połącz pakiet",
     "linkAgreement": "Połącz umowę",
     "comparison.created.error.noComparisonLinked": "Błąd podczas tworzenia <strong> porównania </strong> : co najmniej jedno porównanie nie zostało połączone",
@@ -111,5 +110,8 @@
     "permission.jobs.view": "Porównania e-zasobów: Wyświetlanie zadań",
     "permission.jobs.edit": "Porównania e-zasobów: Tworzenie zadań",
     "permission.jobs.delete": "Porównania e-zasobów: Usuwanie zadań",
-    "appMenu.keyboardShortcuts": "Keyboard shortcuts"
+    "appMenu.keyboardShortcuts": "Keyboard shortcuts",
+    "comparisonReport.overlap.full": "Full",
+    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.partial": "Partial"
 }
