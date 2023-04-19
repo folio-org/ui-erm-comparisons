@@ -315,7 +315,7 @@ const ComparisonReportList = (
                                 return (
                                   <div
                                     key={`row-${rowIndex}`}
-                                    className={`${rowClass} ${css.borderCell}`}
+                                    className={`${rowClass} ${rowIndex !== 0 ? css.borderCell : ''}`}
                                     data-test-coverage-mcl-row
                                     {...rowProps}
                                     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
