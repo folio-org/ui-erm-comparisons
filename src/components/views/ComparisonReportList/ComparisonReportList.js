@@ -213,11 +213,11 @@ const ComparisonReportList = (
           getCellClass={(defaultClass, rowData, column) => {
             const { overlap } = rowData;
             if (column === 'overlap') {
-              return `${defaultClass} ${css[overlap]}`;
+              return `${defaultClass} ${css[overlap]} ${css.borderCell}`;
             } else if (column === 'title') {
-              return `${defaultClass} ${css.titleCell}`;
+              return `${defaultClass} ${css.titleCell} ${css.borderCell}`;
             }
-            return defaultClass;
+            return `${defaultClass} ${css.borderCell}`;
           }}
           getHeaderCellClass={(header) => {
             return ['coverage', 'resourceA', 'resourceB', 'overlap'].includes(header) ? css[header] : undefined;
@@ -248,7 +248,7 @@ const ComparisonReportList = (
                   cells[0]
                 }
                 {
-                  <div aria-colspan="4" className={css.nestedMcl}>
+                  <div aria-colspan="4" className={`${css.nestedMcl} ${css.borderCell}`}>
                     <MultiColumnList
                       columnWidths={{
                         availableVia: 250,
@@ -296,6 +296,7 @@ const ComparisonReportList = (
                           >
                             {cells[0]}
                             {
+                              // no css.borderCell needed here, it would double the cell border
                               <div aria-colspan="3" className={css.nestedMcl}>
                                 <MultiColumnList
                                   columnWidths={{
@@ -325,7 +326,7 @@ const ComparisonReportList = (
                                     return (
                                       <div
                                         key={`row-${rowIndex}`}
-                                        className={rowClass}
+                                        className={`${rowClass} ${css.borderCell}`}
                                         data-test-coverage-mcl-row
                                         {...rowProps}
                                         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
