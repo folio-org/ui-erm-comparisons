@@ -90,6 +90,8 @@
   "comparisonReport.info.issn": "ISSN",
   "comparisonReport.info.isbn": "ISBN",
   "comparisonReport.info.eisbn": "ISBN (Online)",
+  "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
+  "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report.",
 
   "newComparison.info": "Select two items for comparison",
   "newComparison.name": "Name",
