@@ -113,5 +113,7 @@
     "appMenu.keyboardShortcuts": "Raccourcis clavier",
     "comparisonReport.overlap.full": "Full",
     "comparisonReport.overlap.none": "None",
-    "comparisonReport.overlap.partial": "Partial"
+    "comparisonReport.overlap.partial": "Partial",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
+    "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
 }
