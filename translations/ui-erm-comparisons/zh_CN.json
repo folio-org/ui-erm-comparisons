@@ -111,7 +111,9 @@
     "permission.jobs.edit": "ERM比较：创建任务",
     "permission.jobs.delete": "ERM比较：删除任务",
     "appMenu.keyboardShortcuts": "键盘快捷键",
-    "comparisonReport.overlap.full": "Full",
-    "comparisonReport.overlap.none": "None",
-    "comparisonReport.overlap.partial": "Partial"
+    "comparisonReport.overlap.full": "完整",
+    "comparisonReport.overlap.none": "无",
+    "comparisonReport.overlap.partial": "部分",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
+    "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
 }

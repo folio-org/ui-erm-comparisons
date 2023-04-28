@@ -113,5 +113,7 @@
     "appMenu.keyboardShortcuts": "Klávesové zkratky",
     "comparisonReport.overlap.full": "Úplné",
     "comparisonReport.overlap.none": "Žádný",
-    "comparisonReport.overlap.partial": "Částečné"
+    "comparisonReport.overlap.partial": "Částečné",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> z <strong>{total}</strong> zobrazených titulů.",
+    "comparisonReport.loadMessage": "Chcete-li zobrazit celý výstup, vyberte možnost <strong>Načíst vše</strong>."
 }
