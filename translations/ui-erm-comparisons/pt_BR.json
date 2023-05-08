@@ -113,5 +113,7 @@
     "appMenu.keyboardShortcuts": "Atalhos do teclado",
     "comparisonReport.overlap.full": "Completo",
     "comparisonReport.overlap.none": "Nenhum",
-    "comparisonReport.overlap.partial": "Parcial"
+    "comparisonReport.overlap.partial": "Parcial",
+    "comparisonReport.recordsMessage": "<strong> {records} </strong> de <strong> {total} </strong> títulos exibidos.",
+    "comparisonReport.loadMessage": "Selecione <strong> Carregar tudo </strong> para visualizar o relatório completo."
 }
