@@ -91,17 +91,26 @@ const ComparisonReportList = (
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div>
-        <div style={{ marginBottom: '10px' }}>
-          <FormattedMessage id="ui-erm-comparisons.comparisonReport.recordsMessage" values={{ records: report.length, total: totalCount }} />
-          {' '}
-          {report.length < totalCount ?
-            <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadMessage" />
-            :
-            null}
-        </div>
-        <div><Button fullWidth onClick={onNeedMoreData}>Load all</Button></div>
+      <div style={{ marginBottom: '10px' }}>
+        <FormattedMessage id="ui-erm-comparisons.comparisonReport.recordsMessage" values={{ records: report.length, total: totalCount }} />
+        {' '}
+        {report.length < totalCount ?
+          <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadMessage" />
+          :
+          null}
       </div>
+      {totalCount > 200 ?
+        <div>
+          <Button
+            disabled={report.length === totalCount}
+            fullWidth
+            onClick={onNeedMoreData}
+          >
+            <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadAll" />
+          </Button>
+        </div>
+        :
+        null}
       <div style={{ flex: '1 0 auto', marginBottom: '1rem' }}>
         <MultiColumnList
           autosize
@@ -368,7 +377,18 @@ const ComparisonReportList = (
           visibleColumns={['title', 'availableVia', 'coverage', 'resourceA', 'resourceB', 'overlap']}
         />
       </div>
-      <div><Button fullWidth onClick={onNeedMoreData}>Load all</Button></div>
+      {totalCount > 200 ?
+        <div>
+          <Button
+            disabled={report.length === totalCount}
+            fullWidth
+            onClick={onNeedMoreData}
+          >
+            <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadAll" />
+          </Button>
+        </div>
+        :
+        null}
     </div>
   );
 };
