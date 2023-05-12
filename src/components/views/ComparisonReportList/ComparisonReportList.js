@@ -106,7 +106,7 @@ const ComparisonReportList = (
             fullWidth
             onClick={onNeedMoreData}
           >
-            Load all
+            <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadAll" />
           </Button>
         </div>
         :
@@ -384,7 +384,7 @@ const ComparisonReportList = (
             fullWidth
             onClick={onNeedMoreData}
           >
-            Load all
+            <FormattedMessage id="ui-erm-comparisons.comparisonReport.loadAll" />
           </Button>
         </div>
         :
