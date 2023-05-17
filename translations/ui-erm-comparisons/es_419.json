@@ -114,6 +114,6 @@
     "comparisonReport.overlap.full": "Completo",
     "comparisonReport.overlap.none": "Ninguno",
     "comparisonReport.overlap.partial": "Parcial",
-    "comparisonReport.recordsMessage": "<strong>{registros}</strong> de <strong>{total}</strong> títulos mostrados.",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> de <strong>{total}</strong> títulos mostrados.",
     "comparisonReport.loadMessage": "Seleccione <strong>Cargar todo</strong> para ver el informe completo."
 }
