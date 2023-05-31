@@ -114,6 +114,6 @@
     "comparisonReport.overlap.full": "完整",
     "comparisonReport.overlap.none": "无",
     "comparisonReport.overlap.partial": "部分",
-    "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
-    "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
+    "comparisonReport.recordsMessage": "已显示 <strong>{total} </strong> 标题中的<strong>{records}</strong>。",
+    "comparisonReport.loadMessage": "选择<strong>全部加载</strong>查看完整报告。"
 }
