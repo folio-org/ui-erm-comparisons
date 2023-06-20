@@ -1,6 +1,5 @@
-import React from 'react';
 import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Pane, PaneHeader, MultiColumnList } from '@folio/stripes-testing';
+import { Pane, PaneHeader, MultiColumnList, SearchField } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
 import translationsProperties from '../../../../test/jest/helpers/translationsProperties';
 
@@ -38,9 +37,8 @@ describe('Comparisons', () => {
     await Pane('Search and filter').is({ visible: true });
   });
 
-  test('renders expected search box for SAS', () => {
-    const { getByRole } = renderComponent;
-    expect(getByRole('searchbox', { name: 'Search comparisons' })).toBeInTheDocument();
+  test('renders expected search box for SAS', async () => {
+    await SearchField().exists();
   });
 
   test('renders the expected ERM comparisons Pane', async () => {
