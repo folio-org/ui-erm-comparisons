@@ -111,9 +111,9 @@
     "permission.jobs.edit": "eVergleich: Jobs erstellen",
     "permission.jobs.delete": "eVergleich: Jobs löschen",
     "appMenu.keyboardShortcuts": "Tastenkürzel",
-    "comparisonReport.overlap.full": "Full",
-    "comparisonReport.overlap.none": "None",
-    "comparisonReport.overlap.partial": "Partial",
-    "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
-    "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
+    "comparisonReport.overlap.full": "Vollständig",
+    "comparisonReport.overlap.none": "Keine",
+    "comparisonReport.overlap.partial": "Teilweise",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> von <strong>{total}</strong> Titeln angezeigt.",
+    "comparisonReport.loadMessage": "<strong>Alle laden</strong> auswählen, um den vollständigen Bericht anzuzeigen"
 }
