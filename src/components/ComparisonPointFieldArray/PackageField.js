@@ -19,7 +19,7 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon, Pluggable } from '@folio/stripes/core';
 
-import { useBatchedFetch } from '@folio/stripes-erm-components';
+import { useParallelBatchFetch } from '@folio/stripes-erm-components';
 
 import EntitlementAgreementsList from '../EntitlementsAgreementsList';
 
@@ -51,12 +51,12 @@ const PackageField = ({
 
   // BATCHED FETCH ENTITLEMENTS
   const {
-    results: entitlements,
+    items: entitlements,
     total: entitlementCount,
     isLoading: areEntitlementsLoading
-  } = useBatchedFetch({
-    nsArray: ['ERM', 'Eresource', value?.id, 'Entitlements', RESOURCE_ENTITLEMENTS_ENDPOINT(value?.id)],
-    path: RESOURCE_ENTITLEMENTS_ENDPOINT(value?.id),
+  } = useParallelBatchFetch({
+    generateQueryKey: ({ offset }) => ['ERM', 'Eresource', value?.id, 'Entitlements', RESOURCE_ENTITLEMENTS_ENDPOINT(value?.id), offset],
+    endpoint: RESOURCE_ENTITLEMENTS_ENDPOINT(value?.id),
     queryParams: {
       enabled: !!value?.id
     }
