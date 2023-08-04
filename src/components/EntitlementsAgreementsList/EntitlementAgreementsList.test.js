@@ -1,7 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { MultiColumnList, MultiColumnListCell } from '@folio/stripes-testing';
+import { MultiColumnList, MultiColumnListCell, renderWithIntl } from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import entitlements from './testResources';

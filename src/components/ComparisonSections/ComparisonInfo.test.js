@@ -1,7 +1,13 @@
-import React from 'react';
-import { renderWithIntl, FormattedDateTimeInteractor } from '@folio/stripes-erm-testing';
-import { KeyValue, Heading, Button } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
+
+import {
+  Button,
+  FormattedDateTime,
+  Heading,
+  KeyValue,
+  renderWithIntl
+} from '@folio/stripes-erm-testing';
+
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import comparison from './testResources';
 import ComparisonInfo from './ComparisonInfo';
@@ -34,13 +40,13 @@ describe('ComparisonInfo', () => {
   });
 
   test('renders the expcected Started date and time', async () => {
-    await FormattedDateTimeInteractor({ id: 'started-datetime' }).has({ date: '11/14/2022' });
-    await FormattedDateTimeInteractor({ id: 'started-datetime' }).has({ time: '9:30 AM' });
+    await FormattedDateTime({ id: 'started-datetime' }).has({ date: '11/14/2022' });
+    await FormattedDateTime({ id: 'started-datetime' }).has({ time: '9:30 AM' });
   });
 
   test('renders the expcected Ended date and time', async () => {
-    await FormattedDateTimeInteractor({ id: 'ended-datetime' }).has({ date: '11/14/2022' });
-    await FormattedDateTimeInteractor({ id: 'ended-datetime' }).has({ time: '9:30 AM' });
+    await FormattedDateTime({ id: 'ended-datetime' }).has({ date: '11/14/2022' });
+    await FormattedDateTime({ id: 'ended-datetime' }).has({ time: '9:30 AM' });
   });
 
   test('renders the expcected Errors value', async () => {

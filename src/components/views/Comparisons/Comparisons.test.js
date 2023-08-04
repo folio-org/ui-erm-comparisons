@@ -1,6 +1,13 @@
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Pane, PaneHeader, MultiColumnList, SearchField } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
+
+import {
+  MultiColumnList,
+  Pane,
+  PaneHeader,
+  renderWithIntl,
+  SearchField,
+} from '@folio/stripes-erm-testing';
+
 import translationsProperties from '../../../../test/jest/helpers/translationsProperties';
 
 import { data, source } from './testResources';

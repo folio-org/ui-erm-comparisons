@@ -3,13 +3,13 @@
   "parser": "@babel/eslint-parser",
   "rules": {
     "react/jsx-sort-props": "error",
-    "testing-library/await-async-query": "error",
-    "testing-library/no-await-sync-query": "error",
-    "testing-library/no-debugging-utils": "warn",
-    "jest-dom/prefer-checked": "error",
-    "jest-dom/prefer-enabled-disabled": "error",
-    "jest-dom/prefer-required": "error",
-    "jest-dom/prefer-to-have-attribute": "error"
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "(React|^_)"
+      }
+    ]
   },
   "env": {
     "jest": true
