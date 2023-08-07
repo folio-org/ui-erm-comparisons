@@ -1,7 +1,6 @@
-import React from 'react';
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Accordion } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
+
+import { Accordion, renderWithIntl } from '@folio/stripes-erm-testing';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import comparison from './testResources';
 import ComparisonPoints from './ComparisonPoints';

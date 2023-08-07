@@ -1,7 +1,6 @@
-
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { MultiColumnList } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
+
+import { MultiColumnList, renderWithIntl } from '@folio/stripes-erm-testing';
 import translationsProperties from '../../../../test/jest/helpers/translationsProperties';
 import ComparisonReportList from './ComparisonReportList';
 import sourceData from './testResources';

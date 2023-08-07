@@ -1,9 +1,15 @@
 import { Field } from 'react-final-form';
 import { StaticRouter as Router } from 'react-router-dom';
 
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
+
 import { requiredValidator } from '@folio/stripes-erm-components';
-import { TestForm, renderWithIntl } from '@folio/stripes-erm-testing';
-import { Button, KeyValue } from '@folio/stripes-testing';
+import {
+  Button,
+  KeyValue,
+  TestForm,
+  renderWithIntl
+} from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import { packageFieldData } from './testResources';
@@ -117,7 +123,9 @@ describe('PackageField', () => {
 
     it('displays an error', async () => {
       const { getByText } = renderComponent;
-      await Button('Submit').click();
+      await waitFor(async () => {
+        await Button('Submit').click();
+      });
       expect(getByText('Please fill this in to continue')).toBeInTheDocument();
     });
   });

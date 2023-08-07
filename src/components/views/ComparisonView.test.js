@@ -1,9 +1,15 @@
-import React from 'react';
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Accordion, KeyValue, Button } from '@folio/stripes-testing';
 import { MemoryRouter } from 'react-router-dom';
+
+import {
+  Accordion,
+  Button,
+  KeyValue,
+  renderWithIntl
+} from '@folio/stripes-erm-testing';
+
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonView from './ComparisonView';
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 
 const data = {
   comparison: {
@@ -152,7 +158,9 @@ describe('ComparisonView', () => {
     });
 
     test('renders the delete and export button under the Actions dropdown', async () => {
-      await Button('Actions').click();
+      await waitFor(async () => {
+        await Button('Actions').click();
+      });
       await Button('Delete').exists();
       await Button('Export comparison report as JSON').exists();
     });

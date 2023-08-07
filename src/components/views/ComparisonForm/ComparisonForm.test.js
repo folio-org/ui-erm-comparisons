@@ -1,6 +1,5 @@
-import { renderWithIntl } from '@folio/stripes-erm-testing';
 import { MemoryRouter } from 'react-router-dom';
-import { Button, Pane, PaneHeader, TextField } from '@folio/stripes-testing';
+import { Button, Pane, PaneHeader, renderWithIntl, TextField } from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../../test/jest/helpers/translationsProperties';
 import ComparisonForm from './ComparisonForm';

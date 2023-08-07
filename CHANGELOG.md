@@ -1,7 +1,9 @@
 # Change history for ui-erm-comparisons
 
-## 5.1.0 In progress
+## 6.0.0 In progress
 * ERM-1026 Capitalise Full, Partial and None
+* STRIPES-870 BREAKING upgrade react to v18
+  * ERM-2997 upgrade ui-erm-comparisons React to v18
 
 ## 5.0.0 2023-02-22
 * ERM-2620 move typescript to dev-deps

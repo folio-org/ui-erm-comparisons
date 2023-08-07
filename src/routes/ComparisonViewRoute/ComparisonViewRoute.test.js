@@ -1,10 +1,13 @@
-import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { MemoryRouter } from 'react-router-dom';
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
+
 import { Button } from '@folio/stripes/components';
-import { Button as ButtonInteractor } from '@folio/stripes-testing';
+import {
+  Button as ButtonInteractor,
+  renderWithIntl
+} from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonViewRoute from './ComparisonViewRoute';
@@ -97,17 +100,23 @@ describe('ComparisonViewRoute', () => {
     });
 
     test('calls the CloseButton', async () => {
-      await ButtonInteractor('CloseButton').click();
+      await waitFor(async () => {
+        await ButtonInteractor('CloseButton').click();
+      });
       expect(historyPushMock).toHaveBeenCalled();
     });
 
     test('calls the DeleteButton', async () => {
-      await ButtonInteractor('DeleteButton').click();
+      await waitFor(async () => {
+        await ButtonInteractor('DeleteButton').click();
+      });
       expect(historyPushMock).toHaveBeenCalled();
     });
 
     test('calls the ViewReportButton', async () => {
-      await ButtonInteractor('ViewReportButton').click();
+      await waitFor(async () => {
+        await ButtonInteractor('ViewReportButton').click();
+      });
       expect(historyPushMock).toHaveBeenCalled();
     });
   });

@@ -1,9 +1,8 @@
 import { useQuery } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
-import { waitFor } from '@testing-library/dom';
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-erm-testing';
-import { Accordion, Checkbox } from '@folio/stripes-testing';
+import { Accordion, Checkbox, renderWithIntl } from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonFilters from './ComparisonFilters';
