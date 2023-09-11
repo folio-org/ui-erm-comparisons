@@ -4,6 +4,7 @@
 * ERM-1026 Capitalise Full, Partial and None
 * STRIPES-870 BREAKING upgrade react to v18
   * ERM-2997 upgrade ui-erm-comparisons React to v18
+* ERM-3026 *BREAKING* bump `react-intl` to `v6.4.4`
 
 ## 5.0.0 2023-02-22
 * ERM-2620 move typescript to dev-deps
