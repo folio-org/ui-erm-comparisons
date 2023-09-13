@@ -1,4 +1,4 @@
-import { mockReactQuery as reactQueryMocks, renderWithIntl } from '@folio/stripes-erm-testing';
+import { renderWithIntl } from '@folio/stripes-erm-testing';
 import { MemoryRouter } from 'react-router-dom';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonReportViewRoute from './ComparisonReportViewRoute';
@@ -23,19 +23,21 @@ const data = {
 };
 
 /* EXAMPLE Mocking using an import from stripes-erm-testing
- * For whatever reason,m we can't directly spread the import into the mock.
- * Instead we import, set to some variable, and then use that in the mock.
+ * For whatever reason, in this case we need to require within the mock itself.
+ * In LicenseAmendmentList test we don't see this behaviour *shrug*
  *
  * In this component we expect useQuery to return an object in one instance and an array in the other
  * Our mock only returns an object, so re-mock that here
  */
-const mockReactQuery = reactQueryMocks;
-jest.unmock('react-query');
-jest.mock('react-query', () => ({
-  ...jest.requireActual('react-query'),
-  ...mockReactQuery,
-  useQuery: jest.fn(() => ({ data: null, refetch: jest.fn(), isLoading: false }))
-}));
+jest.mock('react-query', () => {
+  const { mockReactQuery } = jest.requireActual('@folio/stripes-erm-testing');
+
+  return ({
+    ...jest.requireActual('react-query'),
+    ...mockReactQuery,
+    useQuery: jest.fn(() => ({ data: null, refetch: jest.fn(), isLoading: false }))
+  });
+});
 
 describe('ComparisonReportViewRoute', () => {
   describe('renders the ComparisonReportViewRoute', () => {
