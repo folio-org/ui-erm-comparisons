@@ -131,12 +131,9 @@ describe('ComparisonView', () => {
       await Accordion('Comparison points').exists();
     });
 
-    test('renders the Error log Accordion', async () => {
-      await Accordion('Error log').exists();
-    });
-
-    test('renders the Info log Accordion', async () => {
-      await Accordion('Info log').exists();
+    test('renders the logs', () => {
+      const { queryAllByText } = renderComponent;
+      expect(queryAllByText('Logs')).toHaveLength(2);
     });
 
     test('renders the Comparison points list', async () => {
