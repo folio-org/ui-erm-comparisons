@@ -20,9 +20,9 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 
-import { ComparisonInfo, ComparisonPoints } from '../ComparisonSections';
+import { Logs } from '@folio/stripes-erm-components';
 
-import Logs from '../Logs';
+import { ComparisonInfo, ComparisonPoints } from '../ComparisonSections';
 
 class ComparisonView extends React.Component {
   static propTypes = {
@@ -76,6 +76,7 @@ class ComparisonView extends React.Component {
     return {
       id,
       comparison,
+      job: comparison, // Used for Logs. Lazy option taken here to duplicate prop
     };
   }
 
