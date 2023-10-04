@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 
 import { generateKiwtQueryParams, useKiwtSASQuery } from '@k-int/stripes-kint-components';
 
-import { getRefdataValuesByDesc, useInfiniteFetch } from '@folio/stripes-erm-components';
+import {
+  getRefdataValuesByDesc,
+  useInfiniteFetch,
+  usePrevNextPagination
+} from '@folio/stripes-erm-components';
 import { useOkapiKy } from '@folio/stripes/core';
 import View from '../../components/views/Comparisons';
 import { COMPARISONS_ENDPOINT, resultCount } from '../../constants';
 import useErmComparisonsRefdata from '../../hooks/useErmComparisonsRefdata';
 
-const { RESULT_COUNT_INCREMENT } = resultCount;
+const { RESULT_COUNT_INCREMENT_MEDIUM } = resultCount;
 
 const [
   RESULT,
@@ -42,9 +46,11 @@ const ComparisonsRoute = ({
   });
 
   const { query, querySetter, queryGetter } = useKiwtSASQuery();
+  const { currentPage } = usePrevNextPagination();
 
   const comparisonsQueryParams = useMemo(() => (
     generateKiwtQueryParams({
+      page: currentPage,
       searchKey: 'name',
       filterKeys: {
         status: 'status.value',
@@ -52,16 +58,16 @@ const ComparisonsRoute = ({
         'comparisonPointOne': 'comparisonPoints.titleList.id',
         'comparisonPointTwo': 'comparisonPoints.titleList.id',
       },
-      perPage: RESULT_COUNT_INCREMENT
+      perPage: RESULT_COUNT_INCREMENT_MEDIUM
     }, (query ?? {}))
-  ), [query]);
+  ), [currentPage, query]);
+
 
   const {
     infiniteQueryObject: {
       error: comparisonsError,
       fetchNextPage: fetchNextComparisonsPage,
       isLoading: areComparisonsLoading,
-      isIdle: isComparisonsIdle,
       isError: isComparisonsError
     },
     results: comparisons = [],
@@ -95,7 +101,7 @@ const ComparisonsRoute = ({
       selectedRecordId={match.params.id}
       source={{ // Fake source from useQuery return values;
         totalCount: () => comparisonsCount,
-        loaded: () => !isComparisonsIdle,
+        loaded: () => !areComparisonsLoading,
         pending: () => areComparisonsLoading,
         failure: () => isComparisonsError,
         failureMessage: () => comparisonsError.message

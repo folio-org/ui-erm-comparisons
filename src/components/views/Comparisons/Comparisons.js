@@ -23,8 +23,9 @@ import {
   PersistedPaneset,
   SearchAndSortNoResultsMessage,
 } from '@folio/stripes/smart-components';
-import { FormattedDateTime } from '@folio/stripes-erm-components';
+import { FormattedDateTime, usePrevNextPagination } from '@folio/stripes-erm-components';
 
+import { resultCount } from '../../../constants';
 import { ComparisonFilters } from '../../ComparisonFilters';
 import css from './Comparisons.css';
 
@@ -43,6 +44,7 @@ const propTypes = {
 };
 
 const filterPaneVisibilityKey = '@folio/ui-erm-comparisons/comparisonsFilterPaneVisibility';
+const { RESULT_COUNT_INCREMENT_MEDIUM } = resultCount;
 
 const Comparisons = ({
   children,
@@ -61,6 +63,13 @@ const Comparisons = ({
   const query = queryGetter() ?? {};
   const sortOrder = query.sort ?? '';
 
+  const {
+    paginationMCLProps,
+    paginationSASQProps
+  } = usePrevNextPagination({
+    count,
+    pageSize: RESULT_COUNT_INCREMENT_MEDIUM
+  });
 
   const [storedFilterPaneVisibility] = useLocalStorage(filterPaneVisibilityKey, true);
   const [filterPaneIsVisible, setFilterPaneIsVisible] = useState(storedFilterPaneVisibility);
@@ -89,6 +98,7 @@ const Comparisons = ({
     >
       <div ref={contentRef} data-test-ermcomparisons data-testid="comparisons">
         <SearchAndSortQuery
+          {...paginationSASQProps}
           initialFilterState={{ }}
           initialSearchState={{ query: '' }}
           initialSortState={{ sort: '-started' }}
@@ -234,7 +244,20 @@ const Comparisons = ({
                     formatter={{
                       ended: ({ ended }) => (ended ? <FormattedDateTime date={ended} /> : <NoValue />),
                       errors: ({ errorLogCount }) => errorLogCount,
-                      jobname: ({ name }) => name,
+                      comparisonName: ({ name }) => {
+                        return (
+                          <AppIcon
+                            app="erm-comparisons"
+                            iconAlignment="baseline"
+                            iconKey="app"
+                            size="small"
+                          >
+                            <div style={{ overflowWrap: 'break-word', width: 460 }}>
+                              {name}
+                            </div>
+                          </AppIcon>
+                        );
+                      },
                       runningStatus: ({ status }) => status && status.label,
                       result: ({ result }) => result && result.label,
                       started: ({ started }) => (started ? <FormattedDateTime date={started} /> : <NoValue />),
@@ -259,6 +282,7 @@ const Comparisons = ({
                       labelStrings: ({ rowData }) => [rowData.name],
                       to: id => `/erm-comparisons/${id}${searchString}`
                     }}
+                    {...paginationMCLProps}
                     sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
                     sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
                     totalCount={count}
