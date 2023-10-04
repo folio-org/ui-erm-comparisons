@@ -120,7 +120,7 @@ const Comparisons = ({
             const disableReset = () => (!filterChanged && !searchChanged);
             const filterCount = activeFilters.string ? activeFilters.string.split(',').length : 0;
             return (
-              <PersistedPaneset id="erm-comparisons-paneset">
+              <PersistedPaneset appId="@folio/erm-comparisons" id="erm-comparisons-paneset" >
                 {filterPaneIsVisible &&
                   <Pane
                     defaultWidth="20%"
