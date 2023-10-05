@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+
+import { Link } from 'react-router-dom';
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { AppIcon, IfPermission } from '@folio/stripes/core';
 
@@ -89,6 +91,28 @@ const Comparisons = ({
       handler: goToNew,
     },
   ];
+
+  const rowFormatter = (row) => {
+    const { rowClass, rowData, rowIndex, rowProps = {}, cells } = row;
+
+    return (
+      <Link
+        key={`row-${rowIndex}`}
+        aria-rowindex={rowIndex + 2}
+        className={rowClass}
+        data-label={rowData.name}
+        role="row"
+        to={rowURL(rowData.id)}
+        {...rowProps}
+      >
+        {cells}
+      </Link>
+    );
+  };
+
+  const rowURL = (id) => {
+    return `/comparisons-erm/${id}${searchString}`;
+  };
 
   return (
     <HasCommand
@@ -242,8 +266,6 @@ const Comparisons = ({
                     }}
                     contentData={data.comparisons}
                     formatter={{
-                      ended: ({ ended }) => (ended ? <FormattedDateTime date={ended} /> : <NoValue />),
-                      errors: ({ errorLogCount }) => errorLogCount,
                       comparisonName: ({ name }) => {
                         return (
                           <AppIcon
@@ -258,6 +280,8 @@ const Comparisons = ({
                           </AppIcon>
                         );
                       },
+                      ended: ({ ended }) => (ended ? <FormattedDateTime date={ended} /> : <NoValue />),
+                      errors: ({ errorLogCount }) => errorLogCount,
                       runningStatus: ({ status }) => status && status.label,
                       result: ({ result }) => result && result.label,
                       started: ({ started }) => (started ? <FormattedDateTime date={started} /> : <NoValue />),
@@ -278,6 +302,7 @@ const Comparisons = ({
                     isSelected={({ item }) => item.id === selectedRecordId}
                     onHeaderClick={onSort}
                     onNeedMoreData={onNeedMoreData}
+                    rowFormatter={rowFormatter}
                     rowProps={{
                       labelStrings: ({ rowData }) => [rowData.name],
                       to: id => `/erm-comparisons/${id}${searchString}`
