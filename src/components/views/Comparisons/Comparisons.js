@@ -2,7 +2,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { Link } from 'react-router-dom';
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { AppIcon, IfPermission } from '@folio/stripes/core';
 
@@ -92,28 +91,6 @@ const Comparisons = ({
     },
   ];
 
-  const rowFormatter = (row) => {
-    const { rowClass, rowData, rowIndex, rowProps = {}, cells } = row;
-
-    return (
-      <Link
-        key={`row-${rowIndex}`}
-        aria-rowindex={rowIndex + 2}
-        className={rowClass}
-        data-label={rowData.name}
-        role="row"
-        to={rowURL(rowData.id)}
-        {...rowProps}
-      >
-        {cells}
-      </Link>
-    );
-  };
-
-  const rowURL = (id) => {
-    return `/comparisons-erm/${id}${searchString}`;
-  };
-
   return (
     <HasCommand
       commands={shortcuts}
@@ -144,7 +121,7 @@ const Comparisons = ({
             const disableReset = () => (!filterChanged && !searchChanged);
             const filterCount = activeFilters.string ? activeFilters.string.split(',').length : 0;
             return (
-              <PersistedPaneset appId="@folio/erm-comparisons" id="erm-comparisons-paneset" >
+              <PersistedPaneset appId="@folio/erm-comparisons" id="erm-comparisons-paneset">
                 {filterPaneIsVisible &&
                   <Pane
                     defaultWidth="20%"
@@ -302,10 +279,9 @@ const Comparisons = ({
                     isSelected={({ item }) => item.id === selectedRecordId}
                     onHeaderClick={onSort}
                     onNeedMoreData={onNeedMoreData}
-                    rowFormatter={rowFormatter}
                     rowProps={{
                       labelStrings: ({ rowData }) => [rowData.name],
-                      to: id => `/erm-comparisons/${id}${searchString}`
+                      to: id => `/comparisons-erm/${id}${searchString}`
                     }}
                     {...paginationMCLProps}
                     sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
