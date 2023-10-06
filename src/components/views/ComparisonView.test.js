@@ -7,9 +7,9 @@ import {
   renderWithIntl
 } from '@folio/stripes-erm-testing';
 
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonView from './ComparisonView';
-import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 
 const data = {
   comparison: {

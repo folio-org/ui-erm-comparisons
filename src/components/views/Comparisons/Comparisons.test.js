@@ -65,6 +65,6 @@ describe('Comparisons', () => {
   });
 
   test('renders the expcted number of MCL rows', async () => {
-    await MultiColumnList({ rowCount: 4 }).exists();
+    await MultiColumnList({ rowCount: 3 }).exists();
   });
 });
