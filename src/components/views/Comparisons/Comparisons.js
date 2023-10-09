@@ -100,209 +100,208 @@ const Comparisons = ({
       <div ref={contentRef} data-test-ermcomparisons data-testid="comparisons">
         <SearchAndSortQuery
           {...paginationSASQProps}
-          initialFilterState={{ }}
+          initialFilterState={{}}
           initialSearchState={{ query: '' }}
           initialSortState={{ sort: '-started' }}
           queryGetter={queryGetter}
           querySetter={querySetter}
         >
           {
-          ({
-            searchValue,
-            getSearchHandlers,
-            onSubmitSearch,
-            onSort,
-            getFilterHandlers,
-            activeFilters,
-            filterChanged,
-            searchChanged,
-            resetAll,
-          }) => {
-            const disableReset = () => (!filterChanged && !searchChanged);
-            const filterCount = activeFilters.string ? activeFilters.string.split(',').length : 0;
-            return (
-              <PersistedPaneset appId="@folio/erm-comparisons" id="erm-comparisons-paneset">
-                {filterPaneIsVisible &&
-                  <Pane
-                    defaultWidth="20%"
-                    lastMenu={
-                      <PaneMenu>
-                        <CollapseFilterPaneButton onClick={toggleFilterPane} />
-                      </PaneMenu>
-                    }
-                    paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
-                  >
-                    <form onSubmit={onSubmitSearch}>
-                      {/* TODO: Use forthcoming <SearchGroup> or similar component */}
-                      <div className={css.searchGroupWrap}>
-                        <FormattedMessage id="ui-erm-comparisons.searchInputLabel">
-                          {ariaLabel => (
-                            <SearchField
-                              aria-label={ariaLabel}
-                              autoFocus
-                              className={css.searchField}
-                              data-test-erm-comparisons-search-input
-                              id="input-erm-comparisons-search"
-                              inputRef={searchField}
-                              marginBottom0
-                              name="query"
-                              onChange={getSearchHandlers().query}
-                              onClear={() => {
-                                getSearchHandlers().clear();
-                                // TODO: Add way to trigger search automatically
-                                // onSubmitSearch();
-                              }}
-                              value={searchValue.query}
-                            />
-                          )}
-                        </FormattedMessage>
-                        <Button
-                          buttonStyle="primary"
-                          disabled={!searchValue.query || searchValue.query === ''}
-                          fullWidth
-                          id="clickable-search-comparisons"
-                          marginBottom0
-                          type="submit"
-                        >
-                          <FormattedMessage id="stripes-smart-components.search" />
-                        </Button>
-                      </div>
-                      <div className={css.resetButtonWrap}>
-                        <Button
-                          buttonStyle="none"
-                          disabled={disableReset()}
-                          id="clickable-reset-all"
-                          onClick={resetAll}
-                        >
-                          <Icon icon="times-circle-solid">
-                            <FormattedMessage id="stripes-smart-components.resetAll" />
-                          </Icon>
-                        </Button>
-                      </div>
-                      <ComparisonFilters
-                        activeFilters={activeFilters.state}
-                        data={data}
-                        filterHandlers={getFilterHandlers()}
-                      />
-                    </form>
-                  </Pane> }
-                <Pane
-                  appIcon={<AppIcon app="erm-comparisons" />}
-                  defaultWidth="fill"
-                  firstMenu={
-                    !filterPaneIsVisible ?
-                      (
+            ({
+              searchValue,
+              getSearchHandlers,
+              onSubmitSearch,
+              onSort,
+              getFilterHandlers,
+              activeFilters,
+              filterChanged,
+              searchChanged,
+              resetAll,
+            }) => {
+              const disableReset = () => (!filterChanged && !searchChanged);
+              const filterCount = activeFilters.string ? activeFilters.string.split(',').length : 0;
+              return (
+                <PersistedPaneset appId="@folio/erm-comparisons" id="erm-comparisons-paneset">
+                  {filterPaneIsVisible &&
+                    <Pane
+                      defaultWidth="20%"
+                      lastMenu={
                         <PaneMenu>
-                          <ExpandFilterPaneButton
-                            filterCount={filterCount}
-                            onClick={toggleFilterPane}
-                          />
+                          <CollapseFilterPaneButton onClick={toggleFilterPane} />
                         </PaneMenu>
-                      )
-                      :
-                      null
-                  }
-                  lastMenu={
-                    <IfPermission perm="ui-erm-comparisons.jobs.edit">
-                      <Button
-                        bottomMargin0
-                        buttonStyle="primary"
-                        to={`/comparisons-erm/create${searchString}`}
-                      >
-                        <FormattedMessage id="ui-erm-comparisons.comparison.new" />
-                      </Button>
-                    </IfPermission>
-                  }
-                  noOverflow
-                  padContent={false}
-                  paneSub={
-                    source?.loaded() ?
-                      <FormattedMessage id="stripes-smart-components.searchResultsCountHeader" values={{ count: source.totalCount() }} />
-                      :
-                      <FormattedMessage id="stripes-smart-components.searchCriteria" />
-                  }
-                  paneTitle={<FormattedMessage id="ui-erm-comparisons.meta.title" />}
-                >
-                  <MultiColumnList
-                    autosize
-                    columnMapping={{
-                      comparisonName: <FormattedMessage id="ui-erm-comparisons.prop.comparisonName" />,
-                      runningStatus: <FormattedMessage id="ui-erm-comparisons.prop.runningStatus" />,
-                      result: <FormattedMessage id="ui-erm-comparisons.prop.outcome" />,
-                      errors: <FormattedMessage id="ui-erm-comparisons.prop.errors" />,
-                      started: <FormattedMessage id="ui-erm-comparisons.prop.started" />,
-                      ended: <FormattedMessage id="ui-erm-comparisons.prop.ended" />,
-                    }}
-                    columnWidths={{
-                      ended: 150,
-                      errors: 100,
-                      comparisonName: 300,
-                      runningStatus: 150,
-                      result: 150,
-                      started: 150,
-                    }}
-                    contentData={data.comparisons}
-                    formatter={{
-                      comparisonName: ({ name }) => {
-                        return (
-                          <AppIcon
-                            app="erm-comparisons"
-                            iconAlignment="baseline"
-                            iconKey="app"
-                            size="small"
+                      }
+                      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+                    >
+                      <form onSubmit={onSubmitSearch}>
+                        {/* TODO: Use forthcoming <SearchGroup> or similar component */}
+                        <div className={css.searchGroupWrap}>
+                          <FormattedMessage id="ui-erm-comparisons.searchInputLabel">
+                            {ariaLabel => (
+                              <SearchField
+                                aria-label={ariaLabel}
+                                autoFocus
+                                className={css.searchField}
+                                data-test-erm-comparisons-search-input
+                                id="input-erm-comparisons-search"
+                                inputRef={searchField}
+                                marginBottom0
+                                name="query"
+                                onChange={getSearchHandlers().query}
+                                onClear={() => {
+                                  getSearchHandlers().clear();
+                                  // TODO: Add way to trigger search automatically
+                                  // onSubmitSearch();
+                                }}
+                                value={searchValue.query}
+                              />
+                            )}
+                          </FormattedMessage>
+                          <Button
+                            buttonStyle="primary"
+                            disabled={!searchValue.query || searchValue.query === ''}
+                            fullWidth
+                            id="clickable-search-comparisons"
+                            marginBottom0
+                            type="submit"
                           >
-                            <div style={{ overflowWrap: 'break-word', width: 460 }}>
-                              {name}
-                            </div>
-                          </AppIcon>
-                        );
-                      },
-                      ended: ({ ended }) => (ended ? <FormattedDateTime date={ended} /> : <NoValue />),
-                      errors: ({ errorLogCount }) => errorLogCount,
-                      runningStatus: ({ status }) => status && status.label,
-                      result: ({ result }) => result && result.label,
-                      started: ({ started }) => (started ? <FormattedDateTime date={started} /> : <NoValue />),
-                    }}
-                    id="list-comparisons"
-                    isEmptyMessage={
-                      source ? (
-                        <div>
-                          <SearchAndSortNoResultsMessage
-                            filterPaneIsVisible
-                            searchTerm={query.query ?? ''}
-                            source={source}
-                            toggleFilterPane={toggleFilterPane}
-                          />
+                            <FormattedMessage id="stripes-smart-components.search" />
+                          </Button>
                         </div>
-                      ) : '...'
+                        <div className={css.resetButtonWrap}>
+                          <Button
+                            buttonStyle="none"
+                            disabled={disableReset()}
+                            id="clickable-reset-all"
+                            onClick={resetAll}
+                          >
+                            <Icon icon="times-circle-solid">
+                              <FormattedMessage id="stripes-smart-components.resetAll" />
+                            </Icon>
+                          </Button>
+                        </div>
+                        <ComparisonFilters
+                          activeFilters={activeFilters.state}
+                          data={data}
+                          filterHandlers={getFilterHandlers()}
+                        />
+                      </form>
+                    </Pane>}
+                  <Pane
+                    appIcon={<AppIcon app="erm-comparisons" />}
+                    defaultWidth="fill"
+                    firstMenu={
+                      !filterPaneIsVisible ?
+                        (
+                          <PaneMenu>
+                            <ExpandFilterPaneButton
+                              filterCount={filterCount}
+                              onClick={toggleFilterPane}
+                            />
+                          </PaneMenu>
+                        )
+                        :
+                        null
                     }
-                    isSelected={({ item }) => item.id === selectedRecordId}
-                    onHeaderClick={onSort}
-                    onNeedMoreData={onNeedMoreData}
-                    rowProps={{
-                      labelStrings: ({ rowData }) => [rowData.name],
-                      to: id => `/comparisons-erm/${id}${searchString}`
-                    }}
-                    {...paginationMCLProps}
-                    sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
-                    sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
-                    totalCount={count}
-                    virtualize
-                    visibleColumns={[
-                      'comparisonName',
-                      'runningStatus',
-                      'result',
-                      'errors',
-                      'started',
-                      'ended'
-                    ]}
-                  />
-                </Pane>
-                {children}
-              </PersistedPaneset>
-            );
+                    lastMenu={
+                      <IfPermission perm="ui-erm-comparisons.jobs.edit">
+                        <Button
+                          bottomMargin0
+                          buttonStyle="primary"
+                          to={`/comparisons-erm/create${searchString}`}
+                        >
+                          <FormattedMessage id="ui-erm-comparisons.comparison.new" />
+                        </Button>
+                      </IfPermission>
+                    }
+                    noOverflow
+                    padContent={false}
+                    paneSub={
+                      source?.loaded() ?
+                        <FormattedMessage id="stripes-smart-components.searchResultsCountHeader" values={{ count: source.totalCount() }} />
+                        :
+                        <FormattedMessage id="stripes-smart-components.searchCriteria" />
+                    }
+                    paneTitle={<FormattedMessage id="ui-erm-comparisons.meta.title" />}
+                  >
+                    <MultiColumnList
+                      autosize
+                      columnMapping={{
+                        comparisonName: <FormattedMessage id="ui-erm-comparisons.prop.comparisonName" />,
+                        runningStatus: <FormattedMessage id="ui-erm-comparisons.prop.runningStatus" />,
+                        result: <FormattedMessage id="ui-erm-comparisons.prop.outcome" />,
+                        errors: <FormattedMessage id="ui-erm-comparisons.prop.errors" />,
+                        started: <FormattedMessage id="ui-erm-comparisons.prop.started" />,
+                        ended: <FormattedMessage id="ui-erm-comparisons.prop.ended" />,
+                      }}
+                      columnWidths={{
+                        ended: 150,
+                        errors: 100,
+                        comparisonName: 300,
+                        runningStatus: 150,
+                        result: 150,
+                        started: 150,
+                      }}
+                      contentData={data.comparisons}
+                      formatter={{
+                        comparisonName: ({ name }) => {
+                          return (
+                            <AppIcon
+                              app="erm-comparisons"
+                              iconAlignment="baseline"
+                              iconKey="app"
+                              size="small"
+                            >
+                              <div style={{ overflowWrap: 'break-word', width: 460 }}>
+                                {name}
+                              </div>
+                            </AppIcon>
+                          );
+                        },
+                        ended: ({ ended }) => (ended ? <FormattedDateTime date={ended} /> : <NoValue />),
+                        errors: ({ errorLogCount }) => errorLogCount,
+                        runningStatus: ({ status }) => status && status.label,
+                        result: ({ result }) => result && result.label,
+                        started: ({ started }) => (started ? <FormattedDateTime date={started} /> : <NoValue />),
+                      }}
+                      id="list-comparisons"
+                      isEmptyMessage={
+                        source ? (
+                          <div>
+                            <SearchAndSortNoResultsMessage
+                              filterPaneIsVisible
+                              searchTerm={query.query ?? ''}
+                              source={source}
+                              toggleFilterPane={toggleFilterPane}
+                            />
+                          </div>
+                        ) : '...'
+                      }
+                      isSelected={({ item }) => item.id === selectedRecordId}
+                      onHeaderClick={onSort}
+                      onNeedMoreData={onNeedMoreData}
+                      rowProps={{
+                        labelStrings: ({ rowData }) => [rowData.name],
+                        to: id => `/comparisons-erm/${id}${searchString}`
+                      }}
+                      {...paginationMCLProps}
+                      sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
+                      sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
+                      totalCount={count}
+                      visibleColumns={[
+                        'comparisonName',
+                        'runningStatus',
+                        'result',
+                        'errors',
+                        'started',
+                        'ended'
+                      ]}
+                    />
+                  </Pane>
+                  {children}
+                </PersistedPaneset>
+              );
+            }
           }
-        }
         </SearchAndSortQuery>
       </div>
     </HasCommand>
