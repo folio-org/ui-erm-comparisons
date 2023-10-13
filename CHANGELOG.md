@@ -1,10 +1,21 @@
 # Change history for ui-erm-comparisons
 
-## 6.0.0 In progress
-* ERM-1026 Capitalise Full, Partial and None
-* STRIPES-870 BREAKING upgrade react to v18
-  * ERM-2997 upgrade ui-erm-comparisons React to v18
+## 6.0.0 2023-10-13
+* ERM-3045 Swap Logs component to prev-next pagination
 * ERM-3026 *BREAKING* bump `react-intl` to `v6.4.4`
+* ERM-3001 Update Node.js to v18 in GitHub Actions
+* ERM-2973 Replace naive fetch hooks with parallelised ones (and deprecate)
+  * ERM-2976 Switch to useParallelBatchFetch
+* ERM-2913 Remove top double-border in split coverage (and subsequent) cells
+* ERM-2907 Quarantine global CSS selector in ERM-Comparisons
+* ERM-2641 Upgrade to Grails 5 (including Hibernate 5.6.x) for Poppy
+  * Added okapi interface dependency on new erm interface 6.0
+* ERM-2055 ERM Comparisons - Implement MCL Next/Previous pagination
+  * ERM-3049 On Next/Previous pagination the page of results doesn't go to top of page
+* ERM-1061 Comparison report - display message indicating there are more records to load.
+* ERM-1026 Capitalise Full, Partial and None
+* STRIPES-870 *BREAKING* upgrade react to v18
+  * ERM-2997 upgrade ui-erm-comparisons React to v18
 
 ## 5.0.0 2023-02-22
 * ERM-2620 move typescript to dev-deps
