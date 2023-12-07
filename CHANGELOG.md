@@ -1,6 +1,7 @@
 # Change history for ui-erm-comparisons
 
 ## 6.1.0 In progress
+* ERM-3123 Remove redundant CSS `color()` usage.
 
 ## 6.0.0 2023-10-13
 * ERM-3045 Swap Logs component to prev-next pagination
