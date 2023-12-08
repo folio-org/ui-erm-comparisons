@@ -20,7 +20,7 @@
 
 /* overlap column coloring classes */
 .none {
-  background-color: color(var(--error, #900));
+  background-color: var(--error, #900);
   color: var(--bg);
   border-bottom: 1px solid var(--bg);
 }
@@ -32,7 +32,7 @@
 }
 
 .full {
-  background-color: color(var(--success, #060));
+  background-color: var(--success, #060);
   color: var(--bg);
   border-bottom: 1px solid var(--bg);
 }
