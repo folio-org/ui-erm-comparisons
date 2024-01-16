@@ -60,7 +60,7 @@
     "newComparison.package": "Paquete",
     "newComparison.addPackage": "Añadir paquete",
     "newComparison.removePackage": "Remove package {index} from comparison",
-    "newComparison.packageTitle": "Paquete",
+    "newComparison.packageTitle": "Paquete {number}",
     "newComparison.addAgreement": "Añadir acuerdo",
     "newComparison.removeAgreement": "Remove agreement {index} from comparison",
     "newComparison.agreementTitle": "Agreement {number}",
