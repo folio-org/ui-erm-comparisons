@@ -106,10 +106,10 @@
     "permission.jobs.view": "Porównania e-zasobów: Wyświetlanie zadań",
     "permission.jobs.edit": "Porównania e-zasobów: Tworzenie zadań",
     "permission.jobs.delete": "Porównania e-zasobów: Usuwanie zadań",
-    "appMenu.keyboardShortcuts": "Keyboard shortcuts",
+    "appMenu.keyboardShortcuts": "Skróty klawiaturowe",
     "comparisonReport.overlap.full": "Full",
     "comparisonReport.overlap.none": "None",
     "comparisonReport.overlap.partial": "Partial",
     "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
-    "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
+    "comparisonReport.loadMessage": "Wybierz<strong>Załaduj wszystko</strong> aby zobaczyć pełen raport."
 }
