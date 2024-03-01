@@ -71,7 +71,7 @@
     "newComparison.replaceAgreement": "Zastąp umowę",
     "newComparison.replaceAgreementSpecific": "Zastąp umowę {agreement}",
     "newComparison.onDate": "W dniu",
-    "newComparison.startDate": "Data rozpoczęcia",
+    "newComparison.startDate": "Data początkowa",
     "newComparison.endDate": "Data końcowa",
     "newComparison.status": "Status",
     "newComparison.type": "Rodzaj",
