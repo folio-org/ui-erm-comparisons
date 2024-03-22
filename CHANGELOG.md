@@ -1,9 +1,10 @@
 # Change history for ui-erm-comparisons
 
-## 6.1.0 In progress
-* ERM-2981 Standardise use of external url validator library across ERM apps
-* ERM-3123 Remove redundant CSS `color()` usage.
+## 7.0.0 In progress
 * ERM-3129 Remove explicit typescript version
+* ERM-3123 Remove redundant CSS `color()` usage
+* ERM-2981 Standardise use of external url validator library across ERM apps
+* *BREAKING* Switched to erm interface 7
 
 ## 6.0.0 2023-10-13
 * ERM-3045 Swap Logs component to prev-next pagination
