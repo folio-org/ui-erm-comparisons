@@ -90,9 +90,9 @@ class ComparisonForm extends React.Component {
     return (
       <PaneMenu>
         <FormattedMessage id="ui-erm-comparisons.comparison.close">
-          {ariaLabel => (
+          {([ariaLabel]) => (
             <IconButton
-              aria-label={ariaLabel?.[0]}
+              aria-label={ariaLabel}
               icon="times"
               id="close-comparison-form-button"
               onClick={this.props.handlers.onClose}
