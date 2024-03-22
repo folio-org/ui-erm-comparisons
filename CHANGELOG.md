@@ -1,6 +1,8 @@
 # Change history for ui-erm-comparisons
 
-## 7.0.0 In progress
+## 7.1.0 In progress
+
+## 7.0.0 2024-03-22
 * ERM-3129 Remove explicit typescript version
 * ERM-3123 Remove redundant CSS `color()` usage
 * ERM-2981 Standardise use of external url validator library across ERM apps
