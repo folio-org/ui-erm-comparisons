@@ -1,5 +1,6 @@
 import React from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
@@ -8,6 +9,8 @@ import { useKiwtFieldArray } from '@k-int/stripes-kint-components';
 
 import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
 import ComparisonPointField from './ComparisonPointField';
+
+dayjs.extend(utc);
 
 const ComparisonPointFieldArray = ({
   addButtonId,
@@ -74,7 +77,7 @@ const ComparisonPointFieldArray = ({
             <Col xs={3}>
               <Field
                 component={Datepicker}
-                defaultValue={moment.utc().startOf('day').toISOString()}
+                defaultValue={dayjs.utc().startOf('day').toISOString()}
                 id={`data-test-field-date-${comparisonType}`}
                 index={index}
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
