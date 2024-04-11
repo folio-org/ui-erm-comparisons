@@ -110,6 +110,6 @@
     "comparisonReport.overlap.full": "Úplné",
     "comparisonReport.overlap.none": "Žádný",
     "comparisonReport.overlap.partial": "Částečné",
-    "comparisonReport.recordsMessage": "<strong>{records}</strong> z <strong>{total}</strong> zobrazených titulů.",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> z <strong>{total}</strong> zobrazených názvů.",
     "comparisonReport.loadMessage": "Chcete-li zobrazit celý výstup, vyberte možnost <strong>Načíst vše</strong>."
 }
