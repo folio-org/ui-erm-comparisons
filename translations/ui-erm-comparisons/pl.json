@@ -41,7 +41,7 @@
     "comparison.close": "Zamknij porównanie",
     "comparisonReport.titleOnPlatform": "Tytuł na platformie",
     "comparisonReport.title": "Tytuł",
-    "comparisonReport.availableVia": "Dostępne przez",
+    "comparisonReport.availableVia": "Dostępny przez",
     "comparisonReport.coverage": "Pokrycie",
     "comparisonReport.isPresent": "Jest obecny w {type} dniu {date} „ {name} ”",
     "comparisonReport.isNotPresent": "Nie ma w {type} dnia {date} „ {name} ”",
