@@ -14,9 +14,9 @@ import {
 const EntitlementAgreementsList = (
   { headline,
     id,
-    isEmptyMessage,
+    isEmptyMessage = <FormattedMessage id="ui-erm-comparisons.emptyAccordion.noAgreementsEresource" />,
     entitlements,
-    visibleColumns }
+    visibleColumns = ['name', 'status', 'startDate', 'endDate'] }
 ) => {
   const columnMapping = {
     name: <FormattedMessage id="ui-erm-comparisons.agreements.name" />,
@@ -64,11 +64,6 @@ const EntitlementAgreementsList = (
       />
     </div>
   );
-};
-
-EntitlementAgreementsList.defaultProps = {
-  isEmptyMessage: <FormattedMessage id="ui-erm-comparisons.emptyAccordion.noAgreementsEresource" />,
-  visibleColumns: ['name', 'status', 'startDate', 'endDate']
 };
 
 EntitlementAgreementsList.propTypes = {
