@@ -67,7 +67,7 @@
     "newComparison.linkAgreement": "Lier un accord",
     "newComparison.noAgreementLinked": "Aucun accord lié",
     "newComparison.linkAgreementToStart": "Lier un accord pour commencer",
-    "newComparison.noAgreementPlugin": "Aucun plugin \"trouver-accord\" n'est installé",
+    "newComparison.noAgreementPlugin": "Aucun plugin \"rechercher-accord\" n'est installé",
     "newComparison.replaceAgreement": "Remplacer l'accord",
     "newComparison.replaceAgreementSpecific": "Remplacer l'accord {agreement}",
     "newComparison.onDate": "À la date",
