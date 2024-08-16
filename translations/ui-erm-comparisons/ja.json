@@ -91,7 +91,7 @@
     "emptyAccordion.noAgreementsEresource": "この電子リソースの契約はありません",
     "report.close": "Close comparison report screen",
     "linkPackage": "Link package",
-    "linkAgreement": "契約をリンク",
+    "linkAgreement": "契約のリンク",
     "comparison.created.error.noComparisonLinked": "<strong>比較</strong>の作成中にエラーが発生しました: 1 つ以上の比較がリンクされていませんでした",
     "comparison.created.error": "<strong>比較</strong>の作成中にエラーが発生しました: {err}",
     "comparison.created.error.unknownError": "<strong>比較</strong>の作成中にエラーが発生しました",
@@ -108,8 +108,8 @@
     "permission.jobs.delete": "ERM比較: ジョブの削除",
     "appMenu.keyboardShortcuts": "キーボードショートカット",
     "comparisonReport.overlap.full": "Full",
-    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.none": "なし",
     "comparisonReport.overlap.partial": "Partial",
     "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
-    "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
+    "comparisonReport.loadMessage": "<strong>Load all</strong> を選択すると、全レポートが表示されます。"
 }

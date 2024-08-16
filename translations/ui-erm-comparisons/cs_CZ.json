@@ -62,7 +62,7 @@
     "newComparison.removePackage": "Odebrat balíček {index} z porovnání",
     "newComparison.packageTitle": "Balíček {number}",
     "newComparison.addAgreement": "Přidat smlouvu",
-    "newComparison.removeAgreement": "Odebrat dohodu {index} z porovnání",
+    "newComparison.removeAgreement": "Odebrat smlouvu {index} z porovnání",
     "newComparison.agreementTitle": "Smlouva {number}",
     "newComparison.linkAgreement": "Propojit smlouvu",
     "newComparison.noAgreementLinked": "Žádná smlouva není propojena",
