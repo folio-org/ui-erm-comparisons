@@ -59,7 +59,7 @@
     "newComparison.agreement": "계약",
     "newComparison.package": "패키지",
     "newComparison.addPackage": "패키지 추가",
-    "newComparison.removePackage": "비교에서 패키지 {인덱스} 제거",
+    "newComparison.removePackage": "비교에서 패키지 {index} 제거",
     "newComparison.packageTitle": "패키지 {number}",
     "newComparison.addAgreement": "계약 추가",
     "newComparison.removeAgreement": "비교에서 계약 {index} 제거",

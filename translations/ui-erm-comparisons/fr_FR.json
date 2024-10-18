@@ -108,7 +108,7 @@
     "permission.jobs.delete": "Comparaisons ERM: supprimer des tâches",
     "appMenu.keyboardShortcuts": "Raccourcis clavier",
     "comparisonReport.overlap.full": "Full",
-    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.none": "Aucun",
     "comparisonReport.overlap.partial": "Partial",
     "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
     "comparisonReport.loadMessage": "Select <strong>Load all</strong> to view full report."
