@@ -1,5 +1,7 @@
 # Change history for ui-erm-comparisons
 
+## 7.2.0 IN PROGRESS
+
 ## 7.1.0 2024-11-01
 * ERM-3377 Update module license and guidance for ui-erm-comparisons
 * ERM-3352 Review and cleanup Module Descriptor for ui-erm-comparisons (Eureka)
