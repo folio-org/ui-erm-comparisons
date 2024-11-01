@@ -1,12 +1,16 @@
 # Change history for ui-erm-comparisons
 
-## 7.1.0 In progress
+## 7.1.0 2024-11-01
+* ERM-3377 Update module license and guidance for ui-erm-comparisons
+* ERM-3352 Review and cleanup Module Descriptor for ui-erm-comparisons (Eureka)
+* ERM-3232 React v19: refactor ui-erm-comparisons away from default props for functional components
+* ERM-3165 Replace moment with dayjs across app suite
+* FOLIO-4086 Fix GitHub Actions workflow not running for tags
 
 ## 7.0.0 2024-03-22
 * ERM-3129 Remove explicit typescript version
 * ERM-3123 Remove redundant CSS `color()` usage
 * ERM-2981 Standardise use of external url validator library across ERM apps
-* FOLIO-4086 Fix GitHub Actions workflow not running for tags
 * *BREAKING* Switched to erm interface 7
 
 ## 6.0.0 2023-10-13
