@@ -1,22 +1,12 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 
-import { Button } from '@folio/stripes/components';
+import { Button as MockStripesButton } from '@folio/stripes/components';
 import { Button as ButtonInteractor, renderWithIntl } from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonCreateRoute from './ComparisonCreateRoute';
-
-const CloseButton = (props) => {
-  return <Button onClick={props.handlers.onClose}>CloseButton</Button>;
-};
-
-CloseButton.propTypes = {
-  handlers: PropTypes.shape({
-    onClose: PropTypes.func,
-  }),
-};
 
 const historyPushMock = jest.fn();
 const historyReplaceMock = jest.fn();
@@ -25,7 +15,7 @@ jest.mock('../../components/views/ComparisonForm', () => {
   return (props) => (
     <div>
       <div>ComparisonForm</div>
-      <CloseButton {...props} />
+      <MockStripesButton onClick={props.handlers.onClose}>CloseButton</MockStripesButton>
     </div>
   );
 });
@@ -48,26 +38,26 @@ const data = {
     }
   },
   resources: {
-    'entitlements': {
-      'hasLoaded': false,
-      'isPending': false,
-      'failed': false,
-      'records': [],
-      'successfulMutations': [],
-      'failedMutations': [],
-      'pendingMutations': []
+    entitlements: {
+      hasLoaded: false,
+      isPending: false,
+      failed: false,
+      records: [],
+      successfulMutations: [],
+      failedMutations: [],
+      pendingMutations: []
     },
-    'entitlementQueryParams': {
-      'entitlementsCount': 100
+    entitlementQueryParams: {
+      entitlementsCount: 100
     },
-    'comparisons': {
-      'hasLoaded': false,
-      'isPending': false,
-      'failed': false,
-      'records': [],
-      'successfulMutations': [],
-      'failedMutations': [],
-      'pendingMutations': []
+    comparisons: {
+      hasLoaded: false,
+      isPending: false,
+      failed: false,
+      records: [],
+      successfulMutations: [],
+      failedMutations: [],
+      pendingMutations: []
     }
   }
 };
@@ -89,10 +79,18 @@ describe('ComparisonCreateRoute', () => {
       expect(getByText('ComparisonForm')).toBeInTheDocument();
     });
 
-    // we check if the button is clicked it calls the historyPushMock(push) function to invoke the child callback (handleClose) defined in Route
-    test('calls the CloseButton', async () => {
-      await ButtonInteractor('CloseButton').click();
-      expect(historyPushMock).toHaveBeenCalled();
+    describe('clicking the CloseButton', () => {
+      beforeEach(async () => {
+        await waitFor(async () => {
+          await ButtonInteractor('CloseButton').click();
+        });
+      });
+      // we check if the button is clicked it calls the historyPushMock(push) function to invoke the child callback (handleClose) defined in Route
+      test('calls history.push', async () => {
+        await waitFor(() => {
+          expect(historyPushMock).toHaveBeenCalled();
+        });
+      });
     });
   });
 });

@@ -11,6 +11,7 @@ import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import translationsProperties from '../../../test/jest/helpers/translationsProperties';
 import ComparisonView from './ComparisonView';
 
+// TODO This data should be centralised
 const data = {
   comparison: {
     'id': '44d02dfd-4383-43cf-92ab-4fc452b0cd93',
@@ -154,12 +155,22 @@ describe('ComparisonView', () => {
       await Button('Actions').exists();
     });
 
-    test('renders the delete and export button under the Actions dropdown', async () => {
-      await waitFor(async () => {
-        await Button('Actions').click();
+    describe('clicking the actions button', () => {
+      beforeEach(async () => {
+        await waitFor(async () => {
+          await Button('Actions').click();
+        });
       });
-      await Button('Delete').exists();
-      await Button('Export comparison report as JSON').exists();
+
+      test.each([
+        'Delete',
+        'Export comparison report as JSON'
+      ])('%s button exists', async (label) => {
+        // TODO we should probably also be testing the outcomes of actions here
+        await waitFor(async () => {
+          await Button(label).exists();
+        });
+      });
     });
   });
 

@@ -1,5 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
+
 import {
   Button,
   FormattedDateTime,
@@ -31,30 +33,56 @@ describe('ComparisonInfo', () => {
     await Heading('test').exists();
   });
 
-  test('renders the expcected Running status value', async () => {
-    await KeyValue('Running status').has({ value: 'Ended' });
+  test.each([
+    {
+      title: 'Running status',
+      interactor: KeyValue('Running status'),
+      hasObj: { value: 'Ended' }
+    },
+    {
+      title: 'Outcome',
+      interactor: KeyValue('Outcome'),
+      hasObj: { value: 'Success' }
+    },
+    {
+      title: 'Start date date',
+      interactor: FormattedDateTime({ id: 'started-datetime' }),
+      hasObj: { date: '11/14/2022' }
+    },
+    {
+      title: 'Start date time',
+      interactor: FormattedDateTime({ id: 'started-datetime' }),
+      hasObj: { time: '9:30 AM' }
+    },
+    {
+      title: 'End date date',
+      interactor: FormattedDateTime({ id: 'ended-datetime' }),
+      hasObj: { date: '11/14/2022' }
+    },
+    {
+      title: 'End date time',
+      interactor: FormattedDateTime({ id: 'ended-datetime' }),
+      hasObj: { time: '9:44 AM' }
+    },
+    {
+      title: 'Errors',
+      interactor: KeyValue('Errors'),
+      hasObj: { value: '0' }
+    },
+  ])('renders the expected $title', async ({ title: _t, interactor, hasObj }) => {
+    await interactor.has(hasObj);
   });
 
-  test('renders the expcected Outcome value', async () => {
-    await KeyValue('Outcome').has({ value: 'Success' });
-  });
-
-  test('renders the expcected Started date and time', async () => {
-    await FormattedDateTime({ id: 'started-datetime' }).has({ date: '11/14/2022' });
-    await FormattedDateTime({ id: 'started-datetime' }).has({ time: '9:30 AM' });
-  });
-
-  test('renders the expcected Ended date and time', async () => {
-    await FormattedDateTime({ id: 'ended-datetime' }).has({ date: '11/14/2022' });
-    await FormattedDateTime({ id: 'ended-datetime' }).has({ time: '9:30 AM' });
-  });
-
-  test('renders the expcected Errors value', async () => {
-    await KeyValue('Errors').has({ value: '0' });
-  });
-
-  it('clicking the View comparison report button calls onViewReport', async () => {
-    await Button('View comparison report').click();
-    expect(onViewReportMock).toHaveBeenCalled();
+  describe('clicking view comparison report button', () => {
+    beforeEach(async () => {
+      await waitFor(async () => {
+        await Button('View comparison report').click();
+      });
+    });
+    it('calls onViewReport handler', async () => {
+      await waitFor(() => {
+        expect(onViewReportMock).toHaveBeenCalled();
+      });
+    });
   });
 });

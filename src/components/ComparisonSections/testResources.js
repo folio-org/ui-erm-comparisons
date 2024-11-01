@@ -1,7 +1,8 @@
+// TODO centralise the refdata and toher stuff here please
 const comparison = {
   'id': '778d9b3c-d70d-4bc3-abac-a6112fce1227',
   'dateCreated': 1668418191884,
-  'ended': 1668418211986,
+  'ended': 1668419068986,
   'result': {
     'id': '2c91809c84713b730184714368dc000c',
     'value': 'success',
