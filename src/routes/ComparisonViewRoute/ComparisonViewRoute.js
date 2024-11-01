@@ -74,6 +74,7 @@ const ComparisonViewRoute = ({
         data={{
           comparison
         }}
+        // TODO Why is only this one in handlers? Refactor might be in order
         handlers={{
           onExportReportAsJSON: exportReportAsJSON,
         }}
@@ -101,8 +102,7 @@ const ComparisonViewRoute = ({
 
 ComparisonViewRoute.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    replace: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,

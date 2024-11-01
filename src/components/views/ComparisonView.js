@@ -30,6 +30,7 @@ class ComparisonView extends React.Component {
       comparison: PropTypes.object,
       comparisonPointData: PropTypes.arrayOf(PropTypes.object)
     }),
+    // TODO again why is handlers only used for the export. Either have them all flat or all in handlers
     handlers: PropTypes.shape({
       onExportReportAsJSON: PropTypes.func,
     }),

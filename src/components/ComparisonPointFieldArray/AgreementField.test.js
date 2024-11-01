@@ -20,7 +20,7 @@ const onSubmit = jest.fn();
 
 let renderComponent;
 describe('AgreementField', () => {
-  describe('AgreementField selected agreement', () => {
+  describe('selected agreement', () => {
     beforeEach(() => {
       renderComponent = renderWithIntl(
         <Router>
@@ -117,12 +117,18 @@ describe('AgreementField', () => {
       expect(getByText('Link an agreement to get started')).toBeInTheDocument();
     });
 
-    it('displays an error', async () => {
-      const { getByText } = renderComponent;
-      await waitFor(async () => {
-        await Button('Submit').click();
+    describe('attempting to submit', () => {
+      beforeEach(async () => {
+        await waitFor(async () => {
+          await Button('Submit').click();
+        });
       });
-      expect(getByText('Please fill this in to continue')).toBeInTheDocument();
+      it('displays an error', async () => {
+        const { getByText } = renderComponent;
+        await waitFor(() => {
+          expect(getByText('Please fill this in to continue')).toBeInTheDocument();
+        });
+      });
     });
   });
 });
