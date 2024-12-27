@@ -110,6 +110,6 @@
     "comparisonReport.overlap.full": "完整",
     "comparisonReport.overlap.none": "没有",
     "comparisonReport.overlap.partial": "部分的",
-    "comparisonReport.recordsMessage": "顯示<strong> {records} </strong>個題名（共<strong> {total} </strong>個）。",
+    "comparisonReport.recordsMessage": "顯示<strong> {records} </strong>個題名 ( 共<strong> {total} </strong>個 )。",
     "comparisonReport.loadMessage": "選擇<strong>載入全部</strong>以檢視完整報告。"
 }
