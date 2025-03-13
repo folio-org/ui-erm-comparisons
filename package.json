@@ -115,7 +115,7 @@
     "rxjs": "^6.6.3"
   },
   "dependencies": {
-    "@k-int/stripes-kint-components": "^5.11.0",
+    "@k-int/stripes-kint-components": "^5.15.0",
     "@rehooks/local-storage": "^2.4.5",
     "compose-function": "^3.0.3",
     "dayjs": "^1.11.13",
