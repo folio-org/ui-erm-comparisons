@@ -1,5 +1,7 @@
 # Change history for ui-erm-comparisons
 
+## 8.1.0 IN PROGRESS
+
 ## 8.0.0 2025-03-13
   * ERM-3610 *BREAKING* Stripes v10 dependencies update
     Updated all stripes-* dependencies for the stripes v10 upgrade along with react-intl and formatjs/cli
