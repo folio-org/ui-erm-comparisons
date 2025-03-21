@@ -108,7 +108,7 @@
     "permission.jobs.delete": "Porównania e-Zasobów: usuwanie zadań",
     "appMenu.keyboardShortcuts": "Skróty klawiaturowe",
     "comparisonReport.overlap.full": "Full",
-    "comparisonReport.overlap.none": "None",
+    "comparisonReport.overlap.none": "Brak",
     "comparisonReport.overlap.partial": "Partial",
     "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
     "comparisonReport.loadMessage": "Wybierz<strong>Załaduj wszystko</strong> aby zobaczyć pełen raport."
