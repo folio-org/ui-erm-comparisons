@@ -74,7 +74,7 @@ const ComparisonPointFieldArray = ({
             <Col xs={3}>
               <Field
                 component={Datepicker}
-                defaultValue={dayjs.utc().format('MM/DD/YYYY')}
+                defaultValue={dayjs.utc().toISOString()}
                 id={`data-test-field-date-${comparisonType}`}
                 index={index}
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
