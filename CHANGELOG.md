@@ -1,6 +1,7 @@
 # Change history for ui-erm-comparisons
 
-## 8.1.0 IN PROGRESS
+## 8.0.1 20235-05-15
+  * ERM-3715 ERM Comparison jobs submitted with date in incorrect format
 
 ## 8.0.0 2025-03-13
   * ERM-3610 *BREAKING* Stripes v10 dependencies update
