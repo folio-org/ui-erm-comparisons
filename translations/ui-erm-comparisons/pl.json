@@ -110,6 +110,6 @@
     "comparisonReport.overlap.full": "Full",
     "comparisonReport.overlap.none": "Brak",
     "comparisonReport.overlap.partial": "Partial",
-    "comparisonReport.recordsMessage": "<strong>{records}</strong> of <strong>{total}</strong> titles displayed.",
+    "comparisonReport.recordsMessage": "<strong>{records}</strong> z <strong>{total}</strong> wyświetlonych tytułów.",
     "comparisonReport.loadMessage": "Wybierz<strong>Załaduj wszystko</strong> aby zobaczyć pełen raport."
 }
