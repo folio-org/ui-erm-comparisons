@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { generateKiwtQueryParams, useKiwtSASQuery } from '@k-int/stripes-kint-components';
-
 import {
   getRefdataValuesByDesc,
   useInfiniteFetch,
-  usePrevNextPagination
 } from '@folio/stripes-erm-components';
 import { useOkapiKy } from '@folio/stripes/core';
+import { generateKiwtQueryParams, useKiwtSASQuery, usePrevNextPagination } from '@k-int/stripes-kint-components';
+
 import View from '../../components/views/Comparisons';
 import { COMPARISONS_ENDPOINT, resultCount } from '../../constants';
 import useErmComparisonsRefdata from '../../hooks/useErmComparisonsRefdata';
