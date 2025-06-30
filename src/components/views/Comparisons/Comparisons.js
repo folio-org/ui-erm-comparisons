@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
+
 import { AppIcon, IfPermission } from '@folio/stripes/core';
 
 import {
@@ -24,7 +25,8 @@ import {
   PersistedPaneset,
   SearchAndSortNoResultsMessage,
 } from '@folio/stripes/smart-components';
-import { FormattedDateTime, usePrevNextPagination } from '@folio/stripes-erm-components';
+import { FormattedDateTime } from '@folio/stripes-erm-components';
+import { usePrevNextPagination } from '@k-int/stripes-kint-components';
 
 import { resultCount } from '../../../constants';
 import { ComparisonFilters } from '../../ComparisonFilters';
