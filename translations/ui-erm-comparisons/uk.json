@@ -105,7 +105,7 @@
     "prop.viewReportReload": "Перезавантажте сторінку, натиснувши на кнопку \"оновити\" після завершення завдання",
     "permission.jobs.view": "Управління е-ресурсами (ERM) - порівняння: Перегляд завдань",
     "permission.jobs.edit": "Управління е-ресурсами (ERM) - порівняння: Створення завдань",
-    "permission.jobs.delete": "ERM Comparisons: Delete jobs",
+    "permission.jobs.delete": "Управління е-ресурсами (ERM) - порівняння: Видалення завдань",
     "appMenu.keyboardShortcuts": "\"Гарячі\" клавіші",
     "comparisonReport.overlap.full": "Заповнено",
     "comparisonReport.overlap.none": "Жоден",
