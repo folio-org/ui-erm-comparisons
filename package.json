@@ -84,6 +84,7 @@
         "permissionName": "settings.erm-comparisons.enabled",
         "displayName": "Settings (ERM comparisons): display list of settings pages",
         "subPermissions": [
+          "mod-settings.global.read.stripes-core.prefs.manage",
           "settings.enabled"
         ]
       }
