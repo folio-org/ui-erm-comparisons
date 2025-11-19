@@ -47,7 +47,11 @@
     "permissionSets": [
       {
         "permissionName": "module.erm-comparisons.enabled",
-        "displayName": "UI: ui-erm-comparisons module is enabled"
+        "displayName": "UI: ui-erm-comparisons module is enabled",
+        "subPermissions": [
+          "mod-settings.global.read.stripes-core.prefs.manage",
+          "mod-settings.entries.collection.get"
+        ]
       },
       {
         "permissionName": "ui-erm-comparisons.jobs.view",
@@ -84,6 +88,8 @@
         "permissionName": "settings.erm-comparisons.enabled",
         "displayName": "Settings (ERM comparisons): display list of settings pages",
         "subPermissions": [
+          "mod-settings.global.read.stripes-core.prefs.manage",
+          "mod-settings.entries.collection.get",
           "settings.enabled"
         ]
       }
