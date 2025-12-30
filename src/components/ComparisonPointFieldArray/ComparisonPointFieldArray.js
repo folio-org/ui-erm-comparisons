@@ -73,12 +73,14 @@ const ComparisonPointFieldArray = ({
           <Row>
             <Col xs={3}>
               <Field
+                backendDateStandard="YYYY-MM-DD"
                 component={Datepicker}
                 defaultValue={dayjs.utc().toISOString()}
                 id={`data-test-field-date-${comparisonType}`}
                 index={index}
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
                 name={`${name}[${index}].onDate`}
+                parse={v => v}
                 required
                 timeZone="UTC"
                 usePortal
