@@ -3,7 +3,14 @@ import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { StaticRouter as Router } from 'react-router-dom';
 import { FieldArray } from 'react-final-form-arrays';
 
-import { Button, Datepicker, renderWithIntl, TestForm } from '@folio/stripes-erm-testing';
+import {
+  Button,
+  Datepicker,
+  IconButton,
+  renderWithIntl,
+  TestForm,
+  Tooltip,
+} from '@folio/stripes-erm-testing';
 
 import translationsProperties from '../../../../test/jest/helpers/translationsProperties';
 
@@ -43,6 +50,7 @@ describe('ComparisonPointFieldArray', () => {
       },
       type: 'package',
       addButtonLabel: 'Add package',
+      deleteButtonLabel: 'Remove package 1 from comparison',
     },
     {
       initialValues: {
@@ -69,9 +77,11 @@ describe('ComparisonPointFieldArray', () => {
       },
       type: 'agreement',
       addButtonLabel: 'Add agreement',
+      deleteButtonLabel: 'Remove agreement 1 from comparison',
     },
   ])('ComparisonPointFieldArray type $type', ({
     addButtonLabel,
+    deleteButtonLabel,
     initialValues,
     fieldName,
     props
@@ -93,8 +103,52 @@ describe('ComparisonPointFieldArray', () => {
       );
     });
 
+    test('Renders ComparisonPointField', () => {
+      const { getAllByText } = renderComponent;
+      expect(getAllByText('ComparisonPointField')).toHaveLength(1);
+    });
+
     test(`Renders "${addButtonLabel}" button`, async () => {
       await Button(addButtonLabel).exists();
+    });
+
+    describe(`Clicking the "${addButtonLabel}" button`, () => {
+      beforeEach(async () => {
+        await waitFor(async () => {
+          await Button(addButtonLabel).click();
+        });
+      });
+
+      test('renders another ComparisonPointField', () => {
+        const { getAllByText } = renderComponent;
+        expect(getAllByText('ComparisonPointField')).toHaveLength(2);
+      });
+    });
+
+    describe('Delete button', () => {
+      test('Delete button tooltip exists', async () => {
+        await Tooltip(deleteButtonLabel, { proximity: true }).exists();
+      });
+
+      test('currently renders a single ComparisonPointField', () => {
+        const { getAllByText } = renderComponent;
+        expect(getAllByText('ComparisonPointField')).toHaveLength(1);
+      });
+
+      test('delete IconButton exists', async () => {
+        await IconButton({ icon: 'trash' }).exists();
+      });
+
+      describe(`Clicking the "${deleteButtonLabel}" button`, () => {
+        beforeEach(async () => {
+          await IconButton({ icon: 'trash' }).click();
+        });
+
+        test('no longer renders a ComparisonPointField', () => {
+          const { queryAllByText } = renderComponent;
+          expect(queryAllByText('ComparisonPointField')).toHaveLength(0);
+        });
+      });
     });
 
     test('Renders the "On date" date field', async () => {
