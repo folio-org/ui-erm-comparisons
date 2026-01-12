@@ -1,4 +1,3 @@
-import React from 'react';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +6,28 @@ import { Button, Col, Datepicker, Row } from '@folio/stripes/components';
 import { useKiwtFieldArray } from '@k-int/stripes-kint-components';
 
 import { EditCard, requiredValidator } from '@folio/stripes-erm-components';
-import ComparisonPointField from './ComparisonPointField';
+import ComparisonPointField from '../ComparisonPointField';
+
+// Separate these out ready for centralised test resources
+export const agreementToComparisonPoint = (agreement) => {
+  return ({
+    id: agreement.id,
+    name: agreement.name,
+    reasonForClosure: agreement.reasonForClosure?.label,
+    startDate: agreement.startDate,
+    status: agreement.agreementStatus?.label,
+    endDate: agreement.endDate
+  });
+};
+
+export const packageToComparisonPoint = (pkg) => {
+  return ({
+    id: pkg.id,
+    name: pkg.name,
+    count: pkg._object?.resourceCount,
+    provider: pkg._object?.vendor?.name
+  });
+};
 
 const ComparisonPointFieldArray = ({
   addButtonId,
@@ -24,23 +44,11 @@ const ComparisonPointFieldArray = ({
   const handleComparisonPointSelected = (index, compPoint, comparisonType) => {
     if (comparisonType === 'agreement') {
       onUpdateField(index, {
-        'comparisonPoint': {
-          id: compPoint.id,
-          name: compPoint.name,
-          reasonForClosure: compPoint.reasonForClosure?.label,
-          startDate: compPoint.startDate,
-          status: compPoint.agreementStatus?.label,
-          endDate: compPoint.endDate
-        }
+        'comparisonPoint': agreementToComparisonPoint(compPoint)
       });
     } else if (comparisonType === 'package') {
       onUpdateField(index, {
-        'comparisonPoint': {
-          id: compPoint.id,
-          name: compPoint.name,
-          count: compPoint._object?.resourceCount,
-          provider: compPoint._object?.vendor?.name
-        }
+        'comparisonPoint': packageToComparisonPoint(compPoint)
       }, true);
     }
   };
@@ -73,12 +81,14 @@ const ComparisonPointFieldArray = ({
           <Row>
             <Col xs={3}>
               <Field
+                backendDateStandard="YYYY-MM-DD"
                 component={Datepicker}
                 defaultValue={dayjs.utc().toISOString()}
                 id={`data-test-field-date-${comparisonType}`}
                 index={index}
                 label={<FormattedMessage id="ui-erm-comparisons.newComparison.onDate" />}
                 name={`${name}[${index}].onDate`}
+                parse={v => v}
                 required
                 timeZone="UTC"
                 usePortal
@@ -99,6 +109,12 @@ const ComparisonPointFieldArray = ({
         marginBottom0
         onClick={() => onAddField()}
       >
+        {/*
+          * It's kind of crazy that we're passing translation ids around here...
+          * this whole component could use a refactor, we know the two cases.
+          * Even if it was to be extended I don't think we really need to save the
+          * logic of adding a button.
+        */}
         <FormattedMessage id={addLabelId} />
       </Button>
     );
