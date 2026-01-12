@@ -1,3 +1,7 @@
+// TODO Not a huge fan of these test resources tbh
+// We should be mocking handlers and testing them, and that might as well happen in the tests themselves
+// unless they're needed by multiple tests, which I doubt
+
 const agreementFieldData = {
   'id': 'data-test-field-comparison-point-agreement',
   'index': 0,
@@ -22,35 +26,6 @@ const comparisonPointFieldAgreement = {
   'required': true
 };
 
-const comparisonPointFieldArrayPackage = {
-  'addButtonId': 'data-test-add-package-button',
-  'addLabelId': 'ui-erm-comparisons.newComparison.addPackage',
-  'comparisonPoint': 'package',
-  'data': {
-    'entitlements': '{}'
-  },
-  'data-test-field-array-packages': true,
-  'deleteButtonTooltipId': 'ui-erm-comparisons.newComparison.removePackage',
-  'disableAddNew': true,
-  'handlers': {
-    'onEResourceAdded': 'ƒ onEResourceAdded() {}',
-    'onEResourceRemoved': 'ƒ onEResourceRemoved() {}'
-  },
-  'headerId': 'ui-erm-comparisons.newComparison.packageTitle',
-  'id': 'comparison-point-form-packages'
-};
-
-const comparisonPointFieldArrayAgreement = {
-  'addButtonId': 'data-test-add-agreement-button',
-  'addLabelId': 'ui-erm-comparisons.newComparison.addAgreement',
-  'comparisonPoint': 'agreement',
-  'data-test-field-array-agreements': true,
-  'deleteButtonTooltipId': 'ui-erm-comparisons.newComparison.removeAgreement',
-  'disableAddNew': true,
-  'headerId': 'ui-erm-comparisons.newComparison.agreementTitle',
-  'id': 'comparison-point-form-agreements'
-};
-
 const packageFieldData = {
   'entitlements': {},
   'id': 'data-test-field-comparison-point-package',
@@ -63,7 +38,5 @@ export {
   agreementFieldData,
   comparisonPointFieldPackage,
   comparisonPointFieldAgreement,
-  comparisonPointFieldArrayPackage,
-  comparisonPointFieldArrayAgreement,
   packageFieldData,
 };
