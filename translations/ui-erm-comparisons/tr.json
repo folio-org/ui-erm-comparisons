@@ -48,7 +48,7 @@
     "comparisonReport.overlap": "Örtüşme",
     "comparisonReport.type": "<strong>{type}</strong> üzerinde <strong>{date}</strong> \"{name}\"",
     "comparisonReport.accessTitleOnPlatform": "Erişim \"{title}\" Platformda \"{platform}\".",
-    "comparisonReport.resourceTitle": "{type} üzerinde {date}: \"isim\" ",
+    "comparisonReport.resourceTitle": "{type} üzerinde {date}: \"isim\"",
     "comparisonReport.info.type": "Tip",
     "comparisonReport.info.resourceType": "Kaynak türü",
     "comparisonReport.info.ezb": "EZB",
