@@ -96,13 +96,13 @@
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/eslint-parser": "^7.15.0",
-    "@folio/eslint-config-stripes": "^8.0.0",
-    "@folio/handler-stripes-registry": "^3.0.0",
-    "@folio/jest-config-stripes": "^3.0.0",
-    "@folio/stripes": "^10.0.0",
-    "@folio/stripes-cli": "^4.0.0",
-    "@folio/stripes-erm-components": "^10.0.0",
-    "@folio/stripes-erm-testing": "^3.0.0",
+    "@folio/eslint-config-stripes": "^9.0.0",
+    "@folio/handler-stripes-registry": "^3.1.0",
+    "@folio/jest-config-stripes": "^3.1.0",
+    "@folio/stripes": "^10.1.0",
+    "@folio/stripes-cli": "^5.0.0",
+    "@folio/stripes-erm-components": "^10.1.0",
+    "@folio/stripes-erm-testing": "^3.1.0",
     "@formatjs/cli": "^6.6.0",
     "eslint": "^7.32.0",
     "graphql": "^16.0.0",
@@ -119,7 +119,7 @@
     "rxjs": "^6.6.3"
   },
   "dependencies": {
-    "@k-int/stripes-kint-components": "^5.15.0",
+    "@k-int/stripes-kint-components": "^5.37.0",
     "@rehooks/local-storage": "^2.4.5",
     "compose-function": "^3.0.3",
     "dayjs": "^1.11.13",
@@ -132,9 +132,9 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "@folio/handler-stripes-registry": "^3.0.0",
-    "@folio/stripes": "^10.0.0",
-    "@folio/stripes-erm-components": "^10.0.0",
+    "@folio/handler-stripes-registry": "^3.1.0",
+    "@folio/stripes": "^10.1.0",
+    "@folio/stripes-erm-components": "^10.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^7.1.5",
