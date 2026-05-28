@@ -1,5 +1,8 @@
 # Change history for ui-erm-comparisons
 
+## 8.1.1 2026-05-28
+  * Updated dependencies for Trillium release
+
 ## 8.1.0 2026-04-17
   * ERM-3902: On creating an ERM Comparison the Date fields do not accept typed dates
   * ERM-3853: ui-erm-comparisons: include global permissions in package.json base permissions

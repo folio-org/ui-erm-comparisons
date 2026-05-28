@@ -42,7 +42,7 @@
     "comparisonReport.titleOnPlatform": "Tytuł na platformie",
     "comparisonReport.title": "Tytuł",
     "comparisonReport.availableVia": "Dostępny przez",
-    "comparisonReport.coverage": "Pokrycie",
+    "comparisonReport.coverage": "Zakres",
     "comparisonReport.isPresent": "Jest obecny w {type} dniu {date} „ {name} ”",
     "comparisonReport.isNotPresent": "Nie ma w {type} dnia {date} „ {name} ”",
     "comparisonReport.overlap": "Nakładanie się",
